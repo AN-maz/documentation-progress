@@ -1,4 +1,4 @@
-**04 - Controller**
+**03 - Controller**
 
 sebelumnya kita sudah bisa membuat url yang kita tulis menjadi elemen-elemen pada arry:
 
@@ -8,7 +8,7 @@ sebelumnya kita sudah bisa membuat url yang kita tulis menjadi elemen-elemen pad
             1 => "index", // method
             2 => "123" // parameter
         ]
-        
+
 jadi elemen-elemen ini akan dihubungkan ke controller/method/parameter untuk tiap-tiap halamannya 
 
 dan juga bila menuliskan `localhost/phpmvc/public/` akan otomtis memanggil controller dan method default. Itu yang dilakukan dalam materi ini
