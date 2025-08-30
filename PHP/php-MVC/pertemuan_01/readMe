@@ -1,3 +1,59 @@
-Pertemuan 01
+01-setup-mvc
 
-Membahas tentang pengelanan Struktur organisasi Model View Controller
+Struktur Folder & File Utama
+
+Dalam arsitektur MVC (Model-View-Controller), kita membagi folder agar kode lebih rapi dan terstruktur.
+
+Struktur dasar folder proyek kita adalah sebagai berikut:
+
+    project-root/
+    │
+    ├── app/
+    │   ├── core/         # Inti MVC, berisi App.php & Controller.php
+    │   ├── controllers/  # Menyimpan controller (logika utama aplikasi)
+    │   ├── models/       # Menyimpan model (interaksi dengan database)
+    │   ├── views/        # Menyimpan file tampilan (UI)
+    │   ├── init.php      # File bootstrap untuk memanggil semua komponen
+    │
+    ├── public/
+    │   ├── index.php     # File utama yang diakses user (entry point)
+    │   ├── css/          # File CSS
+    │   ├── js/           # File JavaScript
+    │   ├── img/          # File gambar
+    │
+    └── .htaccess         # Mengatur akses & routing
+
+Penjelasan Folder
+- `public/`
+    Berisi file yang bisa diakses langsung oleh user, seperti index.php, CSS, JavaScript, dan gambar.
+    - `index.php` adalah entry point aplikasi.
+    - `Folder app/` tidak bisa langsung diakses user untuk keamanan.
+
+- `app/`
+    Berisi inti aplikasi MVC, terdiri dari beberapa folder:
+    - `core/` → menyimpan inti MVC, misalnya `App.php` (untuk routing) dan Controller.php.
+    - `controllers/` → berisi file controller yang mengatur alur aplikasi.
+    - `models/` → berisi file model untuk berhubungan dengan database.
+    - `views/` → berisi file tampilan. Biasanya dipisahkan per-controller, misalnya:
+
+        views/
+    ├── home/
+    │   └── index.php
+    └── about/
+        └── index.php
+    
+    - `init.php` → bertugas melakukan bootstraping, yaitu memanggil semua file yang ada di app/ agar aplikasi bisa berjalan.
+
+##Bootstraping
+- index.php di folder public/ akan memanggil file init.php yang ada di folder app/.
+- `init.php` akan memanggil semua komponen inti di folder `core/`.
+- Di dalam `core/`, file `App.php` akan menangani routing, sementara `Controller.php` akan menjadi dasar (parent) dari semua controller di `controllers/.`
+
+
+##Ringkasan Alur
+1. User mengakses index.php (di public/).
+2. index.php memanggil init.php.
+3. init.php memanggil semua file inti di app/core/.
+4. App.php membaca URL dan menentukan controller serta method mana yang harus dijalankan.
+5. Controller memanggil model (jika perlu), lalu mengirim data ke view.
+6. View menampilkan hasil ke user.
