@@ -1,18 +1,8 @@
-`MVC - Assets`
-Assets di sini bisa css/js dan gambar. pokoknya yang ada di folder public
+**05 Assets**
 
-Disini pertemuan ini akan menggunakan `Framework Bootstrap`
-Bisa pakai `CDN (Content Delivery Network)` atau `self-hosted`
+pada materi ini kita akan mengelola asset yang ada di folder public. Bisa css/js/img
 
--- Cara CDN
-Copy aja di web bootstrap dibagian `introduction` untuk link:css dan js-nya 
+untuk css disini pakai bootstrap. Silahkan kunjungi web bootsrap-nya 
+cara memasangan silahkan baca documentasi di webnya
 
--- Cara `self-hosted`
-Download dulu dibagian `download` di `Compiled CSS and JS`
-copy ke folder `public`. Setelah itu panggil aja css dan js-nya
-
-untuk cara di pertemuan ini pake cara `self-hosted`
-
-buat file `Constant` di folder `core`. Isinya Constanta apa yang ingin dibutuhkan 
-
---- Sekarang tinggal memberi style bootstrap saja
+jadi setelah memberi bootstrap. Buat file constant.php di core. untuk menyimpan constanta yang nantinya kita butuhkan . Setelah itu baru dipanggil di file init.php
