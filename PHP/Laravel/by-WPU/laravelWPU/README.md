@@ -46,3 +46,27 @@ Karena Page `Artikles By` memanipulasi dari page `blog`
 Dilakukan menyesuaian 
 
 
+**Post Categori**
+Menambahkan Fitur Kategori
+
+Modifikasi File:
+- Membuat File migrasi categori dan Faktori Categori
+- Membuat relasi antar table Categoties dan Posts
+- Membuat relasi model Categoties dan Posts
+- penyesuaian di file: 
+    - Post.php
+    - PostFactory.php
+    - UserFactory
+    - 0001_01_01_000000_create_users_table
+    - 2025_09_04_023845_create_posts_table
+    - web.php
+    - blog.blade.php
+    - post.blade.php
+
+- File baru:
+    - CategoryFactory.php
+    - Category.php
+    - 2025_09_04_023840_create_categories_table
+
+
+
