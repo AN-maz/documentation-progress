@@ -63,10 +63,24 @@ Modifikasi File:
     - blog.blade.php
     - post.blade.php
 
-- File baru:
+File baru:
     - CategoryFactory.php
     - Category.php
     - 2025_09_04_023840_create_categories_table
 
+**Database Seeder**
+Lebih mudah daripada factory menggunakan tinker. Dengan database seeder lebih sekali jalan 
+
+Modifikasi File:
+- `DatabaseSeeder.php`
+
+File Baru
+- `CategorySeeder.php`
+- `UserSeeder.php`
+
+Perintah Cmd jika mau membuat file seeder: `php artisan make:seeder`
+Perintah Cmd untuk merefresh dan menambahkan data: `php artisan migrate:fresh --seed`
+
+Jauh lebih simple dari pada menggunakan Tinker
 
 
