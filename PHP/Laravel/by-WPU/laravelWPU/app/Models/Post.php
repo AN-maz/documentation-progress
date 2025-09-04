@@ -3,15 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Arr;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Post extends Model
 {
-
+    use HasFactory;
     // Metode Mass Assignment
-
     protected $fillable = ['title','author','slug','body']; 
-
-    // buka terminal dan ketik: php artisan tinker
-    
 }
