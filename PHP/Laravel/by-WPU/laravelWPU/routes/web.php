@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
 
@@ -26,9 +27,12 @@ Route::get('/blog', function () {
 // Menggunakan Implicit Binding
 Route::get('/blog/{post:slug}', function (Post $post) {
 
-    // $post = Post::find($slug);
-
     return view('post', ['title' => 'Single Post', 'post' => $post]);
+});
+
+Route::get('/authors/{user}', function (User $user) {
+
+    return view('blog', ['title' => 'Artikes by ' . $user->name, 'posts' => $user->posts]);
 });
 
 
