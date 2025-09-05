@@ -84,3 +84,16 @@ Perintah Cmd untuk merefresh dan menambahkan data: `php artisan migrate:fresh --
 Jauh lebih simple dari pada menggunakan Tinker
 
 
+**N + 1 Problem**
+N+1 Problem di Laravel (atau framework lain yang pakai ORM seperti Eloquent) adalah masalah query berlebihan ketika kita mengambil data relasi.
+
+**Gambaran Umum**
+- Kasus "N+1" muncul saat:
+    1. Kita ambil 1 query utama (1).
+    2. Lalu untuk setiap hasil, ORM mengeksekusi query tambahan (N kali).
+Hasilnya jadi 1 + N query, padahal sebenarnya bisa diselesaikan dengan join / eager loading supaya hanya perlu 2 query.
+
+tambahkan mode debug tambahan:
+`composer require barryvdh/laravel-debugbar --dev`
+
+

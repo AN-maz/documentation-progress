@@ -12,6 +12,9 @@ class Post extends Model
     // Metode Mass Assignment
     protected $fillable = ['title', 'author', 'slug', 'body'];
 
+    // Eager Loading by Default
+    protected $with = ['author','category'];
+
     // untuk menghubungkan dari author_id (Posts) ke id (Users)
     public function author(): BelongsTo
     {

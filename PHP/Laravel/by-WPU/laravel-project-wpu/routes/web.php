@@ -18,10 +18,11 @@ Route::get('/about', function () {
     ]);
 });
 
-
 // VIEW DATA
 Route::get('/blog', function () {
-    return view('blog',['title' => 'Blog', 'posts' => Post::all()]);
+    // N + 1 problem
+    $posts = Post::latest()->get();
+    return view('blog', ['title' => 'Blog', 'posts' => $posts]);
 });
 
 // VIEW -> mengirimkan data ke halaman SIngle post
@@ -33,11 +34,14 @@ Route::get('/blog/{post:slug}', function (Post $post) {
 
 Route::get('/authors/{user:username}', function (User $user) {
 
-    return view('blog', ['title' => count($user->posts) . ' Artikes by ' . $user->name, 'posts' => $user->posts]);
+    // Lazy eger load
+    $posts = $user->posts->load('category','author');
+    return view('blog', ['title' => count($user->posts) . ' Artikes by ' . $user->name, 'posts' => $posts]);
 });
 
 Route::get('/categories/{category:slug}', function (Category $category) {
-
+    // Lazy eger load
+    // $posts = $category->posts->load('category','author');
     return view('blog', ['title' => ' Artikes in ' . $category->name, 'posts' => $category->posts]);
 });
 
@@ -45,5 +49,3 @@ Route::get('/categories/{category:slug}', function (Category $category) {
 Route::get('/contact', function () {
     return view('contact', ['title' => 'Contact Page']);
 });
-
-
