@@ -1,0 +1,22 @@
+[
+    {
+        "nama" : "Purwa Guri",
+        "noHp" : "08123345",
+        "email" : "purwa12@gmail.com"
+    },
+     {
+        "nama": "Akane Kurokawa",
+        "noHp": "08124567",
+        "email": "akane.kurokawa@gmail.com"
+    },
+    {
+        "nama": "Aqua Hoshino",
+        "noHp": "08127890",
+        "email": "aqua.hoshino@gmail.com"
+    },
+    {
+        "nama": "Kana Arima",
+        "noHp": "08121234",
+        "email": "kana.arima@gmail.com"
+    }
+]
