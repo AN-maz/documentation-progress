@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %>
+    </title>
+</head>
+
+<body>
+
+    <h1>
+        <%= heading %>
+    </h1>
+    <p>Ini adalah halaman yang dirender menggunakan ejs</p>
+
+    <h3>Daftar Pengguna</h3>
+
+    <ul>
+        <% users.forEach(user=> { %>
+            <li>
+                <%= user.name %> - Umur <%= user.age %>
+            </li>
+            <% }) %>
+    </ul>
+</body>
+
+</html>
