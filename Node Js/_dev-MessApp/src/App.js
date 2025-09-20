@@ -1,23 +1,21 @@
 const express = require('express');
 const path = require('path');
+const expressLayouts = require('express-ejs-layouts');
 
 const app = express();
 
-app.set('view engine','ejs');
-app.set('views',path.join(__dirname,'views'));
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
-app.get('/', (req,res) =>{
+app.use(expressLayouts);
+app.set('layout', 'layouts/main-layout');
 
-    const data = {
-        title:'Main Page',
-        heading:'selamat datang di my-web',
-        users:[
-            {name: 'Andi', age:25},
-            {name: 'purwa', age:21},
-            {name: 'Akane', age:18}
-        ]
-    };
-    res.render('index',data);
+app.get('/', (req, res) => {
+
+    res.render('login', {
+        title: 'Login Page'
+    });
+
 });
 
 module.exports = app;
