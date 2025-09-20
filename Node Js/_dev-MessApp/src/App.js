@@ -10,10 +10,19 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(expressLayouts);
 app.set('layout', 'layouts/main-layout');
 
-app.get('/', (req, res) => {
+app.use(express.static(path.join(__dirname, 'public')));
 
+
+app.get('/', (req, res) => {
     res.render('login', {
         title: 'Login Page'
+    });
+
+});
+
+app.get('/register', (req, res) => {
+    res.render('register', {
+        title: 'Register Page'
     });
 
 });

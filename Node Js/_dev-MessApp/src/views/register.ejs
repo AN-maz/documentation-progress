@@ -1,0 +1,23 @@
+<div class="container-fluid d-flex align-items-center justify-content-center min-vh-100">
+  <div class="row shadow rounded-3 overflow-hidden" style="max-width: 1000px; width: 100%; height: 500px;">
+      
+      <!-- INFO PANEL -->
+      <div class="col-md-6 d-flex flex-column justify-content-center text-center p-4 bg-primary text-white">
+        <h2 class="mb-3">Gabung Sekarang</h2>
+        <p class="text-light">Buat akun dan mulai bagikan cerita dengan teman-temanmu</p>
+      </div>
+      
+    <!-- FORM REGISTER -->
+    <div class="col-md-6 bg-white text-primary p-4 d-flex flex-column justify-content-center">
+      <form action="/register" method="post">
+        <h4 class="mb-3">Register</h4>
+        <input type="text" name="username" class="form-control mb-2" placeholder="Username" required>
+        <input type="password" name="password" class="form-control mb-2" placeholder="Password" required>
+        <input type="password" name="confirmPassword" class="form-control mb-2" placeholder="Confirm Password" required>
+        <button class="btn btn-success w-100 mb-2">Register</button>
+        <a href="/" class="mt-2 d-block text-center">Kembali untuk login</a>
+      </form>
+    </div>
+
+  </div>
+</div>
