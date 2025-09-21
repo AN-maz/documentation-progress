@@ -1,9 +1,20 @@
 <div class="container-fluid d-flex align-items-center justify-content-center min-vh-100">
   <div class="row shadow rounded-3 overflow-hidden" style="max-width: 1000px; width: 100%; height: 500px;">
 
+     <% if (errorMessage && errorMessage.length > 0) { %>
+          <div class="alert alert-danger" role="alert">
+            <%= errorMessage %>
+          </div>
+        <% } %>
+        <% if (successMessage && successMessage.length > 0) { %>
+            <div class="alert alert-success" role="alert">
+              <%= successMessage %>
+            </div>
+        <% } %>
+        
     <!-- FORM LOGIN -->
     <div class="col-md-6 bg-white text-primary p-4 d-flex flex-column justify-content-center">
-      <form action="/login" method="post">
+      <form action="/login" method="post" class="p-5">
         <h4 class="mb-3">Login</h4>
         <input type="text" name="username" class="form-control mb-2" placeholder="Username" required>
         <input type="password" name="password" class="form-control mb-2" placeholder="Password" required>
