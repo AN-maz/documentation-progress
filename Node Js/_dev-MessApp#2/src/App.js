@@ -10,9 +10,11 @@ app.use(expressLayout);
 app.set('layout','layouts/main-layout');
 
 app.get('/', (req,res) => {
-    res.render('index',{
-        title:'Home'
+    res.render('login',{
+        title:'Login Page'
     });
 });
+
+
 
 module.exports = app;
