@@ -24,6 +24,15 @@ exports.loginUser = async (req, res) => {
             return res.redirect('/login');
         }
 
+        // Simpan session
+        req.session.userId = user._id;
+
+        req.session.save((err) => {
+            if(err){
+                return next(err);
+            }
+        });
+        
         res.redirect('/home');
     } catch (err) {
         console.log(err);
