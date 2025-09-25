@@ -1,24 +1,90 @@
-*{
+* {
   box-sizing: border-box;
 }
-body{
-  font-family: sans-serif;
-  margin: 20px;
-  padding: 0;
-}
-.square{
-  width: 35px;
-  height: 35px;
-  border: 1px solid black;
-  background-color: white;
-  font-size: 1.2rem;
-  font-weight: bold;
-  cursor: pointer;
+
+body {
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background: linear-gradient(135deg, #74ebd5, #9face6);
+  margin: 0;
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  color: #333;
 }
 
-.board{
+.square {
+  width: 80px;
+  height: 80px;
+  border: 2px solid #4a4a4a;
+  background-color: #fff;
+  font-size: 2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
   display: flex;
-  flex-wrap: wrap;
-  width: 105px;
-  height: 105px;
+  align-items: center;
+  justify-content: center;
+}
+
+.square:hover {
+  background-color: #f0f0f0;
+  transform: scale(1.05);
+}
+
+.square:active {
+  background-color: #ddd;
+  transform: scale(0.97);
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 80px);
+  grid-template-rows: repeat(3, 80px);
+  gap: 5px;
+  background-color: #4a4a4a;
+  padding: 5px;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.status {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #222;
+}
+
+.game {
+  display: flex;
+  flex-direction: row;
+  background: #ffffffaa;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+}
+
+.game-info {
+  margin-left: 30px;
+}
+
+.game-info button {
+  background: #4a90e2;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  margin: 4px 0;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.2s;
+}
+
+.game-info button:hover {
+  background: #357abd;
+}
+
+.game-info button:active {
+  background: #2a5f91;
 }
