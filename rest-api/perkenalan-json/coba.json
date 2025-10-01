@@ -1,0 +1,30 @@
+[
+    {
+        "nama": "Purwa",
+        "umur": 12,
+        "nim": "245509876",
+        "lulus": true,
+        "hobby": [
+            "coding",
+            "gaming"
+        ],
+        "pebimbing": {
+            "pebimbing1": "Izaak Drummer",
+            "pebimbing2": "Devandra Pembangkang"
+        }
+    },
+    {
+        "nama": "Ahmad",
+        "umur": 25,
+        "nim": "245512346",
+        "lulus": true,
+        "hobby": [
+            "Roblox",
+            "Minicraf"
+        ],
+        "pebimbing": {
+            "pebimbing1": "Adrian Angklung",
+            "pebimbing2": "Adrian Starboy"
+        }
+    }
+]
