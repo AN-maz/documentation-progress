@@ -2,6 +2,7 @@ const express = require('express');
 const expressLayout = require('express-ejs-layouts');
 const path = require('path');
 const session = require('express-session');
+const flash = require('connect-flash');
 
 const authRoutes = require('../src/routes/authRoutes');
 const homeRts = require('../src/routes/homeRts');
@@ -25,6 +26,12 @@ app.use(
         cookie: { maxAge: 60000 }
     })
 );
+
+app.use(flash());
+app.use((req, res, next) => {
+    res.locals.messages = req.flash();
+    next();
+});
 
 app.use(attachUser);
 
