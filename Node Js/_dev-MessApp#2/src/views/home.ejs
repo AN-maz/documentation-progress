@@ -1,1 +1,19 @@
-<h1>Selamat Datang Di halaman Home</h1>
+<div class="card mb-4 shadow-sm">
+    <div class="card-body">
+        <h5 class="card-title">Buat Postingan Baru</h5>
+        <form action="/posts" method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+                <textarea class="form-control" name="content" rows="3" placeholder="Apa yang kamu pikirkan?" required></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="postImage" class="form-label">Tambahkan Gambar (Opsional)</label>
+                <input class="form-control" type="file" id="postImage" name="postImage">
+            </div>
+
+            <div class="text-end">
+                <button type="submit" class="btn btn-primary">Posting</button>
+            </div>
+        </form>
+    </div>
+</div>

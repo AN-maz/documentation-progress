@@ -1,0 +1,11 @@
+<h5>Pesan</h5>
+<hr>
+<div class="list-group">
+    <% if (conversations && conversations.length > 0) { %>
+        <% conversations.forEach(conv => { %>
+            <%- include('_conversationItem', { conv: conv, user: user }) %>
+        <% }) %>
+    <% } else { %>
+        <p class="text-center text-muted">Belum ada percakapan.</p>
+    <% } %>
+</div>
