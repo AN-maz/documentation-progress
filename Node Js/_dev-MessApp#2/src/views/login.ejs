@@ -1,34 +1,47 @@
-<div class="container-fluid d-flex align-items-center justify-content-center min-vh-100">
-    <div class="row shadow rounded-3 overflow-hidden" style="max-width: 1000px; width: 100%; height: 500px;">
+<div class="container-fluid d-flex align-items-center justify-content-center min-vh-100 py-4">
 
-        <% if (messages.error && messages.error.length> 0) { %>
-            <div class="alert alert-danger alert-dismissible fade show position-absolute top-0 start-50 translate-middle-x mt-3"
-                role="alert" style="max-width: 600px; width: 90%;">
-                <%= messages.error[0] %>
+    <div class="row shadow rounded-3 overflow-hidden" style="max-width: 1000px; width: 100%;">
+
+        <div class="col-12 col-md-6 bg-white text-primary p-4 d-flex flex-column justify-content-center">
+
+            <%# Pesan Error & Sukses %>
+            <% if (messages.error && messages.error.length > 0) { %>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <%= messages.error[0] %>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
+                </div>
+            <% } %>
+            <% if (messages.success && messages.success.length > 0) { %>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <%= messages.success[0] %>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
             <% } %>
 
-                <!-- FORM LOGIN -->
-                <div class="col-md-6 bg-white text-primary p-4 d-flex flex-column justify-content-center">
-                    <form action="/login" method="POST" class="p-5">
-                        <h4 class="mb-3 text-center">Login</h4>
+            <form action="/login" method="POST" class="px-md-5 py-3">
+                <h4 class="mb-4 text-center">Login</h4>
 
-                        <input type="text" name="username" class="form-control mb-3" placeholder="Username" required
-                            autocomplete="off">
-                        <input type="password" name="password" class="form-control mb-3" placeholder="Password" required
-                            autocomplete="off">
-
-                        <button type="submit" class="btn btn-primary w-100 mb-2">Sign In</button>
-                        <a href="/register" class="mt-2 d-block text-center">Belum punya akun?</a>
-                    </form>
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" name="username" class="form-control" id="username" required autocomplete="off">
                 </div>
 
-                <!-- INFO PANEL -->
-                <div class="col-md-6 d-flex flex-column justify-content-center text-center p-4 bg-primary text-white">
-                    <h2 class="mb-3">Selamat Datang</h2>
-                    <p class="text-light">Login untuk melanjutkan dan terhubung dengan temanmu</p>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" name="password" class="form-control" id="password" required autocomplete="off">
                 </div>
+
+                <div class="d-grid mb-3">
+                    <button type="submit" class="btn btn-primary">Sign In</button>
+                </div>
+                <a href="/register" class="mt-2 d-block text-center text-decoration-none">Belum punya akun?</a>
+            </form>
+        </div>
+        
+        <div class="col-12 col-md-6 d-flex flex-column justify-content-center text-center p-5 bg-primary text-white">
+            <h2 class="mb-3">Selamat Datang</h2>
+            <p class="text-light">Login untuk melanjutkan dan terhubung dengan temanmu</p>
+        </div>
 
     </div>
 </div>

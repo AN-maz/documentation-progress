@@ -47,9 +47,9 @@ exports.loginUser = async (req, res) => {
 exports.registerUser = async (req, res) => {
 
     try {
-        const { username, pass, passConf } = req.body;
+        const { username, password, passwordConfirm } = req.body;
 
-        if (pass !== passConf) {
+        if (password !== passwordConfirm) {
             console.log("Error: Password tidak cocok MasPur");
             req.flash('error', 'Password tidak cocok MasPur!');
             return res.redirect('/register');
@@ -60,23 +60,33 @@ exports.registerUser = async (req, res) => {
         if (user) {
             console.log("Username sudah ada MasPur");
             req.flash('error', 'Username suda digunakan MasPur');
-            res.redirect('/register');
+            return res.redirect('/register');
         }
 
-        user = new User({ username, pass });
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+
+        user = new User({
+            username,
+            password: hashedPassword // Simpan password yang sudah di-hash
+        });
         await user.save();
+
+        req.flash('success', 'Akun berhasil dibuat! Silakan login.');
 
         res.redirect('/login');
     } catch (err) {
-
+        console.error(err);
+        // res.status(500).send('Terjadi error di server saat registrasi.');
+        req.flash('error', 'Terjadi error di server saat registrasi MasPur!');
+        return res.redirect('/register');
     }
 }
 
 exports.showRegisterPage = async (req, res) => {
 
     res.render('register', {
-        title: 'Register',
-        errorMessage: req.flash('error')
+        title: 'Register'
     });
 };
 
