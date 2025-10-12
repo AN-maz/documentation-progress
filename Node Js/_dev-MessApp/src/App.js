@@ -25,8 +25,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(expressLayouts);
 app.set('layout', 'layouts/main-layout');
 
-
-
 app.use(session({
     secret: 'solat yang penting',
     resave: false,
@@ -43,6 +41,7 @@ app.use((req, res, next) => {
     res.locals.messages = req.flash();
     next();
 });
+
 
 app.use(attachUser);
 

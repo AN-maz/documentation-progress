@@ -1,30 +1,29 @@
 const User = require('../models/userModel');
 const bcrypt = require('bcryptjs');
 
+// Menampilkan halaman registrasi
 exports.showRegisterPage = (req, res) => {
     res.render('register', {
-        title: 'register',
-        layout: 'layouts/main-layout',
+        title: 'Register',
         errorMessage: req.flash('error')
     });
 };
 
+// Memproses data registrasi
 exports.registerUser = async (req, res) => {
     try {
         const { username, password, passwordConfirm } = req.body;
 
         if (password !== passwordConfirm) {
-            console.log('Error: Password tidak cocok');
+            console.log('Error: Password tidak cocok.');
 
             req.flash('error', 'Password tidak cocok MasPur!');
             return res.redirect('/register');
         }
 
         let user = await User.findOne({ username });
-
         if (user) {
-            console.log('Error: username sudah di gunakan MasPur!');
-
+            console.log('Error: Username sudah digunakan.');
             req.flash('error', 'Username sudah digunakan MasPur!');
             return res.redirect('/register');
         }
@@ -33,36 +32,34 @@ exports.registerUser = async (req, res) => {
 
         await user.save();
 
-        req.flash('success', 'Registrasi berhasil! Silakan login.');
         res.redirect('/login');
     } catch (err) {
-        req.flash('error', 'Terjadi error di server saat register MasPur!');
+        console.error(err);
+        req.flash('error', 'Terjadi error di server saat registrasi MasPur!');
         return res.redirect('/register');
     }
 };
 
-exports.showLoginPage = (req,res) => {
+// Menampilkan halaman login
+exports.showLoginPage = (req, res) => {
     res.render('login', {
-        title: 'login',
-        layout: 'layouts/main-layout',
-        successMessage: req.flash('success'),
+        title: 'Login',
         errorMessage: req.flash('error')
     });
 };
 
-exports.loginUser = async (req, res) => {
-    try {
 
+// Memproses data login
+exports.loginUser = async (req, res, next) => {
+    try {
         const { username, password } = req.body;
         const user = await User.findOne({ username });
-
         if (!user) {
             req.flash('error', 'username atau password salah MasPur!');
             return res.redirect('/login');
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
-
         if (!isMatch) {
             req.flash('error', 'username atau password salah MasPur!');
             return res.redirect('/login');
@@ -70,28 +67,27 @@ exports.loginUser = async (req, res) => {
 
         req.session.userId = user._id;
 
-        // req.session.save((err) => {
-        //     if (err) {
-        //         return next(err);
-        //     }
-        // });
+        req.session.save((err) => {
+            if (err) {
+                return next(err);
+            }
+        });
 
         res.redirect('/home');
-
     } catch (err) {
-        console.log(err);
-        req.flash('error', 'Terjadi error di server');
+        console.error(err);
+        req.flash('error', 'terjadi error di server');
         return res.redirect('/login');
     }
 };
 
+// Proses Logout
 exports.logoutUser = (req, res) => {
     req.session.destroy((err) => {
         if (err) {
-            req.flash('error', 'Gagal untuk logOut MasPur');
-            return res.redirect('/home')
+            req.flash('error', 'Gagal untuk logout MasPur!');
+            return res.redirect('/home');
         }
-        res.clearCookie('connect.sid');
         res.redirect('/login');
     });
-}
+};
