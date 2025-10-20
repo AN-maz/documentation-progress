@@ -1,0 +1,23 @@
+ body {
+     padding-top: 56px;
+ }
+
+ .hero-section {
+     height: 60vh;
+     background: url('https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2070&auto=format&fit=crop') no-repeat center center;
+     background-size: cover;
+     color: white;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     text-align: center;
+ }
+
+ .hero-section h1 {
+     font-weight: bold;
+     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+ }
+
+ .section-padding {
+     padding: 60px 0;
+ }

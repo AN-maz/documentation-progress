@@ -1,0 +1,14 @@
+ body {
+     padding-top: 56px;
+ }
+
+ .hero-section {
+     height: 60vh;
+     background: url('/public/imgs/woman-8175307_1280.jpg') no-repeat center center;
+     background-size: cover;
+     color: white;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     text-align: center;
+ }
