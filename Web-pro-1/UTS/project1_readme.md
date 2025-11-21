@@ -30,6 +30,10 @@ Menampilkan ringkasan statistik dan aktivitas terbaru.
 Halaman untuk melihat informasi akun yang sedang login.
 ![Dashboard Profile](imgs/readMe/dashboard_profile.png)
 
+**Manajemen dashboard_dataManagement**
+Halaman untuk melihat informasi akun yang sedang login.
+![Dashboard Profile](imgs/readMe/dashboard_dataManagement.png)
+
 **Pengaturan (Settings)**
 Halaman konfigurasi aplikasi.
 ![Dashboard Settings](imgs/readMe/dashboard_settings.png)
