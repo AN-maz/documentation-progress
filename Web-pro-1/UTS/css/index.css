@@ -1,0 +1,47 @@
+:root {
+  --primary-color: #2563eb;
+  --secondary-color: #1e40af;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.hero-section {
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+  color: white;
+  padding: 100px 0;
+  margin-bottom: 50px;
+}
+
+.info-card {
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+  height: 100%;
+}
+
+.info-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.info-card img {
+  height: 200px;
+  object-fit: cover;
+}
+
+footer {
+  background: #1f2937;
+  color: white;
+  padding: 30px 0;
+  margin-top: 50px;
+}
+
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
