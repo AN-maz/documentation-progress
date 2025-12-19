@@ -1,2 +1,2 @@
-# 📘 Documentation Progress
+# Documentation Progress
 
