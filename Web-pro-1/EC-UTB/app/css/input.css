@@ -1,0 +1,11 @@
+@tailwind base;
+
+@layer base {
+  :root {
+    --color-ec-blue: #001452;
+    --color-ec-red: #D81B2B;
+  }
+}
+
+@tailwind components;
+@tailwind utilities;
