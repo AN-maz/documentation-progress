@@ -1,0 +1,12 @@
+{
+  "name": "ec-utb",
+  "version": "1.0.0",
+  "description": "English Club UTB Website",
+  "scripts": {
+    "build-css": "tailwindcss -i ./app/css/input.css -o ./public/css/output.css --watch",
+    "build-css-prod": "tailwindcss -i ./app/css/input.css -o ./public/css/output.css --minify"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.0"
+  }
+}
