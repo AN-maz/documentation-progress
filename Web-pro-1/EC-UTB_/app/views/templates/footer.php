@@ -105,7 +105,7 @@
         </div>
 
         <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
-            <p>&copy;Copyright by 24552011027_Andrian Maulana Dzikwan_TIF RP 23 CNS B. All Rights Reserved.</p>
+            <p>&copy;Copyright by 24552011027_Andrian Maulana Dzikwan_TIF_RP_23_CNS_B_UASWEB1. All Rights Reserved.</p>
             <p class="mt-2 md:mt-0">Designed with <span class="text-ec-red">♥</span> in Bandung.</p>
         </div>
 

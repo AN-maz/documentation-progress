@@ -8,6 +8,18 @@ Proyek ini merupakan sebuah web application yang digunakan untuk mengelola siste
 
 Web application ini diharapkan dapat menjadi platform pendukung pembelajaran dan aktivitas organisasi UKM English Club UTB.
 
+untuk ekosistem project yang saya gunakan adalah **PHP MVC**. Referensi dari ch yt Dosen Unpas **Bapak Sanhdika Galih**. 
+
+Dengan Frontend di bagian:
+- app/views
+- public 
+
+untuk backend di bagian:
+- app/controllers 
+- app/core 
+- app/helper 
+- app/models 
+
 ---
 
 ## Role Pengguna
@@ -274,3 +286,11 @@ Mendemonstrasikan fungsi remember me yang tersimpan di cookie
 
 - **internal meeting**
 <video src="vid/internal-meeting.mp4" width="100%" controls></video>
+
+
+# PROJECT HOSTING
+https://zykone.web.id/public/
+
+akun admin super: 
+superadmin@ecutb.ac.id
+superadmin$123
