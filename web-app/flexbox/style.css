@@ -1,0 +1,29 @@
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+    padding:1rem 2rem;
+    background:#333;
+    color:white;
+}
+
+.nav-links{
+    display: flex;
+    gap: 20px;
+    list-style: none;;
+}
+
+.hero{
+    display: flex;
+    flex-wrap: wrap; /* Izinkan kartu turun ke bawah jika tidak muat */
+    gap:15px;
+    padding:20px;
+}
+.card{
+    background: #f4f4f4;
+    padding: 20px;
+    border: 2px solid #ddd;
+    flex-grow:1; /* Kartu akan melebar mengisi ruang kosong */
+    flex-basis: 200px; /* Ukuran dasar kartu sebelum tumbuh/menyusut */
+    text-align: center;    
+}
