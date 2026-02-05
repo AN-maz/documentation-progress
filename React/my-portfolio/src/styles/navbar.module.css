@@ -1,0 +1,23 @@
+.nav{
+    background: #007bff;
+    padding: 15px 30px;
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+}
+
+.nav h2{
+    color:white;
+}
+
+.nav a{
+    color:white;
+    margin-left:15px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav a.active{
+    text-decoration: underline;
+}
+
