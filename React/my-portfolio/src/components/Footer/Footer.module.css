@@ -6,7 +6,7 @@
     width: 100%;
 }
 
-.footer-container{
+.footerContainer{
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -16,42 +16,42 @@
     padding: 0 20px;
 }
 
-.footer-section{
+.footerSection{
     flex: 1;
     min-width: 250px;
     margin: 20px;
 }
 
-.footer-section h3{
+.footerSection h3{
     color: #007bff;
     margin-bottom: 15px;
 }
 
 
-.footer-section h4{
+.footerSection h4{
     border-bottom: 2px solid #007bff;
     display: inline-block;
     padding-bottom: 5px;
     margin-bottom: 15px;
 }
 
-.social-icons{
+.socialIcons{
     display: flex;
     gap: 15px;
 }
 
-.social-icons a{
+.socialIcons a{
     color: #fff;
     font-size:24px;
     transition: 0.3s;
 }
 
-.social-icons a:hover{
+.socialIcons a:hover{
     color: #007bff;
     transform: translateY(-3px);
 }
 
-.contact-item .icon{
+.contactItem .icon{
     color: var(--primary);
     font-size: 18px;
 }
