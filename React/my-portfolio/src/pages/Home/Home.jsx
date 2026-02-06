@@ -25,7 +25,7 @@ function Home() {
                 </div>
                 <div className={styles.heroImg}>
                     <img
-                        src="../../public/ahmad.jpeg"
+                        src="../../public/profile.png"
                         alt="profile"
                     />
                 </div>

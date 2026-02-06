@@ -24,7 +24,6 @@ const Navbar = () => {
         </div>
 
         {/* MENU LINKS */}
-        {/* Logic: Jika click true, tambah class 'active' ke menu */}
         <ul className={click ? `${styles.navMenu} ${styles.active}` : styles.navMenu}>
           <li className={styles.navItem}>
             <NavLink 
