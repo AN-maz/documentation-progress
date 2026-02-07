@@ -1,0 +1,43 @@
+.learning-path-section {
+    background-color: #fafafa;
+}
+
+.section-title {
+    margin-bottom: 3rem;
+    font-size: 2.25rem;
+}
+
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    transition: transform 0.3s;
+    border: 1px solid #eee;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    background-color: var(--color-oxigen-light);
+    color: white;
+    padding: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.card-body {
+    padding: 1.5rem;
+    color: #555;
+    line-height: 1.6;
+}

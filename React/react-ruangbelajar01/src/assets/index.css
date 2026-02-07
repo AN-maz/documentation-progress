@@ -1,0 +1,19 @@
+.card{
+    margin: 20px;
+    padding:10px;
+    background:blue;
+    color:white;
+    text-align:center;  
+}
+
+.counter{
+    padding: 10px;
+    margin:20px;
+    background:aqua;
+    text-align: center;
+}
+
+.button{
+    padding:10px;
+    
+}

@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+@theme {
+  /* Warna Utama OXIGEN */
+  --color-oxigen-light: #0051D2;
+  --color-oxigen-dark: #001A57;
+
+  /* Divisi Software */
+  --color-software-bright: #39FF5A;
+  --color-software-tosca: #20C997;
+  --color-software-teal: #008080;
+
+  /* Divisi Hardware */
+  --color-hardware-cyan: #00B4D8;
+  --color-hardware-royal: #0056D2;
+
+  /* Divisi Game */
+  --color-game-red: #FF414D;
+  --color-game-pink: #D12E67;
+  --color-game-purple: #6B2D8C;
+}
