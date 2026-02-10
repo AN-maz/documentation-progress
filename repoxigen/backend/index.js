@@ -1,36 +1,40 @@
 const express = require("express");
-const mysql = require("mysql2");
 const cors = require("cors");
+const helmet = require("helmet");
+const rateLimit = require("express-rate-limit");
+const cookieParser = require("cookie-parser");
 require("dotenv").config();
 
+const authRoutes = require("./routes/authRoutes");
+
 const app = express();
-
-app.use(cors());
-app.use(express.json());
-
-const db = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-});
-
-db.connect((err) => {
-  if (err) {
-    console.log("Koneksi Mysql gagal: " + err.stack);
-    return;
-  }
-  console.log("Terhubung ke MYSQL XAMPP dengan ID: " + db.threadId);
-});
-
-app.get("/api/hello", (req, res) => {
-  res.json({
-    message: "Hallo dari backend Express!",
-    status: "Server & Database Aktif",
-  });
-});
-
 const PORT = process.env.PORT;
+
+app.use(helmet());
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  message: "Terlalu banyak permintaan dari IP ini, coba lagi nanti.",
+});
+app.use(limiter);
+
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  }),
+);
+
+app.use(express.json());
+app.use(cookieParser());
+
+app.get("/", (req, res) => {
+  res.send("API UKM OXIGEN is Running security...");
+});
+
+app.use("/api/auth", authRoutes);
+
 app.listen(PORT, () => {
-  console.log(`Server backend berjalan di http://localhost${PORT}`);
+  console.log(`Server is running securely on http://localhost:${PORT}`);
 });
