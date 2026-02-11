@@ -6,7 +6,7 @@ const NavLink = ({ to, children }) => {
 
   const isActive = to === '/'
     ? location.pathname === '/' || location.pathname.startsWith('/home')
-    : location.pathname === to;
+    : location.pathname.startsWith(to);
 
   return (
     <Link

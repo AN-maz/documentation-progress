@@ -2,13 +2,12 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronLeft, ChevronRight, ArrowLeft } from 'lucide-react';
 
-// Import Data & Komponen (Path naik 3 level karena ada di dalam folder Home/Gallery)
 import galleryData from '../../../data/gallery.json';
 import GalleryCard from '../../../components/GalleryCard';
 
 const GalleryPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6; // Menampilkan 6 foto per halaman
+  const itemsPerPage = 6; 
 
   // Logic Pagination
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -19,7 +18,7 @@ const GalleryPage = () => {
   // Fungsi Ganti Halaman
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
-    window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll ke atas saat ganti halaman
+    window.scrollTo({ top: 0, behavior: 'smooth' }); 
   };
 
   return (
@@ -34,7 +33,7 @@ const GalleryPage = () => {
         {/* Tombol Kembali ke Home */}
         <div className="mb-8">
            <Link 
-             to="/" 
+             to="/#GalleryPreview" 
              className="inline-flex items-center text-gray-400 hover:text-white transition-colors gap-2 group"
            >
               <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />

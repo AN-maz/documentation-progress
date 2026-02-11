@@ -5,13 +5,11 @@ import galleryData from '../../data/gallery.json';
 import GalleryCard from '../../components/GalleryCard'; 
 
 const GalleryPreview = () => {
-  // Ambil 3 data terbaru saja untuk preview
   const latestGallery = galleryData.slice(0, 3);
 
   return (
-    <section className="py-24 bg-oxigen-dark relative overflow-hidden">
-      
-      {/* Background Decoration (Glow Effect) */}
+    <section id="GalleryPreview" className="py-24 bg-oxigen-dark relative overflow-hidden">
+  
       <div className="absolute top-0 right-0 w-96 h-96 bg-oxigen-light/10 rounded-full blur-3xl -z-10 translate-x-1/2 -translate-y-1/2"></div>
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-software-teal/10 rounded-full blur-3xl -z-10 -translate-x-1/2 translate-y-1/2"></div>
 
@@ -31,7 +29,6 @@ const GalleryPreview = () => {
             </p>
           </div>
 
-          {/* Tombol Lihat Semua (Mengarah ke /home/gallery) */}
           <Link 
             to="/home/gallery" 
             className="group flex items-center gap-2 text-white font-semibold border-b border-white/20 pb-1 hover:border-software-bright hover:text-software-bright transition-all duration-300"
@@ -41,7 +38,6 @@ const GalleryPreview = () => {
           </Link>
         </div>
 
-        {/* Grid Gallery (3 Items) */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {latestGallery.map((item) => (
             <GalleryCard key={item.id} item={item} />

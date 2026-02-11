@@ -4,6 +4,7 @@ import Layout from './components/Layout';
 import Home from './pages/Home'
 import GalleryPage from './pages/Home/Gallery';
 import About from './pages/About';
+import SquadDetail from './pages/About/Structure/SquadDetail';
 import Merchant from './pages/Merchant';
 
 import Login from './pages/Auth/Login'
@@ -18,6 +19,7 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/home/gallery' element={<GalleryPage />} />
           <Route path='/about' element={<About />} />
+          <Route path="/about/squad/:divisionId" element={<SquadDetail />} />
           <Route path='/merchant' element={<Merchant />} />
 
           <Route path="/login" element={<Login />} />
