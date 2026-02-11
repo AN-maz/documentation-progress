@@ -21,10 +21,10 @@ function App() {
           <Route path='/about' element={<About />} />
           <Route path="/about/squad/:divisionId" element={<SquadDetail />} />
           <Route path='/merchant' element={<Merchant />} />
-
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Registrasi />} />
         </Route>
+
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Registrasi />} />
       </Routes>
     </BrowserRouter>
   );
