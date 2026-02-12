@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Users, ArrowDown } from 'lucide-react';
 import structureData from '../../../data/structure.json';
-import CharacterCard from '../../../components/CharacterCard';
+import CharacterCard from '../../../components/Cards/CharacterCard';
 
 const Structure = () => {
   const { bph, divisions } = structureData;

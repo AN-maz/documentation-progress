@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import galleryData from '../../data/gallery.json'; 
-import GalleryCard from '../../components/GalleryCard'; 
+import GalleryCard from '../../components/Cards/GalleryCard'; 
 
 const GalleryPreview = () => {
   const latestGallery = galleryData.slice(0, 3);

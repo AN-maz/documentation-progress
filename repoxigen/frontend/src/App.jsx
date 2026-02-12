@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Layout from './components/Layout';
+import PublicLayout from './components/Layouts/PublicLayout';
 
 import Home from './pages/Home'
 import GalleryPage from './pages/Home/Gallery';
@@ -14,8 +14,9 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Layout */}
-        <Route element={<Layout />}>
+        
+        {/* Landing Page */}
+        <Route element={<PublicLayout />}>
           <Route path='/' element={<Home />} />
           <Route path='/home/gallery' element={<GalleryPage />} />
           <Route path='/about' element={<About />} />

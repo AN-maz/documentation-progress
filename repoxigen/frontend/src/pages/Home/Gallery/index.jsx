@@ -3,7 +3,7 @@ import { Link,useLocation } from 'react-router-dom';
 import { ChevronLeft, ChevronRight, ArrowLeft } from 'lucide-react';
 
 import galleryData from '../../../data/gallery.json';
-import GalleryCard from '../../../components/GalleryCard';
+import GalleryCard from '../../../components/Cards/GalleryCard';
 
 const GalleryPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
