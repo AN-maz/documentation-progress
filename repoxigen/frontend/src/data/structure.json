@@ -3,19 +3,27 @@
     {
       "id": "ketua",
       "role": "Ketua Umum",
-      "name": "Nama Ketua",
+      "name": "Sulastian",
       "nickname": "The Commander",
-      "image": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=400",
-      "stats": { "lead": 95, "tech": 85, "charisma": 90 },
+      "image": "/pengurus/topman/Sulastian.png",
+      "stats": {
+        "lead": 95,
+        "tech": 85,
+        "charisma": 90
+      },
       "color": "from-blue-600 to-blue-400"
     },
     {
       "id": "wakil",
       "role": "Wakil Ketua",
-      "name": "Nama Wakil",
+      "name": "Gita Aulia",
       "nickname": "The Strategist",
-      "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400",
-      "stats": { "lead": 90, "tech": 88, "charisma": 85 },
+      "image": "/pengurus/topman/Gita.png",
+      "stats": {
+        "lead": 90,
+        "tech": 88,
+        "charisma": 85
+      },
       "color": "from-blue-500 to-cyan-400"
     },
     {
@@ -23,8 +31,12 @@
       "role": "Sekretaris 1",
       "name": "Nama Sekre 1",
       "nickname": "The Scribe",
-      "image": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=400",
-      "stats": { "admin": 95, "speed": 85, "teliti": 90 },
+      "image": "/pengurus/topman/ahmad.jpeg",
+      "stats": {
+        "admin": 95,
+        "speed": 85,
+        "teliti": 90
+      },
       "color": "from-purple-600 to-pink-400"
     },
     {
@@ -32,8 +44,12 @@
       "role": "Sekretaris 2",
       "name": "Nama Sekre 2",
       "nickname": "The Archivist",
-      "image": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=400",
-      "stats": { "admin": 90, "speed": 88, "teliti": 92 },
+      "image": "/pengurus/topman/ahmad.jpeg",
+      "stats": {
+        "admin": 90,
+        "speed": 88,
+        "teliti": 92
+      },
       "color": "from-purple-500 to-pink-300"
     },
     {
@@ -41,8 +57,12 @@
       "role": "Bendahara 1",
       "name": "Nama Bendahara 1",
       "nickname": "The Treasurer",
-      "image": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400",
-      "stats": { "finance": 98, "audit": 85, "saving": 90 },
+      "image": "/pengurus/topman/ahmad.jpeg",
+      "stats": {
+        "finance": 98,
+        "audit": 85,
+        "saving": 90
+      },
       "color": "from-green-600 to-emerald-400"
     },
     {
@@ -50,8 +70,12 @@
       "role": "Bendahara 2",
       "name": "Nama Bendahara 2",
       "nickname": "The Banker",
-      "image": "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=400",
-      "stats": { "finance": 92, "audit": 90, "saving": 88 },
+      "image": "/pengurus/topman/ahmad.jpeg",
+      "stats": {
+        "finance": 92,
+        "audit": 90,
+        "saving": 88
+      },
       "color": "from-green-500 to-emerald-300"
     }
   ],
@@ -62,8 +86,26 @@
       "desc": "Hubungan Internal & Eksternal",
       "color": "border-yellow-500",
       "members": [
-         { "id": "hum1", "name": "Anggota 1", "role": "Koordinator", "image": "...", "stats": {"comms": 90, "rel": 85} },
-         { "id": "hum2", "name": "Anggota 2", "role": "Staff", "image": "...", "stats": {"comms": 80, "rel": 80} }
+        {
+          "id": "hum1",
+          "name": "orang",
+          "role": "Kadiv Internal",
+          "image": "/pengurus/humaniora/eksternal/ahmad.jpeg",
+          "stats": {
+            "comms": 90,
+            "rel": 85
+          }
+        },
+        {
+          "id": "hum2",
+          "name": "orang ",
+          "role": "Kadiv Eksternal",
+          "image": "/pengurus/humaniora/internal/ahmad.jpeg",
+          "stats": {
+            "comms": 80,
+            "rel": 80
+          }
+        }
       ]
     },
     {
@@ -71,38 +113,93 @@
       "name": "Kominfo",
       "desc": "Media, Branding & Kreatif",
       "color": "border-orange-500",
-      "members": []
+      "members": [
+        {
+          "id": "kom1",
+          "name": "orang",
+          "role": "Kadiv Kominfo",
+          "image": "/pengurus/kominfo/ahmad.jpeg",
+          "stats": {
+            "comms": 90,
+            "rel": 85
+          }
+        }
+      ]
     },
     {
       "id": "kewirus",
       "name": "Kewirausahaan",
       "desc": "Bisnis & Pendanaan",
       "color": "border-green-500",
-      "members": []
+      "members": [
+        {
+          "id": "kewirus1",
+          "name": "orang",
+          "role": "Kadiv Kewirus",
+          "image": "/pengurus/kewirus/ahmad.jpeg",
+          "stats": {
+            "comms": 90,
+            "rel": 85
+          }
+        }
+      ]
     },
     {
       "id": "software",
-      "name": "Software Engineering",
+      "name": "Divisi Software",
       "desc": "Web, Mobile & AI Dev",
       "color": "border-software-bright",
       "isTech": true,
-      "members": []
+      "members": [
+        {
+          "id": "sotf",
+          "name": "orang",
+          "role": "Kadiv software",
+          "image": "/pengurus/sotfware/ahmad.jpeg",
+          "stats": {
+            "comms": 90,
+            "rel": 85
+          }
+        }
+      ]
     },
     {
       "id": "hardware",
-      "name": "Hardware & IoT",
+      "name": "Divisi Hardware",
       "desc": "Robotics & Microcontroller",
       "color": "border-hardware-cyan",
       "isTech": true,
-      "members": []
+      "members": [
+        {
+          "id": "hard1",
+          "name": "orang",
+          "role": "Kadiv Hardware",
+          "image": "/pengurus/hardware/ahmad.jpeg",
+          "stats": {
+            "comms": 90,
+            "rel": 85
+          }
+        }
+      ]
     },
     {
       "id": "game",
-      "name": "Game Development",
+      "name": "Divisi Game",
       "desc": "Game Design & Programming",
       "color": "border-game-red",
       "isTech": true,
-      "members": []
+      "members": [
+        {
+          "id": "game1",
+          "name": "orang",
+          "role": "Kadiv Game",
+          "image": "/pengurus/game/ahmad.jpeg",
+          "stats": {
+            "comms": 90,
+            "rel": 85
+          }
+        }
+      ]
     }
   ]
 }

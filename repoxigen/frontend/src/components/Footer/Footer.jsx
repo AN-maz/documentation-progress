@@ -58,7 +58,7 @@ const Footer = () => {
             <h3 className="text-xl font-bold mb-6">Quick Link</h3>
             <ul className="space-y-4 text-sm text-gray-200">
               <li>
-                <a href="https://sttbandung.ac.id" target="_blank" rel="noopener noreferrer" className="hover:text-white hover:underline transition-all">STTBANDUNG</a>
+                <a href="https://www.utb-univ.ac.id/" target="_blank" rel="noopener noreferrer" className="hover:text-white hover:underline transition-all">Universitas Teknologi Bandung</a>
               </li>
             </ul>
           </div>
@@ -67,9 +67,8 @@ const Footer = () => {
             <h3 className="text-xl font-bold mb-6">Resources</h3>
             <ul className="space-y-4 text-sm text-gray-200">
               <li><Link to="/#division" className="hover:text-white hover:underline transition-all">Division</Link></li>
-              <li><Link to="/about" className="hover:text-white hover:underline transition-all">Team</Link></li>
-              <li><Link to="/gallery" className="hover:text-white hover:underline transition-all">Gallery</Link></li>
-              <li><Link to="/blog" className="hover:text-white hover:underline transition-all">Blog</Link></li>
+              <li><Link to="/#GalleryPreview" className="hover:text-white hover:underline transition-all">Gallery</Link></li>
+              <li><Link to="/about#structure" className="hover:text-white hover:underline transition-all">Team</Link></li>
             </ul>
           </div>
 
@@ -95,7 +94,7 @@ const Footer = () => {
         <div className="border-t border-white/20 mt-12 mb-8"></div>
 
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center text-sm text-gray-300">
-          <p>© {new Date().getFullYear()} OXIGEN STTBANDUNG</p>
+          <p>© {new Date().getFullYear()} OXIGEN UTB</p>
           
           <button 
             onClick={scrollToTop} 

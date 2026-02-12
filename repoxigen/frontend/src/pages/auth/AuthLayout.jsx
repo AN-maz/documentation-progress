@@ -43,7 +43,7 @@ const AuthLayout = ({ children, title, subtitle }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 2000);
+    }, 2000 );
 
     return () => clearInterval(interval);
   }, []);
@@ -103,10 +103,6 @@ const AuthLayout = ({ children, title, subtitle }) => {
       </div>
 
 
-      {/* --- PANEL 2: FORM SECTION --- 
-          ORDER-2 di Mobile (Tampil Bawah)
-          ORDER-1 di Desktop (Tampil Kiri)
-      */}
       <div 
         className={`
           w-full md:w-1/2 lg:w-5/12 
@@ -116,7 +112,7 @@ const AuthLayout = ({ children, title, subtitle }) => {
           -mt-8 md:mt-0 
         `}
       >
-        {/* Card Putih Form dengan Rounded Top di Mobile agar terlihat seperti "Sheet" */}
+      
         <div className="bg-white rounded-t-[30px] md:rounded-none shadow-[0_-10px_40px_rgba(0,0,0,0.1)] md:shadow-none min-h-[65vh] md:min-h-screen p-8 md:p-12 lg:p-16 flex flex-col justify-center">
           
           {/* Tombol Kembali */}
@@ -133,20 +129,19 @@ const AuthLayout = ({ children, title, subtitle }) => {
           <div className="max-w-md w-full mx-auto mt-4 md:mt-0">
             {/* Header Form */}
             <div className="mb-8 md:mb-10 text-center md:text-left">
-              {/* Logo Kecil hanya muncul di mobile form header */}
+      
               <img src="/oxigen.png" alt="Logo" className="h-8 w-auto mb-4 mx-auto md:mx-0 md:hidden" />
               
               <h1 className="text-2xl md:text-3xl font-black text-oxigen-dark mb-2 tracking-tight">{title}</h1>
               <p className="text-sm md:text-base text-gray-500">{subtitle}</p>
             </div>
 
-            {/* Content (Form Login/Register) */}
             {children}
           </div>
 
           {/* Footer Kecil */}
           <div className="mt-12 text-center text-[10px] md:text-xs text-gray-400">
-            &copy; {new Date().getFullYear()} OXIGEN STT BANDUNG.
+            &copy; {new Date().getFullYear()} OXIGEN UTB.
           </div>
         </div>
       </div>

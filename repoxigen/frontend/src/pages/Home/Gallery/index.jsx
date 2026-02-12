@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link,useLocation } from 'react-router-dom';
 import { ChevronLeft, ChevronRight, ArrowLeft } from 'lucide-react';
 
 import galleryData from '../../../data/gallery.json';
@@ -7,7 +7,7 @@ import GalleryCard from '../../../components/GalleryCard';
 
 const GalleryPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6; 
+  const itemsPerPage = 6;
 
   // Logic Pagination
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -18,27 +18,46 @@ const GalleryPage = () => {
   // Fungsi Ganti Halaman
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
-    window.scrollTo({ top: 0, behavior: 'smooth' }); 
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const location = useLocation();
+
+  useEffect(() => {
+    
+    if (location.hash) {
+      const elementId = location.hash.replace('#', '');
+      const element = document.getElementById(elementId);
+
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+      }
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [location]);
+
+
   return (
-    <div className="min-h-screen bg-oxigen-dark pt-32 pb-20 px-6 relative overflow-hidden">
-      
+    <div className="min-h-screen bg-oxigen-dark pt-32 pb-20 px-6 relative overflow-hidden" id='galleryDetail'>
+
       {/* Background Decoration */}
       <div className="absolute top-20 left-10 w-72 h-72 bg-oxigen-light/5 rounded-full blur-3xl pointer-events-none"></div>
       <div className="absolute bottom-20 right-10 w-96 h-96 bg-software-teal/5 rounded-full blur-3xl pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto relative z-10">
-        
+
         {/* Tombol Kembali ke Home */}
         <div className="mb-8">
-           <Link 
-             to="/#GalleryPreview" 
-             className="inline-flex items-center text-gray-400 hover:text-white transition-colors gap-2 group"
-           >
-              <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
-              <span>Kembali ke Home</span>
-           </Link>
+          <Link
+            to="/#GalleryPreview"
+            className="inline-flex items-center text-gray-400 hover:text-white transition-colors gap-2 group"
+          >
+            <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
+            <span>Kembali ke Home</span>
+          </Link>
         </div>
 
         {/* Page Header */}
@@ -61,14 +80,14 @@ const GalleryPage = () => {
         {/* Pagination Controls */}
         {totalPages > 1 && (
           <div className="flex justify-center items-center gap-4">
-            
+
             {/* Tombol Previous */}
             <button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
               className={`p-3 rounded-full border border-white/10 transition-all duration-300
-                ${currentPage === 1 
-                  ? 'text-gray-600 cursor-not-allowed opacity-50' 
+                ${currentPage === 1
+                  ? 'text-gray-600 cursor-not-allowed opacity-50'
                   : 'text-white hover:bg-white/10 hover:border-white/30 hover:shadow-lg'}`
               }
             >
@@ -82,8 +101,8 @@ const GalleryPage = () => {
                   key={number}
                   onClick={() => handlePageChange(number)}
                   className={`w-10 h-10 rounded-full font-bold transition-all duration-300
-                    ${currentPage === number 
-                      ? 'bg-oxigen-light text-white shadow-lg shadow-oxigen-light/30 scale-110' 
+                    ${currentPage === number
+                      ? 'bg-oxigen-light text-white shadow-lg shadow-oxigen-light/30 scale-110'
                       : 'bg-transparent text-gray-400 hover:text-white hover:bg-white/5'}`
                   }
                 >
@@ -97,8 +116,8 @@ const GalleryPage = () => {
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
               className={`p-3 rounded-full border border-white/10 transition-all duration-300
-                ${currentPage === totalPages 
-                  ? 'text-gray-600 cursor-not-allowed opacity-50' 
+                ${currentPage === totalPages
+                  ? 'text-gray-600 cursor-not-allowed opacity-50'
                   : 'text-white hover:bg-white/10 hover:border-white/30 hover:shadow-lg'}`
               }
             >

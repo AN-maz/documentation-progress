@@ -9,7 +9,6 @@ const CharacterCard = ({ member }) => {
         
         {/* Image Area */}
         <div className="h-64 overflow-hidden relative">
-          {/* Overlay Gradient (Warna spesifik member atau default biru) */}
           <div className={`absolute inset-0 bg-gradient-to-b ${member.color || 'from-gray-700 to-gray-900'} opacity-30 mix-blend-overlay z-10 group-hover:opacity-10 transition-opacity duration-500`}></div>
           
           <img 

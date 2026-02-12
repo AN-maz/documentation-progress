@@ -15,7 +15,7 @@ const Advisor = () => {
           <div className="relative shrink-0 w-64 h-64 md:w-80 md:h-80">
             <div className="absolute inset-0 bg-gradient-to-tr from-oxigen-light to-software-tosca rounded-full blur-3xl opacity-20"></div>
             <img 
-              src="https://via.placeholder.com/400x500?text=Foto+Pembina+PNG" 
+              src="/pembina.png" 
               alt="Pembina UKM Oxigen" 
               className="relative z-10 w-full h-full object-contain drop-shadow-xl hover:scale-105 transition-transform duration-500"
             />
@@ -26,17 +26,17 @@ const Advisor = () => {
             <Quote size={48} className="text-oxigen-light/20 mx-auto md:mx-0 mb-4" />
             
             <h3 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2">
-              Bapak [Nama Pembina], M.T.
+              Bapak Muhammad Ikhwan Fathulloh, M.Kom.
             </h3>
             
             {/* Jabatan / Title */}
             <div className="flex flex-col md:flex-row gap-2 md:items-center justify-center md:justify-start mb-6">
               <span className="px-3 py-1 bg-oxigen-dark text-white text-xs font-bold uppercase rounded-md">
-                Pembina UKM
+                Pembina OXIGEN UTB
               </span>
               <span className="hidden md:block text-gray-400">•</span>
               <span className="text-oxigen-light font-semibold text-sm">
-                Direktur Duspatin STTB
+                Direktur Pusdatin UTB | Dosen
               </span>
             </div>
 

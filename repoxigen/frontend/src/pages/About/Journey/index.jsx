@@ -41,7 +41,7 @@ const Journey = () => {
             
             <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
               <img 
-                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800" 
+                src="/gallery/poto3.JPG" 
                 alt="Foto Bersama Anggota OXIGEN" 
                 className="w-full h-full object-cover transform transition duration-700 group-hover:scale-105"
               />

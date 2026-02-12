@@ -30,7 +30,7 @@ const GalleryPreview = () => {
           </div>
 
           <Link 
-            to="/home/gallery" 
+            to="/home/gallery#galleryDetail" 
             className="group flex items-center gap-2 text-white font-semibold border-b border-white/20 pb-1 hover:border-software-bright hover:text-software-bright transition-all duration-300"
           >
             Lihat Semua Galeri

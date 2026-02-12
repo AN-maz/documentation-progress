@@ -7,8 +7,8 @@ import About from './pages/About';
 import SquadDetail from './pages/About/Structure/SquadDetail';
 import Merchant from './pages/Merchant';
 
-import Login from './pages/Auth/Login'
-import Registrasi from './pages/Auth/Registrasi'
+import Login from './pages/auth/Login'
+import Registrasi from './pages/auth/Registrasi'
 
 function App() {
   return (

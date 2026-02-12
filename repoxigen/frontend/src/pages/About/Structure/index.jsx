@@ -7,15 +7,11 @@ import CharacterCard from '../../../components/CharacterCard';
 const Structure = () => {
   const { bph, divisions } = structureData;
 
-  // LOGIKA PEMISAHAN LEVEL
-  // Level 1: Ketua & Wakil (Berdasarkan ID atau Role)
   const topLeaders = bph.filter(m => m.id === 'ketua' || m.id === 'wakil');
-  
-  // Level 2: Sisanya (Sekretaris & Bendahara)
   const officers = bph.filter(m => m.id !== 'ketua' && m.id !== 'wakil');
 
   return (
-    // Tambahkan id="structure" di sini agar bisa di-scroll otomatis
+
     <section id="structure" className="relative py-24 bg-oxigen-dark text-white overflow-hidden scroll-mt-20">
       
       {/* Background Grid */}
@@ -37,19 +33,17 @@ const Structure = () => {
         <div className="flex flex-wrap justify-center gap-10 mb-12">
           {topLeaders.map((member) => (
             <div key={member.id} className="relative z-10">
-              {/* Tambahkan mahkota/tanda khusus jika perlu */}
+
               <CharacterCard member={member} />
             </div>
           ))}
         </div>
 
-        {/* Konektor Visual (Garis Penghubung) */}
         <div className="flex justify-center mb-12 opacity-30">
            <ArrowDown size={40} className="text-white animate-bounce" />
         </div>
 
         {/* --- LEVEL 2: OFFICERS (Sekretaris & Bendahara) --- */}
-        {/* Grid 4 kolom untuk desktop agar sejajar rapi */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-24 justify-items-center">
           {officers.map((member) => (
             <CharacterCard key={member.id} member={member} />
@@ -60,7 +54,7 @@ const Structure = () => {
         <div className="border-t border-white/10 pt-16">
           <div className="text-center mb-10">
             <h4 className="text-3xl font-bold text-white mb-2">Operational Units</h4>
-            <p className="text-gray-400">Pilih divisi (Squad) untuk melihat daftar anggota.</p>
+            <p className="text-gray-400">Pilih divis untuk melihat daftar anggota.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

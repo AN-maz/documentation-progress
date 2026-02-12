@@ -63,11 +63,11 @@ const Merchant = () => {
           </div>
 
           <h1 className="text-4xl md:text-6xl font-black text-oxigen-dark uppercase tracking-tight mb-4 drop-shadow-sm">
-            Supply <span className="text-transparent bg-clip-text bg-gradient-to-r from-oxigen-light to-software-tosca">Depot</span>
+            OXI-<span className="text-transparent bg-clip-text bg-gradient-to-r from-oxigen-light to-software-tosca">Shop</span>
           </h1>
           
           <p className="text-gray-500 max-w-xl mx-auto text-lg">
-            Lengkapi gear dan logistikmu. Dari seragam identitas hingga asupan energi coding.
+            Tempat menemani diriku yang banyak Rezeki
             <br/>
             <span className="text-xs font-bold text-oxigen-light bg-blue-50 border border-blue-100 px-3 py-1 rounded-full mt-3 inline-block">
               Tap Order untuk Chat Admin

@@ -1,27 +1,27 @@
 [
   {
     "id": 1,
-    "title": "Workshop IoT Dasar",
+    "title": "Agenda Rutin",
     "desc": "Pelatihan perakitan mikrokontroler ESP32 untuk pemula bersama divisi Hardware.",
     "date": "2023-10-15",
-    "category": "Hardware",
-    "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800"
+    "category": "Game",
+    "image": "/gallery/poto1.jpeg"
   },
   {
     "id": 2,
-    "title": "Game Jam 2023",
+    "title": "Top Nominasi Project 24",
     "desc": "Kompetisi pembuatan game 48 jam non-stop dengan tema 'Cyberpunk Nusantara'.",
     "date": "2023-11-20",
-    "category": "Game Dev",
-    "image": "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?auto=format&fit=crop&q=80&w=800"
+    "category": "Supergame Galaxy",
+    "image": "/gallery/poto2.JPG"
   },
   {
     "id": 3,
-    "title": "Seminar Web Modern",
+    "title": "Supergame Galaxy x EXPO 2025",
     "desc": "Bedah tuntas teknologi Frontend terbaru menggunakan React dan Tailwind CSS.",
     "date": "2023-12-05",
-    "category": "Software",
-    "image": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80&w=800"
+    "category": "Supergame Galaxy",
+    "image": "/gallery/poto3.JPG"
   },
   {
     "id": 4,

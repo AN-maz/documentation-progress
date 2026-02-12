@@ -4,54 +4,88 @@ import AuthLayout from '../AuthLayout';
 
 const Registrasi = () => {
   return (
-    <AuthLayout 
-      title="Join the Squad" 
+    <AuthLayout
+      title="Join the Squad"
       subtitle="Daftarkan dirimu dan pilih divisi untuk memulai perjalanan teknologi."
     >
       <form className="space-y-4">
-        
+
+        <div>
+          <label className="block text-sm font-bold text-gray-700 mb-1">Nama Lengkap</label>
+          <input
+            type="text"
+            className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-oxigen-light focus:outline-none transition-all"
+            placeholder="Masukkan nama lengkap"
+          />
+        </div>
+
         <div className="grid grid-cols-2 gap-4">
-          {/* Nama Depan */}
+          {/* NIM */}
           <div>
-            <label className="block text-sm font-bold text-gray-700 mb-1">Nama Depan</label>
-            <input type="text" className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-oxigen-light focus:outline-none transition-all" placeholder="John" />
+            <label className="block text-sm font-bold text-gray-700 mb-1">NIM</label>
+            <input
+              type="text"
+              className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-oxigen-light focus:outline-none transition-all"
+              placeholder="2455XXXX"
+            />
           </div>
-          {/* Nama Belakang */}
+
+      
           <div>
-            <label className="block text-sm font-bold text-gray-700 mb-1">Nama Belakang</label>
-            <input type="text" className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-oxigen-light focus:outline-none transition-all" placeholder="Doe" />
+            <label className="block text-sm font-bold text-gray-700 mb-1">Jurusan</label>
+            <select className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-oxigen-light focus:outline-none transition-all appearance-none cursor-pointer">
+              <option value="" disabled selected>Pilih Jurusan</option>
+              <option value="TIF">Teknik Informatika</option>
+              <option value="TI">Teknik Industri</option>
+              <option value="DKV">Desain Komunikasi Visual</option>
+              <option value="BD">Bisnis Digital</option>
+              <option value="MR">Manajemen Retail</option>
+            </select>
           </div>
         </div>
 
-        {/* NIM */}
+  
         <div>
-          <label className="block text-sm font-bold text-gray-700 mb-1">NIM Mahasiswa</label>
-          <input type="text" className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-oxigen-light focus:outline-none transition-all" placeholder="1011xxxx" />
+          <label className="block text-sm font-bold text-gray-700 mb-1">Alamat Email</label>
+          <input
+            type="email"
+            className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-oxigen-light focus:outline-none transition-all"
+            placeholder="purwa123@gmail.com"
+          />
         </div>
 
-        {/* Email */}
-        <div>
-          <label className="block text-sm font-bold text-gray-700 mb-1">Email Kampus</label>
-          <input type="email" className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-oxigen-light focus:outline-none transition-all" placeholder="email@mahasiswa.ac.id" />
-        </div>
-
-        {/* Password */}
+  
         <div>
           <label className="block text-sm font-bold text-gray-700 mb-1">Password</label>
-          <input type="password" className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-oxigen-light focus:outline-none transition-all" placeholder="••••••••" />
+          <input
+            type="password"
+            className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-oxigen-light focus:outline-none transition-all"
+            placeholder="••••••••"
+          />
         </div>
 
-        {/* Terms Checkbox */}
-        <div className="flex items-start gap-3 mt-2">
-          <input type="checkbox" className="mt-1 w-4 h-4 text-oxigen-light border-gray-300 rounded focus:ring-oxigen-light" />
-          <p className="text-xs text-gray-500 leading-tight">
-            Saya setuju dengan <a href="#" className="text-oxigen-light font-bold hover:underline">Aturan Organisasi</a> dan berkomitmen untuk aktif dalam kegiatan UKM.
-          </p>
+        <div>
+          <label className="block text-sm font-bold text-gray-700 mb-1">Menjadi Bagian Dari</label>
+          <select className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-oxigen-light focus:outline-none transition-all appearance-none cursor-pointer">
+            <option value="" disabled selected>Pilih Divisi Peminatan</option>
+            <option value="software">Divisi Software</option>
+            <option value="hardware">Divisi Hardware</option>
+            <option value="game">Divisi Game</option>
+          </select>
         </div>
 
-        {/* Submit Button */}
-        <button 
-          type="submit" 
+        <div>
+          <label className="block text-sm font-bold text-gray-700 mb-1">Alasan Bergabung</label>
+          <textarea
+            rows="3"
+            className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-oxigen-light focus:outline-none transition-all resize-none"
+            placeholder="Ceritakan motivasi singkatmu..."
+          ></textarea>
+        </div>
+
+
+        <button
+          type="submit"
           className="w-full py-4 mt-2 bg-gradient-to-r from-oxigen-light to-software-tosca hover:to-oxigen-light text-white font-bold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
         >
           Buat Akun Baru

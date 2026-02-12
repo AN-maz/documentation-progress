@@ -37,6 +37,13 @@ const divisions = [
 const Divisions = () => {
   const [activeId, setActiveId] = useState('software');
 
+  // --- LOGIC BARU: MENCEGAH BUG DI MOBILE ---
+  const handleMouseEnter = (id) => {
+    if (window.innerWidth >= 768) {
+      setActiveId(id);
+    }
+  };
+
   return (
     <section id="division" className="relative py-20 bg-slate-50 overflow-hidden flex flex-col justify-center">
       
@@ -67,7 +74,8 @@ const Divisions = () => {
               <div
                 key={div.id}
                 onClick={() => setActiveId(div.id)}
-                onMouseEnter={() => setActiveId(div.id)}
+                onMouseEnter={() => handleMouseEnter(div.id)}
+                
                 className={`
                   relative rounded-3xl overflow-hidden cursor-pointer transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]
                   ${isActive 
@@ -90,7 +98,7 @@ const Divisions = () => {
                 <div className={`relative z-10 h-full flex flex-col p-6 md:p-8 ${isActive ? 'justify-between' : 'justify-center items-center md:items-start'}`}>
                   
                   {/* Top: Icon & Division Name */}
-                  <div className={`flex items-center gap-3 md:gap-4 transition-all duration-500 ${isActive ? 'translate-y-0' : 'translate-y-0'}`}>
+                  <div className="flex items-center gap-3 md:gap-4 transition-all duration-500">
                     <div 
                       className="p-3 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-white transition-colors duration-300"
                       style={{ color: isActive ? div.color : 'white' }}
@@ -98,7 +106,6 @@ const Divisions = () => {
                       {div.icon}
                     </div>
                     
-
                     <h3 className={`
                       font-bold text-white uppercase tracking-widest transition-all duration-300
                       ${isActive ? 'text-xl md:text-2xl opacity-100' : 'text-sm md:text-2xl opacity-100 md:opacity-0 md:hidden'}
@@ -106,7 +113,6 @@ const Divisions = () => {
                       {div.title}
                     </h3>
                   </div>
-
 
                   <div className={`
                     space-y-4 transition-all duration-500 transform w-full
@@ -143,7 +149,6 @@ const Divisions = () => {
 
                   </div>
 
-                  {/* Vertical Text for Inactive State (DESKTOP ONLY) */}
                   {!isActive && (
                     <div className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:block whitespace-nowrap">
                        <span className="text-white/50 font-bold text-xl uppercase tracking-[0.2em] [writing-mode:vertical-rl] rotate-180">

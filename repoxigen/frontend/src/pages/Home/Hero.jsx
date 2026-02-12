@@ -47,12 +47,19 @@ const Hero = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-              <button className="px-8 py-3 bg-oxigen-light hover:bg-blue-600 text-white rounded-lg font-semibold transition-all shadow-lg shadow-oxigen-light/25">
+              <a
+                href="/register"
+                className="px-8 py-3 bg-oxigen-light hover:bg-blue-600 text-white rounded-lg font-semibold transition-all shadow-lg shadow-oxigen-light/25 text-center"
+              >
                 Bergabung Sekarang
-              </button>
-              <button className="px-8 py-3 border border-gray-600 hover:border-software-bright hover:text-software-bright text-gray-300 rounded-lg font-semibold transition-all">
+              </a>
+
+              <a
+                href="/#division"
+                className="px-8 py-3 border border-gray-600 hover:border-software-bright hover:text-software-bright text-gray-300 rounded-lg font-semibold transition-all text-center"
+              >
                 Pelajari Divisi
-              </button>
+              </a>
             </div>
           </div>
 
