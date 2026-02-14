@@ -68,9 +68,9 @@ const Registrasi = () => {
           <label className="block text-sm font-bold text-gray-700 mb-1">Menjadi Bagian Dari</label>
           <select className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-oxigen-light focus:outline-none transition-all appearance-none cursor-pointer">
             <option value="" disabled selected>Pilih Divisi Peminatan</option>
-            <option value="software">Divisi Software</option>
-            <option value="hardware">Divisi Hardware</option>
-            <option value="game">Divisi Game</option>
+            <option value="SFT">Divisi Software</option>
+            <option value="HRD">Divisi Hardware</option>
+            <option value="GAM">Divisi Game</option>
           </select>
         </div>
 

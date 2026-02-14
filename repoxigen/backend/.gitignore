@@ -19,3 +19,6 @@ npm-debug.log*
 # Production Build (jika nanti menggunakan TypeScript atau bundling)
 dist/
 build/
+/generated/prisma
+
+/generated/prisma

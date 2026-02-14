@@ -1,11 +1,11 @@
-const express = require("express");
-const cors = require("cors");
-const helmet = require("helmet");
-const rateLimit = require("express-rate-limit");
-const cookieParser = require("cookie-parser");
-require("dotenv").config();
+import express from "express";
+import cors from "cors";
+import helmet from "helmet";
+import rateLimit from "express-rate-limit";
+import cookieParser from "cookie-parser";
+import 'dotenv/config';
 
-const authRoutes = require("./routes/authRoutes");
+import authRoutes from "./routes/authRoutes.js";
 
 const app = express();
 const PORT = process.env.PORT;
