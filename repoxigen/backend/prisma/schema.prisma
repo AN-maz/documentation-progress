@@ -22,7 +22,7 @@ enum KategoriDivisi {
   pendukung
 }
 
-enum StatusKeanggotaan {
+enum StatusKeanggotaan {  
   pending
   pasif
   aktif

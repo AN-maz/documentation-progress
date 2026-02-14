@@ -1,5 +1,6 @@
 import { prisma } from "../lib/prisma.ts";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 export const registerUser = async (data) => {
   const { nama_lengkap, nim, jurusan, email, password, kode_divisi, alasan } =
@@ -56,4 +57,43 @@ export const registerUser = async (data) => {
   } catch (err) {
     throw new Error("Gagal registrasi: " + err.message);
   }
+};
+
+export const loginUser = async ({ email, password }) => {
+  const account = await prisma.akun.findUnique({
+    where: { email },
+    include: { userProfile: true },
+  });
+
+  if (!account) {
+    throw new Error("Email atau Password salah MasPur!");
+  }
+
+  const isMatch = await bcrypt.compare(password, account.password);
+  if (!isMatch) {
+    throw new Error("Email atau password salah MasPur!");
+  }
+
+  if (account.is_approved === false) {
+    throw new Error(
+      "Akun kamu belum disetujui sama Admin, Mangga dikontak dulu adminnya bisi lupa",
+    );
+  }
+
+  const payload = {
+    id_akun: account.id_akun,
+    role: account.role,
+    nim: account.userProfile?.nim,
+    kelola_divisi: account.kelola_divisi_id,
+  };
+
+  const token = jwt.sign(payload, process.env.JWT_SECRET, {
+    expiresIn: "1d",
+  });
+
+  return {
+    token,
+    user: account.userProfile,
+    role: account.role,
+  };
 };

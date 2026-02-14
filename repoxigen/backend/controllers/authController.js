@@ -23,6 +23,26 @@ export const register = async (req, res) => {
   }
 };
 
-export const login = async (req,res) => {
-  res.send("Login Endpoint!")
-}
+export const login = async (req, res) => {
+  try {
+    const result = await authService.loginUser(req.body);
+
+    res.status(200).json({
+      status: true,
+      message: "Login Berhasil!",
+      data: {
+        token: result.token,
+        role: result.role,
+        nama: result.user?.nama_lengkap,
+        nim: result.user?.nim,
+      },
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(401).json({
+      status: false,
+      message: err.message,
+      data: null,
+    });
+  }
+};
