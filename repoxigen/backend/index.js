@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 import 'dotenv/config';
 
 import authRoutes from "./routes/authRoutes.js";
+import usersRouter from './routes/userRoutes.js';
 
 const app = express();
 const PORT = process.env.PORT;
@@ -34,6 +35,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/auth", authRoutes);
+app.use('/api/users', usersRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is running securely on http://localhost:${PORT}`);
