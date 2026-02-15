@@ -8,6 +8,7 @@ import 'dotenv/config';
 import authRoutes from "./routes/authRoutes.js";
 import usersRoutes from './routes/userRoutes.js';
 import agendaRoutes from './routes/agendaRoutes.js';
+import adminRoutes from './routes/adminRoutes.js';
 
 const app = express();
 const PORT = process.env.PORT;
@@ -38,6 +39,7 @@ app.get("/", (req, res) => {
 app.use("/api/auth", authRoutes);
 app.use('/api/users', usersRoutes);
 app.use('/api/agendas',agendaRoutes)
+app.use('/api/admin',adminRoutes)
 
 app.listen(PORT, () => {
   console.log(`Server is running securely on http://localhost:${PORT}`);

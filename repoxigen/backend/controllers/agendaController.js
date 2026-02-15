@@ -30,3 +30,23 @@ export const getAllAgenda = async (req, res) => {
     res.status(500).json({ status: false, message: err.message });
   }
 };
+
+export const getParticipants = async (req,res) => {
+
+  try{
+    const {id_agenda} = req.params;
+
+    const result = await agendaService.getAgendaPartisipants(id_agenda);
+
+    res.status(200).json({
+      status:true,
+      message: "Data presensi berhasil ditarik",
+      data: result
+    });
+  }catch(err){
+    res.status(400).json({
+      status:false,
+      message: err.message
+    });
+  }
+}
