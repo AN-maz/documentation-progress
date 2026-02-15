@@ -44,3 +44,5 @@ app.use('/api/admin',adminRoutes)
 app.listen(PORT, () => {
   console.log(`Server is running securely on http://localhost:${PORT}`);
 });
+
+// adminSoft@123

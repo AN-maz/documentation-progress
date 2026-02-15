@@ -1,22 +1,10 @@
-import { prisma } from "../lib/prisma.ts";
+import * as userService from "../services/userService.js";
 
 export const getMyProfile = async (req, res) => {
   try {
-    const userId = req.user.id_akun;
+    const userId = req.body.id_akun;
 
-    const userProfile = await prisma.users.findFirst({
-      where: { id_akun: userId },
-      include: {
-        divisi: true,
-      },
-    });
-
-    if (!userProfile) {
-      return res.status(404).json({
-        status: false,
-        message: "Profile user tidak ditemukan",
-      });
-    }
+    const userProfile = await userService.getUserProfile(userId);
 
     res.status(200).json({
       status: true,
@@ -24,8 +12,10 @@ export const getMyProfile = async (req, res) => {
       data: userProfile,
     });
   } catch (err) {
-    res.status(500).json({
-      status: "Error",
+    const statusCode =
+      err.message === "Profile user tidak ditemukan!" ? 404 : 500;
+    res.status(statusCode).json({
+      status: false,
       message: err.message,
     });
   }

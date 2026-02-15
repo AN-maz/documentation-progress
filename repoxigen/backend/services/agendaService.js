@@ -1,7 +1,22 @@
 import { prisma } from "../lib/prisma.ts";
 
-export const createAgenda = async (data, creatorId) => {
+const superRole = ["super_admin"];
+
+export const createAgenda = async (
+  data,
+  creatorId,
+  userRole,
+  userIDivisiId,
+) => {
   const { judul, deskripsi, tanggal, lokasi, token_absen, id_divisi } = data;
+
+  let targetDivisi = parseInt(id_divisi);
+  // const superRole = ["super_admin"];
+
+  if (!superRole.includes(userRole)) {
+    if (!userIDivisiId) throw new Error("Kamu ga punya akses hak divisi!");
+    targetDivisi = userIDivisiId;
+  }
 
   const newAgenda = await prisma.agenda.create({
     data: {
@@ -11,14 +26,36 @@ export const createAgenda = async (data, creatorId) => {
       lokasi,
       token_absen,
       is_absen_open: true,
-      id_divisi: parseInt(id_divisi),
+      id_divisi: targetDivisi,
       created_by: creatorId,
     },
   });
 };
 
-export const getAllAgenda = async () => {
+export const getAllAgenda = async (userRole, userDivisiId) => {
+  let whereClause = {};
+
+  // if (!superRole.includes(userRole)) {
+  //   if (!userDivisiId) return [];
+  //   whereClause = { id_divisi: userDivisiId };
+  // }
+
+  if (userRole === "admin_divisi") {
+    if (!userDivisiId) return [];
+    whereClause = { id_divisi: userDivisiId };
+  } else if (userRole === "user") {
+    const userProfile = await prisma.users.findUnique({
+      where: { id_akun: userId },
+      select: { divisi_perminatan_id: true },
+    });
+
+    if (!userProfile || !userProfile.divisi_peminatan_id) return [];
+
+    whereClause = {id_divisi: userProfile .divisi_peminatan_id};
+  }
+
   return await prisma.agenda.findMany({
+    where: whereClause,
     include: {
       divisi: true,
       _count: {
@@ -29,7 +66,11 @@ export const getAllAgenda = async () => {
   });
 };
 
-export const getAgendaPartisipants = async (agendaId) => {
+export const getAgendaPartisipants = async (
+  agendaId,
+  userRole,
+  userDivisiId,
+) => {
   const agenda = await prisma.agenda.findUnique({
     where: { id_agenda: parseInt(agendaId) },
     include: {
@@ -42,6 +83,10 @@ export const getAgendaPartisipants = async (agendaId) => {
 
   if (!agenda) {
     throw new Error("Agenda tidak ditemukan Min...");
+  }
+
+  if (!superRole.includes(userRole) && agenda.id_divisi !== userDivisiId) {
+    throw new Error("Dilarang mengintip agenda divisi lain Kak!");
   }
 
   const participants = await prisma.absensi.findMany({

@@ -29,7 +29,7 @@ export const verifyToken = (req, res, next) => {
 };
 
 export const onlyAdmin = (req, res, next) => {
-  const allowedRoles = ["super_admin", "adminDivisi", "bph"];
+  const allowedRoles = ["super_admin", "admin_divisi", "bph"];
 
   if (!allowedRoles.includes(req.user.role)) {
     return res.status(403).json({
