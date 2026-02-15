@@ -2,7 +2,7 @@ import * as userService from "../services/userService.js";
 
 export const getMyProfile = async (req, res) => {
   try {
-    const userId = req.body.id_akun;
+    const userId = req.user.id_akun;
 
     const userProfile = await userService.getUserProfile(userId);
 

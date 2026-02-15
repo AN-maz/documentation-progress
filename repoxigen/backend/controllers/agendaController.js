@@ -25,6 +25,7 @@ export const createAgenda = async (req, res) => {
 export const getAllAgenda = async (req, res) => {
   try {
     const { role, kelola_divisi, id_akun } = req.user;
+    
     const agendas = await agendaService.getAllAgenda(role, kelola_divisi, id_akun);
 
     res.status(200).json({

@@ -32,28 +32,29 @@ export const createAgenda = async (
   });
 };
 
-export const getAllAgenda = async (userRole, userDivisiId) => {
+export const getAllAgenda = async (userRole, userDivisiId, userId) => {
   let whereClause = {};
 
-  // if (!superRole.includes(userRole)) {
-  //   if (!userDivisiId) return [];
-  //   whereClause = { id_divisi: userDivisiId };
-  // }
 
+  // SKENARIO 1: Admin Divisi (Cuma lihat divisinya)
   if (userRole === "admin_divisi") {
     if (!userDivisiId) return [];
     whereClause = { id_divisi: userDivisiId };
-  } else if (userRole === "user") {
+  }
+
+  // SKENARIO 2: User Biasa/Member (Cuma lihat divisinya)
+  else if (userRole === "user") {
     const userProfile = await prisma.users.findUnique({
       where: { id_akun: userId },
-      select: { divisi_perminatan_id: true },
+      select: { divisi_peminatan_id: true },
     });
 
     if (!userProfile || !userProfile.divisi_peminatan_id) return [];
 
-    whereClause = {id_divisi: userProfile .divisi_peminatan_id};
+    whereClause = { id_divisi: userProfile.divisi_peminatan_id };
   }
 
+  // SKENARIO 3: Super Admin (Lihat Semua - whereClause tetap kosong)
   return await prisma.agenda.findMany({
     where: whereClause,
     include: {
