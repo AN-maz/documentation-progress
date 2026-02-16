@@ -35,7 +35,6 @@ export const createAgenda = async (
 export const getAllAgenda = async (userRole, userDivisiId, userId) => {
   let whereClause = {};
 
-
   // SKENARIO 1: Admin Divisi (Cuma lihat divisinya)
   if (userRole === "admin_divisi") {
     if (!userDivisiId) return [];
@@ -64,6 +63,70 @@ export const getAllAgenda = async (userRole, userDivisiId, userId) => {
       },
     },
     orderBy: { tanggal: "desc" },
+  });
+};
+
+export const updateAgenda = async (agendaId, data, userRole, userDivisiId) => {
+  const agenda = await prisma.agenda.findUnique({
+    where: { id_agenda: parseInt(agendaId) },
+  });
+
+  if (!agenda) throw new Error("agenda tidak ditemukan!");
+  if (!superRole.includes(userRole)) {
+    if (agenda.id_divisi !== userDivisiId) {
+      throw new Error("Anda tidak berhak mengedit agenda divisi lain!");
+    }
+  }
+
+  return await prisma.agenda.update({
+    where: { id_agenda: parseInt(agendaId) },
+    data: {
+      judul: data.judul,
+      deskripsi: data.deskripsi,
+      tanggal: data.tanggal ? new Data(data.tanggal) : undefined,
+      lokasi: data.lokasi,
+      token_absen: data.token_absen,
+      is_absen_open: data.is_absen_open,
+      konten_materi: data.konten_materi,
+    },
+  });
+};
+
+export const deleteAgenda = async (agendaId, userRole, userDIvisiId) => {
+  const agenda = await prisma.agenda.findUnique({
+    where: { id_agenda: parseInt(agendaId) },
+  });
+
+  if (!agenda) throw new Error("Agenda tidak ditemukan");
+  if (!userRole.include(userRole)) {
+    if (agenda.id_divisi !== userDIvisiId) {
+      throw new Error("Anda tidak berhak mengghapus agenda divisi lain");
+    }
+  }
+
+  return await prisma.agenda.delete({
+    where: { id_agenda: parseInt(agendaId) },
+  });
+};
+
+export const kickParticipants = async (absensiId, userRole, userDivisiId) => {
+  const absensi = await prisma.absensi.findUnique({
+    where: { id_absensi: parseInt(absensiId) },
+    include: {
+      agenda: true,
+    },
+  });
+
+  if (!absensi) throw new Error("Data absensi tidak ditemukan!");
+
+  if (!superRole.includes(userRole)) {
+    if (absensi.agenda.id_divisi !== userDivisiId) {
+      throw new Error("Anda tidak berhak menghapus peserta divisi lain!");
+    }
+  }
+
+  return await prisma.absensi.delete({
+    where: { id_absensi: parseInt(agendaId) },
   });
 };
 
