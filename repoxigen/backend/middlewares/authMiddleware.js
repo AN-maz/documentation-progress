@@ -39,3 +39,27 @@ export const onlyAdmin = (req, res, next) => {
   }
   next();
 };
+
+export const onlyHumaniora = (req,res,next) => {
+  const allowedRoles = ["user_admin","admin_humaniora"];
+
+  if(!allowedRoles.includes(req.user.role)){
+    return res.status(403).json({
+      status:false,
+      message: "Akses DItolak! Khusus Admin humanioara"
+    });
+  }
+  next();
+}
+
+export const onlyPengurus = (req,res,next) => {
+  const pengurusRoles = ["super_admin","admin_divisi","admin_divisi","admin_humanioara","bph"];
+
+  if(!pengurusRoles.includes(req.user.role)){
+    return res.status(403).json({
+      status:false,
+      message: "Sorry ye.. ini rapat internal pengurus!"
+    });
+  }
+  next();
+}

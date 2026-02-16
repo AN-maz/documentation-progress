@@ -60,6 +60,7 @@ model Akun {
   // Relasi
   userProfile      Users?
   agendaCreated    Agenda[]
+  InternalMeet     InternalMeet[]
 
   createdAt        DateTime  @default(now())
   
@@ -83,7 +84,8 @@ model Users {
   akun                Akun             @relation(fields: [id_akun], references: [id_akun], onDelete: Cascade)
   
   // Relasi: User punya banyak Absensi
-  absensi             Absensi[]
+  absensi            Absensi[]
+  absensiInternals   AbsensiInternal[]
   
   createdAt           DateTime          @default(now())
   updatedAt           DateTime          @updatedAt
@@ -126,4 +128,39 @@ model Absensi {
 
   @@unique([id_agenda, nim]) // Satu user cuma bisa absen 1x per agenda
   @@map("absensi")
+}
+
+model InternalMeet {
+  id_meet     Int       @id @default(autoincrement())
+  judul       String    
+  tanggal     DateTime
+  lokasi      String? 
+  token_absen String    @db.VarChar(10)
+  is_open     Boolean   @default(true)
+
+  notulensi   String?    @db.LongText
+  file_notulensi String? 
+
+  created_by  String 
+  creator     Akun      @relation (fields: [created_by], references:[id_akun])
+
+  absensi     AbsensiInternal[]
+
+  createAt     DateTime   @default(now())
+  updateAt     DateTime   @updatedAt
+
+  @@map("intenal_meet") 
+}
+
+model AbsensiInternal{
+  id_absensi  Int   @id @default(autoincrement())
+  id_meet     Int 
+  nim         String 
+  waktu_input DateTime @default(now())
+
+  meet        InternalMeet  @relation(fields:[id_meet], references:[id_meet], onDelete: Cascade)
+  user        Users         @relation(fields:[nim], references:[nim], onDelete: Cascade)
+
+  @@unique([id_meet,nim])
+  @@map("absensi_internal")
 }
