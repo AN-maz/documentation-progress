@@ -3,7 +3,7 @@ CREATE TABLE `divisi` (
     `id_divisi` INTEGER NOT NULL AUTO_INCREMENT,
     `nama_divisi` VARCHAR(191) NOT NULL,
     `kode` CHAR(3) NOT NULL,
-    `kategori` ENUM('bph', 'peminatan', 'pendukung') NOT NULL,
+    `kategori` ENUM('topman', 'peminatan', 'pendukung') NOT NULL,
     `deskripsi` TEXT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 
@@ -16,7 +16,7 @@ CREATE TABLE `akun` (
     `id_akun` VARCHAR(191) NOT NULL,
     `email` VARCHAR(191) NOT NULL,
     `password` VARCHAR(191) NOT NULL,
-    `role` ENUM('super_admin', 'admin_divisi', 'admin_humaniora', 'bph', 'user') NOT NULL DEFAULT 'user',
+    `role` ENUM('super_admin', 'admin_divisi', 'admin_hum_in', 'bph', 'user') NOT NULL DEFAULT 'user',
     `is_approved` BOOLEAN NOT NULL DEFAULT false,
     `cookie_token` VARCHAR(191) NULL,
     `cookie_expiry` DATETIME(3) NULL,
@@ -34,7 +34,7 @@ CREATE TABLE `users` (
     `nama_lengkap` VARCHAR(191) NOT NULL,
     `jurusan` VARCHAR(191) NOT NULL,
     `angkatan` INTEGER NOT NULL,
-    `no_wa` VARCHAR(191) NULL,
+    `alasan` TEXT NULL,
     `status_keanggotaan` ENUM('pending', 'pasif', 'aktif', 'bph') NOT NULL DEFAULT 'pending',
     `divisi_peminatan_id` INTEGER NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
@@ -74,6 +74,34 @@ CREATE TABLE `absensi` (
     PRIMARY KEY (`id_absensi`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
+-- CreateTable
+CREATE TABLE `intenal_meet` (
+    `id_meet` INTEGER NOT NULL AUTO_INCREMENT,
+    `judul` VARCHAR(191) NOT NULL,
+    `tanggal` DATETIME(3) NOT NULL,
+    `lokasi` VARCHAR(191) NULL,
+    `token_absen` VARCHAR(10) NOT NULL,
+    `is_open` BOOLEAN NOT NULL DEFAULT true,
+    `notulensi` LONGTEXT NULL,
+    `file_notulensi` VARCHAR(191) NULL,
+    `created_by` VARCHAR(191) NOT NULL,
+    `createAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updateAt` DATETIME(3) NOT NULL,
+
+    PRIMARY KEY (`id_meet`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `absensi_internal` (
+    `id_absensi` INTEGER NOT NULL AUTO_INCREMENT,
+    `id_meet` INTEGER NOT NULL,
+    `nim` VARCHAR(191) NOT NULL,
+    `waktu_input` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+
+    UNIQUE INDEX `absensi_internal_id_meet_nim_key`(`id_meet`, `nim`),
+    PRIMARY KEY (`id_absensi`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
 -- AddForeignKey
 ALTER TABLE `users` ADD CONSTRAINT `users_divisi_peminatan_id_fkey` FOREIGN KEY (`divisi_peminatan_id`) REFERENCES `divisi`(`id_divisi`) ON DELETE SET NULL ON UPDATE CASCADE;
 
@@ -91,3 +119,12 @@ ALTER TABLE `absensi` ADD CONSTRAINT `absensi_id_agenda_fkey` FOREIGN KEY (`id_a
 
 -- AddForeignKey
 ALTER TABLE `absensi` ADD CONSTRAINT `absensi_nim_fkey` FOREIGN KEY (`nim`) REFERENCES `users`(`nim`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `intenal_meet` ADD CONSTRAINT `intenal_meet_created_by_fkey` FOREIGN KEY (`created_by`) REFERENCES `akun`(`id_akun`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `absensi_internal` ADD CONSTRAINT `absensi_internal_id_meet_fkey` FOREIGN KEY (`id_meet`) REFERENCES `intenal_meet`(`id_meet`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `absensi_internal` ADD CONSTRAINT `absensi_internal_nim_fkey` FOREIGN KEY (`nim`) REFERENCES `users`(`nim`) ON DELETE CASCADE ON UPDATE CASCADE;
