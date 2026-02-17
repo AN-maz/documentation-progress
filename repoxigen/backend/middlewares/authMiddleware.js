@@ -41,7 +41,7 @@ export const onlyAdmin = (req, res, next) => {
 };
 
 export const onlyHumaniora = (req,res,next) => {
-  const allowedRoles = ["user_admin","admin_humaniora"];
+  const allowedRoles = ["super_admin","admin_humaniora"];
 
   if(!allowedRoles.includes(req.user.role)){
     return res.status(403).json({
