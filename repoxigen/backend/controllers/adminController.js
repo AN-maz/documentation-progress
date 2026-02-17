@@ -57,3 +57,84 @@ export const rejectMember = async (req, res) => {
     res.status(500).json({ status: "error", message: err.message });
   }
 };
+
+export const getDashboardData = async (req, res) => {
+  try {
+    const data = await adminService.getDashboardStats();
+    res.json({
+      status: true,
+      data,
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: false,
+      message: err.message,
+    });
+  }
+};
+
+export const manageUsers = async (req, res) => {
+  try {
+    const filters = req.body;
+    const result = await adminService.getAllUsers(filters);
+
+    res.json({
+      status: true,
+      data: result,
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: false,
+      message: err.message,
+    });
+  }
+};
+
+export const editUser = async (req, res) => {
+  try {
+    const { nim } = req.params;
+    const updateData = req.body;
+    await adminService.updateUserProfile(nim, updateData);
+
+    res.json({
+      status: true,
+      message: "Data user berhasil diupdate",
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: false,
+      message: err.message,
+    });
+  }
+};
+
+export const resetPassword = async (req, res) => {
+  try {
+    const { nim } = req.params;
+    const defaultPass = "passBaru$1234";
+
+    await adminService.resetPassword(nim, defaultPass);
+
+    res.json({
+      status: true,
+      message: `Password berhasil direset ke: ${defaultPass}`,
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: false,
+      message: err.message,
+    });
+  }
+};
+
+export const removeUser = async (req, res) => {
+  try {
+    const { nim } = req.params;
+    await adminService.deleteUser(nim);
+  } catch (err) {
+    res.status(500).json({
+      status: false,
+      message: err.message,
+    });
+  }
+};
