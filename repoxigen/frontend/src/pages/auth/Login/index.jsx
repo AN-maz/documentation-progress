@@ -1,7 +1,7 @@
 // src/pages/auth/Login/index.jsx
 import React, {useState} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import AuthLayout from '../AuthLayout';
+import AuthLayout from '../../../components/Layouts/AuthLayout';
 import { authService } from '../../../services/authService';
 
 const Login = () => {
@@ -22,20 +22,18 @@ const Login = () => {
     setErrorMsg('');
 
     try {
-      // Panggil API Login
+  
       const res = await authService.login(formData.email, formData.password);
 
-      // Jika Backend balikin success: true
-      if (res.status || res.success) { // Cek flag sukses dari backend
+      if (res.status || res.success) { 
         alert("Login Berhasil! Selamat Datang.");
-        navigate('/dashboard/member'); // Redirect ke Dashboard
+        navigate('/dashboard/user'); 
       } else {
-        // Handle kasus response 200 tapi isinya gagal (jarang, tapi jaga-jaga)
+
         setErrorMsg(res.message || "Login gagal");
       }
 
     } catch (err) {
-      // Handle Error dari Backend (401, 400, 500)
       console.error(err);
       setErrorMsg(err.message || "Email atau Password Salah!");
     } finally {
@@ -48,7 +46,9 @@ const Login = () => {
       title="Welcome Back!"
       subtitle="Masuk untuk mengakses materi pembelajaran."
     >
-      <form className="space-y-5" onSubmit={handleSubmit}>
+      <form 
+        className="space-y-5" 
+        onSubmit={handleSubmit}>
 
         {/* Error Alert */}
         {errorMsg && (

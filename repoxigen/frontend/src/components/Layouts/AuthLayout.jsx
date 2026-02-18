@@ -141,7 +141,6 @@ const AuthLayout = ({ children, title, subtitle }) => {
 
           {/* Footer Kecil */}
           <div className="mt-12 text-center text-[10px] md:text-xs text-gray-400">
-            &copy; {new Date().getFullYear()} OXIGEN UTB.
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import AuthLayout from '../AuthLayout';
+import AuthLayout from '../../../components/Layouts/AuthLayout';
 import { authService } from '../../../services/authService';
 
 const Registrasi = () => {
@@ -45,7 +45,7 @@ const Registrasi = () => {
 
   return (
     <AuthLayout
-      title="Join the Divisition"
+      title="Join the Division"
       subtitle="Daftarkan dirimu dan pilih divisi yang kamu banget dah pokoknya..."
     >
       <form className="space-y-4" onSubmit={handleSubmit}>
@@ -57,7 +57,7 @@ const Registrasi = () => {
           <label className="block text-sm font-bold text-gray-700 mb-1">Nama Lengkap</label>
           <input
             type="text"
-            name="fullname"
+            name="fullName"
             className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-oxigen-light focus:outline-none transition-all"
             placeholder="Masukkan nama lengkap"
             onChange={handleChange}
@@ -85,7 +85,7 @@ const Registrasi = () => {
               onChange={handleChange}
               name="jurusan"
               >
-              <option value="" disabled selected>Pilih Jurusan</option>
+              <option value="" disabled>Pilih Jurusan</option>
               <option value="Teknik Informatika">Teknik Informatika</option>
               <option value="Teknik Industri">Teknik Industri</option>
               <option value="Desain Komunikasi Visual">Desain Komunikasi Visual</option>
@@ -127,7 +127,7 @@ const Registrasi = () => {
             value={formData.divisi}
             name="divisi"
             >
-            <option value="" disabled selected>Pilih Divisi Peminatan</option>
+            <option value="" disabled>Pilih Divisi Peminatan</option>
             <option value="software">Divisi Software</option>
             <option value="hardware">Divisi Hardware</option>
             <option value="game">Divisi Game</option>

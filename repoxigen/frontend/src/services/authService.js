@@ -15,6 +15,7 @@ export const authService = {
         localStorage.setItem("token", response.data.data.token);
         localStorage.setItem("user", JSON.stringify(response.data.data.user));
       }
+      return response.data;
     } catch (err) {
       throw err.response ? err.response.data : { message: "Server Error" };
     }
