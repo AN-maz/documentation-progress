@@ -1,7 +1,23 @@
-import { getJSON } from "./client";
+import axios from "axios";
 
-const BASE_URL = "http://localhost:5000/api";
+const api = axios.create({
+  baseURL: import.meta.env.VITE_API_BASE_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
 
-export function getHallo() {
-  return getJSON(`${BASE_URL}/hello`);
-}
+api.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      config.headers.Authorization = `bearer ${token}`;
+    }
+
+    return config;
+  },
+  (err) => Promise.reject(err),
+);
+
+export default api;

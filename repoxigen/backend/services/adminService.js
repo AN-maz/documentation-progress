@@ -93,7 +93,10 @@ export const getAllUsers = async (filters) => {
     where: whereClause,
     include: {
       akun: { select: { email: true, role: true } },
-      divisi: { select: { nama_divisi: true } },
+      // divisi: { select: { nama_divisi: true } },
+
+      peminatan: { select: { nama_divisi: true } },
+      jabatan: { select: { nama_divisi: true } },
     },
     orderBy: { nama_lengkap: "asc" },
     skip: parseInt(skip),
@@ -113,6 +116,7 @@ export const getAllUsers = async (filters) => {
 };
 
 export const updateUserProfile = async (nim, data) => {
+  
   return await prisma.users.update({
     where: { nim: nim },
     data: {
@@ -123,6 +127,9 @@ export const updateUserProfile = async (nim, data) => {
       divisi_peminatan_id: data.divisi_id
         ? parseInt(data.divisi_id)
         : undefined,
+      jabatan_struktural_id: data.jabatan_struktural_id
+        ? parseInt(data.jabatan_struktural_id)
+        : null,
     },
   });
 };

@@ -47,6 +47,7 @@ export const registerUser = async (data) => {
           divisi_peminatan_id: divisiTarget.id_divisi,
           alasan,
           status_keanggotaan: "pending",
+          jabatan_struktural_id: null
         },
       });
 
@@ -84,7 +85,6 @@ export const loginUser = async ({ email, password }) => {
     id_akun: account.id_akun,
     role: account.role,
     nim: account.userProfile?.nim,
-    kelola_divisi: account.kelola_divisi_id,
   };
 
   const token = jwt.sign(payload, process.env.JWT_SECRET, {

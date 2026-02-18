@@ -1,24 +1,41 @@
 import { prisma } from "../lib/prisma.ts";
 
-const superRole = ["super_admin"];
+const superRole = ["super_admin", "admin_divisi"];
 
-export const createAgenda = async (
-  data,
-  creatorId,
-  userRole,
-  userIDivisiId,
-) => {
+const getUserDivision = async (idAkun) => {
+  const user = await prisma.users.findUnique({
+    where: { id_akun: idAkun },
+    select: { divisi_peminatan_id: true },
+  });
+  return user ? user.divisi_peminatan_id : null;
+};
+
+export const createAgenda = async (data, creatorId, userRole) => {
   const { judul, deskripsi, tanggal, lokasi, token_absen, id_divisi } = data;
 
   let targetDivisi = parseInt(id_divisi);
   // const superRole = ["super_admin"];
 
   if (!superRole.includes(userRole)) {
-    if (!userIDivisiId) throw new Error("Kamu ga punya akses hak divisi!");
-    targetDivisi = userIDivisiId;
+    const userDivisiId = await getUserDivision(creatorId);
+    if (!userDivisiId) throw new Error("Kamu ga punya akses hak divisi!");
+    targetDivisi = userDivisiId;
   }
 
-  const newAgenda = await prisma.agenda.create({
+  // const newAgenda = await prisma.agenda.create({
+  //   data: {
+  //     judul,
+  //     deskripsi,
+  //     tanggal: new Date(tanggal),
+  //     lokasi,
+  //     token_absen,
+  //     is_absen_open: true,
+  //     id_divisi: targetDivisi,
+  //     created_by: creatorId,
+  //   },
+  // });
+
+  return await prisma.agenda.create({
     data: {
       judul,
       deskripsi,
@@ -36,9 +53,16 @@ export const getAllAgenda = async (userRole, userDivisiId, userId) => {
   let whereClause = {};
 
   // SKENARIO 1: Admin Divisi (Cuma lihat divisinya)
+  // if (userRole === "admin_divisi") {
+  //   if (!userDivisiId) return [];
+  //   whereClause = { id_divisi: userDivisiId };
+  // }
+
   if (userRole === "admin_divisi") {
-    if (!userDivisiId) return [];
-    whereClause = { id_divisi: userDivisiId };
+    const realDivisiId = await getUserDivision(userId);
+
+    if (!realDivisiId) return [];
+    whereClause = { id_divisi: realDivisiId };
   }
 
   // SKENARIO 2: User Biasa/Member (Cuma lihat divisinya)
@@ -49,8 +73,8 @@ export const getAllAgenda = async (userRole, userDivisiId, userId) => {
     });
 
     if (!userProfile || !userProfile.divisi_peminatan_id) return [];
-
     whereClause = { id_divisi: userProfile.divisi_peminatan_id };
+    
   }
 
   // SKENARIO 3: Super Admin (Lihat Semua - whereClause tetap kosong)

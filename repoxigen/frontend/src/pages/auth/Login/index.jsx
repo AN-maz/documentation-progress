@@ -1,36 +1,91 @@
 // src/pages/auth/Login/index.jsx
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, {useState} from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import AuthLayout from '../AuthLayout';
+import { authService } from '../../../services/authService';
 
 const Login = () => {
+
+  const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({ email: '', password: '' });
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setErrorMsg('');
+
+    try {
+      // Panggil API Login
+      const res = await authService.login(formData.email, formData.password);
+
+      // Jika Backend balikin success: true
+      if (res.status || res.success) { // Cek flag sukses dari backend
+        alert("Login Berhasil! Selamat Datang.");
+        navigate('/dashboard/member'); // Redirect ke Dashboard
+      } else {
+        // Handle kasus response 200 tapi isinya gagal (jarang, tapi jaga-jaga)
+        setErrorMsg(res.message || "Login gagal");
+      }
+
+    } catch (err) {
+      // Handle Error dari Backend (401, 400, 500)
+      console.error(err);
+      setErrorMsg(err.message || "Email atau Password Salah!");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <AuthLayout
       title="Welcome Back!"
       subtitle="Masuk untuk mengakses materi pembelajaran."
     >
-      <form className="space-y-5">
+      <form className="space-y-5" onSubmit={handleSubmit}>
+
+        {/* Error Alert */}
+        {errorMsg && (
+          <div className="p-3 bg-red-100 border border-red-200 text-red-600 text-sm rounded-lg">
+            {errorMsg}
+          </div>
+        )}
 
         {/* Email Input */}
         <div>
           <label className="block text-sm font-bold text-gray-700 mb-2">Alamat Email</label>
           <input
             type="email"
-            placeholder="nama@mahasiswa.sttbandung.ac.id"
+            placeholder="purwa123@gmail.com"
             className="w-full px-5 py-3 rounded-xl bg-gray-50 border border-gray-200 text-gray-900 focus:outline-none focus:border-oxigen-light focus:ring-2 focus:ring-oxigen-light/20 transition-all"
+            onChange={handleChange}
+            value={formData.email}
+            name="email"
           />
         </div>
 
         {/* Password Input */}
         <div>
-          <div className="flex justify-between items-center mb-2">
+
+          {/* <div className="flex justify-between items-center mb-2">
             <label className="block text-sm font-bold text-gray-700">Password</label>
             <a href="#" className="text-xs font-semibold text-oxigen-light hover:underline">Lupa Password?</a>
-          </div>
+          </div> */}
+
           <input
             type="password"
             placeholder="••••••••"
             className="w-full px-5 py-3 rounded-xl bg-gray-50 border border-gray-200 text-gray-900 focus:outline-none focus:border-oxigen-light focus:ring-2 focus:ring-oxigen-light/20 transition-all"
+            onChange={handleChange}
+            value={formData.password}
+            name="password"
+
           />
         </div>
 
@@ -45,11 +100,12 @@ const Login = () => {
             Remember Me
           </label>
         </div>
-        
+
         {/* Submit Button */}
         <button
           type="submit"
-          className="w-full py-4 bg-oxigen-dark hover:bg-blue-900 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
+          className={`w-full py-4 text-white font-bold rounded-xl shadow-lg transition-all ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-oxigen-dark hover:bg-blue-900 hover:-translate-y-1'}`}
+          disabled={loading}
         >
           Masuk Sekarang
         </button>

@@ -4,7 +4,9 @@ export const getUserProfile = async (userId) => {
     const user = await prisma.users.findFirst({
         where:{id_akun: userId},
         include:{
-            divisi:true,
+            // divisi:true,
+            peminatan:true,
+            jabatan:true
         }
     });
 

@@ -1,21 +1,66 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import AuthLayout from '../AuthLayout';
+import { authService } from '../../../services/authService';
 
 const Registrasi = () => {
+
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
+
+  const [formData, setFormData] = useState({
+    fullName: '',
+    nim: '',
+    jurusan: '',
+    email: '',
+    password: '',
+    divisi: '',
+    alasan: ''
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setErrorMsg('');
+
+    try {
+      // Panggil API Register
+      await authService.register(formData);
+
+      alert("Registrasi Berhasil! Silakan Login.");
+      navigate('/login');
+
+    } catch (err) {
+      console.error(err);
+      setErrorMsg(err.message || "Gagal Mendaftar. Cek kembali data Anda.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <AuthLayout
-      title="Join the Squad"
-      subtitle="Daftarkan dirimu dan pilih divisi untuk memulai perjalanan teknologi."
+      title="Join the Divisition"
+      subtitle="Daftarkan dirimu dan pilih divisi yang kamu banget dah pokoknya..."
     >
-      <form className="space-y-4">
+      <form className="space-y-4" onSubmit={handleSubmit}>
+
+        {/* Error Alert */}
+        {errorMsg && <div className="p-3 bg-red-100 text-red-600 text-sm rounded-lg">{errorMsg}</div>}
 
         <div>
           <label className="block text-sm font-bold text-gray-700 mb-1">Nama Lengkap</label>
           <input
             type="text"
+            name="fullname"
             className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-oxigen-light focus:outline-none transition-all"
             placeholder="Masukkan nama lengkap"
+            onChange={handleChange}
           />
         </div>
 
@@ -27,50 +72,65 @@ const Registrasi = () => {
               type="text"
               className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-oxigen-light focus:outline-none transition-all"
               placeholder="2455XXXX"
+              onChange={handleChange}
+              name="nim"
             />
           </div>
 
-      
+
           <div>
             <label className="block text-sm font-bold text-gray-700 mb-1">Jurusan</label>
-            <select className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-oxigen-light focus:outline-none transition-all appearance-none cursor-pointer">
+            <select 
+              className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-oxigen-light focus:outline-none transition-all appearance-none cursor-pointer" 
+              onChange={handleChange}
+              name="jurusan"
+              >
               <option value="" disabled selected>Pilih Jurusan</option>
-              <option value="TIF">Teknik Informatika</option>
-              <option value="TI">Teknik Industri</option>
-              <option value="DKV">Desain Komunikasi Visual</option>
-              <option value="BD">Bisnis Digital</option>
-              <option value="MR">Manajemen Retail</option>
+              <option value="Teknik Informatika">Teknik Informatika</option>
+              <option value="Teknik Industri">Teknik Industri</option>
+              <option value="Desain Komunikasi Visual">Desain Komunikasi Visual</option>
+              <option value="Bisnis Digital">Bisnis Digital</option>
+              <option value="Manajemen Retail">Manajemen Retail</option>
             </select>
           </div>
         </div>
 
-  
+
         <div>
           <label className="block text-sm font-bold text-gray-700 mb-1">Alamat Email</label>
           <input
             type="email"
             className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-oxigen-light focus:outline-none transition-all"
             placeholder="purwa123@gmail.com"
+            onChange={handleChange}
+            name="email"
           />
         </div>
 
-  
+
         <div>
           <label className="block text-sm font-bold text-gray-700 mb-1">Password</label>
           <input
             type="password"
+            name="password"
             className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-oxigen-light focus:outline-none transition-all"
             placeholder="••••••••"
+            onChange={handleChange}
           />
         </div>
 
         <div>
           <label className="block text-sm font-bold text-gray-700 mb-1">Menjadi Bagian Dari</label>
-          <select className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-oxigen-light focus:outline-none transition-all appearance-none cursor-pointer">
+          <select 
+            className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-oxigen-light focus:outline-none transition-all appearance-none cursor-pointer" 
+            onChange={handleChange}
+            value={formData.divisi}
+            name="divisi"
+            >
             <option value="" disabled selected>Pilih Divisi Peminatan</option>
-            <option value="SFT">Divisi Software</option>
-            <option value="HRD">Divisi Hardware</option>
-            <option value="GAM">Divisi Game</option>
+            <option value="software">Divisi Software</option>
+            <option value="hardware">Divisi Hardware</option>
+            <option value="game">Divisi Game</option>
           </select>
         </div>
 
@@ -80,6 +140,8 @@ const Registrasi = () => {
             rows="3"
             className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-oxigen-light focus:outline-none transition-all resize-none"
             placeholder="Ceritakan motivasi singkatmu..."
+            onChange={handleChange}
+            name="alasan"
           ></textarea>
         </div>
 
@@ -88,7 +150,7 @@ const Registrasi = () => {
           type="submit"
           className="w-full py-4 mt-2 bg-gradient-to-r from-oxigen-light to-software-tosca hover:to-oxigen-light text-white font-bold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
         >
-          Buat Akun Baru
+          {loading ? 'Mendaftar...' : 'Buat Akun Baru'}
         </button>
 
       </form>
