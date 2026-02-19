@@ -1,12 +1,12 @@
 import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { 
-  LayoutDashboard, 
-  User, 
-  LogOut, 
-  ChevronLeft, 
+import {
+  LayoutDashboard,
+  User,
+  LogOut,
+  ChevronLeft,
   ChevronRight,
-  Settings
+  CalendarDays
 } from 'lucide-react';
 
 const Sidebar = ({ isCollapsed, toggleSidebar }) => {
@@ -20,13 +20,11 @@ const Sidebar = ({ isCollapsed, toggleSidebar }) => {
 
   const menuItems = [
     { path: '/dashboard/user', name: 'Dashboard', icon: <LayoutDashboard size={20} /> },
-    { path: '/dashboard/profile', name: 'Profile Saya', icon: <User size={20} /> },
-    // Tambah menu lain disini
-    { path: '/dashboard/settings', name: 'Pengaturan', icon: <Settings size={20} /> },
+    { path: '/dashboard/agenda', name: 'Agenda UKM', icon: <CalendarDays size={20} /> },
   ];
 
   return (
-    <aside 
+    <aside
       className={`
         hidden md:flex flex-col h-screen bg-oxigen-dark text-white 
         transition-all duration-300 ease-in-out shadow-xl z-50 fixed left-0 top-0
@@ -43,9 +41,9 @@ const Sidebar = ({ isCollapsed, toggleSidebar }) => {
             <span className="font-bold text-xl tracking-wide">OXIGEN</span>
           </div>
         )}
-        
-        {/* Tombol Toggle Ukuran Sidebar */}
-        <button 
+
+
+        <button
           onClick={toggleSidebar}
           className={`
             p-1.5 rounded-lg bg-white/10 hover:bg-white/20 transition-colors
@@ -64,8 +62,8 @@ const Sidebar = ({ isCollapsed, toggleSidebar }) => {
             to={item.path}
             className={({ isActive }) => `
               flex items-center gap-3 px-3 py-3 rounded-xl transition-all duration-300 group
-              ${isActive 
-                ? 'bg-gradient-to-r from-oxigen-light to-blue-600 text-white shadow-lg shadow-blue-900/50' 
+              ${isActive
+                ? 'bg-gradient-to-r from-oxigen-light to-blue-600 text-white shadow-lg shadow-blue-900/50'
                 : 'text-gray-400 hover:bg-white/5 hover:text-white'}
               ${isCollapsed ? 'justify-center' : ''}
             `}
@@ -73,14 +71,14 @@ const Sidebar = ({ isCollapsed, toggleSidebar }) => {
             <div className={`${isCollapsed ? '' : 'group-hover:scale-110 transition-transform'}`}>
               {item.icon}
             </div>
-            
+
             {!isCollapsed && (
               <span className="font-medium text-sm whitespace-nowrap overflow-hidden">
                 {item.name}
               </span>
             )}
 
-            {/* Tooltip saat collapsed */}
+    
             {isCollapsed && (
               <div className="absolute left-16 bg-gray-900 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50">
                 {item.name}
@@ -92,7 +90,7 @@ const Sidebar = ({ isCollapsed, toggleSidebar }) => {
 
       {/* 3. Footer / Logout */}
       <div className="p-4 border-t border-white/10">
-        <button 
+        <button
           onClick={handleLogout}
           className={`
             w-full flex items-center gap-3 px-3 py-3 rounded-xl text-red-400 

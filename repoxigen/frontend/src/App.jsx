@@ -9,7 +9,10 @@ import Merchant from './pages/Merchant';
 
 import Login from './pages/auth/Login'
 import Registrasi from './pages/auth/Registrasi'
-import UserDashboard from './pages/dashboard/User/Dashboard';
+
+import UserDashboard from './pages/Dashboard/User/Dashboard';
+import AgendaList from './pages/Dashboard/User/Agenda';
+import AgendaDetail from './pages/Dashboard/User/Agenda/Detail';
 
 import DashboardLayout from './components/Layouts/DashboardLayout';
 
@@ -17,7 +20,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        
+
         {/* Landing Page */}
         <Route element={<PublicLayout />}>
           <Route path='/' element={<Home />} />
@@ -32,7 +35,10 @@ function App() {
 
         <Route path='/dashboard' element={<DashboardLayout />}>
           {/* <Route index element={<Navigate to="user" replace />} /> */}
-          <Route path="user" element={<UserDashboard/>}></Route>
+          <Route path="user" element={<UserDashboard />}></Route>
+
+          <Route path="agenda" element={<AgendaList />} />
+          <Route path="agenda/:id" element={<AgendaDetail />} />
 
           {/* <Route path='admin' element={}> </Route> */}
         </Route>

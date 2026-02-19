@@ -1,12 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, User, Settings, LogOut } from 'lucide-react';
+import { LayoutDashboard, CalendarDays, LogOut } from 'lucide-react';
 
 const MobileNav = () => {
   const menuItems = [
     { path: '/dashboard/user', name: 'Home', icon: <LayoutDashboard size={22} /> },
-    { path: '/dashboard/profile', name: 'Profile', icon: <User size={22} /> },
-    { path: '/dashboard/settings', name: 'Settings', icon: <Settings size={22} /> },
+    { path: '/dashboard/agenda', name: 'Agenda UKM', icon: <CalendarDays size={20} /> },
   ];
 
   return (
@@ -24,9 +23,8 @@ const MobileNav = () => {
             {item.icon}
           </NavLink>
         ))}
-        
-        {/* Tombol Logout Mobile (Kecil) */}
-        <button 
+
+        <button
           onClick={() => {
             localStorage.removeItem('token');
             localStorage.removeItem('user');
