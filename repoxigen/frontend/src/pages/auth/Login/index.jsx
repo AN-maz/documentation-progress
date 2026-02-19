@@ -1,16 +1,13 @@
-// src/pages/auth/Login/index.jsx
-import React, {useState} from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, } from 'react-router-dom';
 import AuthLayout from '../../../components/Layouts/AuthLayout';
-import { authService } from '../../../services/authService';
+import { useAuth } from '../../../hooks/UseAuth';
+
 
 const Login = () => {
 
-  const navigate = useNavigate();
-
+  const { login, loading, errorMsg } = useAuth();
   const [formData, setFormData] = useState({ email: '', password: '' });
-  const [loading, setLoading] = useState(false);
-  const [errorMsg, setErrorMsg] = useState('');
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -18,27 +15,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    setErrorMsg('');
-
-    try {
-  
-      const res = await authService.login(formData.email, formData.password);
-
-      if (res.status || res.success) { 
-        alert("Login Berhasil! Selamat Datang.");
-        navigate('/dashboard/user'); 
-      } else {
-
-        setErrorMsg(res.message || "Login gagal");
-      }
-
-    } catch (err) {
-      console.error(err);
-      setErrorMsg(err.message || "Email atau Password Salah!");
-    } finally {
-      setLoading(false);
-    }
+    await login(formData.email, formData.password);
   };
 
   return (
@@ -46,8 +23,8 @@ const Login = () => {
       title="Welcome Back!"
       subtitle="Masuk untuk mengakses materi pembelajaran."
     >
-      <form 
-        className="space-y-5" 
+      <form
+        className="space-y-5"
         onSubmit={handleSubmit}>
 
         {/* Error Alert */}

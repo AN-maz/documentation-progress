@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import AuthLayout from '../../../components/Layouts/AuthLayout';
-import { authService } from '../../../services/authService';
+import { useAuth } from '../../../hooks/UseAuth';
 
 const Registrasi = () => {
 
-  const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
-  const [errorMsg, setErrorMsg] = useState('');
+  const { register, loading, errorMsg } = useAuth();
 
   const [formData, setFormData] = useState({
     fullName: '',
@@ -25,22 +23,21 @@ const Registrasi = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    setErrorMsg('');
-
     try {
-      // Panggil API Register
-      await authService.register(formData);
-
+      await register(formData);
       alert("Registrasi Berhasil! Silakan Login.");
-      navigate('/login');
-
     } catch (err) {
-      console.error(err);
-      setErrorMsg(err.message || "Gagal Mendaftar. Cek kembali data Anda.");
-    } finally {
-      setLoading(false);
+      console.error("Registrasi gagal di komponen:", err);
     }
+
+    e.preventDefault();
+    try {
+      await register(formData);
+      alert("Registrasi Berhasil! Silakan Login.");
+    } catch (err) {
+      console.error("Registrasi gagal di komponen:", err);
+    }
+
   };
 
   return (
@@ -80,11 +77,11 @@ const Registrasi = () => {
 
           <div>
             <label className="block text-sm font-bold text-gray-700 mb-1">Jurusan</label>
-            <select 
-              className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-oxigen-light focus:outline-none transition-all appearance-none cursor-pointer" 
+            <select
+              className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-oxigen-light focus:outline-none transition-all appearance-none cursor-pointer"
               onChange={handleChange}
               name="jurusan"
-              >
+            >
               <option value="" disabled>Pilih Jurusan</option>
               <option value="Teknik Informatika">Teknik Informatika</option>
               <option value="Teknik Industri">Teknik Industri</option>
@@ -121,12 +118,12 @@ const Registrasi = () => {
 
         <div>
           <label className="block text-sm font-bold text-gray-700 mb-1">Menjadi Bagian Dari</label>
-          <select 
-            className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-oxigen-light focus:outline-none transition-all appearance-none cursor-pointer" 
+          <select
+            className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-oxigen-light focus:outline-none transition-all appearance-none cursor-pointer"
             onChange={handleChange}
             value={formData.divisi}
             name="divisi"
-            >
+          >
             <option value="" disabled>Pilih Divisi Peminatan</option>
             <option value="software">Divisi Software</option>
             <option value="hardware">Divisi Hardware</option>
