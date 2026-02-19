@@ -2,15 +2,9 @@ import * as agendaService from "../services/agendaService.js";
 
 export const createAgenda = async (req, res) => {
   try {
-    const { id_akun, role, kelola_divisi } = req.user;
+    const { id_akun, role } = req.user;
 
-    const newAgenda = await agendaService.createAgenda(
-      req.body,
-      // req.user.id_akun,
-      id_akun,
-      role,
-      kelola_divisi,
-    );
+    const newAgenda = await agendaService.createAgenda(req.body, id_akun, role);
 
     res.status(201).json({
       status: true,
@@ -24,13 +18,12 @@ export const createAgenda = async (req, res) => {
 
 export const getAllAgenda = async (req, res) => {
   try {
-    const { role, kelola_divisi, id_akun } = req.user;
+    const { role, id_akun } = req.user;
 
-    const agendas = await agendaService.getAllAgenda(
-      role,
-      kelola_divisi,
-      id_akun,
-    );
+    console.log("ISI REQ.USER DARI TOKEN:", req.user);
+    console.log("ID AKUN YANG DIAMBIL:", id_akun);
+
+    const agendas = await agendaService.getAllAgenda(role, id_akun);
 
     res.status(200).json({
       status: true,
@@ -45,13 +38,13 @@ export const getAllAgenda = async (req, res) => {
 export const updateAgenda = async (req, res) => {
   try {
     const { id_agenda } = req.params;
-    const { role, kelola_divisi } = req.user;
+    const { role, id_akun } = req.user;
 
     const result = await agendaService.updateAgenda(
       id_agenda,
       req.body,
       role,
-      kelola_divisi,
+      id_akun,
     );
 
     res.status(200).json({
@@ -73,9 +66,9 @@ export const updateAgenda = async (req, res) => {
 export const deleteAgenda = async (req, res) => {
   try {
     const { id_agenda } = req.params;
-    const { role, kelola_divisi } = req.user;
+    const { role, id_akun } = req.user;
 
-    await agendaService.deleteAgenda(id_agenda, role, kelola_divisi);
+    await agendaService.deleteAgenda(id_agenda, role, id_akun);
 
     res.status(200).json({
       status: true,
@@ -92,15 +85,14 @@ export const deleteAgenda = async (req, res) => {
 export const kickParticipant = async (req, res) => {
   try {
     const { id_absensi } = req.params;
-    const { role, kelola_divisi } = req.user;
+    const { role, id_akun } = req.user;
 
-    await agendaService.kickParticipants(id_absensi, role, kelola_divisi);
+    await agendaService.kickParticipants(id_absensi, role, id_akun);
 
     res.status(200).json({
       status: true,
-      message: "peserta berhasil dihapus dari daftar hadir",
+      message: "Peserta berhasil dihapus dari daftar hadir",
     });
-    
   } catch (err) {
     if (err.message.includes("tidak berhak")) {
       return res.status(403).json({ status: false, message: err.message });
@@ -108,15 +100,16 @@ export const kickParticipant = async (req, res) => {
     res.status(500).json({ status: false, message: err.message });
   }
 };
+
 export const getParticipants = async (req, res) => {
   try {
     const { id_agenda } = req.params;
-    const { role, kelola_divisi } = req.user;
+    const { role, id_akun } = req.user;
 
     const result = await agendaService.getAgendaPartisipants(
       id_agenda,
       role,
-      kelola_divisi,
+      id_akun,
     );
 
     res.status(200).json({
@@ -126,7 +119,7 @@ export const getParticipants = async (req, res) => {
     });
   } catch (err) {
     if (err.message.includes("Dilarang")) {
-      return res.status(403).json({ status: false, messaga: err.message });
+      return res.status(403).json({ status: false, message: err.message });
     }
     res.status(400).json({ status: false, message: err.message });
   }

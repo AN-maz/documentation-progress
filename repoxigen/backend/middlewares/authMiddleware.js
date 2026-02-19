@@ -3,8 +3,6 @@ import jwt from "jsonwebtoken";
 export const verifyToken = (req, res, next) => {
   const authHeader = req.headers["authorization"];
 
-  // console.log("Headers diterima:", req.headers);
-  // console.log("Auth Header:", authHeader);
 
   const token = authHeader && authHeader.split(" ")[1];
 
@@ -29,7 +27,7 @@ export const verifyToken = (req, res, next) => {
 };
 
 export const onlyAdmin = (req, res, next) => {
-  const allowedRoles = ["super_admin", "admin_divisi", "bph"];
+  const allowedRoles = ["super_admin", "admin_divisi"];
 
   if (!allowedRoles.includes(req.user.role)) {
     return res.status(403).json({
@@ -53,7 +51,7 @@ export const onlyHumaniora = (req,res,next) => {
 }
 
 export const onlyPengurus = (req,res,next) => {
-  const pengurusRoles = ["super_admin","admin_divisi","admin_divisi","admin_humanioara","bph"];
+  const pengurusRoles = ["super_admin","admin_hum_in"];
 
   if(!pengurusRoles.includes(req.user.role)){
     return res.status(403).json({
