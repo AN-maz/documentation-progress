@@ -1,57 +1,40 @@
-import React from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Outlet } from 'react-router-dom';
+import Sidebar from '../Navigation/Sidebar';
+import MobileNav from '../Navigation/MobileNav';
 
 const DashboardLayout = () => {
-  const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem('user'));
-
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    navigate('/login');
-  };
+  // State untuk kontrol Sidebar (Expanded/Collapsed)
+  // Default: Expanded di Desktop
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
   return (
-    <div className="flex h-screen bg-gray-100">
-      {/* SIDEBAR SEMENTARA */}
-      <aside className="w-64 bg-oxigen-dark text-white p-6 flex flex-col">
-        <h1 className="text-2xl font-bold mb-8">OXIGEN</h1>
+    <div className="min-h-screen bg-gray-50 flex">
+      
+      {/* 1. SIDEBAR (Hanya muncul di Desktop/Tablet) */}
+      <Sidebar 
+        isCollapsed={isSidebarCollapsed} 
+        toggleSidebar={() => setIsSidebarCollapsed(!isSidebarCollapsed)} 
+      />
+
+      {/* 2. MAIN CONTENT AREA */}
+      <main 
+        className={`
+          flex-1 p-6 md:p-8 pb-32 md:pb-8 transition-all duration-300 ease-in-out
+          ${isSidebarCollapsed ? 'md:ml-20' : 'md:ml-64'} 
+        `}
+      >
+        {/* Kita hapus Header User di pojok kanan atas sesuai request */}
         
-        <nav className="flex-1 space-y-4">
-          <div className="text-gray-400 text-xs uppercase font-bold">Menu</div>
-          <a href="#" className="block px-4 py-2 bg-white/10 rounded-lg">Dashboard</a>
-          <a href="#" className="block px-4 py-2 hover:bg-white/5 rounded-lg">Profile Saya</a>
-          
-          {/* Menu Khusus Admin (Logic Render) */}
-          {user?.role === 'super_admin' && (
-            <>
-              <div className="text-gray-400 text-xs uppercase font-bold mt-6">Admin Zone</div>
-              <a href="#" className="block px-4 py-2 text-yellow-300 hover:bg-white/5">Manage Users</a>
-            </>
-          )}
-        </nav>
-
-        <button onClick={handleLogout} className="mt-auto bg-red-600 px-4 py-2 rounded-lg text-sm">
-          Logout
-        </button>
-      </aside>
-
-      {/* KONTEN UTAMA */}
-      <main className="flex-1 overflow-y-auto p-8">
-        <header className="flex justify-between items-center mb-8">
-          <h2 className="text-2xl font-bold text-gray-800">Dashboard</h2>
-          <div className="flex items-center gap-3">
-            <span className="text-right">
-              <p className="font-bold text-sm">{user?.nama_lengkap}</p>
-              <p className="text-xs text-gray-500">{user?.role || 'Member'}</p>
-            </span>
-            <div className="w-10 h-10 rounded-full bg-gray-300"></div>
-          </div>
-        </header>
-
-        {/* INI TEMPAT HALAMAN BERUBAH-UBAH */}
-        <Outlet /> 
+        {/* Render Halaman Dashboard disini */}
+        <div className="max-w-7xl mx-auto animate-fade-in-up">
+          <Outlet />
+        </div>
       </main>
+
+      {/* 3. MOBILE NAVBAR (Hanya muncul di Mobile) */}
+      <MobileNav />
+
     </div>
   );
 };

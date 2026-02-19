@@ -10,11 +10,27 @@ export const authService = {
   login: async (email, password) => {
     try {
       const response = await api.post("/api/auth/login", { email, password });
+      const resData = response.data;
 
-      if (response.data.success || response.data.token) {
-        localStorage.setItem("token", response.data.data.token);
-        localStorage.setItem("user", JSON.stringify(response.data.data.user));
+      if ((resData.status || resData.success) && resData.data?.token) {
+
+        // Simpan Token
+        localStorage.setItem("token", resData.data.token);
+        console.log("✅ Token berhasil disimpan ke LocalStorage");
+        
+        // Simpan Data User (Untuk Dashboard)
+        // Cek apakah user ada di dalam object 'user' atau langsung di 'data'
+        const userDataToSave = resData.data.user || resData.data;
+        
+        // Kita copy datanya biar aman, lalu hapus token dari object user (biar gak duplikat)
+        const finalUser = { ...userDataToSave };
+        delete finalUser.token; 
+
+        localStorage.setItem('user', JSON.stringify(finalUser));
+      } else {
+        console.warn("❌ Login sukses tapi Token tidak ditemukan di response!");
       }
+      
       return response.data;
     } catch (err) {
       throw err.response ? err.response.data : { message: "Server Error" };
@@ -41,7 +57,7 @@ export const authService = {
       };
 
       console.log("Data yang dikirim ke Backend:", payload);
-      
+
       const response = await api.post("/api/auth/register", payload);
       return response.data;
     } catch (err) {

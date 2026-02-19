@@ -9,9 +9,9 @@ import Merchant from './pages/Merchant';
 
 import Login from './pages/auth/Login'
 import Registrasi from './pages/auth/Registrasi'
+import UserDashboard from './pages/dashboard/User/Dashboard';
 
 import DashboardLayout from './components/Layouts/DashboardLayout';
-import UserDashboard from './pages/dashboard/User/Dashboard';
 
 function App() {
   return (
@@ -31,6 +31,7 @@ function App() {
         <Route path="/register" element={<Registrasi />} />
 
         <Route path='/dashboard' element={<DashboardLayout />}>
+          {/* <Route index element={<Navigate to="user" replace />} /> */}
           <Route path="user" element={<UserDashboard/>}></Route>
 
           {/* <Route path='admin' element={}> </Route> */}
