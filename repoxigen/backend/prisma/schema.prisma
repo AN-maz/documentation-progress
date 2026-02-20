@@ -12,7 +12,6 @@ enum Role {
   super_admin
   admin_divisi
   admin_hum_in
-  bph
   user
 }
 
@@ -23,7 +22,6 @@ enum KategoriDivisi {
 }
 
 enum StatusKeanggotaan {  
-  pending
   pasif
   aktif
   bph
@@ -74,7 +72,7 @@ model Users {
   angkatan           Int               
   alasan             String?           @db.Text
 
-  status_keanggotaan StatusKeanggotaan @default(pending)
+  status_keanggotaan StatusKeanggotaan @default(pasif)
   
 
   divisi_peminatan_id Int?
@@ -106,7 +104,6 @@ model Agenda {
   token_absen   String   @db.VarChar(10)
   is_absen_open Boolean  @default(false)
   konten_materi String?  @db.LongText 
-  file_lampiran String? 
   
   created_by    String
   

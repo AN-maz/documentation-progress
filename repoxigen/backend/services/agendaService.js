@@ -11,7 +11,7 @@ const getUserDivision = async (idAkun) => {
 };
 
 export const createAgenda = async (data, creatorId, userRole) => {
-  const { judul, deskripsi, tanggal, lokasi, token_absen, id_divisi } = data;
+  const { judul, deskripsi, tanggal, lokasi, token_absen, id_divisi, konten_materi} = data;
 
   let targetDivisi = parseInt(id_divisi);
   // const superRole = ["super_admin"];
@@ -21,19 +21,6 @@ export const createAgenda = async (data, creatorId, userRole) => {
     if (!userDivisiId) throw new Error("Kamu ga punya akses hak divisi!");
     targetDivisi = userDivisiId;
   }
-
-  // const newAgenda = await prisma.agenda.create({
-  //   data: {
-  //     judul,
-  //     deskripsi,
-  //     tanggal: new Date(tanggal),
-  //     lokasi,
-  //     token_absen,
-  //     is_absen_open: true,
-  //     id_divisi: targetDivisi,
-  //     created_by: creatorId,
-  //   },
-  // });
 
   return await prisma.agenda.create({
     data: {
@@ -45,6 +32,7 @@ export const createAgenda = async (data, creatorId, userRole) => {
       is_absen_open: true,
       id_divisi: targetDivisi,
       created_by: creatorId,
+      konten_materi: konten_materi
     },
   });
 };

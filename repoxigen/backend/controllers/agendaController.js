@@ -147,11 +147,10 @@ export const getAgendaDetail = async (req, res) => {
         status: false,
         message: err.message,
       });
-
     }
-      res.status(404).json({
-        status: false,
-        message: err.message,
-      });
+    res.status(404).json({
+      status: false,
+      message: err.message,
+    });
   }
 };
