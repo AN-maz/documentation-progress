@@ -25,6 +25,7 @@ router.delete("/:id_agenda", verifyToken,onlyAdmin,deleteAgenda);
 // KELOLA ANGGOTA
 router.get("/:id_agenda/participants", verifyToken, onlyAdmin, getParticipants);
 router.delete("/participants/:id_absensi", verifyToken, onlyAdmin, kickParticipant);
-router.post("/absen", verifyToken, submitAbsensi);
+// router.post("/absen", verifyToken, submitAbsensi);
+router.post('/:id_agenda/absen', verifyToken, submitAbsensi)
 
 export default router;

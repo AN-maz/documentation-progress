@@ -16,6 +16,7 @@ import AgendaDetail from './pages/Dashboard/User/Agenda/Detail';
 
 import AdminDashboard from './pages/Dashboard/Admin/Dashboard';
 import AdminAgendaList from './pages/Dashboard/Admin/Agenda';
+import AdminAgendaDetail from './pages/Dashboard/Admin/Agenda/Detail';
 
 import DashboardLayout from './components/Layouts/DashboardLayout';
 
@@ -46,6 +47,8 @@ function App() {
           {/* ROUTE ADMIN DIVISI */}
           <Route path='admin' element={<AdminDashboard />} />
           <Route path='admin/agenda' element={<AdminAgendaList />} />
+          <Route path='admin/agenda/:id' element={<AdminAgendaDetail />} />
+
         </Route>
       </Routes>
     </BrowserRouter>

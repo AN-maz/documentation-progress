@@ -84,7 +84,7 @@ export const updateAgenda = async (agendaId, data, userRole, userDivisiId) => {
     data: {
       judul: data.judul,
       deskripsi: data.deskripsi,
-      tanggal: data.tanggal ? new Data(data.tanggal) : undefined,
+      tanggal: data.tanggal ? new Date(data.tanggal) : undefined,
       lokasi: data.lokasi,
       token_absen: data.token_absen,
       is_absen_open: data.is_absen_open,
@@ -177,6 +177,7 @@ export const getAgendaPartisipants = async (
       total_hadir: agenda._count.absensi,
     },
     peserta: participants.map((p) => ({
+      id_absensi: p.id_absensi,
       nim: p.nim,
       nama: p.user.nama_lengkap,
       jurusan: p.user.jurusan,
