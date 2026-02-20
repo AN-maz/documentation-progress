@@ -124,3 +124,34 @@ export const getParticipants = async (req, res) => {
     res.status(400).json({ status: false, message: err.message });
   }
 };
+
+export const getAgendaDetail = async (req, res) => {
+  try {
+    const { id_agenda } = req.params;
+    const { role, id_akun } = req.user;
+
+    const agenda = await agendaService.getAgendaDetail(
+      id_agenda,
+      role,
+      id_akun,
+    );
+
+    res.status(200).json({
+      status: true,
+      message: "Berhasil ambil detail agenda ya...",
+      data: agenda,
+    });
+  } catch (err) {
+    if (err.message.includes("Akses ditolak")) {
+      return res.status(403).json({
+        status: false,
+        message: err.message,
+      });
+
+    }
+      res.status(404).json({
+        status: false,
+        message: err.message,
+      });
+  }
+};

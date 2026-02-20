@@ -196,3 +196,28 @@ export const getAgendaPartisipants = async (
     })),
   };
 };
+
+export const getAgendaDetail = async (agendaId, userRole, userId) => {
+  const agenda = await prisma.agenda.findUnique({
+    where: { id_agenda: parseInt(agendaId) },
+    include: {
+      divisi: true,
+      _count: { select: { absensi: true } },
+    },
+  });
+
+  if(!agenda) throw new Error("Agenda tidak ditemukan!");
+
+  const superRoles = ['super_admin'];
+
+  if(!superRoles.includes(userRole)){
+
+    const userDivisiId = await getUserDivision(userId);
+
+    if(agenda.id_divisi !== userDivisiId){
+      throw new Error("Akses ditolak! kamu tidak berhak spill-spill agenda divisi lain...")
+    }
+  }
+
+  return agenda;
+};
