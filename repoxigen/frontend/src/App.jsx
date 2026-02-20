@@ -14,6 +14,9 @@ import UserDashboard from './pages/Dashboard/User/Dashboard';
 import AgendaList from './pages/Dashboard/User/Agenda';
 import AgendaDetail from './pages/Dashboard/User/Agenda/Detail';
 
+import AdminDashboard from './pages/Dashboard/Admin/Dashboard';
+import AdminAgendaList from './pages/Dashboard/Admin/Agenda';
+
 import DashboardLayout from './components/Layouts/DashboardLayout';
 
 function App() {
@@ -34,13 +37,15 @@ function App() {
         <Route path="/register" element={<Registrasi />} />
 
         <Route path='/dashboard' element={<DashboardLayout />}>
+          {/* ROUTE USER */}
           {/* <Route index element={<Navigate to="user" replace />} /> */}
-          <Route path="user" element={<UserDashboard />}></Route>
-
+          <Route path="user" element={<UserDashboard />} />
           <Route path="agenda" element={<AgendaList />} />
           <Route path="agenda/:id" element={<AgendaDetail />} />
 
-          {/* <Route path='admin' element={}> </Route> */}
+          {/* ROUTE ADMIN DIVISI */}
+          <Route path='admin' element={<AdminDashboard />} />
+          <Route path='admin/agenda' element={<AdminAgendaList />} />
         </Route>
       </Routes>
     </BrowserRouter>

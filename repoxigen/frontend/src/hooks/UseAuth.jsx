@@ -13,11 +13,25 @@ export const useAuth = () => {
     setErrorMsg('');
     try {
       const res = await authService.login(email, password);
-      if (res.status || res.success) {
-        navigate('/dashboard/user');
+
+      if (res && (res.status || res.success)) {
+
+        const userData = res.data?.user || res.data;
+        const userRole = userData?.role;
+
+        alert("Login Berhasil");
+
+        if (userRole === 'admin_divisi') {
+          navigate('/dashboard/admin');
+        } else if (userRole === 'super_admin') {
+          navigate('/dashboard/super')
+        } else {
+          navigate('/dashboard/user');
+        }
         return res;
+      }else{
+        setErrorMsg(res.message || "Login gagal");
       }
-      setErrorMsg(res.message || "Login gagal");
     } catch (err) {
       setErrorMsg(err.message || "Email atau Password Salah!");
       throw err;

@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import {
   LayoutDashboard,
-  User,
+  ClipboardList,
   LogOut,
   ChevronLeft,
   ChevronRight,
@@ -12,16 +12,27 @@ import {
 const Sidebar = ({ isCollapsed, toggleSidebar }) => {
   const navigate = useNavigate();
 
+  const userString = localStorage.getItem('user');
+  const user = userString ? JSON.parse(userString) : null;
+  const userRole = user?.role || 'user';
+
   const handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     navigate('/login');
   };
 
-  const menuItems = [
+  const userMenuItems = [
     { path: '/dashboard/user', name: 'Dashboard', icon: <LayoutDashboard size={20} /> },
     { path: '/dashboard/agenda', name: 'Agenda UKM', icon: <CalendarDays size={20} /> },
   ];
+
+  const adminDivisiMenuItems = [
+    { path: '/dashboard/admin', name: 'Dashboard Admin', icon: <LayoutDashboard size={20} />, end: true},
+    { path: '/dashboard/admin/agenda', name: 'Manajemen Agenda', icon: <ClipboardList size={20} /> },
+  ];
+
+  const menuItems = userRole === 'admin_divisi' ? adminDivisiMenuItems : userMenuItems;
 
   return (
     <aside
@@ -56,10 +67,19 @@ const Sidebar = ({ isCollapsed, toggleSidebar }) => {
 
       {/* 2. Menu Navigation */}
       <nav className="flex-1 py-6 px-3 space-y-2 overflow-y-auto">
+        
+        {/* ROLE BASED */}
+
+        {!isCollapsed && (
+          <div className="px-3 mb-4 text-xs font-bold text-gray-400 uppercase tracking-wider">
+            {userRole === 'admin_divisi' ? 'Admin Panel' : 'Member Area'}
+          </div>
+        )}
         {menuItems.map((item) => (
           <NavLink
             key={item.path}
             to={item.path}
+            end={item.end}
             className={({ isActive }) => `
               flex items-center gap-3 px-3 py-3 rounded-xl transition-all duration-300 group
               ${isActive
