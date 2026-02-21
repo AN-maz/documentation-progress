@@ -85,9 +85,9 @@ export const deleteAgenda = async (req, res) => {
 export const kickParticipant = async (req, res) => {
   try {
     const { id_absensi } = req.params;
-    const { role, id_akun } = req.user;
+    const { role, divisi_peminatan_id } = req.user;
 
-    await agendaService.kickParticipants(id_absensi, role, id_akun);
+    await agendaService.kickParticipants(id_absensi, role, divisi_peminatan_id);
 
     res.status(200).json({
       status: true,

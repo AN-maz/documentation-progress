@@ -7,16 +7,16 @@ import { ArrowLeft, Edit, Trash2, Users, Power, X } from 'lucide-react';
 const AdminAgendaDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  
+
   const [agenda, setAgenda] = useState(null);
-  const [pesertaAbsen, setPesertaAbsen] = useState([]); // ✅ Tambahan dari revisi teman
+  const [pesertaAbsen, setPesertaAbsen] = useState([]);
   const [loading, setLoading] = useState(true);
-  
+
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editFormData, setEditFormData] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // ✅ FETCH DETAIL DIGABUNG
+
   const fetchDetail = async () => {
     try {
       const [resAgenda, resPeserta] = await Promise.all([
@@ -37,8 +37,8 @@ const AdminAgendaDetail = () => {
 
       if (resPeserta) {
         setPesertaAbsen(
-          resPeserta.peserta || 
-          resPeserta.data?.peserta || 
+          resPeserta.peserta ||
+          resPeserta.data?.peserta ||
           []
         );
       }
@@ -65,7 +65,7 @@ const AdminAgendaDetail = () => {
     }
   };
 
-  // ✅ KICK ANGGOTA UPDATE STATE PESERTA
+
   const handleKickAnggota = async (id_absensi, nama_peserta) => {
     const isConfirm = window.confirm(
       `Yakin ingin menghapus absensi atas nama ${nama_peserta}?`
@@ -80,7 +80,8 @@ const AdminAgendaDetail = () => {
       setPesertaAbsen(updatedPeserta);
       alert("Berhasil menghapus peserta!");
     } catch (error) {
-      alert("Gagal menghapus data absensi peserta");
+      console.error("Detail Error Kick:", error);
+      alert(`Gagal: ${error.message || "Server Error"}`);
     }
   };
 
@@ -138,22 +139,20 @@ const AdminAgendaDetail = () => {
           <div className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm">
             <div className="flex justify-between items-start mb-4">
               <span
-                className={`px-3 py-1 text-xs font-bold uppercase rounded-full inline-flex items-center gap-1 ${
-                  agenda.is_absen_open
+                className={`px-3 py-1 text-xs font-bold uppercase rounded-full inline-flex items-center gap-1 ${agenda.is_absen_open
                     ? 'bg-green-100 text-green-700'
                     : 'bg-red-100 text-red-700'
-                }`}
+                  }`}
               >
                 {agenda.is_absen_open ? 'Absen Terbuka' : 'Absen Ditutup'}
               </span>
 
               <button
                 onClick={handleToggleAbsen}
-                className={`p-2 rounded-full transition-colors ${
-                  agenda.is_absen_open
+                className={`p-2 rounded-full transition-colors ${agenda.is_absen_open
                     ? 'bg-red-50 text-red-500 hover:bg-red-100'
                     : 'bg-green-50 text-green-600 hover:bg-green-100'
-                }`}
+                  }`}
               >
                 <Power size={18} />
               </button>

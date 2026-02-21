@@ -1,6 +1,7 @@
 import api from "./api";
 
 export const agendaService = {
+
   getAllAgendas: async () => {
     try {
       const response = await api.get("/api/agendas");
@@ -69,4 +70,5 @@ export const agendaService = {
       throw err.response?.data || {message: "Gagal mengambil data anggota"}
     }
   }
+  
 };

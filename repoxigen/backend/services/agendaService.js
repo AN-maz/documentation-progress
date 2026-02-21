@@ -127,7 +127,7 @@ export const kickParticipants = async (absensiId, userRole, userDivisiId) => {
   }
 
   return await prisma.absensi.delete({
-    where: { id_absensi: parseInt(agendaId) },
+    where: { id_absensi: parseInt(absensiId) },
   });
 };
 
