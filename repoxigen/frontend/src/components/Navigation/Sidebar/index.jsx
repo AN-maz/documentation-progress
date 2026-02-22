@@ -6,7 +6,9 @@ import {
   LogOut,
   ChevronLeft,
   ChevronRight,
-  CalendarDays
+  CalendarDays,
+  Briefcase,
+  Users
 } from 'lucide-react';
 
 const Sidebar = ({ isCollapsed, toggleSidebar }) => {
@@ -14,7 +16,7 @@ const Sidebar = ({ isCollapsed, toggleSidebar }) => {
 
   const userString = localStorage.getItem('user');
   const user = userString ? JSON.parse(userString) : null;
-  const userRole = user?.role || 'user';
+  const userRole = user?.role || 'user'; 
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -22,17 +24,33 @@ const Sidebar = ({ isCollapsed, toggleSidebar }) => {
     navigate('/login');
   };
 
+
   const userMenuItems = [
     { path: '/dashboard/user', name: 'Dashboard', icon: <LayoutDashboard size={20} /> },
     { path: '/dashboard/agenda', name: 'Agenda UKM', icon: <CalendarDays size={20} /> },
   ];
 
   const adminDivisiMenuItems = [
-    { path: '/dashboard/admin', name: 'Dashboard Admin', icon: <LayoutDashboard size={20} />, end: true},
+    { path: '/dashboard/admin', name: 'Dashboard Admin', icon: <LayoutDashboard size={20} />, end: true },
     { path: '/dashboard/admin/agenda', name: 'Manajemen Agenda', icon: <ClipboardList size={20} /> },
   ];
+  const adminInternalMenuItems = [
+    { path: '/dashboard/internal', name: 'Dashboard Internal', icon: <LayoutDashboard size={20} /> },
+    { path: '/dashboard/internal/akun', name: 'Manage Akun', icon: <Users size={20} /> },
+    { path: '/dashboard/internal/rapat', name: 'Rapat Internal', icon: <Briefcase size={20} /> },
+  ];
 
-  const menuItems = userRole === 'admin_divisi' ? adminDivisiMenuItems : userMenuItems;
+
+  let menuItems = userMenuItems;
+  let panelLabel = 'Member Area';
+
+  if (userRole === 'admin_divisi') {
+    menuItems = adminDivisiMenuItems;
+    panelLabel = 'Divisi Panel';
+  } else if (userRole === 'admin_hum_in') {
+    menuItems = adminInternalMenuItems;
+    panelLabel = 'Internal Panel';
+  }
 
   return (
     <aside
@@ -42,7 +60,7 @@ const Sidebar = ({ isCollapsed, toggleSidebar }) => {
         ${isCollapsed ? 'w-20' : 'w-64'}
       `}
     >
-      {/* 1. Header Logo & Toggle */}
+      {/* 1️⃣ Header Logo & Toggle */}
       <div className="h-20 flex items-center justify-between px-4 border-b border-white/10">
         {!isCollapsed && (
           <div className="flex items-center gap-2 overflow-hidden whitespace-nowrap">
@@ -52,7 +70,6 @@ const Sidebar = ({ isCollapsed, toggleSidebar }) => {
             <span className="font-bold text-xl tracking-wide">OXIGEN</span>
           </div>
         )}
-
 
         <button
           onClick={toggleSidebar}
@@ -65,23 +82,22 @@ const Sidebar = ({ isCollapsed, toggleSidebar }) => {
         </button>
       </div>
 
-      {/* 2. Menu Navigation */}
+      {/* 2️⃣ Menu Navigation */}
       <nav className="flex-1 py-6 px-3 space-y-2 overflow-y-auto">
-        
-        {/* ROLE BASED */}
 
         {!isCollapsed && (
           <div className="px-3 mb-4 text-xs font-bold text-gray-400 uppercase tracking-wider">
-            {userRole === 'admin_divisi' ? 'Admin Panel' : 'Member Area'}
+            {panelLabel}
           </div>
         )}
+
         {menuItems.map((item) => (
           <NavLink
             key={item.path}
             to={item.path}
             end={item.end}
             className={({ isActive }) => `
-              flex items-center gap-3 px-3 py-3 rounded-xl transition-all duration-300 group
+              flex items-center gap-3 px-3 py-3 rounded-xl transition-all duration-300 group relative
               ${isActive
                 ? 'bg-gradient-to-r from-oxigen-light to-blue-600 text-white shadow-lg shadow-blue-900/50'
                 : 'text-gray-400 hover:bg-white/5 hover:text-white'}
@@ -98,7 +114,6 @@ const Sidebar = ({ isCollapsed, toggleSidebar }) => {
               </span>
             )}
 
-    
             {isCollapsed && (
               <div className="absolute left-16 bg-gray-900 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50">
                 {item.name}
@@ -108,7 +123,7 @@ const Sidebar = ({ isCollapsed, toggleSidebar }) => {
         ))}
       </nav>
 
-      {/* 3. Footer / Logout */}
+      {/* 3️⃣ Footer / Logout */}
       <div className="p-4 border-t border-white/10">
         <button
           onClick={handleLogout}

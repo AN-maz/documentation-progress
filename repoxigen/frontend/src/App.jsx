@@ -20,6 +20,8 @@ import AdminAgendaDetail from './pages/Dashboard/Admin/Agenda/Detail';
 
 import DashboardLayout from './components/Layouts/DashboardLayout';
 
+import InternalDashboard from './pages/Dashboard/Admin_internal/Dashboard';
+
 function App() {
   return (
     <BrowserRouter>
@@ -48,6 +50,9 @@ function App() {
           <Route path='admin' element={<AdminDashboard />} />
           <Route path='admin/agenda' element={<AdminAgendaList />} />
           <Route path='admin/agenda/:id' element={<AdminAgendaDetail />} />
+
+          {/* ROUTE ADMIN HUMANIORA INTERNAL */}
+          <Route path='internal' element={<InternalDashboard/>}/>
 
         </Route>
       </Routes>

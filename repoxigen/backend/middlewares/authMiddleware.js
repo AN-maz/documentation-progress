@@ -27,7 +27,7 @@ export const verifyToken = (req, res, next) => {
 };
 
 export const onlyAdmin = (req, res, next) => {
-  const allowedRoles = ["super_admin", "admin_divisi"];
+  const allowedRoles = ["super_admin", "admin_divisi","admin_hum_in"];
 
   if (!allowedRoles.includes(req.user.role)) {
     return res.status(403).json({
@@ -39,12 +39,12 @@ export const onlyAdmin = (req, res, next) => {
 };
 
 export const onlyHumaniora = (req,res,next) => {
-  const allowedRoles = ["super_admin","admin_humaniora"];
+  const allowedRoles = ["super_admin","admin_hum_in"];
 
   if(!allowedRoles.includes(req.user.role)){
     return res.status(403).json({
       status:false,
-      message: "Akses DItolak! Khusus Admin humanioara"
+      message: "Akses DItolak! Khusus Admin humaniora internal"
     });
   }
   next();

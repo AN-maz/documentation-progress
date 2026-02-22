@@ -12,7 +12,7 @@
   },
   {
     "id": 2,
-    "name": "Korsa Angkatan 24",
+    "name": "Jaket Angkatan Oxi-25",
     "price": 180000,
     "category": "Apparel",
     "image": "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&q=80&w=500",
@@ -23,7 +23,7 @@
   },
   {
     "id": 3,
-    "name": "Basreng Pedas Level 3",
+    "name": "Sate FullStack",
     "price": 15000,
     "category": "Food",
     "image": "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&q=80&w=500",
@@ -34,7 +34,7 @@
   },
   {
     "id": 4,
-    "name": "Es Kopi Gula Aren",
+    "name": "Es Kopi Vanilla Css",
     "price": 12000,
     "category": "Food",
     "image": "https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&q=80&w=500",

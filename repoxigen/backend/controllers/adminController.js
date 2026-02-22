@@ -60,7 +60,9 @@ export const rejectMember = async (req, res) => {
 
 export const getDashboardData = async (req, res) => {
   try {
-    const data = await adminService.getDashboardStats();
+
+    const {angkatan} = req.query;
+    const data = await adminService.getDashboardStats(angkatan);
     res.json({
       status: true,
       data,

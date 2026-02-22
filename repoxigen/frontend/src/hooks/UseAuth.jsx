@@ -25,11 +25,13 @@ export const useAuth = () => {
           navigate('/dashboard/admin');
         } else if (userRole === 'super_admin') {
           navigate('/dashboard/super')
+        } else if (userRole === 'admin_hum_in') {
+          navigate('/dashboard/internal')
         } else {
           navigate('/dashboard/user');
         }
         return res;
-      }else{
+      } else {
         setErrorMsg(res.message || "Login gagal");
       }
     } catch (err) {

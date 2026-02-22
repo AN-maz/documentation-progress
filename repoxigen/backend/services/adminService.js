@@ -23,8 +23,8 @@ export const approveUser = async (userId) => {
   });
 
   const user = await prisma.users.findUnique({ where: { id_akun: userId } });
-  
-  return {account: updatedAccount , user: user};
+
+  return { account: updatedAccount, user: user };
 };
 
 export const rejectUser = async (userId) => {
@@ -33,11 +33,20 @@ export const rejectUser = async (userId) => {
   });
 };
 
-export const getDashboardStats = async () => {
-  const totalUsers = await prisma.users.count();
+export const getDashboardStats = async (angkatanFilter) => {
+  const whereClause = {};
+
+  if (angkatanFilter) {
+    whereClause.angkatan = parseInt(angkatanFilter);
+  }
+
+  const totalUsers = await prisma.users.count({
+    where: whereClause,
+  });
 
   const statsStatus = await prisma.users.groupBy({
     by: ["status_keanggotaan"],
+    where: whereClause,
     _count: { nim: true },
   });
 
@@ -46,8 +55,18 @@ export const getDashboardStats = async () => {
     _max: { angkatan: true },
   });
 
+  const pendingApprovalCount = await prisma.users.count({
+    where: {
+      ...whereClause,
+      akun: {
+        is_approved: false,
+      },
+    },
+  });
+
   return {
     total_users: totalUsers,
+    pending_approval: pendingApprovalCount,
     chart_data: statsStatus.map((item) => ({
       status: item.status_keanggotaan,
       jumlah: item._count.nim,
