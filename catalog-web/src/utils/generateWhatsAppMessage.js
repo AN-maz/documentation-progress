@@ -1,8 +1,8 @@
 export const generateWhatsAppMessage = (cartItems, totalAmount) => {
-    // Ganti dengan nomor WhatsApp pemilik toko
-    const phoneNumber = "6281234567890";
 
-    let message = "Halo, saya ingin memesan:\n\n";
+    const phoneNumber = "6281229386986";
+
+    let message = "Punten Min, Abi bade order:\n\n";
 
     cartItems.forEach((item, index) => {
         message += `${index + 1}. ${item.name} (${item.quantity} ${item.unit})\n`;
@@ -11,7 +11,7 @@ export const generateWhatsAppMessage = (cartItems, totalAmount) => {
     });
 
     message += `*Total Belanja: Rp ${totalAmount.toLocaleString("id-ID")}*\n\n`;
-    message += "Tolong dikirim ke alamat saya. Terima kasih!";
+    message += "Punten kin dikintun ka alamat Abi. Hatur Thankyou";
 
     const encodedMessage = encodeURIComponent(message);
     return `https://wa.me/${phoneNumber}?text=${encodedMessage}`;

@@ -3,7 +3,7 @@ import { products } from '../../data/products';
 import ProductCard from '../../components/ui/ProductCard';
 
 function Home() {
-    // Ambil 4 produk pertama sebagai "Produk Unggulan"
+
     const featuredProducts = products.slice(0, 4);
 
     return (
@@ -22,7 +22,7 @@ function Home() {
                             Lihat Katalog
                         </Link>
                         <Link to="/contact" className="bg-blue-700/50 hover:bg-blue-700 text-white border border-blue-400 font-bold py-3 px-8 rounded-xl transition-colors backdrop-blur-sm">
-                            Hubungi Kami
+                            Hubungi Purwa
                         </Link>
                     </div>
                 </div>

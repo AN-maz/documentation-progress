@@ -11,7 +11,7 @@ function Navbar() {
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-8 h-8">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 21v-7.5a.75.75 0 01.75-.75h3a.75.75 0 01.75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 11.15l-3.25-9.75v-.01A3.001 3.001 0 0015.5 3H8.5a3.001 3.001 0 00-2.89 2.15l-3.25 9.75M19.64 14.15L15.36 21H8.64l-4.28-6.85m15.28 0c-.81 0-1.54.43-1.93 1.1A3.001 3.001 0 0112 18a3.001 3.001 0 01-3.71-2.75A1.996 1.996 0 006.36 14.15" />
                     </svg>
-                    <h1 className="font-bold text-xl tracking-tight text-gray-900">Retail<span className="text-blue-600">App</span></h1>
+                    <h1 className="font-bold text-xl tracking-tight text-gray-900">Ruko<span className="text-blue-600">purwa</span></h1>
                 </Link>
 
                 {/* Desktop Navigation */}

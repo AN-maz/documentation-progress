@@ -11,7 +11,7 @@ function MainLayout() {
             </main>
             <footer className="bg-gray-900 text-white py-6 mt-auto hidden md:block">
                 <div className="container mx-auto px-4 text-center">
-                    <p>&copy; {new Date().getFullYear()} Katalog Retail (Gas, Air, Beras). All rights reserved.</p>
+                    <p>&copy; {new Date().getFullYear()} RukoPurwa. All rights reserved.</p>
                 </div>
             </footer>
             <MobileNav />
