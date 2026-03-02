@@ -1,0 +1,47 @@
+export const riceData = [
+    {
+        id: "r1",
+        name: "Beras Rojolele 5 Kg",
+        category: "Beras",
+        price: 75000,
+        unit: "karung",
+        description: "Beras pulen kualitas premium ukuran 5 kilogram.",
+        image: "https://placehold.co/400x400/facc15/ffffff?text=Rojolele+5kg",
+    },
+    {
+        id: "r2",
+        name: "Beras BMW 5 Kg",
+        category: "Beras",
+        price: 72000,
+        unit: "karung",
+        description: "Beras wangi dan pulen spesial untuk keluarga.",
+        image: "https://placehold.co/400x400/ef4444/ffffff?text=BMW+5kg",
+    },
+    {
+        id: "r3",
+        name: "Beras Pandan Wangi 10 Kg",
+        category: "Beras",
+        price: 160000,
+        unit: "karung",
+        description: "Beras dengan aroma pandan alami, sangat lezat.",
+        image: "https://placehold.co/400x400/22c55e/ffffff?text=Pandan+Wangi+10kg",
+    },
+    {
+        id: "r4",
+        name: "Beras Setra Ramos 5 Kg",
+        category: "Beras",
+        price: 68000,
+        unit: "karung",
+        description: "Beras standar keluarga, harganya terjangkau.",
+        image: "https://placehold.co/400x400/eab308/ffffff?text=Setra+Ramos+5kg",
+    },
+    {
+        id: "r5",
+        name: "Beras Eceran (Per Liter)",
+        category: "Beras",
+        price: 12000,
+        unit: "liter",
+        description: "Pembelian beras secara eceran harga per liter.",
+        image: "https://placehold.co/400x400/cbd5e1/1e293b?text=Beras+Literan",
+    }
+];
