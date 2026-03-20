@@ -56,4 +56,14 @@ HTML menggunakan kode-kode berbentuk tag—seperti <head>, <p>, dan <img>—untu
 - `<div>` : (Division) Wadah serbaguna untuk mengelompokkan elemen-elemen lain agar mudah diatur tampilannya dengan CSS.
 
 ### Atribute pada Taq HTML
-Atribut memberikan informasi tambahan atau pengaturan khusus pada sebuah tag. Atribut selalu ditulis di dalam tag pembuka
+Atribut memberikan informasi tambahan atau pengaturan khusus pada sebuah tag. Atribut selalu ditulis di dalam tag pembuka.
+
+
+## CSS
+
+apa itu?
+
+jenis css? 
+
+At
+
