@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:src="@drawable/oxigen"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Registrasi"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="@color/oxigen_dark"
+            android:layout_gravity="center"
+            android:layout_marginBottom="24dp"/>
+
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:background="@drawable/edittext_rounded"
+            android:paddingStart="16dp"
+            android:layout_marginBottom="12dp"/>
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:background="@drawable/edittext_rounded"
+            android:paddingStart="16dp"
+            android:layout_marginBottom="12dp"/>
+
+        <TextView
+            android:id="@+id/passwardStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Password minimal 6 karakter"
+            android:textSize="12dp"
+            android:visibility="gone"/>
+        <EditText
+            android:id="@+id/etConPass"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Confirm Password"
+            android:inputType="textPassword"
+            android:background="@drawable/edittext_rounded"
+            android:paddingStart="16dp"
+            android:layout_marginBottom="12dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Jenis Kelamin"
+            android:textColor="@color/oxigen_dark"
+            android:textStyle="bold"
+            android:layout_marginBottom="4dp"/>
+
+        <RadioGroup
+            android:id="@+id/rgGender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp">
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/rbPria"
+                android:text="Pria"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/rbWanira"
+                android:text="Wanita"
+                android:layout_marginStart="16dp"/>
+        </RadioGroup>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hobi"
+            android:textColor="@color/oxigen_dark"
+            android:textStyle="bold"
+            android:layout_marginBottom="4dp"/>
+
+        <CheckBox
+            android:id="@+id/cbGitar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gitar"/>
+
+        <CheckBox
+            android:id="@+id/cbCoding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Coding"/>
+
+
+        <CheckBox
+            android:id="@+id/cbMembaca"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Membaca"/>
+
+        <TextView
+            android:id="@+id/toLogin"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Sudah Punya akun?"
+            android:textStyle="bold"
+            android:textColor="@color/oxigen_light"
+            android:layout_marginTop="5dp"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:longClickable="false"
+            android:textIsSelectable="false"
+            android:layout_marginBottom="15dp"/>
+
+        <Button
+            android:id="@+id/btnDaftar"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:text="Daftar"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/oxigen_light"
+            android:textStyle="bold"/>
+
+
+    </LinearLayout>
+
+
+</ScrollView>
