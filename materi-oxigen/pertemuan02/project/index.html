@@ -1,66 +1,110 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portofolio Saya - Beranda</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            oxigen: {
-              light: '#0051D2',
-              dark: '#001A57',
-            },
-            white: '#FFFFFF',
-          }
-        }
-      }
-    }
-  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body class="bg-white text-oxigen-dark font-sans">
+<body>
 
-  <nav class="bg-white border-b border-gray-100 p-4 sticky top-0 z-50">
-    <div class="container mx-auto flex justify-between items-center px-4">
-      <div class="text-2xl font-bold text-oxigen-dark">Portofolio Saya</div>
-      <ul class="flex space-x-6 font-medium text-gray-600">
-        <li><a href="index.html" class="text-oxigen-light hover:text-oxigen-dark transition">Beranda</a></li>
-        <li><a href="projects.html" class="hover:text-oxigen-light transition">Proyek</a></li>
-        <li><a href="about.html" class="hover:text-oxigen-light transition">Tentang</a></li>
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <h2 class="logo">ANmaz</h2>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#contact">Contact</a></li>
       </ul>
-    </div>
-  </nav>
-
-  <header class="bg-oxigen-dark text-white text-center py-24 px-4">
-    <div class="container mx-auto max-w-3xl">
-      <img src="ahmad.jpeg" alt="Foto Profil" class="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-white shadow-lg">
-      <h1 class="text-4xl md:text-5xl font-extrabold mb-4">Halo, Saya Purwa</h1>
-      <p class="text-lg md:text-xl mb-8 text-blue-100 max-w-2xl mx-auto">
-        Pengembang Web & Desainer Antarmuka yang berfokus pada pembuatan pengalaman digital yang bersih dan fungsional.
-      </p>
-      <a href="projects.html" class="bg-oxigen-light text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-blue-700 transition duration-300">
-        Lihat Proyek Saya
-      </a>
-    </div>
+    </nav>
   </header>
 
-  <section class="py-16 px-4 container mx-auto">
-    <h2 class="text-3xl font-bold text-center mb-10 text-oxigen-dark">Keahlian Utama</h2>
-    <div class="flex flex-wrap justify-center gap-6">
-      <span class="bg-gray-100 text-oxigen-dark px-6 py-3 rounded-full font-medium shadow">HTML</span>
-      <span class="bg-gray-100 text-oxigen-dark px-6 py-3 rounded-full font-medium shadow">CSS</span>
-      <span class="bg-gray-100 text-oxigen-dark px-6 py-3 rounded-full font-medium shadow">Tailwind CSS</span>
-      <span class="bg-gray-100 text-oxigen-dark px-6 py-3 rounded-full font-medium shadow">JavaScript</span>
+  <!-- HERO -->
+  <section class="hero" id="about">
+    <div class="hero-text">
+      <h1>Hi, I'm <span>ANmaz</span></h1>
+      <p>
+        Saya adalah mahasiswa yang tertarik pada web development, desain,
+        dan pengembangan project digital.
+      </p>
+      <div class="hero-buttons">
+        <a href="#projects" class="btn primary">Lihat Project</a>
+        <a href="#contact" class="btn secondary">Hubungi Saya</a>
+      </div>
+    </div>
+
+    <div class="hero-image">
+      <img src="profile.jpeg" alt="Profile Picture" />
     </div>
   </section>
 
-  <footer class="bg-oxigen-dark text-white/80 text-center py-6 mt-10">
-    <div class="container mx-auto px-4">
-      <p>&copy; 2026 Purwa. Dibuat dengan Tailwind CSS.</p>
+  <!-- SKILLS -->
+  <section class="section" id="skills">
+    <h2 class="section-title">Skills</h2>
+    <div class="skills-grid">
+      <div class="card">HTML</div>
+      <div class="card">CSS</div>
+      <div class="card">JavaScript</div>
+      <div class="card">Responsive Design</div>
+      <div class="card">UI/UX</div>
+      <div class="card">Git & GitHub</div>
     </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="section" id="projects">
+    <h2 class="section-title">Projects</h2>
+    <div class="projects-grid">
+      <div class="project-card">
+        <h3>Website Portfolio</h3>
+        <p>Membuat website portfolio pribadi menggunakan HTML dan CSS.</p>
+      </div>
+      <div class="project-card">
+        <h3>Landing Page Event</h3>
+        <p>Membuat landing page untuk kebutuhan acara dan promosi.</p>
+      </div>
+      <div class="project-card">
+        <h3>CRUD Sederhana</h3>
+        <p>Membuat aplikasi CRUD sederhana untuk latihan web development.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="section" id="experience">
+    <h2 class="section-title">Experience</h2>
+    <div class="experience-grid">
+      <div class="exp-card">
+        <h3>Panitia Seminar</h3>
+        <p>Menjadi bagian dari tim pelaksana seminar kampus.</p>
+      </div>
+      <div class="exp-card">
+        <h3>Organisasi Mahasiswa</h3>
+        <p>Aktif dalam kegiatan organisasi dan pengembangan program kerja.</p>
+      </div>
+      <div class="exp-card">
+        <h3>Pelatihan Web</h3>
+        <p>Mengikuti dan mempraktikkan pelatihan HTML, CSS, dan JavaScript.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section" id="contact">
+    <h2 class="section-title">Contact</h2>
+    <div class="contact-box">
+      <p>Email: yourmail@example.com</p>
+      <p>Instagram: @username</p>
+      <p>WhatsApp: 08xxxxxxxxxx</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>© 2026 ANmaz. All Rights Reserved.</p>
   </footer>
 
 </body>
