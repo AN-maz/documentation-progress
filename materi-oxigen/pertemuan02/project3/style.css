@@ -1,15 +1,11 @@
-/* =========================
-   RESET DASAR
-========================= */
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* =========================
-   ROOT WARNA
-========================= */
+
 :root {
   --primary: #2563eb;
   --secondary: #1e293b;
@@ -20,9 +16,7 @@
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
-/* =========================
-   GLOBAL
-========================= */
+
 html {
   scroll-behavior: smooth;
 }
@@ -65,9 +59,7 @@ body {
   margin: 0 auto;
 }
 
-/* =========================
-   NAVBAR (FLEXBOX)
-========================= */
+
 .navbar {
   position: sticky;
   top: 0;
@@ -109,9 +101,7 @@ body {
   color: var(--primary);
 }
 
-/* =========================
-   HERO (GRID)
-========================= */
+
 .hero {
   padding: 100px 0 80px;
   background: linear-gradient(to right, #f8fafc, #eff6ff);
@@ -203,9 +193,7 @@ body {
   font-size: 1.1rem;
 }
 
-/* =========================
-   HIGHLIGHTS (GRID)
-========================= */
+
 .highlights-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -236,9 +224,7 @@ body {
   font-weight: 600;
 }
 
-/* =========================
-   ABOUT (GRID + FLEX)
-========================= */
+
 .about-content {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -278,9 +264,7 @@ body {
   font-weight: 600;
 }
 
-/* =========================
-   CARD UMUM
-========================= */
+
 .card {
   background-color: var(--white);
   padding: 28px;
@@ -293,9 +277,7 @@ body {
   transform: translateY(-6px);
 }
 
-/* =========================
-   PROJECTS (GRID + FLEX)
-========================= */
+
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -312,7 +294,7 @@ body {
   color: #475569;
 }
 
-/* FLEXBOX */
+
 .tech-stack {
   display: flex;
   flex-wrap: wrap;
@@ -328,14 +310,12 @@ body {
   font-weight: 600;
 }
 
-/* Grid item custom */
+
 .featured-project {
   grid-column: span 2;
 }
 
-/* =========================
-   EXPERIENCE (GRID)
-========================= */
+
 .experience-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -353,9 +333,7 @@ body {
   margin-bottom: 12px;
 }
 
-/* =========================
-   CONTACT (GRID)
-========================= */
+
 .contact-box {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -374,9 +352,7 @@ body {
   margin-bottom: 10px;
 }
 
-/* =========================
-   FOOTER
-========================= */
+
 .footer {
   background-color: var(--secondary);
   color: var(--white);
@@ -384,9 +360,7 @@ body {
   padding: 24px 0;
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
+
 @media (max-width: 992px) {
   .hero-content {
     grid-template-columns: 1fr;

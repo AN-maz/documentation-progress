@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flexbox | Pertemuan 2</title>
+
+    <style>
+        .parent {
+            display: flex;
+            /* flex-direction: column; */
+            gap: 20px;
+
+            /* Mengatur isi konten di Child */
+            justify-content: space-evenly;
+        }
+        
+        .child {
+            background-color: lightblue;
+            padding: 20px;
+            border-radius: 10px;
+            flex: 1;
+
+
+            /* align-items: center; */
+            text-align: center;
+        }
+
+        header{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+
+            background-color: lightgray;
+            border-radius: 10px;
+        }
+
+        ul{
+            display: flex;
+            gap: 20px;
+        }
+        ul li{
+            list-style: none;
+        }
+        a{
+            text-decoration: none;
+            color: black;
+            
+        }
+
+        button{
+            padding: 10px 40px;
+            border: none;
+            background-color: blue;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        span{
+            font-size: 24px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="parent">
+        <div class="child">
+            <h1>Judul 1</h1>
+            <p>Lorem ipsum</p>
+        </div>
+        <div class="child">
+            <h1>Judul 2</h1>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laborum libero nihil cupiditate quaerat? Iste
+                officiis ut ipsum provident saepe maxime earum ullam</p>
+        </div>
+        <div class="child">
+            <h1>Judul 3</h1>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laborum libero nihil cupiditate quaerat? Iste
+                officiis ut ipsum provident saepe maxime earum ullam, fugiat non nobis vitae, vel blanditiis! Culpa,
+                suscipit?</p>
+        </div>
+
+    </div>
+
+    <hr>
+    <!-- Contoh -->
+     <header>
+        <span>Logo</span>
+
+        <nav>
+            <ul>
+                <li><a href="">Home</a></li>
+                <li><a href="">About</a></li>
+                <li><a href="">Contact</a></li>
+            </ul>
+        </nav>
+
+        <button>Klik</button>
+     </header>
+
+</body>
+
+</html>
