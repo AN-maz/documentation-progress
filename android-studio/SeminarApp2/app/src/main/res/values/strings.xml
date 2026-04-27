@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">SeminarApp2</string>
+
+    <string-array name="seminar_options">
+        <item>Pilih Seminar...</item>
+        <item>Transformasi Coding era AI: Vibe Coding</item>
+        <item>Web Development Masterclass</item>
+        <item>Mobile App UI/UX Design</item>
+        <item>Network Administration Basics</item>
+        <item>Data Science for Beginners</item>
+    </string-array>
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+
+    <!-- Custom -->
+    <color name="oxigen_light">#0051D2</color>
+    <color name="oxigen_dark">#001A57</color>
+    <color name="oxigen_white">#FFFFFF</color>
+
+
+
+</resources>
