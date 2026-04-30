@@ -3,56 +3,44 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kontak Saya - Blog Purwa</title>
-    <link rel="stylesheet" href="style.css" />
+    <title>MyWeb - Contact</title>
+    <!-- <link rel="stylesheet" href="style.css" /> -->
   </head>
   <body>
     <header>
-      <h1>Catatan Purwa</h1>
+      <h1>MyWeb</h1>
       <nav>
-        <ul>
-          <li><a href="index.html">Beranda</a></li>
-          <li><a href="about.html">Tentang Saya</a></li>
-          <li><a href="contact.html">Kontak Saya</a></li>
-        </ul>
+        <a href="index.html">Home</a>
+        <a href="contact.html">Contact</a>
       </nav>
     </header>
 
     <main>
       <h2>Hubungi Saya</h2>
-      <p>
-        Punya pertanyaan, ide proyek kolaborasi, atau sekadar ingin ngobrol santai seputar <em>coding</em>? 
-        Jangan ragu untuk mengirim pesan melalui formulir di bawah ini!
-      </p>
+      <p>Silakan isi form di bawah ini jika ada info loker atau project web.</p>
 
-      <br />
+      <form action="#" method="POST" class="contact-form">
+        <div class="form-group">
+          <label for="name">Nama:</label>
+          <input type="text" id="name" name="name" required placeholder="Masukkan nama kamu" />
+        </div>
 
-      <form action="#" method="POST">
-        <div>
-          <label for="nama">Nama Lengkap:</label><br />
-          <input type="text" id="nama" name="nama" required placeholder="Masukkan nama kamu" />
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required placeholder="Masukkan email kamu" />
         </div>
-        <br />
-        
-        <div>
-          <label for="email">Alamat Email:</label><br />
-          <input type="email" id="email" name="email" required placeholder="contoh@email.com" />
+
+        <div class="form-group">
+          <label for="message">Pesan:</label>
+          <textarea id="message" name="message" rows="5" required placeholder="Tulis pesanmu di sini..."></textarea>
         </div>
-        <br />
-        
-        <div>
-          <label for="pesan">Pesan:</label><br />
-          <textarea id="pesan" name="pesan" rows="5" required placeholder="Tulis pesanmu di sini..."></textarea>
-        </div>
-        <br />
-        
+
         <button type="submit">Kirim Pesan</button>
       </form>
-
     </main>
 
     <footer>
-      <p>&copy; 2026 Purwa. Dibuat dengan HTML & CSS.</p>
+      <p>&copy; 2026 ganti presiden</p>
     </footer>
   </body>
 </html>
