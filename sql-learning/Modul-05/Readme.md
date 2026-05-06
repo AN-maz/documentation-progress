@@ -17,9 +17,9 @@
 
 Pada modul sebelumnya kita telah mempelajari teknik tingkat menengah untuk menggabungkan data:
 
-- ✅ `JOIN` → Menggabungkan data dari beberapa tabel yang berelasi (`INNER JOIN`, `LEFT JOIN`, `RIGHT JOIN`)
-- ✅ Klausa `ON` → Menentukan aturan/kolom kunci yang menghubungkan antar tabel
-- ✅ `Subquery` → Membuat query bersarang di dalam `WHERE`, `SELECT`, atau `FROM`
+- `JOIN` → Menggabungkan data dari beberapa tabel yang berelasi (`INNER JOIN`, `LEFT JOIN`, `RIGHT JOIN`)
+- Klausa `ON` → Menentukan aturan/kolom kunci yang menghubungkan antar tabel
+- `Subquery` → Membuat query bersarang di dalam `WHERE`, `SELECT`, atau `FROM`
 
 Sekarang, kita akan belajar membuat output query menjadi lebih rapi dan "cerdas" menggunakan fungsi-fungsi SQL.
 

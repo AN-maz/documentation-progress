@@ -16,9 +16,9 @@
 
 Pada modul sebelumnya, kita telah menguasai cara membaca dan menganalisis data dari satu tabel:
 
-- ✅ **DQL Dasar**: `SELECT`, `WHERE`, `ORDER BY`, `LIMIT`
-- ✅ **Operator**: `>`, `<`, `=`, `LIKE`, `IN`, `BETWEEN`
-- ✅ **Agregasi & Pengelompokan**: `SUM`, `COUNT`, `AVG` beserta klausa `GROUP BY` dan `HAVING`
+- **DQL Dasar**: `SELECT`, `WHERE`, `ORDER BY`, `LIMIT`
+- **Operator**: `>`, `<`, `=`, `LIKE`, `IN`, `BETWEEN`
+- **Agregasi & Pengelompokan**: `SUM`, `COUNT`, `AVG` beserta klausa `GROUP BY` dan `HAVING`
 
 Namun, dalam dunia nyata, arsitektur database relasional memecah data ke dalam banyak tabel untuk menghindari duplikasi (*Normalisasi*). Di sinilah `JOIN` berperan penting.
 

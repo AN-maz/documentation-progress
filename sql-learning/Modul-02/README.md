@@ -15,9 +15,9 @@
 
 Pada pertemuan sebelumnya kita sudah belajar:
 
-- ✅ RDBMS vs NoSQL
-- ✅ Tipe Data (`INT`, `VARCHAR`, `DATE`, dll)
-- ✅ DDL (*Data Definition Language*)
+- RDBMS vs NoSQL
+- Tipe Data (`INT`, `VARCHAR`, `DATE`, dll)
+- DDL (*Data Definition Language*)
   - `CREATE`
   - `ALTER`
   - `DROP`
