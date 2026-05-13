@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net">
   <diagram name="Halaman-1" id="tqs_mUWXiHPOxTAnvLCT">
-    <mxGraphModel dx="1471" dy="814" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="824" dy="456" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -117,7 +117,10 @@
           <mxGeometry x="329" y="810" as="geometry" />
         </mxCell>
         <mxCell id="lVlfZHm6UShKGzl6mXll-52" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;" value="" vertex="1">
-          <mxGeometry height="900" width="420" x="220" y="60" as="geometry" />
+          <mxGeometry height="930" width="420" x="220" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yMOEb1umcnTsUppxUYJv-2" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Sistem Informasi Operasional Terintegrasi" vertex="1">
+          <mxGeometry height="30" width="250" x="320" y="40" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
