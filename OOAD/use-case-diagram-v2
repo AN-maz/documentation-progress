@@ -1,9 +1,54 @@
 <mxfile host="app.diagrams.net">
   <diagram name="Halaman-1" id="TBlTwn4uyiNiIwxooKSb">
-    <mxGraphModel dx="1030" dy="570" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="858" dy="475" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="Sx_fcFprIMTQW_ET57Uj-5" edge="1" parent="1" source="Sx_fcFprIMTQW_ET57Uj-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" target="Sx_fcFprIMTQW_ET57Uj-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Sx_fcFprIMTQW_ET57Uj-1" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" value="&#xa;Karyawan&#xa;&#xa;" vertex="1">
+          <mxGeometry height="60" width="30" x="110" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="Sx_fcFprIMTQW_ET57Uj-2" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="&#xa;Melakukan Absen Harian Terpusat&#xa;&#xa;" vertex="1">
+          <mxGeometry height="80" width="120" x="240" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="Sx_fcFprIMTQW_ET57Uj-6" edge="1" parent="1" source="Sx_fcFprIMTQW_ET57Uj-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;" target="Sx_fcFprIMTQW_ET57Uj-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Sx_fcFprIMTQW_ET57Uj-3" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" value="&#xa;&lt;b data-path-to-node=&quot;10,1,1,1,0&quot; data-index-in-node=&quot;0&quot;&gt;Sales&lt;/b&gt; &#xa;&#xa;" vertex="1">
+          <mxGeometry height="60" width="30" x="110" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="Sx_fcFprIMTQW_ET57Uj-4" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="&#xa;Melakukan &lt;i data-path-to-node=&quot;10,1,1,1,0&quot; data-index-in-node=&quot;29&quot;&gt;Public Absen&lt;/i&gt; via GPS&#xa;&#xa;" vertex="1">
+          <mxGeometry height="80" width="120" x="230" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="Sx_fcFprIMTQW_ET57Uj-7" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;" value="" vertex="1">
+          <mxGeometry height="270" width="190" x="190" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="Sx_fcFprIMTQW_ET57Uj-8" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&#xa;Sistem Absensi (HRM)&#xa;&#xa;" vertex="1">
+          <mxGeometry height="50" width="125" x="227.5" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="Sx_fcFprIMTQW_ET57Uj-9" edge="1" parent="1" source="Sx_fcFprIMTQW_ET57Uj-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" target="Sx_fcFprIMTQW_ET57Uj-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Sx_fcFprIMTQW_ET57Uj-18" edge="1" parent="1" source="Sx_fcFprIMTQW_ET57Uj-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;curved=1;" target="Sx_fcFprIMTQW_ET57Uj-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Sx_fcFprIMTQW_ET57Uj-10" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" value="Sales" vertex="1">
+          <mxGeometry height="60" width="30" x="460" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="Sx_fcFprIMTQW_ET57Uj-11" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="&#xa;Mencatat Log Kunjungan Calon Klien&#xa;&#xa;" vertex="1">
+          <mxGeometry height="80" width="120" x="590" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="Sx_fcFprIMTQW_ET57Uj-14" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="&#xa;Mengklasifikasikan Prospek: Hot/Warm/Cold&#xa;&#xa;" vertex="1">
+          <mxGeometry height="80" width="120" x="588.75" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="Sx_fcFprIMTQW_ET57Uj-15" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;" value="" vertex="1">
+          <mxGeometry height="270" width="190" x="553.75" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="Sx_fcFprIMTQW_ET57Uj-16" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&#xa;Aplikasi Lapangan Sales&#xa;&#xa;" vertex="1">
+          <mxGeometry height="50" width="142.5" x="577.5" y="80" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
