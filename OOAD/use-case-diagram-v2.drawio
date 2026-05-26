@@ -114,14 +114,23 @@
         <mxCell id="Sx_fcFprIMTQW_ET57Uj-63" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="Mengajukan kebutuhan kabel/perangkat" vertex="1">
           <mxGeometry height="80" width="120" x="232.5" y="860" as="geometry" />
         </mxCell>
+        <mxCell id="XkWRqONoJ2McaV6cbkCc-1" edge="1" parent="1" source="Sx_fcFprIMTQW_ET57Uj-67" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;curved=1;dashed=1;" target="g6zTP17O8paTX7cS_huV-5" value="&amp;lt;&amp;lt; include &amp;gt;&amp;gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
         <mxCell id="Sx_fcFprIMTQW_ET57Uj-67" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="Memeriksa ketersediaan stok gudang" vertex="1">
           <mxGeometry height="80" width="120" x="230" y="980" as="geometry" />
         </mxCell>
         <mxCell id="g6zTP17O8paTX7cS_huV-13" edge="1" parent="1" source="Sx_fcFprIMTQW_ET57Uj-69" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;dashed=1;" target="Sx_fcFprIMTQW_ET57Uj-67" value="&amp;lt;&amp;lt; ekstend &amp;gt;&amp;gt;">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
+        <mxCell id="XkWRqONoJ2McaV6cbkCc-2" edge="1" parent="1" source="Sx_fcFprIMTQW_ET57Uj-69" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;curved=1;dashed=1;" target="g6zTP17O8paTX7cS_huV-5" value="&amp;lt;&amp;lt; include &amp;gt;&amp;gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
         <mxCell id="Sx_fcFprIMTQW_ET57Uj-69" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="Memvalidasi persetujuan pembelian barang" vertex="1">
           <mxGeometry height="80" width="120" x="230" y="1140" as="geometry" />
+        </mxCell>
+        <mxCell id="XkWRqONoJ2McaV6cbkCc-3" edge="1" parent="1" source="Sx_fcFprIMTQW_ET57Uj-71" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;curved=1;dashed=1;" target="g6zTP17O8paTX7cS_huV-5" value="&amp;lt;&amp;lt; include &amp;gt;&amp;gt;">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="Sx_fcFprIMTQW_ET57Uj-71" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="Mengaktifkan bandwitdh jaringan" vertex="1">
           <mxGeometry height="80" width="120" x="225" y="1250" as="geometry" />
@@ -142,7 +151,7 @@
           <mxGeometry height="30" width="87" x="660" y="1320" as="geometry" />
         </mxCell>
         <mxCell id="g6zTP17O8paTX7cS_huV-17" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;" value="" vertex="1">
-          <mxGeometry height="940" width="440" x="190" y="520" as="geometry" />
+          <mxGeometry height="940" width="440" x="760" y="510" as="geometry" />
         </mxCell>
         <mxCell id="g6zTP17O8paTX7cS_huV-18" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&#xa;Network Asset Management &amp;amp; ERP&#xa;&#xa;" vertex="1">
           <mxGeometry height="30" width="190" x="315" y="480" as="geometry" />
