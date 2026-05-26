@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net">
   <diagram name="Halaman-1" id="TBlTwn4uyiNiIwxooKSb">
-    <mxGraphModel dx="1212" dy="671" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1030" dy="570" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -151,10 +151,10 @@
           <mxGeometry height="30" width="87" x="660" y="1320" as="geometry" />
         </mxCell>
         <mxCell id="g6zTP17O8paTX7cS_huV-17" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;" value="" vertex="1">
-          <mxGeometry height="940" width="440" x="190" y="530" as="geometry" />
+          <mxGeometry height="940" width="440" x="190" y="510" as="geometry" />
         </mxCell>
         <mxCell id="g6zTP17O8paTX7cS_huV-18" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&#xa;Network Asset Management &amp;amp; ERP&#xa;&#xa;" vertex="1">
-          <mxGeometry height="30" width="190" x="315" y="500" as="geometry" />
+          <mxGeometry height="30" width="190" x="315" y="480" as="geometry" />
         </mxCell>
         <mxCell id="g6zTP17O8paTX7cS_huV-26" edge="1" parent="1" source="g6zTP17O8paTX7cS_huV-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" target="g6zTP17O8paTX7cS_huV-25">
           <mxGeometry relative="1" as="geometry" />
