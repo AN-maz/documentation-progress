@@ -1,128 +1,49 @@
 <mxfile host="app.diagrams.net" pages="2">
   <diagram name="Halaman-1" id="4ukq49qrS7j7wSB55Qnr">
-    <mxGraphModel dx="1873" dy="1036" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="763" dy="422" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="E995U5KQzY6ryZOn8M7c-1" parent="1" style="swimlane;" value="Karyawan" vertex="1">
-          <mxGeometry height="780" width="300" x="70" y="200" as="geometry" />
+        <mxCell id="EPn6DPAdLFuCNmsW6Cjj-1" parent="1" style="swimlane;" value="Karyawan" vertex="1">
+          <mxGeometry height="670" width="370" x="70" y="190" as="geometry" />
         </mxCell>
-        <mxCell id="E995U5KQzY6ryZOn8M7c-3" parent="E995U5KQzY6ryZOn8M7c-1" style="rounded=1;whiteSpace=wrap;html=1;" value="Membuka Menu Absensi Harian" vertex="1">
-          <mxGeometry height="90" width="190" x="55" y="170" as="geometry" />
-        </mxCell>
-        <mxCell id="E995U5KQzY6ryZOn8M7c-5" edge="1" parent="E995U5KQzY6ryZOn8M7c-1" source="E995U5KQzY6ryZOn8M7c-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="E995U5KQzY6ryZOn8M7c-3">
+        <mxCell id="EzoCsDkuYoyz0CDfna7c-2" edge="1" parent="EPn6DPAdLFuCNmsW6Cjj-1" source="rM9l7WYxtumUcu64ZofO-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="EzoCsDkuYoyz0CDfna7c-1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="E995U5KQzY6ryZOn8M7c-4" parent="E995U5KQzY6ryZOn8M7c-1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" value="" vertex="1">
-          <mxGeometry height="40" width="40" x="130" y="60" as="geometry" />
+        <mxCell id="rM9l7WYxtumUcu64ZofO-1" parent="EPn6DPAdLFuCNmsW6Cjj-1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" value="" vertex="1">
+          <mxGeometry height="40" width="40" x="165" y="80" as="geometry" />
         </mxCell>
-        <mxCell id="E995U5KQzY6ryZOn8M7c-37" parent="E995U5KQzY6ryZOn8M7c-1" style="rounded=1;whiteSpace=wrap;html=1;" value="Karyawan lupa menekan absen masuk dan langsung menekan absen pulang" vertex="1">
-          <mxGeometry height="90" width="190" x="55" y="295" as="geometry" />
+        <mxCell id="EzoCsDkuYoyz0CDfna7c-1" parent="EPn6DPAdLFuCNmsW6Cjj-1" style="rounded=1;whiteSpace=wrap;html=1;" value="Melakukan public Absen via GPS" vertex="1">
+          <mxGeometry height="90" width="190" x="90" y="180" as="geometry" />
         </mxCell>
-        <mxCell id="E995U5KQzY6ryZOn8M7c-10" parent="E995U5KQzY6ryZOn8M7c-1" style="rounded=1;whiteSpace=wrap;html=1;" value="Menekan Tombol Absen Masuk atau Absen Pulang" vertex="1">
-          <mxGeometry height="90" width="190" x="55" y="420" as="geometry" />
+        <mxCell id="EzoCsDkuYoyz0CDfna7c-5" parent="EPn6DPAdLFuCNmsW6Cjj-1" style="rounded=1;whiteSpace=wrap;html=1;" value="Mengkonfirmasi data lokasi dan kehadiran" vertex="1">
+          <mxGeometry height="90" width="190" x="90" y="305" as="geometry" />
         </mxCell>
-        <mxCell id="E995U5KQzY6ryZOn8M7c-51" parent="E995U5KQzY6ryZOn8M7c-1" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" value="" vertex="1">
-          <mxGeometry height="80" width="10" x="270" y="530" as="geometry" />
+        <mxCell id="EzoCsDkuYoyz0CDfna7c-10" parent="EPn6DPAdLFuCNmsW6Cjj-1" style="rounded=1;whiteSpace=wrap;html=1;" value="Refresh untuk titik koordinat" vertex="1">
+          <mxGeometry height="90" width="190" x="90" y="420" as="geometry" />
         </mxCell>
-        <mxCell id="E995U5KQzY6ryZOn8M7c-53" edge="1" parent="E995U5KQzY6ryZOn8M7c-1" source="E995U5KQzY6ryZOn8M7c-37" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="E995U5KQzY6ryZOn8M7c-51">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="30" y="340" />
-              <mxPoint x="30" y="570" />
-            </Array>
-            <mxPoint x="250" y="570" as="targetPoint" />
-          </mxGeometry>
+        <mxCell id="EPn6DPAdLFuCNmsW6Cjj-2" parent="1" style="swimlane;" value="Sistem" vertex="1">
+          <mxGeometry height="670" width="370" x="440" y="190" as="geometry" />
         </mxCell>
-        <mxCell id="E995U5KQzY6ryZOn8M7c-55" edge="1" parent="E995U5KQzY6ryZOn8M7c-1" source="E995U5KQzY6ryZOn8M7c-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="E995U5KQzY6ryZOn8M7c-51">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="150" y="550" />
-            </Array>
-            <mxPoint x="250" y="550" as="targetPoint" />
-          </mxGeometry>
+        <mxCell id="EzoCsDkuYoyz0CDfna7c-3" parent="EPn6DPAdLFuCNmsW6Cjj-2" style="rounded=1;whiteSpace=wrap;html=1;" value="Meminta izin akses lokasi dan menangkap titik koordinasi saat ini" vertex="1">
+          <mxGeometry height="90" width="190" x="90" y="180" as="geometry" />
         </mxCell>
-        <mxCell id="E995U5KQzY6ryZOn8M7c-2" parent="1" style="swimlane;" value="Sistem HRM" vertex="1">
-          <mxGeometry height="780" width="700" x="370" y="200" as="geometry" />
+        <mxCell id="EzoCsDkuYoyz0CDfna7c-9" parent="EPn6DPAdLFuCNmsW6Cjj-2" style="rounded=1;whiteSpace=wrap;html=1;" value="Menyimpan kehadiran&amp;nbsp;" vertex="1">
+          <mxGeometry height="90" width="190" x="80" y="350" as="geometry" />
         </mxCell>
-        <mxCell id="E995U5KQzY6ryZOn8M7c-35" edge="1" parent="E995U5KQzY6ryZOn8M7c-2" source="E995U5KQzY6ryZOn8M7c-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="E995U5KQzY6ryZOn8M7c-33">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="E995U5KQzY6ryZOn8M7c-63" edge="1" parent="E995U5KQzY6ryZOn8M7c-2" source="E995U5KQzY6ryZOn8M7c-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="E995U5KQzY6ryZOn8M7c-62">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="E995U5KQzY6ryZOn8M7c-6" parent="E995U5KQzY6ryZOn8M7c-2" style="rounded=1;whiteSpace=wrap;html=1;" value="Mendeteksi Jadwal Shift Kerja" vertex="1">
-          <mxGeometry height="90" width="190" x="70" y="170" as="geometry" />
-        </mxCell>
-        <mxCell id="E995U5KQzY6ryZOn8M7c-57" edge="1" parent="E995U5KQzY6ryZOn8M7c-2" source="E995U5KQzY6ryZOn8M7c-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="E995U5KQzY6ryZOn8M7c-58">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="165" y="680" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="E995U5KQzY6ryZOn8M7c-28" parent="E995U5KQzY6ryZOn8M7c-2" style="rounded=1;whiteSpace=wrap;html=1;" value="Merekam waktu kehadiran dan memperbaharui status absensi karyawan" vertex="1">
-          <mxGeometry height="90" width="190" x="70" y="525" as="geometry" />
-        </mxCell>
-        <mxCell id="E995U5KQzY6ryZOn8M7c-33" parent="E995U5KQzY6ryZOn8M7c-2" style="rhombus;whiteSpace=wrap;html=1;" value="" vertex="1">
-          <mxGeometry height="30" width="30" x="150" y="325" as="geometry" />
-        </mxCell>
-        <mxCell id="E995U5KQzY6ryZOn8M7c-58" parent="E995U5KQzY6ryZOn8M7c-2" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" value="" vertex="1">
-          <mxGeometry height="40" width="40" x="145" y="700" as="geometry" />
-        </mxCell>
-        <mxCell id="E995U5KQzY6ryZOn8M7c-74" edge="1" parent="E995U5KQzY6ryZOn8M7c-2" source="E995U5KQzY6ryZOn8M7c-61" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="E995U5KQzY6ryZOn8M7c-58">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="370" y="720" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="E995U5KQzY6ryZOn8M7c-61" parent="E995U5KQzY6ryZOn8M7c-2" style="rounded=1;whiteSpace=wrap;html=1;" value="Gagal mendeteksi jadwal shift pada DB HRM" vertex="1">
-          <mxGeometry height="90" width="190" x="270" y="295" as="geometry" />
-        </mxCell>
-        <mxCell id="E995U5KQzY6ryZOn8M7c-64" edge="1" parent="E995U5KQzY6ryZOn8M7c-2" source="E995U5KQzY6ryZOn8M7c-62" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="E995U5KQzY6ryZOn8M7c-61" value="1E">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="E995U5KQzY6ryZOn8M7c-66" edge="1" parent="E995U5KQzY6ryZOn8M7c-2" source="E995U5KQzY6ryZOn8M7c-62" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="E995U5KQzY6ryZOn8M7c-65" value="2E">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="E995U5KQzY6ryZOn8M7c-62" parent="E995U5KQzY6ryZOn8M7c-2" style="rhombus;whiteSpace=wrap;html=1;" value="" vertex="1">
-          <mxGeometry height="30" width="30" x="350" y="200" as="geometry" />
-        </mxCell>
-        <mxCell id="E995U5KQzY6ryZOn8M7c-73" edge="1" parent="E995U5KQzY6ryZOn8M7c-2" source="E995U5KQzY6ryZOn8M7c-65" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="E995U5KQzY6ryZOn8M7c-28">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="540" y="570" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="E995U5KQzY6ryZOn8M7c-65" parent="E995U5KQzY6ryZOn8M7c-2" style="rounded=1;whiteSpace=wrap;html=1;" value="Karyawan terdeteksi absen di luar batas waktu&amp;nbsp;" vertex="1">
-          <mxGeometry height="90" width="190" x="440" y="170" as="geometry" />
-        </mxCell>
-        <mxCell id="E995U5KQzY6ryZOn8M7c-7" edge="1" parent="1" source="E995U5KQzY6ryZOn8M7c-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="E995U5KQzY6ryZOn8M7c-6">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="E995U5KQzY6ryZOn8M7c-45" edge="1" parent="1" source="E995U5KQzY6ryZOn8M7c-33" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="E995U5KQzY6ryZOn8M7c-37" value="1A">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="E995U5KQzY6ryZOn8M7c-46" edge="1" parent="1" source="E995U5KQzY6ryZOn8M7c-33" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="E995U5KQzY6ryZOn8M7c-10">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="535" y="665" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="E995U5KQzY6ryZOn8M7c-56" edge="1" parent="1" source="E995U5KQzY6ryZOn8M7c-51" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="E995U5KQzY6ryZOn8M7c-28">
+        <mxCell id="EzoCsDkuYoyz0CDfna7c-4" edge="1" parent="1" source="EzoCsDkuYoyz0CDfna7c-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="EzoCsDkuYoyz0CDfna7c-3">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
-  <diagram id="MLAG_PJFMQvHsFhRiaYk" name="Halaman-2">
-    <mxGraphModel dx="896" dy="496" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+  <diagram id="MLAG_PJFMQvHsFhRiaYk" name="SistemAbsensi-1">
+    <mxGraphModel dx="1873" dy="1036" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="ItKdYIt59wLONk5_Awmj-1" parent="1" style="swimlane;" value="Karyawan" vertex="1">
-          <mxGeometry height="910" width="300" x="150" y="130" as="geometry" />
+          <mxGeometry height="910" width="300" x="80" y="180" as="geometry" />
         </mxCell>
         <mxCell id="ItKdYIt59wLONk5_Awmj-2" parent="ItKdYIt59wLONk5_Awmj-1" style="rounded=1;whiteSpace=wrap;html=1;" value="Membuka Menu Absensi Harian" vertex="1">
           <mxGeometry height="90" width="190" x="55" y="170" as="geometry" />
@@ -137,7 +58,7 @@
           <mxGeometry height="90" width="190" x="55" y="400" as="geometry" />
         </mxCell>
         <mxCell id="ItKdYIt59wLONk5_Awmj-10" parent="1" style="swimlane;" value="Sistem HRM" vertex="1">
-          <mxGeometry height="910" width="590" x="450" y="130" as="geometry" />
+          <mxGeometry height="910" width="590" x="380" y="180" as="geometry" />
         </mxCell>
         <mxCell id="ItKdYIt59wLONk5_Awmj-26" edge="1" parent="ItKdYIt59wLONk5_Awmj-10" source="ItKdYIt59wLONk5_Awmj-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="ItKdYIt59wLONk5_Awmj-16">
           <mxGeometry relative="1" as="geometry" />
@@ -212,16 +133,16 @@
           <mxGeometry relative="1" x="0.1291" as="geometry">
             <mxPoint as="offset" />
             <Array as="points">
-              <mxPoint x="615" y="575" />
+              <mxPoint x="545" y="625" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="ItKdYIt59wLONk5_Awmj-64" edge="1" parent="1" source="ItKdYIt59wLONk5_Awmj-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="ItKdYIt59wLONk5_Awmj-30">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="300" y="735" />
+              <mxPoint x="230" y="785" />
             </Array>
-            <mxPoint x="300" y="680" as="sourcePoint" />
+            <mxPoint x="230" y="730" as="sourcePoint" />
           </mxGeometry>
         </mxCell>
       </root>
