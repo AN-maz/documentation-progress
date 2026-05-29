@@ -221,7 +221,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="BtxfUqR3StpwqD46PN7z" name="SistemAbsensi-2">
-    <mxGraphModel dx="936" dy="518" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1717" dy="950" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -258,7 +258,7 @@
         <mxCell id="HD-3ac24RA6U1jQUJr_U-41" edge="1" parent="HD-3ac24RA6U1jQUJr_U-8" source="HD-3ac24RA6U1jQUJr_U-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="HD-3ac24RA6U1jQUJr_U-19">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="HD-3ac24RA6U1jQUJr_U-7" parent="HD-3ac24RA6U1jQUJr_U-8" style="rounded=1;whiteSpace=wrap;html=1;" value="Sinyal GPS tidak terdeteksi / jaringan internet hilang" vertex="1">
+        <mxCell id="HD-3ac24RA6U1jQUJr_U-7" parent="HD-3ac24RA6U1jQUJr_U-8" style="rounded=1;whiteSpace=wrap;html=1;" value="Menampilkan error sinyal GPS / jaringan" vertex="1">
           <mxGeometry height="90" width="190" x="420" y="310" as="geometry" />
         </mxCell>
         <mxCell id="HD-3ac24RA6U1jQUJr_U-30" edge="1" parent="HD-3ac24RA6U1jQUJr_U-8" source="HD-3ac24RA6U1jQUJr_U-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="HD-3ac24RA6U1jQUJr_U-7" value="[ sinyal hilang ]">
@@ -270,7 +270,7 @@
         <mxCell id="HD-3ac24RA6U1jQUJr_U-42" edge="1" parent="HD-3ac24RA6U1jQUJr_U-8" source="HD-3ac24RA6U1jQUJr_U-35" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="HD-3ac24RA6U1jQUJr_U-19">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="HD-3ac24RA6U1jQUJr_U-35" parent="HD-3ac24RA6U1jQUJr_U-8" style="rounded=1;whiteSpace=wrap;html=1;" value="Meyimpan rekaman waktu beserta koordinat lapangan" vertex="1">
+        <mxCell id="HD-3ac24RA6U1jQUJr_U-35" parent="HD-3ac24RA6U1jQUJr_U-8" style="rounded=1;whiteSpace=wrap;html=1;" value="menyimpan rekaman waktu beserta koordinat lapangan" vertex="1">
           <mxGeometry height="90" width="190" x="250" y="525" as="geometry" />
         </mxCell>
         <mxCell id="HD-3ac24RA6U1jQUJr_U-43" edge="1" parent="HD-3ac24RA6U1jQUJr_U-8" source="HD-3ac24RA6U1jQUJr_U-39" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="HD-3ac24RA6U1jQUJr_U-19">
