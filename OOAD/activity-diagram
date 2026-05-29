@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" pages="2">
+<mxfile host="app.diagrams.net" pages="3">
   <diagram name="Halaman-1" id="4ukq49qrS7j7wSB55Qnr">
     <mxGraphModel dx="1084" dy="600" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -215,6 +215,69 @@
               <mxPoint x="230" y="785" />
             </Array>
             <mxPoint x="230" y="730" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="BtxfUqR3StpwqD46PN7z" name="Halaman-3">
+    <mxGraphModel dx="824" dy="456" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="HD-3ac24RA6U1jQUJr_U-1" parent="1" style="swimlane;" value="Karyawan" vertex="1">
+          <mxGeometry height="730" width="450" x="250" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="HD-3ac24RA6U1jQUJr_U-2" edge="1" parent="HD-3ac24RA6U1jQUJr_U-1" source="HD-3ac24RA6U1jQUJr_U-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="HD-3ac24RA6U1jQUJr_U-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="HD-3ac24RA6U1jQUJr_U-3" parent="HD-3ac24RA6U1jQUJr_U-1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" value="" vertex="1">
+          <mxGeometry height="40" width="40" x="205" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="HD-3ac24RA6U1jQUJr_U-4" parent="HD-3ac24RA6U1jQUJr_U-1" style="rounded=1;whiteSpace=wrap;html=1;" value="Melakukan public Absen via GPS" vertex="1">
+          <mxGeometry height="90" width="190" x="130" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="HD-3ac24RA6U1jQUJr_U-5" parent="HD-3ac24RA6U1jQUJr_U-1" style="rounded=1;whiteSpace=wrap;html=1;" value="Mengkonfirmasi data lokasi dan kehadiran" vertex="1">
+          <mxGeometry height="90" width="190" x="130" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="HD-3ac24RA6U1jQUJr_U-6" parent="HD-3ac24RA6U1jQUJr_U-1" style="rounded=1;whiteSpace=wrap;html=1;" value="Menekan Tombol Refresh" vertex="1">
+          <mxGeometry height="90" width="190" x="130" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="HD-3ac24RA6U1jQUJr_U-8" parent="1" style="swimlane;" value="Sistem" vertex="1">
+          <mxGeometry height="730" width="620" x="700" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="HD-3ac24RA6U1jQUJr_U-27" edge="1" parent="HD-3ac24RA6U1jQUJr_U-8" source="HD-3ac24RA6U1jQUJr_U-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="HD-3ac24RA6U1jQUJr_U-13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="HD-3ac24RA6U1jQUJr_U-10" parent="HD-3ac24RA6U1jQUJr_U-8" style="rounded=1;whiteSpace=wrap;html=1;" value="Meminta izin akses lokasi dan menangkap titik koordinasi saat ini" vertex="1">
+          <mxGeometry height="90" width="190" x="120" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="HD-3ac24RA6U1jQUJr_U-19" parent="HD-3ac24RA6U1jQUJr_U-8" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" value="" vertex="1">
+          <mxGeometry height="40" width="40" x="501" y="540" as="geometry" />
+        </mxCell>
+        <mxCell id="HD-3ac24RA6U1jQUJr_U-7" parent="HD-3ac24RA6U1jQUJr_U-8" style="rounded=1;whiteSpace=wrap;html=1;" value="Sinyal GPS tidak terdeteksi / jaringan internet hilang" vertex="1">
+          <mxGeometry height="90" width="190" x="370" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="HD-3ac24RA6U1jQUJr_U-30" edge="1" parent="HD-3ac24RA6U1jQUJr_U-8" source="HD-3ac24RA6U1jQUJr_U-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="HD-3ac24RA6U1jQUJr_U-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="HD-3ac24RA6U1jQUJr_U-13" parent="HD-3ac24RA6U1jQUJr_U-8" style="rhombus;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="30" width="30" x="200" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="HD-3ac24RA6U1jQUJr_U-16" parent="1" style="rhombus;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="30" width="30" x="480" y="1225" as="geometry" />
+        </mxCell>
+        <mxCell id="HD-3ac24RA6U1jQUJr_U-23" edge="1" parent="1" source="HD-3ac24RA6U1jQUJr_U-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="HD-3ac24RA6U1jQUJr_U-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="HD-3ac24RA6U1jQUJr_U-28" edge="1" parent="1" source="HD-3ac24RA6U1jQUJr_U-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="HD-3ac24RA6U1jQUJr_U-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="HD-3ac24RA6U1jQUJr_U-29" edge="1" parent="1" source="HD-3ac24RA6U1jQUJr_U-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="HD-3ac24RA6U1jQUJr_U-6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="915" y="785" />
+            </Array>
           </mxGeometry>
         </mxCell>
       </root>
