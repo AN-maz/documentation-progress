@@ -1663,12 +1663,12 @@
     </mxGraphModel>
   </diagram>
   <diagram name="EC-ERP4" id="iQnFFAneBv6ia1AijyKQ">
-    <mxGraphModel dx="858" dy="475" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="896" dy="496" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="LruNDatOMDWyHMHtlesY-0" />
         <mxCell id="LruNDatOMDWyHMHtlesY-1" parent="LruNDatOMDWyHMHtlesY-0" />
         <mxCell id="LruNDatOMDWyHMHtlesY-2" parent="LruNDatOMDWyHMHtlesY-1" style="swimlane;" value="Logistik" vertex="1">
-          <mxGeometry height="960" width="510" x="160" y="100" as="geometry" />
+          <mxGeometry height="1000" width="510" x="160" y="100" as="geometry" />
         </mxCell>
         <mxCell id="LruNDatOMDWyHMHtlesY-3" edge="1" parent="LruNDatOMDWyHMHtlesY-2" source="LruNDatOMDWyHMHtlesY-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="XIADNfhv4z9zueDUwq6E-1">
           <mxGeometry relative="1" as="geometry">
@@ -1707,8 +1707,9 @@
             <mxPoint x="1" y="7" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="YuxGwyws4e4yW_h5U3Fz-23" edge="1" parent="LruNDatOMDWyHMHtlesY-2" source="YuxGwyws4e4yW_h5U3Fz-0" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" value="[ fisik tidak sesuai sistem ]">
-          <mxGeometry relative="1" as="geometry">
+        <mxCell id="YuxGwyws4e4yW_h5U3Fz-23" edge="1" parent="LruNDatOMDWyHMHtlesY-2" source="YuxGwyws4e4yW_h5U3Fz-0" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="YuxGwyws4e4yW_h5U3Fz-24" value="[ fisik sesuai sistem ]">
+          <mxGeometry relative="1" x="0.6137" as="geometry">
+            <mxPoint as="offset" />
             <mxPoint x="255" y="590" as="targetPoint" />
           </mxGeometry>
         </mxCell>
@@ -1718,11 +1719,43 @@
         <mxCell id="YuxGwyws4e4yW_h5U3Fz-2" parent="LruNDatOMDWyHMHtlesY-2" style="rounded=1;whiteSpace=wrap;html=1;" value="Merevisi jumlah stok barang" vertex="1">
           <mxGeometry height="70" width="156" x="310" y="470" as="geometry" />
         </mxCell>
+        <mxCell id="YuxGwyws4e4yW_h5U3Fz-27" edge="1" parent="LruNDatOMDWyHMHtlesY-2" source="YuxGwyws4e4yW_h5U3Fz-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="YuxGwyws4e4yW_h5U3Fz-26">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
         <mxCell id="YuxGwyws4e4yW_h5U3Fz-24" parent="LruNDatOMDWyHMHtlesY-2" style="rounded=1;whiteSpace=wrap;html=1;" value="Mengecek ketersediaan stok" vertex="1">
-          <mxGeometry height="70" width="156" x="180" y="600" as="geometry" />
+          <mxGeometry height="70" width="156" x="177" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="YuxGwyws4e4yW_h5U3Fz-30" edge="1" parent="LruNDatOMDWyHMHtlesY-2" source="YuxGwyws4e4yW_h5U3Fz-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="YuxGwyws4e4yW_h5U3Fz-29">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YuxGwyws4e4yW_h5U3Fz-31" connectable="0" parent="YuxGwyws4e4yW_h5U3Fz-30" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Text" vertex="1">
+          <mxGeometry relative="1" x="0.6055" y="-1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YuxGwyws4e4yW_h5U3Fz-32" connectable="0" parent="YuxGwyws4e4yW_h5U3Fz-30" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="[ stok tercukupi ]" vertex="1">
+          <mxGeometry relative="1" x="0.6055" y="-3" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YuxGwyws4e4yW_h5U3Fz-26" parent="LruNDatOMDWyHMHtlesY-2" style="rhombus;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="30" width="30" x="240" y="710" as="geometry" />
+        </mxCell>
+        <mxCell id="YuxGwyws4e4yW_h5U3Fz-38" edge="1" parent="LruNDatOMDWyHMHtlesY-2" source="YuxGwyws4e4yW_h5U3Fz-29" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="YuxGwyws4e4yW_h5U3Fz-37">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="150" y="920" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YuxGwyws4e4yW_h5U3Fz-29" parent="LruNDatOMDWyHMHtlesY-2" style="rounded=1;whiteSpace=wrap;html=1;" value="Menyetujui pengeluaran barang" vertex="1">
+          <mxGeometry height="70" width="156" x="70" y="790" as="geometry" />
+        </mxCell>
+        <mxCell id="YuxGwyws4e4yW_h5U3Fz-37" parent="LruNDatOMDWyHMHtlesY-2" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" value="" vertex="1">
+          <mxGeometry height="40" width="40" x="235" y="900" as="geometry" />
         </mxCell>
         <mxCell id="LruNDatOMDWyHMHtlesY-25" parent="LruNDatOMDWyHMHtlesY-1" style="swimlane;" value="Sistem ERP" vertex="1">
-          <mxGeometry height="960" width="340" x="670" y="100" as="geometry" />
+          <mxGeometry height="1000" width="340" x="670" y="100" as="geometry" />
         </mxCell>
         <mxCell id="LruNDatOMDWyHMHtlesY-26" edge="1" parent="LruNDatOMDWyHMHtlesY-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;">
           <mxGeometry relative="1" as="geometry">
@@ -1736,8 +1769,32 @@
         <mxCell id="YuxGwyws4e4yW_h5U3Fz-16" parent="LruNDatOMDWyHMHtlesY-25" style="rounded=1;whiteSpace=wrap;html=1;" value="Memperbarui data pangkalan&amp;nbsp;" vertex="1">
           <mxGeometry height="70" width="156" x="110" y="470" as="geometry" />
         </mxCell>
+        <mxCell id="YuxGwyws4e4yW_h5U3Fz-40" edge="1" parent="LruNDatOMDWyHMHtlesY-25" source="YuxGwyws4e4yW_h5U3Fz-33" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="YuxGwyws4e4yW_h5U3Fz-39">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YuxGwyws4e4yW_h5U3Fz-33" parent="LruNDatOMDWyHMHtlesY-25" style="rounded=1;whiteSpace=wrap;html=1;" value="Menyetujui pengeluaran barang" vertex="1">
+          <mxGeometry height="70" width="156" x="92" y="770" as="geometry" />
+        </mxCell>
+        <mxCell id="YuxGwyws4e4yW_h5U3Fz-39" parent="LruNDatOMDWyHMHtlesY-25" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" value="" vertex="1">
+          <mxGeometry height="40" width="40" x="150" y="900" as="geometry" />
+        </mxCell>
         <mxCell id="YuxGwyws4e4yW_h5U3Fz-17" edge="1" parent="LruNDatOMDWyHMHtlesY-1" source="YuxGwyws4e4yW_h5U3Fz-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="YuxGwyws4e4yW_h5U3Fz-16">
           <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YuxGwyws4e4yW_h5U3Fz-25" edge="1" parent="LruNDatOMDWyHMHtlesY-1" source="YuxGwyws4e4yW_h5U3Fz-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="YuxGwyws4e4yW_h5U3Fz-24">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="860" y="735" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="YuxGwyws4e4yW_h5U3Fz-34" edge="1" parent="LruNDatOMDWyHMHtlesY-1" source="YuxGwyws4e4yW_h5U3Fz-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="YuxGwyws4e4yW_h5U3Fz-33">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="YuxGwyws4e4yW_h5U3Fz-35" connectable="0" parent="YuxGwyws4e4yW_h5U3Fz-34" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="[ stok habis / dibawah batas ]" vertex="1">
+          <mxGeometry relative="1" x="0.1683" y="1" as="geometry">
+            <mxPoint x="-133" y="1" as="offset" />
+          </mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>
