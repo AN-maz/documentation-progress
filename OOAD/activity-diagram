@@ -729,7 +729,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="0x9HegLIbGwEq7sw9UC-" name="cifoSuperApp&amp;walanja1">
-    <mxGraphModel dx="1288" dy="713" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="624" dy="345" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -821,16 +821,18 @@
         <mxCell id="6ZQEoOvCG_TBXcArlRza-18" parent="piF3ONSPh-XDsT_wTce9-7" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" value="" vertex="1">
           <mxGeometry height="40" width="40" x="240" y="870" as="geometry" />
         </mxCell>
-        <mxCell id="6ZQEoOvCG_TBXcArlRza-8" edge="1" parent="1" source="6ZQEoOvCG_TBXcArlRza-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="6ZQEoOvCG_TBXcArlRza-7">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
         <mxCell id="6ZQEoOvCG_TBXcArlRza-21" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Top Up token&amp;nbsp;" vertex="1">
           <mxGeometry height="60" width="130" x="120" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ayEC-llBM9CtySVJcxso-1" edge="1" parent="1" source="6ZQEoOvCG_TBXcArlRza-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="6ZQEoOvCG_TBXcArlRza-7" value="[ benar nominal ]">
+          <mxGeometry relative="1" x="-0.5556" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
-  <diagram name="Salinan dari cifoSuperApp&amp;walanja1" id="Rnde1j7OZLrdnVWklFUT">
+  <diagram name="cifoSuperApp&amp;walanja2" id="Rnde1j7OZLrdnVWklFUT">
     <mxGraphModel dx="981" dy="543" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="7BDMiCHVe8QfWU6PDNGd-0" />
