@@ -1309,7 +1309,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="wsZkioLVtBZQwfe_sX5u" name="EC-ERP1">
-    <mxGraphModel dx="2060" dy="1140" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="824" dy="456" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -1343,18 +1343,8 @@
         <mxCell id="TBYM_-rwS9IEvujeVgUU-5" edge="1" parent="aoFd9qSctC30J3zvRojP-14" source="ViojY0zqxeG31MnghbBR-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="TBYM_-rwS9IEvujeVgUU-4">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="TBYM_-rwS9IEvujeVgUU-15" connectable="0" parent="TBYM_-rwS9IEvujeVgUU-5" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="[ data lengkap ]" vertex="1">
-          <mxGeometry relative="1" x="0.7037" y="-1" as="geometry">
-            <mxPoint as="offset" />
-          </mxGeometry>
-        </mxCell>
         <mxCell id="TBYM_-rwS9IEvujeVgUU-7" edge="1" parent="aoFd9qSctC30J3zvRojP-14" source="ViojY0zqxeG31MnghbBR-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="TBYM_-rwS9IEvujeVgUU-1">
           <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="TBYM_-rwS9IEvujeVgUU-8" connectable="0" parent="TBYM_-rwS9IEvujeVgUU-7" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="[ data tidak lengkap ]" vertex="1">
-          <mxGeometry relative="1" x="-0.0438" as="geometry">
-            <mxPoint as="offset" />
-          </mxGeometry>
         </mxCell>
         <mxCell id="ViojY0zqxeG31MnghbBR-5" parent="aoFd9qSctC30J3zvRojP-14" style="rounded=1;whiteSpace=wrap;html=1;" value="Validasi kelengkapan data" vertex="1">
           <mxGeometry height="80" width="171" x="70" y="280" as="geometry" />
@@ -1402,6 +1392,11 @@
         </mxCell>
         <mxCell id="TBYM_-rwS9IEvujeVgUU-12" edge="1" parent="1" source="TBYM_-rwS9IEvujeVgUU-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="TBYM_-rwS9IEvujeVgUU-11">
           <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="TBYM_-rwS9IEvujeVgUU-24" connectable="0" parent="TBYM_-rwS9IEvujeVgUU-12" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="[ data tidak lengkap ]" vertex="1">
+          <mxGeometry relative="1" x="-0.1214" y="2" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>
