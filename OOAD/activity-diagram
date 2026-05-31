@@ -1160,7 +1160,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="TlHSXhxZTZME9dhjWJL4" name="SSO2">
-    <mxGraphModel dx="1873" dy="1036" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="896" dy="496" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -1252,7 +1252,7 @@
         <mxCell id="aBDJqQuBJt9fMyyXYbsd-23" parent="1" style="swimlane;" value="Karyawan " vertex="1">
           <mxGeometry height="820" width="350" x="1030" y="200" as="geometry" />
         </mxCell>
-        <mxCell id="fo-RFWjwB9sReN6dJfU4-15" parent="aBDJqQuBJt9fMyyXYbsd-23" style="rounded=1;whiteSpace=wrap;html=1;" value="Menerima dan mencocokkan token" vertex="1">
+        <mxCell id="fo-RFWjwB9sReN6dJfU4-15" parent="aBDJqQuBJt9fMyyXYbsd-23" style="rounded=1;whiteSpace=wrap;html=1;" value="Memasukan kode OTP" vertex="1">
           <mxGeometry height="70" width="170" x="100" y="500" as="geometry" />
         </mxCell>
         <mxCell id="fo-RFWjwB9sReN6dJfU4-4" edge="1" parent="1" source="8lS8taLIFIIM104hVW9O-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="fo-RFWjwB9sReN6dJfU4-3">
