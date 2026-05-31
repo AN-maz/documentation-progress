@@ -2038,7 +2038,7 @@
     </mxGraphModel>
   </diagram>
   <diagram name="EC-ERP7" id="T5udNNV02H0fN_PAtuC8">
-    <mxGraphModel dx="1084" dy="600" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="896" dy="496" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="JUnImNZ58C-I5XmTydrC-0" />
         <mxCell id="JUnImNZ58C-I5XmTydrC-1" parent="JUnImNZ58C-I5XmTydrC-0" />
@@ -2069,7 +2069,7 @@
         <mxCell id="y9xLPW4_2n7A361ex0an-3" edge="1" parent="JUnImNZ58C-I5XmTydrC-2" source="y9xLPW4_2n7A361ex0an-0" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="y9xLPW4_2n7A361ex0an-2">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="y9xLPW4_2n7A361ex0an-4" connectable="0" parent="y9xLPW4_2n7A361ex0an-3" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="[ meredam optik jelek ]" vertex="1">
+        <mxCell id="y9xLPW4_2n7A361ex0an-4" connectable="0" parent="y9xLPW4_2n7A361ex0an-3" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="[ redaman optik jelek ]" vertex="1">
           <mxGeometry relative="1" x="0.0916" y="-2" as="geometry">
             <mxPoint x="2" y="37" as="offset" />
           </mxGeometry>
@@ -2077,7 +2077,7 @@
         <mxCell id="y9xLPW4_2n7A361ex0an-7" edge="1" parent="JUnImNZ58C-I5XmTydrC-2" source="y9xLPW4_2n7A361ex0an-0" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="y9xLPW4_2n7A361ex0an-5">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="y9xLPW4_2n7A361ex0an-8" connectable="0" parent="y9xLPW4_2n7A361ex0an-7" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="[ merekam memenuhi standar ]" vertex="1">
+        <mxCell id="y9xLPW4_2n7A361ex0an-8" connectable="0" parent="y9xLPW4_2n7A361ex0an-7" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="[ redaman memenuhi standar ]" vertex="1">
           <mxGeometry relative="1" x="0.407" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
@@ -2092,7 +2092,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="y9xLPW4_2n7A361ex0an-2" parent="JUnImNZ58C-I5XmTydrC-2" style="rounded=1;whiteSpace=wrap;html=1;" value="Mengaktifkan profil sementara dan request perbaikan ke Teknisi" vertex="1">
+        <mxCell id="y9xLPW4_2n7A361ex0an-2" parent="JUnImNZ58C-I5XmTydrC-2" style="rounded=1;whiteSpace=wrap;html=1;" value="Mengeksekusi profil batasan bandwitdh" vertex="1">
           <mxGeometry height="70" width="167.5" x="20" y="415" as="geometry" />
         </mxCell>
         <mxCell id="y9xLPW4_2n7A361ex0an-5" parent="JUnImNZ58C-I5XmTydrC-2" style="rounded=1;whiteSpace=wrap;html=1;" value="Mengaktifkan profil sementara dan request perbaikan ke Teknisi" vertex="1">
@@ -2153,7 +2153,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="y9xLPW4_2n7A361ex0an-23" connectable="0" parent="y9xLPW4_2n7A361ex0an-21" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="[ koneksi error lancar ]" vertex="1">
+        <mxCell id="y9xLPW4_2n7A361ex0an-23" connectable="0" parent="y9xLPW4_2n7A361ex0an-21" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="[ koneksi router lancar ]" vertex="1">
           <mxGeometry relative="1" x="-0.5913" y="-1" as="geometry">
             <mxPoint x="1" y="-133" as="offset" />
           </mxGeometry>
