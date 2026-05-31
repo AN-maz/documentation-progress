@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" pages="17">
+<mxfile host="app.diagrams.net" pages="18">
   <diagram id="MLAG_PJFMQvHsFhRiaYk" name="SistemAbsensi-1">
     <mxGraphModel dx="1873" dy="1036" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -1663,7 +1663,7 @@
     </mxGraphModel>
   </diagram>
   <diagram name="EC-ERP4" id="iQnFFAneBv6ia1AijyKQ">
-    <mxGraphModel dx="896" dy="496" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1717" dy="950" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="LruNDatOMDWyHMHtlesY-0" />
         <mxCell id="LruNDatOMDWyHMHtlesY-1" parent="LruNDatOMDWyHMHtlesY-0" />
@@ -1772,11 +1772,11 @@
         <mxCell id="YuxGwyws4e4yW_h5U3Fz-40" edge="1" parent="LruNDatOMDWyHMHtlesY-25" source="YuxGwyws4e4yW_h5U3Fz-33" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="YuxGwyws4e4yW_h5U3Fz-39">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="YuxGwyws4e4yW_h5U3Fz-33" parent="LruNDatOMDWyHMHtlesY-25" style="rounded=1;whiteSpace=wrap;html=1;" value="Menyetujui pengeluaran barang" vertex="1">
-          <mxGeometry height="70" width="156" x="92" y="770" as="geometry" />
+        <mxCell id="YuxGwyws4e4yW_h5U3Fz-33" parent="LruNDatOMDWyHMHtlesY-25" style="rounded=1;whiteSpace=wrap;html=1;" value="Menghentikan pengeluaran dan memicu UC persetujuan kembali" vertex="1">
+          <mxGeometry height="90" width="188" x="92" y="770" as="geometry" />
         </mxCell>
         <mxCell id="YuxGwyws4e4yW_h5U3Fz-39" parent="LruNDatOMDWyHMHtlesY-25" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" value="" vertex="1">
-          <mxGeometry height="40" width="40" x="150" y="900" as="geometry" />
+          <mxGeometry height="40" width="40" x="166" y="900" as="geometry" />
         </mxCell>
         <mxCell id="YuxGwyws4e4yW_h5U3Fz-17" edge="1" parent="LruNDatOMDWyHMHtlesY-1" source="YuxGwyws4e4yW_h5U3Fz-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="YuxGwyws4e4yW_h5U3Fz-16">
           <mxGeometry relative="1" as="geometry" />
@@ -1795,6 +1795,54 @@
           <mxGeometry relative="1" x="0.1683" y="1" as="geometry">
             <mxPoint x="-133" y="1" as="offset" />
           </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="EC-ERP5" id="LCRRUz4r7BtoWobyDDM2">
+    <mxGraphModel dx="1873" dy="1036" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="AWyLqFoSr9QLiPdOjuPz-0" />
+        <mxCell id="AWyLqFoSr9QLiPdOjuPz-1" parent="AWyLqFoSr9QLiPdOjuPz-0" />
+        <mxCell id="AWyLqFoSr9QLiPdOjuPz-2" parent="AWyLqFoSr9QLiPdOjuPz-1" style="swimlane;" value="Logistik" vertex="1">
+          <mxGeometry height="1000" width="440" x="160" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="AWyLqFoSr9QLiPdOjuPz-5" edge="1" parent="AWyLqFoSr9QLiPdOjuPz-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="50" y="785" />
+              <mxPoint x="50" y="535" />
+            </Array>
+            <mxPoint x="70" y="535" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AWyLqFoSr9QLiPdOjuPz-24" parent="AWyLqFoSr9QLiPdOjuPz-1" style="swimlane;" value="Sistem ERP" vertex="1">
+          <mxGeometry height="1000" width="410" x="600" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="AWyLqFoSr9QLiPdOjuPz-25" edge="1" parent="AWyLqFoSr9QLiPdOjuPz-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="440" y="495" />
+              <mxPoint x="440" y="900" />
+            </Array>
+            <mxPoint x="420" y="495" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AWyLqFoSr9QLiPdOjuPz-27" edge="1" parent="AWyLqFoSr9QLiPdOjuPz-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="AWyLqFoSr9QLiPdOjuPz-29">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="186" y="860.0000000000002" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AWyLqFoSr9QLiPdOjuPz-29" parent="AWyLqFoSr9QLiPdOjuPz-24" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" value="" vertex="1">
+          <mxGeometry height="40" width="40" x="166" y="900" as="geometry" />
+        </mxCell>
+        <mxCell id="AWyLqFoSr9QLiPdOjuPz-3" edge="1" parent="AWyLqFoSr9QLiPdOjuPz-24" source="AWyLqFoSr9QLiPdOjuPz-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="207" y="170" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="AWyLqFoSr9QLiPdOjuPz-4" parent="AWyLqFoSr9QLiPdOjuPz-24" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" value="" vertex="1">
+          <mxGeometry height="40" width="40" x="187" y="90" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
