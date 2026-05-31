@@ -1160,7 +1160,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="TlHSXhxZTZME9dhjWJL4" name="SSO2">
-    <mxGraphModel dx="896" dy="496" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1873" dy="1036" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -1190,14 +1190,25 @@
         <mxCell id="8lS8taLIFIIM104hVW9O-1" parent="aBDJqQuBJt9fMyyXYbsd-1" style="rhombus;whiteSpace=wrap;html=1;" value="" vertex="1">
           <mxGeometry height="30" width="30" x="190" y="320" as="geometry" />
         </mxCell>
-        <mxCell id="fo-RFWjwB9sReN6dJfU4-2" edge="1" parent="aBDJqQuBJt9fMyyXYbsd-1" source="8lS8taLIFIIM104hVW9O-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="fo-RFWjwB9sReN6dJfU4-1">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="fo-RFWjwB9sReN6dJfU4-22" edge="1" parent="aBDJqQuBJt9fMyyXYbsd-1" source="8lS8taLIFIIM104hVW9O-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="fo-RFWjwB9sReN6dJfU4-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="60" y="440" />
+              <mxPoint x="60" y="750" />
+            </Array>
+          </mxGeometry>
         </mxCell>
         <mxCell id="8lS8taLIFIIM104hVW9O-3" parent="aBDJqQuBJt9fMyyXYbsd-1" style="rounded=1;whiteSpace=wrap;html=1;" value="Membatalkan proses log in secara otomatis" vertex="1">
           <mxGeometry height="70" width="170" x="120" y="400" as="geometry" />
         </mxCell>
         <mxCell id="fo-RFWjwB9sReN6dJfU4-1" parent="aBDJqQuBJt9fMyyXYbsd-1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" value="" vertex="1">
-          <mxGeometry height="40" width="40" x="185" y="520" as="geometry" />
+          <mxGeometry height="40" width="40" x="189" y="730" as="geometry" />
+        </mxCell>
+        <mxCell id="fo-RFWjwB9sReN6dJfU4-21" edge="1" parent="aBDJqQuBJt9fMyyXYbsd-1" source="fo-RFWjwB9sReN6dJfU4-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="fo-RFWjwB9sReN6dJfU4-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fo-RFWjwB9sReN6dJfU4-17" parent="aBDJqQuBJt9fMyyXYbsd-1" style="rounded=1;whiteSpace=wrap;html=1;" value="Menerima respons validasi dan menerbitkan sesi log in" vertex="1">
+          <mxGeometry height="70" width="170" x="124" y="600" as="geometry" />
         </mxCell>
         <mxCell id="aBDJqQuBJt9fMyyXYbsd-7" parent="1" style="swimlane;" value="Ekosistam Google" vertex="1">
           <mxGeometry height="820" width="500" x="530" y="200" as="geometry" />
@@ -1239,7 +1250,10 @@
           <mxGeometry height="70" width="170" x="40" y="500" as="geometry" />
         </mxCell>
         <mxCell id="aBDJqQuBJt9fMyyXYbsd-23" parent="1" style="swimlane;" value="Karyawan " vertex="1">
-          <mxGeometry height="820" width="500" x="1030" y="200" as="geometry" />
+          <mxGeometry height="820" width="350" x="1030" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="fo-RFWjwB9sReN6dJfU4-15" parent="aBDJqQuBJt9fMyyXYbsd-23" style="rounded=1;whiteSpace=wrap;html=1;" value="Menerima dan mencocokkan token" vertex="1">
+          <mxGeometry height="70" width="170" x="100" y="500" as="geometry" />
         </mxCell>
         <mxCell id="fo-RFWjwB9sReN6dJfU4-4" edge="1" parent="1" source="8lS8taLIFIIM104hVW9O-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="fo-RFWjwB9sReN6dJfU4-3">
           <mxGeometry relative="1" as="geometry">
@@ -1252,6 +1266,16 @@
         <mxCell id="fo-RFWjwB9sReN6dJfU4-5" connectable="0" parent="fo-RFWjwB9sReN6dJfU4-4" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="[ koneksi terhubung ]" vertex="1">
           <mxGeometry relative="1" x="-0.12" y="1" as="geometry">
             <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fo-RFWjwB9sReN6dJfU4-16" edge="1" parent="1" source="fo-RFWjwB9sReN6dJfU4-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="fo-RFWjwB9sReN6dJfU4-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fo-RFWjwB9sReN6dJfU4-19" edge="1" parent="1" source="fo-RFWjwB9sReN6dJfU4-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="fo-RFWjwB9sReN6dJfU4-17">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="780" y="735" />
+            </Array>
           </mxGeometry>
         </mxCell>
       </root>
