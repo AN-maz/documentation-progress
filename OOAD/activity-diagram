@@ -529,7 +529,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="2zfR5IC9ViiaXuJs6iwY" name="cifoGuard-2">
-    <mxGraphModel dx="1369" dy="774" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="742" dy="419" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -545,7 +545,7 @@
         <mxCell id="V6ejwovzng412ApaUnoB-21" parent="V6ejwovzng412ApaUnoB-1" style="rounded=1;whiteSpace=wrap;html=1;" value="Menekan tombol darurat manual" vertex="1">
           <mxGeometry height="70" width="205" x="92.5" y="140" as="geometry" />
         </mxCell>
-        <mxCell id="V6ejwovzng412ApaUnoB-44" parent="V6ejwovzng412ApaUnoB-1" style="rounded=1;whiteSpace=wrap;html=1;" value="Memasukan PIN pembatalan darurat" vertex="1">
+        <mxCell id="V6ejwovzng412ApaUnoB-44" parent="V6ejwovzng412ApaUnoB-1" style="rounded=1;whiteSpace=wrap;html=1;" value="Memasukkan PIN pembatalan darurat" vertex="1">
           <mxGeometry height="70" width="205" x="100" y="480" as="geometry" />
         </mxCell>
         <mxCell id="V6ejwovzng412ApaUnoB-7" parent="1" style="swimlane;" value="Perangkat Hardware" vertex="1">
@@ -569,19 +569,19 @@
         <mxCell id="V6ejwovzng412ApaUnoB-20" parent="1" style="swimlane;" value="Sistem Cifo Guard" vertex="1">
           <mxGeometry height="850" width="380" x="860" y="120" as="geometry" />
         </mxCell>
-        <mxCell id="V6ejwovzng412ApaUnoB-35" edge="1" parent="V6ejwovzng412ApaUnoB-20" source="V6ejwovzng412ApaUnoB-27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="V6ejwovzng412ApaUnoB-34">
+        <mxCell id="V6ejwovzng412ApaUnoB-35" edge="1" parent="V6ejwovzng412ApaUnoB-20" source="V6ejwovzng412ApaUnoB-27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="V6ejwovzng412ApaUnoB-34" value="[ sinyal diterima ]">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="V6ejwovzng412ApaUnoB-27" parent="V6ejwovzng412ApaUnoB-20" style="rhombus;whiteSpace=wrap;html=1;" value="" vertex="1">
           <mxGeometry height="30" width="30" x="190" y="240" as="geometry" />
         </mxCell>
-        <mxCell id="V6ejwovzng412ApaUnoB-37" edge="1" parent="V6ejwovzng412ApaUnoB-20" source="V6ejwovzng412ApaUnoB-34" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="V6ejwovzng412ApaUnoB-36" value="[ validasi false alarm 10 detik ]">
+        <mxCell id="V6ejwovzng412ApaUnoB-37" edge="1" parent="V6ejwovzng412ApaUnoB-20" source="V6ejwovzng412ApaUnoB-34" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="V6ejwovzng412ApaUnoB-36" value="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="V6ejwovzng412ApaUnoB-34" parent="V6ejwovzng412ApaUnoB-20" style="rounded=1;whiteSpace=wrap;html=1;" value="Memvalidasi titik lokasi asal pemicu" vertex="1">
           <mxGeometry height="70" width="205" x="102.5" y="340" as="geometry" />
         </mxCell>
-        <mxCell id="V6ejwovzng412ApaUnoB-49" edge="1" parent="V6ejwovzng412ApaUnoB-20" source="V6ejwovzng412ApaUnoB-36" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="V6ejwovzng412ApaUnoB-48" value="[ valid / waktu 10 detik&amp;nbsp; habis ]">
+        <mxCell id="V6ejwovzng412ApaUnoB-49" edge="1" parent="V6ejwovzng412ApaUnoB-20" source="V6ejwovzng412ApaUnoB-36" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="V6ejwovzng412ApaUnoB-48" value="[&amp;nbsp;Mengunci log kejadian (timestamp) ]">
           <mxGeometry relative="1" x="0.5001" as="geometry">
             <mxPoint as="offset" />
             <Array as="points">
@@ -616,10 +616,10 @@
         <mxCell id="V6ejwovzng412ApaUnoB-54" parent="V6ejwovzng412ApaUnoB-20" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" value="" vertex="1">
           <mxGeometry height="40" width="40" x="45" y="430" as="geometry" />
         </mxCell>
-        <mxCell id="V6ejwovzng412ApaUnoB-28" edge="1" parent="1" source="V6ejwovzng412ApaUnoB-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="V6ejwovzng412ApaUnoB-27" value="[ transmisi sinyal ]">
+        <mxCell id="V6ejwovzng412ApaUnoB-28" edge="1" parent="1" source="V6ejwovzng412ApaUnoB-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="V6ejwovzng412ApaUnoB-27" value="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="V6ejwovzng412ApaUnoB-29" edge="1" parent="1" source="V6ejwovzng412ApaUnoB-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="V6ejwovzng412ApaUnoB-27" value="[ transmisi sinyal ]">
+        <mxCell id="V6ejwovzng412ApaUnoB-29" edge="1" parent="1" source="V6ejwovzng412ApaUnoB-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="V6ejwovzng412ApaUnoB-27" value="">
           <mxGeometry relative="1" x="0.0618" as="geometry">
             <mxPoint as="offset" />
             <Array as="points">
