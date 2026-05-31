@@ -1160,7 +1160,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="TlHSXhxZTZME9dhjWJL4" name="SSO2">
-    <mxGraphModel dx="528" dy="292" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="936" dy="518" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -1181,6 +1181,11 @@
         </mxCell>
         <mxCell id="8lS8taLIFIIM104hVW9O-4" edge="1" parent="aBDJqQuBJt9fMyyXYbsd-1" source="8lS8taLIFIIM104hVW9O-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="8lS8taLIFIIM104hVW9O-3">
           <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8lS8taLIFIIM104hVW9O-5" connectable="0" parent="8lS8taLIFIIM104hVW9O-4" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="[ koneksi RTO / server down ]" vertex="1">
+          <mxGeometry relative="1" x="-0.2716" y="-2" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
         </mxCell>
         <mxCell id="8lS8taLIFIIM104hVW9O-1" parent="aBDJqQuBJt9fMyyXYbsd-1" style="rhombus;whiteSpace=wrap;html=1;" value="" vertex="1">
           <mxGeometry height="30" width="30" x="190" y="320" as="geometry" />
