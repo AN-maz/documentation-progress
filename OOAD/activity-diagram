@@ -529,7 +529,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="2zfR5IC9ViiaXuJs6iwY" name="cifoGuard-2">
-    <mxGraphModel dx="1873" dy="1036" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1369" dy="774" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -613,6 +613,9 @@
         <mxCell id="V6ejwovzng412ApaUnoB-8" parent="V6ejwovzng412ApaUnoB-20" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" value="" vertex="1">
           <mxGeometry height="40" width="40" x="85" y="725" as="geometry" />
         </mxCell>
+        <mxCell id="V6ejwovzng412ApaUnoB-54" parent="V6ejwovzng412ApaUnoB-20" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" value="" vertex="1">
+          <mxGeometry height="40" width="40" x="45" y="430" as="geometry" />
+        </mxCell>
         <mxCell id="V6ejwovzng412ApaUnoB-28" edge="1" parent="1" source="V6ejwovzng412ApaUnoB-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="V6ejwovzng412ApaUnoB-27" value="[ transmisi sinyal ]">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
@@ -634,6 +637,13 @@
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="280" y="735" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="V6ejwovzng412ApaUnoB-55" edge="1" parent="1" source="V6ejwovzng412ApaUnoB-32" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="V6ejwovzng412ApaUnoB-54">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="680" y="570" />
             </Array>
           </mxGeometry>
         </mxCell>
