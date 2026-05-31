@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" pages="4">
+<mxfile host="app.diagrams.net" pages="5">
   <diagram id="MLAG_PJFMQvHsFhRiaYk" name="SistemAbsensi-1">
     <mxGraphModel dx="1873" dy="1036" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -322,7 +322,7 @@
       </root>
     </mxGraphModel>
   </diagram>
-  <diagram id="_FV8y3PXWI1o9eO75V9E" name="Halaman-4">
+  <diagram id="_FV8y3PXWI1o9eO75V9E" name="visit-track2">
     <mxGraphModel dx="1471" dy="814" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
@@ -422,6 +422,43 @@
               <mxPoint x="1020" y="633" />
             </Array>
           </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="7vzNGsbKEl9Th11Dv-ca" name="Halaman-5">
+    <mxGraphModel dx="858" dy="475" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="L5sSVa7JOPWDeHi6emc9-1" parent="1" style="swimlane;" value="Pelanggan" vertex="1">
+          <mxGeometry height="1120" width="390" x="100" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="L5sSVa7JOPWDeHi6emc9-2" edge="1" parent="L5sSVa7JOPWDeHi6emc9-1" source="L5sSVa7JOPWDeHi6emc9-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="vRTT-RSrrCGhV6lC7zhu-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="195" y="190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="L5sSVa7JOPWDeHi6emc9-3" parent="L5sSVa7JOPWDeHi6emc9-1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" value="" vertex="1">
+          <mxGeometry height="40" width="40" x="175" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="vRTT-RSrrCGhV6lC7zhu-1" parent="L5sSVa7JOPWDeHi6emc9-1" style="rounded=1;whiteSpace=wrap;html=1;" value="Membuka menu pemantauan" vertex="1">
+          <mxGeometry height="90" width="190" x="100" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="vRTT-RSrrCGhV6lC7zhu-8" parent="L5sSVa7JOPWDeHi6emc9-1" style="rounded=1;whiteSpace=wrap;html=1;" value="Membuka daftar kamera CCTV dan sensor" vertex="1">
+          <mxGeometry height="90" width="190" x="100" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="L5sSVa7JOPWDeHi6emc9-9" parent="1" style="swimlane;" value="Sistem visit track" vertex="1">
+          <mxGeometry height="1120" width="560" x="490" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="L5sSVa7JOPWDeHi6emc9-10" parent="L5sSVa7JOPWDeHi6emc9-9" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" value="" vertex="1">
+          <mxGeometry height="40" width="40" x="232" y="1030" as="geometry" />
+        </mxCell>
+        <mxCell id="L5sSVa7JOPWDeHi6emc9-13" parent="L5sSVa7JOPWDeHi6emc9-9" style="rhombus;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="30" width="30" x="237" y="500" as="geometry" />
+        </mxCell>
+        <mxCell id="vRTT-RSrrCGhV6lC7zhu-6" parent="L5sSVa7JOPWDeHi6emc9-9" style="rounded=1;whiteSpace=wrap;html=1;" value="Membuka daftar kamera CCTV dan sensor" vertex="1">
+          <mxGeometry height="90" width="190" x="90" y="170" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
