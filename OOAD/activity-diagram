@@ -443,7 +443,7 @@
         <mxCell id="vRTT-RSrrCGhV6lC7zhu-1" parent="L5sSVa7JOPWDeHi6emc9-1" style="rounded=1;whiteSpace=wrap;html=1;" value="Membuka menu pemantauan" vertex="1">
           <mxGeometry height="90" width="190" x="100" y="150" as="geometry" />
         </mxCell>
-        <mxCell id="vRTT-RSrrCGhV6lC7zhu-6" parent="L5sSVa7JOPWDeHi6emc9-1" style="rounded=1;whiteSpace=wrap;html=1;" value="Memilih salah satu titik karema/sensor" vertex="1">
+        <mxCell id="vRTT-RSrrCGhV6lC7zhu-6" parent="L5sSVa7JOPWDeHi6emc9-1" style="rounded=1;whiteSpace=wrap;html=1;" value="Memilih salah satu titik kamera/sensor" vertex="1">
           <mxGeometry height="90" width="190" x="100" y="280" as="geometry" />
         </mxCell>
         <mxCell id="vRTT-RSrrCGhV6lC7zhu-24" parent="L5sSVa7JOPWDeHi6emc9-1" style="rounded=1;whiteSpace=wrap;html=1;" value="Menekan tombol refresh" vertex="1">
@@ -471,7 +471,7 @@
         <mxCell id="L5sSVa7JOPWDeHi6emc9-13" parent="L5sSVa7JOPWDeHi6emc9-9" style="rhombus;whiteSpace=wrap;html=1;" value="" vertex="1">
           <mxGeometry height="30" width="30" x="190" y="530" as="geometry" />
         </mxCell>
-        <mxCell id="vRTT-RSrrCGhV6lC7zhu-8" parent="L5sSVa7JOPWDeHi6emc9-9" style="rounded=1;whiteSpace=wrap;html=1;" value="Membuka daftar kamera CCTV dan sensor" vertex="1">
+        <mxCell id="vRTT-RSrrCGhV6lC7zhu-8" parent="L5sSVa7JOPWDeHi6emc9-9" style="rounded=1;whiteSpace=wrap;html=1;" value="Memuat daftar kamera CCTV dan sensor" vertex="1">
           <mxGeometry height="90" width="190" x="110" y="150" as="geometry" />
         </mxCell>
         <mxCell id="vRTT-RSrrCGhV6lC7zhu-19" edge="1" parent="L5sSVa7JOPWDeHi6emc9-9" source="vRTT-RSrrCGhV6lC7zhu-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="L5sSVa7JOPWDeHi6emc9-13" value="[ status koneksi &amp;amp; perangkat ]">
@@ -483,7 +483,7 @@
         <mxCell id="vRTT-RSrrCGhV6lC7zhu-27" edge="1" parent="L5sSVa7JOPWDeHi6emc9-9" source="vRTT-RSrrCGhV6lC7zhu-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="L5sSVa7JOPWDeHi6emc9-10">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="vRTT-RSrrCGhV6lC7zhu-20" parent="L5sSVa7JOPWDeHi6emc9-9" style="rounded=1;whiteSpace=wrap;html=1;" value="Menampilkan tanyangan langsung dan status deteksi" vertex="1">
+        <mxCell id="vRTT-RSrrCGhV6lC7zhu-20" parent="L5sSVa7JOPWDeHi6emc9-9" style="rounded=1;whiteSpace=wrap;html=1;" value="Menampilkan tayangan langsung dan status deteksi" vertex="1">
           <mxGeometry height="90" width="190" x="30" y="610" as="geometry" />
         </mxCell>
         <mxCell id="vRTT-RSrrCGhV6lC7zhu-28" edge="1" parent="L5sSVa7JOPWDeHi6emc9-9" source="vRTT-RSrrCGhV6lC7zhu-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="L5sSVa7JOPWDeHi6emc9-10">
@@ -509,7 +509,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="vRTT-RSrrCGhV6lC7zhu-25" edge="1" parent="1" source="L5sSVa7JOPWDeHi6emc9-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="vRTT-RSrrCGhV6lC7zhu-24" value="[ tayangan merespon lambar ]">
+        <mxCell id="vRTT-RSrrCGhV6lC7zhu-25" edge="1" parent="1" source="L5sSVa7JOPWDeHi6emc9-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="vRTT-RSrrCGhV6lC7zhu-24" value="[ lambat ]">
           <mxGeometry relative="1" x="0.1034" as="geometry">
             <mxPoint as="offset" />
             <Array as="points">
