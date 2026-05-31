@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" pages="6">
+<mxfile host="app.diagrams.net" pages="7">
   <diagram id="MLAG_PJFMQvHsFhRiaYk" name="SistemAbsensi-1">
     <mxGraphModel dx="1873" dy="1036" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -529,7 +529,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="2zfR5IC9ViiaXuJs6iwY" name="cifoGuard-2">
-    <mxGraphModel dx="742" dy="419" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1483" dy="838" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -646,6 +646,84 @@
               <mxPoint x="680" y="570" />
             </Array>
           </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="R0wE4UfkDw3EviTiSOCx" name="cifoGuard3">
+    <mxGraphModel dx="2967" dy="1677" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="kPpA1qelJPl8MukhCrO0-1" parent="1" style="swimlane;" value="Satpam Perumahan" vertex="1">
+          <mxGeometry height="850" width="390" x="250" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="FL2lLYcqu-65cbPvTVTu-17" edge="1" parent="kPpA1qelJPl8MukhCrO0-1" source="FL2lLYcqu-65cbPvTVTu-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="FL2lLYcqu-65cbPvTVTu-16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="FL2lLYcqu-65cbPvTVTu-13" parent="kPpA1qelJPl8MukhCrO0-1" style="rounded=1;whiteSpace=wrap;html=1;" value="Membaca rincian notifikasi lokasi kejadian" vertex="1">
+          <mxGeometry height="70" width="170" x="130" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="FL2lLYcqu-65cbPvTVTu-20" edge="1" parent="kPpA1qelJPl8MukhCrO0-1" source="FL2lLYcqu-65cbPvTVTu-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="FL2lLYcqu-65cbPvTVTu-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="FL2lLYcqu-65cbPvTVTu-16" parent="kPpA1qelJPl8MukhCrO0-1" style="rounded=1;whiteSpace=wrap;html=1;" value="Menekan tombol konfirmasi tindak lanjut" vertex="1">
+          <mxGeometry height="70" width="170" x="130" y="590" as="geometry" />
+        </mxCell>
+        <mxCell id="FL2lLYcqu-65cbPvTVTu-19" parent="kPpA1qelJPl8MukhCrO0-1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" value="" vertex="1">
+          <mxGeometry height="40" width="40" x="195" y="710" as="geometry" />
+        </mxCell>
+        <mxCell id="kPpA1qelJPl8MukhCrO0-6" parent="1" style="swimlane;" value="Perangkat Hardware" vertex="1">
+          <mxGeometry height="850" width="500" x="640" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="kPpA1qelJPl8MukhCrO0-11" edge="1" parent="kPpA1qelJPl8MukhCrO0-6" source="kPpA1qelJPl8MukhCrO0-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="kPpA1qelJPl8MukhCrO0-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="kPpA1qelJPl8MukhCrO0-8" parent="kPpA1qelJPl8MukhCrO0-6" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" value="" vertex="1">
+          <mxGeometry height="40" width="40" x="230" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="FL2lLYcqu-65cbPvTVTu-2" edge="1" parent="kPpA1qelJPl8MukhCrO0-6" source="kPpA1qelJPl8MukhCrO0-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="FL2lLYcqu-65cbPvTVTu-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="kPpA1qelJPl8MukhCrO0-9" parent="kPpA1qelJPl8MukhCrO0-6" style="rounded=1;whiteSpace=wrap;html=1;" value="Menerima instruksi eksekusi nofisikasi darurat&amp;nbsp;" vertex="1">
+          <mxGeometry height="70" width="205" x="147.5" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="kPpA1qelJPl8MukhCrO0-10" parent="kPpA1qelJPl8MukhCrO0-6" style="rounded=1;whiteSpace=wrap;html=1;" value="Gagal mengirim notifikasi ke layar pos" vertex="1">
+          <mxGeometry height="70" width="170" x="30" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="FL2lLYcqu-65cbPvTVTu-4" edge="1" parent="kPpA1qelJPl8MukhCrO0-6" source="FL2lLYcqu-65cbPvTVTu-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="kPpA1qelJPl8MukhCrO0-10" value="[ jaringan down ]">
+          <mxGeometry relative="1" x="0.6571" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FL2lLYcqu-65cbPvTVTu-7" edge="1" parent="kPpA1qelJPl8MukhCrO0-6" source="FL2lLYcqu-65cbPvTVTu-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="FL2lLYcqu-65cbPvTVTu-5" value="[ jaringan normal ]">
+          <mxGeometry relative="1" x="0.6364" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="FL2lLYcqu-65cbPvTVTu-1" parent="kPpA1qelJPl8MukhCrO0-6" style="rhombus;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="30" width="30" x="235" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="FL2lLYcqu-65cbPvTVTu-9" edge="1" parent="kPpA1qelJPl8MukhCrO0-6" source="FL2lLYcqu-65cbPvTVTu-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="FL2lLYcqu-65cbPvTVTu-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="FL2lLYcqu-65cbPvTVTu-5" parent="kPpA1qelJPl8MukhCrO0-6" style="rounded=1;whiteSpace=wrap;html=1;" value="Gagal mengirim notifikasi ke layar pos" vertex="1">
+          <mxGeometry height="70" width="170" x="290" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="FL2lLYcqu-65cbPvTVTu-11" edge="1" parent="kPpA1qelJPl8MukhCrO0-6" source="FL2lLYcqu-65cbPvTVTu-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="FL2lLYcqu-65cbPvTVTu-10" value="[ sedang patroli / tidak ada respon ]">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="FL2lLYcqu-65cbPvTVTu-8" parent="kPpA1qelJPl8MukhCrO0-6" style="rhombus;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="30" width="30" x="360" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="FL2lLYcqu-65cbPvTVTu-10" parent="kPpA1qelJPl8MukhCrO0-6" style="rounded=1;whiteSpace=wrap;html=1;" value="Mengirim peringatan cadangan via notifikasi smartphone&amp;nbsp;" vertex="1">
+          <mxGeometry height="70" width="170" x="290" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="FL2lLYcqu-65cbPvTVTu-14" edge="1" parent="1" source="FL2lLYcqu-65cbPvTVTu-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="FL2lLYcqu-65cbPvTVTu-13" value="[ berada di depan layar pos ]">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="FL2lLYcqu-65cbPvTVTu-15" edge="1" parent="1" source="FL2lLYcqu-65cbPvTVTu-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" target="FL2lLYcqu-65cbPvTVTu-13">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
