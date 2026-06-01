@@ -1,9 +1,48 @@
 <mxfile host="app.diagrams.net">
   <diagram name="Halaman-1" id="CCjg2qoWrb9VIzqcGKwd">
-    <mxGraphModel dx="1030" dy="570" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="858" dy="475" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="ow4brk4-y1iEM6m1GHW1-1" parent="1" style="image;points=[];aspect=fixed;html=1;align=center;shadow=0;dashed=0;image=img/lib/allied_telesis/computer_and_terminals/Personal_Computer_Wireless.svg;" value="Client" vertex="1">
+          <mxGeometry height="100" width="98.13" x="60" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="ow4brk4-y1iEM6m1GHW1-13" edge="1" parent="1" source="ow4brk4-y1iEM6m1GHW1-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="ow4brk4-y1iEM6m1GHW1-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ow4brk4-y1iEM6m1GHW1-18" edge="1" parent="1" source="ow4brk4-y1iEM6m1GHW1-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="ow4brk4-y1iEM6m1GHW1-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ow4brk4-y1iEM6m1GHW1-2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Entry Point&lt;div&gt;( index.js)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="270" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="ow4brk4-y1iEM6m1GHW1-14" edge="1" parent="1" source="ow4brk4-y1iEM6m1GHW1-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="ow4brk4-y1iEM6m1GHW1-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ow4brk4-y1iEM6m1GHW1-5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Routes" vertex="1">
+          <mxGeometry height="60" width="120" x="446" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="ow4brk4-y1iEM6m1GHW1-16" edge="1" parent="1" source="ow4brk4-y1iEM6m1GHW1-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="ow4brk4-y1iEM6m1GHW1-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ow4brk4-y1iEM6m1GHW1-7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Controllers" vertex="1">
+          <mxGeometry height="60" width="120" x="610" y="460" as="geometry" />
+        </mxCell>
+        <mxCell id="ow4brk4-y1iEM6m1GHW1-9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Services" vertex="1">
+          <mxGeometry height="60" width="120" x="446" y="460" as="geometry" />
+        </mxCell>
+        <mxCell id="ow4brk4-y1iEM6m1GHW1-11" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" value="&#xa;MySQL Database&#xa;&#xa;" vertex="1">
+          <mxGeometry height="120" width="90" x="285" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="ow4brk4-y1iEM6m1GHW1-15" edge="1" parent="1" source="ow4brk4-y1iEM6m1GHW1-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="ow4brk4-y1iEM6m1GHW1-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ow4brk4-y1iEM6m1GHW1-12" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Middlewares" vertex="1">
+          <mxGeometry height="60" width="120" x="610" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="ow4brk4-y1iEM6m1GHW1-17" edge="1" parent="1" source="ow4brk4-y1iEM6m1GHW1-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" target="ow4brk4-y1iEM6m1GHW1-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
