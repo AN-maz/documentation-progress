@@ -101,7 +101,7 @@
         <mxCell id="ow4brk4-y1iEM6m1GHW1-58" parent="1" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;" value="API" vertex="1">
           <mxGeometry height="100" width="140" x="303.5" y="730" as="geometry" />
         </mxCell>
-        <mxCell id="ow4brk4-y1iEM6m1GHW1-61" parent="1" style="image;points=[];aspect=fixed;html=1;align=center;shadow=0;dashed=0;image=img/lib/allied_telesis/computer_and_terminals/Server_Desktop.svg;" value="" vertex="1">
+        <mxCell id="ow4brk4-y1iEM6m1GHW1-61" parent="1" style="image;points=[];aspect=fixed;html=1;align=center;shadow=0;dashed=0;image=img/lib/allied_telesis/computer_and_terminals/Server_Desktop.svg;" value="Server" vertex="1">
           <mxGeometry height="130" width="102.56" x="540" y="715" as="geometry" />
         </mxCell>
         <mxCell id="ow4brk4-y1iEM6m1GHW1-62" edge="1" parent="1" source="ow4brk4-y1iEM6m1GHW1-57" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.07;entryY=0.4;entryDx=0;entryDy=0;entryPerimeter=0;" target="ow4brk4-y1iEM6m1GHW1-58">
@@ -157,7 +157,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="ow4brk4-y1iEM6m1GHW1-73" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;" value="" vertex="1">
-          <mxGeometry height="260" width="570" x="90" y="640" as="geometry" />
+          <mxGeometry height="260" width="570" x="90" y="650" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
