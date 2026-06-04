@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" pages="3">
+<mxfile host="app.diagrams.net" pages="4">
   <diagram name="Halaman-1" id="u5nq4RRRa8SfueB-nDc_">
     <mxGraphModel dx="1873" dy="1036" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -384,6 +384,119 @@
         </mxCell>
         <mxCell id="Z7HlVScsjDXGaqL6mS4l-3" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Sistem Cifo Super Apss" vertex="1">
           <mxGeometry height="30" width="170" x="349" y="280" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="phxUIrXdjrwSalvF8UzV" name="Alur-internet">
+    <mxGraphModel dx="2060" dy="1140" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="OiaGLNUjZycSBXtvTB1--3" edge="1" parent="1" source="OiaGLNUjZycSBXtvTB1--1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;" target="OiaGLNUjZycSBXtvTB1--2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="OiaGLNUjZycSBXtvTB1--5" edge="1" parent="1" source="OiaGLNUjZycSBXtvTB1--1" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" target="OiaGLNUjZycSBXtvTB1--4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="OiaGLNUjZycSBXtvTB1--1" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" value="Calon Pelanggan" vertex="1">
+          <mxGeometry height="60" width="30" x="110" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="OiaGLNUjZycSBXtvTB1--2" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="Membayar Biaya Registrasi" vertex="1">
+          <mxGeometry height="80" width="120" x="270" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="OiaGLNUjZycSBXtvTB1--4" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="Mendaftarkan Layanan internet" vertex="1">
+          <mxGeometry height="80" width="120" x="260" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="OiaGLNUjZycSBXtvTB1--7" edge="1" parent="1" source="OiaGLNUjZycSBXtvTB1--6" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;" target="OiaGLNUjZycSBXtvTB1--4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="OiaGLNUjZycSBXtvTB1--6" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" value="CS" vertex="1">
+          <mxGeometry height="60" width="30" x="100" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="OiaGLNUjZycSBXtvTB1--10" edge="1" parent="1" source="OiaGLNUjZycSBXtvTB1--8" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;" target="OiaGLNUjZycSBXtvTB1--9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="OiaGLNUjZycSBXtvTB1--12" edge="1" parent="1" source="OiaGLNUjZycSBXtvTB1--8" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" target="OiaGLNUjZycSBXtvTB1--11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="OiaGLNUjZycSBXtvTB1--14" edge="1" parent="1" source="OiaGLNUjZycSBXtvTB1--8" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" target="OiaGLNUjZycSBXtvTB1--13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="OiaGLNUjZycSBXtvTB1--8" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" value="Teknisi" vertex="1">
+          <mxGeometry height="60" width="30" x="100" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="OiaGLNUjZycSBXtvTB1--33" edge="1" parent="1" source="OiaGLNUjZycSBXtvTB1--9" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;" target="OiaGLNUjZycSBXtvTB1--24">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="OiaGLNUjZycSBXtvTB1--9" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="Mengajukan kebutuhan perangkat" vertex="1">
+          <mxGeometry height="80" width="120" x="240" y="770" as="geometry" />
+        </mxCell>
+        <mxCell id="OiaGLNUjZycSBXtvTB1--18" edge="1" parent="1" source="OiaGLNUjZycSBXtvTB1--11" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;" target="OiaGLNUjZycSBXtvTB1--17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="OiaGLNUjZycSBXtvTB1--11" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="Melakukan Survei" vertex="1">
+          <mxGeometry height="80" width="120" x="250" y="660" as="geometry" />
+        </mxCell>
+        <mxCell id="OiaGLNUjZycSBXtvTB1--13" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="Melakukan instalasi fisik" vertex="1">
+          <mxGeometry height="80" width="120" x="250" y="545" as="geometry" />
+        </mxCell>
+        <mxCell id="OiaGLNUjZycSBXtvTB1--15" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="Mengecek ketersediaan ODP &amp;amp; Kabel" vertex="1">
+          <mxGeometry height="80" width="120" x="460" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="OiaGLNUjZycSBXtvTB1--16" edge="1" parent="1" source="OiaGLNUjZycSBXtvTB1--11" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=-0.005;entryY=0.396;entryDx=0;entryDy=0;entryPerimeter=0;dashed=1;" target="OiaGLNUjZycSBXtvTB1--15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="OiaGLNUjZycSBXtvTB1--17" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="Memvalidasi riwayat pelanggan" vertex="1">
+          <mxGeometry height="80" width="120" x="460" y="710" as="geometry" />
+        </mxCell>
+        <mxCell id="OiaGLNUjZycSBXtvTB1--21" edge="1" parent="1" source="OiaGLNUjZycSBXtvTB1--19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" target="OiaGLNUjZycSBXtvTB1--20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="OiaGLNUjZycSBXtvTB1--19" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" value="Sales" vertex="1">
+          <mxGeometry height="60" width="30" x="100" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="OiaGLNUjZycSBXtvTB1--22" edge="1" parent="1" source="OiaGLNUjZycSBXtvTB1--20" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;dashed=1;" target="OiaGLNUjZycSBXtvTB1--4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="OiaGLNUjZycSBXtvTB1--20" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="Mendata Prospek (visit track)" vertex="1">
+          <mxGeometry height="80" width="120" x="260" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="OiaGLNUjZycSBXtvTB1--25" edge="1" parent="1" source="OiaGLNUjZycSBXtvTB1--23" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" target="OiaGLNUjZycSBXtvTB1--24">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="OiaGLNUjZycSBXtvTB1--23" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" value="Logistik" vertex="1">
+          <mxGeometry height="60" width="30" x="100" y="870" as="geometry" />
+        </mxCell>
+        <mxCell id="OiaGLNUjZycSBXtvTB1--24" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="Memproses pengeluaran barang" vertex="1">
+          <mxGeometry height="80" width="120" x="430" y="870" as="geometry" />
+        </mxCell>
+        <mxCell id="OiaGLNUjZycSBXtvTB1--29" edge="1" parent="1" source="OiaGLNUjZycSBXtvTB1--27" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;" target="OiaGLNUjZycSBXtvTB1--28">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="OiaGLNUjZycSBXtvTB1--31" edge="1" parent="1" source="OiaGLNUjZycSBXtvTB1--27" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" target="OiaGLNUjZycSBXtvTB1--30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="OiaGLNUjZycSBXtvTB1--27" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" value="Finance" vertex="1">
+          <mxGeometry height="60" width="30" x="100" y="1000" as="geometry" />
+        </mxCell>
+        <mxCell id="OiaGLNUjZycSBXtvTB1--28" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="Memvalidasi Pembayaran" vertex="1">
+          <mxGeometry height="80" width="120" x="250" y="1089" as="geometry" />
+        </mxCell>
+        <mxCell id="OiaGLNUjZycSBXtvTB1--32" edge="1" parent="1" source="OiaGLNUjZycSBXtvTB1--30" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;" target="OiaGLNUjZycSBXtvTB1--24">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="OiaGLNUjZycSBXtvTB1--30" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="Melakukan pembelian barang" vertex="1">
+          <mxGeometry height="80" width="120" x="250" y="980" as="geometry" />
+        </mxCell>
+        <mxCell id="OiaGLNUjZycSBXtvTB1--37" edge="1" parent="1" source="OiaGLNUjZycSBXtvTB1--35" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;" target="OiaGLNUjZycSBXtvTB1--36">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="OiaGLNUjZycSBXtvTB1--35" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" value="NOC" vertex="1">
+          <mxGeometry height="60" width="30" x="690" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="OiaGLNUjZycSBXtvTB1--36" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="Mengaktifkan jaringan (bandwitdh)" vertex="1">
+          <mxGeometry height="80" width="120" x="420" y="440" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
