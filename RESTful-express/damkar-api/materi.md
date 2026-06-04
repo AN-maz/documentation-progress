@@ -1,769 +1,1971 @@
-# Pertemuan 05: Konsep Backend & Pembuatan API Sederhana
+# Bagaimana Aplikasi Saling Berinteraksi
 
-> **Studi Kasus:** Sistem Informasi Dinas Pemadam Kebakaran Kota Bandung  
-> **Stack:** Node.js · Express.js · MySQL
+## Model Client-Server
 
----
+Saat membuka website, menggunakan aplikasi mobile banking, mengirim pesan melalui media sosial, atau menonton video online, sebenarnya terjadi proses komunikasi antara dua pihak, yaitu **client** dan **server**.
 
-## Daftar Isi
+Model **Client-Server** adalah arsitektur jaringan yang digunakan untuk memungkinkan perangkat saling bertukar data dan informasi melalui internet. Dalam model ini, terdapat pihak yang meminta informasi (**client**) dan pihak yang menyediakan informasi (**server**).
 
-1. [Konsep Sebuah Aplikasi Berinteraksi](#1-konsep-sebuah-aplikasi-berinteraksi)
-2. [Apa itu RESTful API?](#2-apa-itu-restful-api)
-3. [HTTP Method](#3-http-method)
-4. [JSON — Bahasa Komunikasi Client & Server](#4-json--bahasa-komunikasi-client--server)
-5. [Pengenalan Node.js & Package Manager (NPM)](#5-pengenalan-nodejs--package-manager-npm)
-6. [Tools untuk Testing API](#6-tools-untuk-testing-api)
-7. [Setup Awal Express](#7-setup-awal-express)
-8. [Anatomi Request & Response — Routing Dasar](#8-anatomi-request--response--routing-dasar)
-9. [Middleware Dasar](#9-middleware-dasar)
-10. [Koneksi Database & Async/Await](#10-koneksi-database--asyncawait)
+Model ini menjadi dasar dari hampir seluruh layanan internet modern yang digunakan saat ini.
 
 ---
 
-## 1. Konsep Sebuah Aplikasi Berinteraksi
+## Komponen Utama dalam Model Client-Server
+---
 
-### Teori
+## 1. Client (Peminta Informasi)
 
-Bayangkan kamu menelepon call center Dinas Damkar. Kamu adalah **Client**, operator yang menerima teleponmu adalah **API**, dan sistem internal damkar yang mencatat laporan adalah **Server**.
+**Client** adalah perangkat atau aplikasi yang bertugas meminta data atau layanan kepada server.
 
-```
-CLIENT  ──── request ────▶  API  ──── proses ────▶  SERVER / DATABASE
-        ◀─── response ────       ◀─── hasil  ────
-```
+### Analogi Sederhana
 
-Dalam dunia web, alurnya persis sama:
+Bayangkan sebuah restoran:
 
-| Analogi Damkar | Dunia Web |
-|---|---|
-| Warga yang menelepon | Browser / Aplikasi (Client) |
-| Operator call center | API (perantara) |
-| Sistem pencatatan internal | Server + Database |
-| Laporan yang diterima operator | Request |
-| Jawaban operator ke warga | Response |
+* Pelanggan memesan makanan.
+* Dapur menyiapkan pesanan.
+* Pelayan mengantarkan makanan kepada pelanggan.
 
-**Kenapa harus ada API di tengah?**
+Dalam analogi ini, **pelanggan adalah client** karena mereka mengajukan permintaan.
 
-- **Keamanan** — Database tidak boleh diakses langsung dari luar
-- **Fleksibilitas** — Satu API bisa dipakai oleh web, mobile, dan aplikasi lain sekaligus
-- **Pemisahan tanggung jawab** — Frontend fokus tampilan, Backend fokus data
+### Contoh Client
 
-### Gambaran Project Damkar Kita
+Beberapa contoh client yang sering digunakan antara lain:
 
-```
-Postman / Browser                   Express Server              MySQL
-(Client)          ──── request ───▶  (API)          ──── query ───▶  (Database)
-                  ◀─── JSON ───────                 ◀─── data  ────
-```
+* Browser web seperti Google Chrome, Firefox, dan Safari.
+* Smartphone dan tablet.
+* Aplikasi mobile.
+* Program yang dibuat menggunakan bahasa pemrograman seperti Python, Java, atau C++.
 
-Saat kita akses `GET /api/laporan`, yang terjadi adalah:
-1. Client mengirim request ke Express
-2. Express menjalankan query `SELECT ... JOIN ...` ke MySQL
-3. MySQL mengembalikan data
-4. Express mengemas data ke format JSON
-5. JSON dikirim balik ke Client
+### Tugas Client
+
+Client bertanggung jawab untuk:
+
+* Mengirim permintaan (*request*).
+* Menampilkan hasil yang diterima dari server kepada pengguna.
+* Menyediakan antarmuka pengguna (*User Interface/UI*).
 
 ---
 
-## 2. Apa itu RESTful API?
+## 2. Server (Penyedia Informasi)
 
-### Teori
+**Server** adalah sistem yang menyediakan data, layanan, atau sumber daya yang dibutuhkan oleh client.
 
-**API** *(Application Programming Interface)* adalah jembatan yang memungkinkan dua aplikasi saling berkomunikasi.
+### Analogi Sederhana
 
-**REST** *(Representational State Transfer)* adalah **aturan main** atau gaya arsitektur dalam membangun API. API yang mengikuti aturan ini disebut **RESTful API**.
+Dalam restoran, **dapur** berperan sebagai server karena bertugas menyiapkan makanan yang diminta pelanggan.
 
-Aturan utama REST yang perlu kamu tahu:
+### Karakteristik Server
 
-| Aturan | Penjelasan | Contoh di Project Damkar |
-|---|---|---|
-| **Gunakan URL sebagai alamat resource** | Setiap data punya "alamat" yang jelas | `/api/laporan`, `/api/pos` |
-| **Gunakan HTTP Method sesuai aksi** | GET untuk ambil, POST untuk buat, dst. | `GET /api/laporan` |
-| **Response dalam format standar** | Biasanya JSON | `{ "success": true, "data": [...] }` |
-| **Stateless** | Setiap request berdiri sendiri | Server tidak "ingat" request sebelumnya |
+Server memiliki beberapa karakteristik penting:
 
-### Struktur URL RESTful yang Baik
+* Menyimpan atau mengelola data.
+* Menerima dan memproses permintaan dari client.
+* Mengirimkan hasil pemrosesan kembali ke client.
+* Selalu aktif mendengarkan permintaan yang masuk melalui port tertentu.
+
+### Hal yang Perlu Dipahami
+
+Server tidak selalu berupa satu komputer fisik.
+
+Dalam praktiknya, sebuah server dapat terdiri dari:
+
+* Beberapa komputer.
+* Virtual machine.
+* Cloud server.
+
+Server juga tidak harus menyimpan seluruh data secara langsung. Server cukup mengetahui cara mengakses data tersebut, misalnya dari database atau layanan lain.
+
+---
+
+## Cara Kerja Model Client-Server
+
+Proses komunikasi antara client dan server berlangsung melalui beberapa tahap berikut.
+
+### 1. Request (Permintaan)
+
+Client mengirimkan permintaan kepada server.
+
+Contoh:
+
+Ketika pengguna membuka halaman profil Instagram, browser akan meminta data profil kepada server Instagram.
 
 ```
-https://api.damkar-bandung.go.id/api/laporan
-│                                │   │
-│                                │   └── Resource (data apa yang diminta)
-│                                └────── Prefix API
-└─────────────────────────────────────── Domain server
+Client → Request → Server
 ```
 
 ---
 
-## 3. HTTP Method
+### 2. Pemrosesan di Server
 
-### Teori
+Setelah menerima permintaan, server akan melakukan berbagai proses, seperti:
 
-HTTP Method adalah "kata kerja" yang menentukan **apa yang ingin kita lakukan** terhadap sebuah data. Hubungkannya dengan operasi database yang sudah kamu pelajari:
-
-| HTTP Method | Operasi Database | Kegunaan | Contoh di Damkar |
-|---|---|---|---|
-| `GET` | `SELECT` | Mengambil data | Lihat daftar laporan kebakaran |
-| `POST` | `INSERT` | Membuat data baru | Buat laporan kebakaran baru |
-| `PUT` | `UPDATE` | Mengubah data | Update status laporan jadi "selesai" |
-| `DELETE` | `DELETE` | Menghapus data | Hapus laporan yang salah input |
-
-### Desain Endpoint Project Damkar
+* Mengambil data dari database.
+* Memvalidasi pengguna.
+* Menghubungi layanan lain (microservices).
+* Mengolah data sesuai kebutuhan.
 
 ```
-Laporan Kebakaran (/api/laporan)
-├── GET    /api/laporan              → Ambil SEMUA laporan
-├── GET    /api/laporan/:id          → Ambil laporan tertentu
-├── GET    /api/laporan/status/proses→ Filter laporan by status
-├── POST   /api/laporan              → Buat laporan baru
-├── PUT    /api/laporan/:id          → Update status laporan
-└── DELETE /api/laporan/:id          → Hapus laporan
-
-Pos Pemadam (/api/pos)
-├── GET    /api/pos                  → Ambil SEMUA pos
-├── GET    /api/pos/:id              → Ambil pos tertentu
-├── POST   /api/pos                  → Tambah pos baru
-├── PUT    /api/pos/:id              → Update data pos
-└── DELETE /api/pos/:id              → Hapus pos
+Client → Request → Server → Database
 ```
-
-> **Catatan `:id`** — Tanda titik dua berarti parameter dinamis. `/api/laporan/5` artinya ambil laporan dengan ID 5.
 
 ---
 
-## 4. JSON — Bahasa Komunikasi Client & Server
+### 3. Response (Tanggapan)
 
-### Teori
+Setelah proses selesai, server mengirimkan hasilnya kembali kepada client.
 
-**JSON** *(JavaScript Object Notation)* adalah format teks ringan yang digunakan sebagai bahasa komunikasi antara Client dan Server.
+Contoh data yang dapat dikirim:
+
+* Informasi pengguna.
+* Daftar produk.
+* Saldo rekening.
+* Pesan kesalahan (*error message*).
+
+```
+Client ← Response ← Server
+```
+
+---
+
+### 4. Render User Interface
+
+Client menerima data dari server dan menampilkannya dalam bentuk yang dapat dipahami pengguna, seperti:
+
+* Teks.
+* Gambar.
+* Tombol.
+* Tabel.
+* Grafik.
+
+Pengguna akhirnya melihat hasil tersebut melalui layar perangkatnya.
+
+---
+
+## API sebagai Jembatan Komunikasi
+
+Agar client dan server dapat saling memahami, keduanya menggunakan **API (Application Programming Interface)**.
+
+API dapat dianggap sebagai **kontrak komunikasi** antara client dan server.
+
+### Analogi
+
+Ketika memesan makanan di restoran, pelanggan tidak masuk ke dapur untuk memasak sendiri. Pelanggan cukup melihat menu dan memesan makanan yang tersedia.
+
+Menu tersebut mirip dengan API.
+
+### Cara Kerja API
+
+Misalnya terdapat aturan:
+
+```
+Jika client meminta data pengguna dengan ID 10,
+maka server akan mengembalikan data pengguna tersebut.
+```
+
+Client tidak perlu mengetahui:
+
+* Bagaimana data disimpan.
+* Struktur database.
+* Bahasa pemrograman yang digunakan server.
+
+Client hanya perlu mengetahui:
+
+* Endpoint API yang harus dipanggil.
+* Format data yang akan diterima.
+
+---
+
+## HTTP sebagai Bahasa Komunikasi
+
+Dalam komunikasi client dan server, protokol yang paling umum digunakan adalah **HTTP (Hypertext Transfer Protocol)**.
+
+HTTP berfungsi sebagai aturan yang mengatur bagaimana data dikirim dan diterima melalui internet.
+
+Contoh sederhana:
+
+```
+Browser → HTTP Request → Server
+Server → HTTP Response → Browser
+```
+
+Tanpa HTTP atau protokol jaringan lainnya, client dan server tidak dapat saling berkomunikasi.
+
+---
+## Pendekatan Terpusat (Centralized Approach)
+
+Model Client-Server disebut sebagai **pendekatan terpusat** (*centralized approach*).
+
+Hal ini karena:
+
+* Server menjadi pusat pengelolaan data.
+* Data utama disimpan dan dikendalikan oleh server.
+* Client bergantung pada server untuk mendapatkan informasi.
+
+### Contoh Kasus
+
+Saat membuka aplikasi mobile banking:
+
+* Browser atau aplikasi hanya menampilkan antarmuka.
+* Informasi saldo rekening berada di server bank.
+* Transaksi diproses oleh server bank.
+
+Tanpa server tersebut, aplikasi tidak dapat menjalankan fungsi utamanya.
+
+Karena itulah server sering disebut sebagai **Single Source of Truth**, yaitu sumber data utama yang dianggap benar dan terpercaya.
+
+---
+
+## Perbandingan dengan Model Peer-to-Peer (P2P) 
+
+
+Selain model Client-Server, terdapat model lain yang disebut **Peer-to-Peer (P2P)**.
+
+## Karakteristik P2P
+
+Pada model ini tidak ada server pusat yang mengendalikan seluruh data.
+
+Setiap perangkat dapat berperan sebagai:
+
+* Client (meminta data).
+* Server (memberikan data).
+
+Secara bersamaan.
+
+### Contoh
+
+Jaringan BitTorrent menggunakan konsep P2P.
+
+Ketika mengunduh sebuah file:
+
+* Pengguna mengambil bagian file dari pengguna lain.
+* Pengguna juga membagikan bagian file yang dimilikinya kepada pengguna lain.
+
+```
+Komputer A ↔ Komputer B
+     ↕         ↕
+Komputer C ↔ Komputer D
+```
+
+Semua komputer dapat saling bertukar data tanpa bergantung pada satu server pusat.
+
+---
+
+## Perbedaan Client-Server dan Peer-to-Peer
+
+| Client-Server                           | Peer-to-Peer (P2P)                                  |
+| --------------------------------------- | --------------------------------------------------- |
+| Memiliki server pusat                   | Tidak memiliki server pusat                         |
+| Data terpusat                           | Data tersebar                                       |
+| Pengelolaan lebih mudah                 | Pengelolaan lebih kompleks                          |
+| Kontrol lebih terstruktur               | Kontrol tersebar                                    |
+| Cocok untuk website dan aplikasi modern | Cocok untuk berbagi file dan jaringan terdistribusi |
+
+---
+
+## Ringkasan
+
+* **Client** adalah pihak yang meminta data atau layanan.
+* **Server** adalah pihak yang menyediakan data atau layanan.
+* **HTTP** digunakan sebagai protokol komunikasi antara client dan server.
+* **API** berfungsi sebagai kontrak atau jembatan komunikasi.
+* Dalam model **Client-Server**, server menjadi pusat pengelolaan data (*centralized approach*).
+* Pada model **Peer-to-Peer (P2P)**, setiap perangkat dapat bertindak sebagai client sekaligus server.
+* Sebagian besar website, aplikasi mobile, dan layanan internet modern menggunakan arsitektur **Client-Server** sebagai fondasi utamanya.
+
+> **Inti konsepnya:** Client meminta, Server melayani. Keduanya berkomunikasi melalui HTTP dengan aturan yang ditentukan oleh API.
+
+---
+# Konsep Dasar API (Application Programming Interface)
+
+API adalah "jembatan" yang membuat client dan server bisa saling berkomunikasi. Kalau di materi sebelumnya kita belajar *siapa yang meminta* (client) dan *siapa yang melayani* (server), sekarang kita belajar *bagaimana mereka berkomunikasi*.
+
+## Pendahuluan
+
+Pada aplikasi modern, berbagai sistem perlu saling bertukar data dan memanfaatkan layanan yang dimiliki sistem lain. Misalnya:
+
+* Aplikasi ojek online menampilkan peta dari Google Maps.
+* Aplikasi cuaca mengambil data dari server penyedia cuaca.
+* Website login menggunakan akun Google.
+
+Agar komunikasi tersebut dapat dilakukan dengan teratur dan aman, digunakanlah **API (Application Programming Interface)**.
+
+API merupakan salah satu teknologi yang menjadi fondasi utama internet modern karena memungkinkan berbagai aplikasi dan sistem untuk saling berinteraksi tanpa harus mengetahui cara kerja internal masing-masing.
+
+---
+
+## Apa itu API?
+
+**API (Application Programming Interface)** adalah sekumpulan aturan dan mekanisme yang memungkinkan dua aplikasi atau sistem perangkat lunak untuk saling berkomunikasi.
+
+API menentukan:
+
+* Permintaan apa yang dapat dilakukan.
+* Data apa yang harus dikirim.
+* Format data yang digunakan.
+* Respons yang akan diberikan.
+
+Dengan kata lain, API bertindak sebagai **perantara komunikasi** antara client dan server.
+
+---
+
+## Analogi Sederhana
+
+### API sebagai Menu Restoran
+
+Bayangkan Anda berada di sebuah restoran.
+
+* Anda adalah client.
+* Dapur adalah server.
+* Menu restoran adalah API.
+
+Pelanggan tidak perlu masuk ke dapur dan memahami cara memasak makanan.
+
+Pelanggan cukup melihat menu yang tersedia lalu memesan makanan sesuai aturan yang ada.
+
+Begitu pula pada API.
+
+Client tidak perlu mengetahui bagaimana kode program server dibuat. Client hanya perlu mengetahui:
+
+* Permintaan apa yang tersedia.
+* Data apa yang harus dikirim.
+* Hasil apa yang akan diterima.
+
+---
+
+## Mengapa API Penting?
+
+### 1. Membawa Keteraturan dalam Komunikasi
+
+Tanpa API, setiap sistem akan memiliki cara komunikasi yang berbeda-beda sehingga sulit untuk diintegrasikan.
+
+API menyediakan aturan yang jelas sehingga semua sistem dapat berkomunikasi dengan cara yang sama.
+
+---
+
+### 2. Menyediakan Abstraksi
+
+API menyembunyikan kompleksitas sistem di belakang layar.
+
+Client tidak perlu mengetahui:
+
+* Struktur database.
+* Bahasa pemrograman yang digunakan.
+* Algoritma yang berjalan di server.
+
+Client cukup mengetahui cara menggunakan API tersebut.
+
+---
+
+### 3. Mempercepat Pengembangan Aplikasi
+
+Developer tidak perlu membangun semua fitur dari nol.
+
+Mereka dapat memanfaatkan API yang sudah tersedia, seperti:
+
+* API Google Maps untuk peta.
+* API pembayaran untuk transaksi.
+* API media sosial untuk login dan berbagi konten.
+
+Hal ini membuat pengembangan aplikasi menjadi lebih cepat dan efisien.
+
+---
+
+### 4. Menyediakan Standar Penanganan Error
+
+API juga menentukan apa yang harus terjadi ketika terjadi kesalahan.
+
+Contohnya:
+
+* Data tidak lengkap.
+* Pengguna tidak memiliki izin.
+* Permintaan terlalu banyak.
+
+Dengan aturan yang jelas, client dapat mengetahui penyebab kegagalan dan cara menanganinya.
+
+---
+
+## Hubungan API dengan Model Client-Server
+
+Perhatikan ilustrasi berikut:
+
+```text
+Client
+   │
+   │ Request
+   ▼
+ API
+   │
+   ▼
+Server
+   │
+   │ Response
+   ▼
+Client
+```
+
+Pada model Client-Server:
+
+* Client mengirim permintaan.
+* API menerima dan menerjemahkan permintaan tersebut.
+* Server memproses permintaan.
+* API mengirimkan hasil kembali ke client.
+
+Karena itu, API sering disebut sebagai **jembatan komunikasi antara client dan server**.
+
+---
+
+## Komponen Utama dalam API
+
+Ketika membaca dokumentasi API, terdapat beberapa komponen penting yang harus dipahami.
+
+### 1. Endpoint
+
+Endpoint adalah alamat tujuan API yang akan dipanggil oleh client.
+
+Contoh:
+
+```text
+https://api.website.com/users
+```
+
+Alamat tersebut menunjukkan lokasi sumber data yang ingin diakses.
+
+### Analogi
+
+Jika API adalah restoran, maka endpoint adalah meja atau loket tertentu tempat Anda melakukan pemesanan.
+
+---
+
+### 2. HTTP Method
+
+Method menentukan tindakan yang ingin dilakukan terhadap data.
+
+Method yang paling sering digunakan adalah:
+
+| Method | Fungsi                    |
+| ------ | ------------------------- |
+| GET    | Mengambil data            |
+| POST   | Menambahkan data baru     |
+| PUT    | Memperbarui seluruh data  |
+| PATCH  | Memperbarui sebagian data |
+| DELETE | Menghapus data            |
+
+### Contoh
+
+Mengambil daftar pengguna:
+
+```http
+GET /users
+```
+
+Menambahkan pengguna baru:
+
+```http
+POST /users
+```
+
+---
+
+### 3. Parameter
+
+Parameter adalah data yang dikirim client agar server dapat memproses permintaan.
+
+### Required Parameter
+
+Wajib dikirim.
+
+Jika tidak ada, server akan menolak permintaan.
+
+Contoh:
 
 ```json
 {
-  "key": "value"
+  "username": "Purwa"
 }
 ```
 
-### Tipe Data dalam JSON
+---
+
+### Optional Parameter
+
+Boleh dikirim atau tidak.
+
+Biasanya digunakan untuk fitur tambahan.
+
+Contoh:
+
+```json
+{
+  "username": "Purwa",
+  "location": "Bandung"
+}
+```
+
+---
+
+### 4. Authentication
+
+Authentication digunakan untuk memastikan identitas pengguna yang memanggil API.
+
+Tujuannya adalah:
+
+* Mencegah penyalahgunaan.
+* Menjaga keamanan data.
+* Mengontrol akses pengguna.
+
+Contoh:
+
+```http
+Authorization: Bearer abc123xyz
+```
+
+Token tersebut berfungsi seperti kartu identitas ketika mengakses layanan API.
+
+---
+
+### 5. Rate Limiting
+
+Rate Limiting adalah pembatasan jumlah request yang boleh dilakukan dalam periode tertentu.
+
+Contoh:
+
+```text
+100 request per jam
+```
+
+Jika batas tersebut terlampaui, server dapat menolak request berikutnya.
+
+Tujuannya untuk:
+
+* Mengurangi spam.
+* Mengurangi beban server.
+* Mencegah penyalahgunaan layanan.
+
+---
+
+### 6. Response Format
+
+Response adalah data yang dikembalikan oleh server.
+
+Format yang paling umum digunakan saat ini adalah **JSON (JavaScript Object Notation)**.
+
+Contoh:
 
 ```json
 {
   "id": 1,
-  "no_laporan": "LAP-2024-001",
-  "tanggal_kejadian": "2024-01-15",
-  "tingkat_bahaya": "tinggi",
-  "selesai": true,
-  "koordinat": null,
-  "pos": {
-    "nama": "Pos Utama Bandung Tengah",
-    "wilayah": "Bandung Tengah"
-  },
-  "unit_yang_dikirim": ["Mobil Tangki 01", "Mobil Tangki 03"]
+  "nama": "Purwa",
+  "jurusan": "Informatika"
 }
 ```
 
-| Key | Value | Tipe Data |
-|---|---|---|
-| `id` | `1` | Number |
-| `no_laporan` | `"LAP-2024-001"` | String |
-| `selesai` | `true` | Boolean |
-| `koordinat` | `null` | Null |
-| `pos` | `{ ... }` | Object |
-| `unit_yang_dikirim` | `[ ... ]` | Array |
+JSON populer karena:
 
-### Contoh Response API Damkar
+* Ringan.
+* Mudah dibaca manusia.
+* Mudah diproses oleh program.
 
-Ketika kita akses `GET /api/laporan/1`, server akan mengembalikan JSON seperti ini:
+---
+
+## Alur Kerja API
+
+Secara umum proses komunikasi API berlangsung sebagai berikut:
+
+### 1. Client Mengirim Request
+
+```http
+GET /users/1
+```
+
+---
+
+### 2. API Menerima Request
+
+API memeriksa:
+
+* Endpoint
+* Method
+* Parameter
+* Authentication
+
+---
+
+### 3. Server Memproses Request
+
+Server dapat:
+
+* Mengambil data dari database.
+* Menyimpan data baru.
+* Memvalidasi pengguna.
+* Berkomunikasi dengan layanan lain.
+
+---
+
+### 4. Server Mengirim Response
+
+Contoh:
 
 ```json
 {
-  "success": true,
-  "data": {
-    "id": 1,
-    "no_laporan": "LAP-2024-001",
-    "tanggal_kejadian": "2024-01-15",
-    "alamat_kejadian": "Jl. Braga No. 23, Bandung",
-    "tingkat_bahaya": "tinggi",
-    "status": "selesai",
-    "nama_pos_penanganan": "Pos Utama Bandung Tengah",
-    "wilayah_pos": "Bandung Tengah",
-    "telp_pos": "022-4201113"
-  }
+  "id": 1,
+  "nama": "Purwa"
 }
 ```
 
 ---
 
-## 5. Pengenalan Node.js & Package Manager (NPM)
+### 5. Client Menampilkan Hasil
 
-### Teori
+Data yang diterima kemudian ditampilkan kepada pengguna dalam bentuk:
 
-**JavaScript** awalnya hanya bisa berjalan di browser. Kita tidak bisa pakai JS untuk membuat server.
+* Teks
+* Tabel
+* Tombol
+* Grafik
+* Halaman web
 
-**Node.js** mengubah itu semua. Node.js adalah **runtime environment** yang memungkinkan JavaScript berjalan di luar browser — termasuk di server.
+---
 
+## Studi Kasus: Mengirim Tweet melalui API
+
+Misalkan sebuah aplikasi ingin membuat tweet secara otomatis.
+
+### Request
+
+Client mengirimkan:
+
+```http
+POST /statuses/update
 ```
-Sebelum Node.js:          Sesudah Node.js:
-─────────────────         ─────────────────────────
-JS → hanya browser        JS → browser + server + tools
-PHP/Python → server       Node.js menjalankan JS di server
-```
 
-### NPM — Node Package Manager
-
-NPM adalah **pengelola paket** (library/modul) untuk Node.js. Analoginya seperti App Store, tapi untuk kode.
-
-| Perintah | Fungsi |
-|---|---|
-| `npm init -y` | Membuat file `package.json` (identitas project) |
-| `npm install express` | Mengunduh & install library Express |
-| `npm install` | Install semua library dari `package.json` |
-| `npm run dev` | Menjalankan script "dev" dari `package.json` |
-
-### File `package.json` Project Damkar
+Dengan data:
 
 ```json
 {
-  "name": "damkar-api",
-  "version": "1.0.0",
-  "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js"
-  },
-  "dependencies": {
-    "dotenv": "^16.3.1",
-    "express": "^4.18.2",
-    "mysql2": "^3.6.0"
-  },
-  "devDependencies": {
-    "nodemon": "^3.0.1"
+  "status": "Hello World"
+}
+```
+
+---
+
+### Proses di Server
+
+Server akan:
+
+1. Memeriksa identitas pengguna.
+2. Memastikan teks tweet valid.
+3. Memastikan tweet tidak duplikat.
+4. Menyimpan tweet ke database.
+
+---
+
+### Response Sukses
+
+```json
+{
+  "id": 123456,
+  "text": "Hello World",
+  "created_at": "2025-05-24"
+}
+```
+
+---
+
+### Response Gagal
+
+Jika pengguna mencoba mengirim tweet yang sama secara berulang:
+
+```json
+{
+  "error": "Status is a duplicate"
+}
+```
+
+Server juga dapat mengirim kode error seperti:
+
+```text
+403 Forbidden
+```
+
+yang menandakan bahwa permintaan ditolak.
+
+---
+
+## Ringkasan
+
+* **API (Application Programming Interface)** adalah mekanisme yang memungkinkan aplikasi saling berkomunikasi.
+* API bertindak sebagai **jembatan antara client dan server**.
+* API mendefinisikan aturan mengenai request dan response.
+* Komponen penting API meliputi:
+
+  * Endpoint
+  * HTTP Method
+  * Parameter
+  * Authentication
+  * Rate Limiting
+  * Response Format
+* Format data yang paling umum digunakan adalah **JSON**.
+* API memungkinkan developer membangun aplikasi lebih cepat dengan memanfaatkan layanan yang sudah tersedia.
+
+> **Inti konsep API:** API adalah kontrak komunikasi. Client mengirim request sesuai aturan yang telah ditentukan, kemudian server mengembalikan response yang sesuai dengan perjanjian tersebut.
+
+# JSON (JavaScript Object Notation)
+
+## Apa itu JSON?
+
+**JSON (JavaScript Object Notation)** adalah format pertukaran data yang digunakan untuk menyimpan dan mengirim informasi antar sistem.
+
+JSON dirancang agar:
+
+* Mudah dibaca oleh manusia.
+* Mudah diproses oleh komputer.
+* Ringan dan sederhana.
+* Dapat digunakan oleh hampir semua bahasa pemrograman.
+
+Saat ini JSON menjadi format data yang paling umum digunakan dalam API dan komunikasi antara client dan server.
+
+---
+
+## Mengapa JSON Dibutuhkan?
+
+Bayangkan sebuah server ingin mengirim data pengguna kepada browser.
+
+Tanpa format yang terstruktur, data mungkin terlihat seperti ini:
+
+```text
+Purwa,20,Informatika,Bandung
+```
+
+Komputer mungkin masih bisa membacanya, tetapi akan sulit mengetahui:
+
+* Mana nama?
+* Mana umur?
+* Mana jurusan?
+* Mana kota?
+
+JSON memberikan struktur yang jelas:
+
+```json
+{
+  "nama": "Purwa",
+  "umur": 20,
+  "jurusan": "Informatika",
+  "kota": "Bandung"
+}
+```
+
+Sekarang baik manusia maupun program langsung tahu arti setiap data.
+
+---
+
+## Struktur Dasar JSON
+
+JSON terdiri dari pasangan:
+
+```text
+"key": value
+```
+
+Contoh:
+
+```json
+{
+  "nama": "Purwa"
+}
+```
+
+Di sini:
+
+* `nama` → key
+* `"Purwa"` → value
+
+Key berfungsi sebagai label yang menjelaskan isi data.
+
+---
+
+## JSON Object
+
+Object adalah kumpulan pasangan key-value yang dibungkus dengan kurung kurawal `{}`.
+
+Contoh:
+
+```json
+{
+  "nama": "Purwa",
+  "umur": 22,
+  "aktif": true
+}
+```
+
+Visualisasinya:
+
+```text
+Data Mahasiswa
+│
+├── nama  = Purwa
+├── umur  = 22
+└── aktif = true
+```
+
+---
+
+## JSON Array
+
+Array digunakan untuk menyimpan banyak data dalam satu variabel.
+
+Ditulis menggunakan kurung siku `[]`.
+
+Contoh:
+
+```json
+{
+  "hobi": ["Ngoding", "Membaca", "Gaming"]
+}
+```
+
+Visualisasinya:
+
+```text
+hobi
+│
+├── Ngoding
+├── Membaca
+└── Gaming
+```
+
+---
+
+## JSON Object di Dalam Object
+
+JSON dapat menyimpan object di dalam object lainnya.
+
+Contoh:
+
+```json
+{
+  "nama": "Purwa",
+  "alamat": {
+    "kota": "Bandung",
+    "provinsi": "Jawa Barat"
   }
 }
 ```
 
-**Penjelasan library yang kita pakai:**
+Visualisasinya:
 
-| Library | Fungsi |
-|---|---|
-| `express` | Framework untuk membangun server & API |
-| `mysql2` | Untuk koneksi dan query ke database MySQL |
-| `dotenv` | Membaca konfigurasi dari file `.env` |
-| `nodemon` | Auto-restart server saat ada perubahan kode (khusus development) |
+```text
+nama
+└── Purwa
 
-### 💻 Praktik: Setup Project
+alamat
+│
+├── kota      = Bandung
+└── provinsi = Jawa Barat
+```
+
+---
+
+## JSON Array Berisi Object
+
+Ini adalah bentuk yang paling sering ditemukan pada API.
+
+Contoh:
+
+```json
+{
+  "mahasiswa": [
+    {
+      "nama": "Purwa",
+      "umur": 22
+    },
+    {
+      "nama": "Andrian",
+      "umur": 21
+    }
+  ]
+}
+```
+
+Visualisasinya:
+
+```text
+mahasiswa
+│
+├── Mahasiswa 1
+│   ├── nama = Purwa
+│   └── umur = 20
+│
+└── Mahasiswa 2
+    ├── nama = Andrian
+    └── umur = 21
+```
+
+---
+
+## Tipe Data yang Didukung JSON
+
+JSON hanya memiliki beberapa tipe data utama.
+
+| Tipe    | Contoh                |
+| ------- | --------------------- |
+| String  | `"Purwa"`             |
+| Number  | `20`, `3.14`          |
+| Boolean | `true`, `false`       |
+| Array   | `["A", "B"]`          |
+| Object  | `{ "nama": "Purwa" }` |
+| Null    | `null`                |
+
+Contoh lengkap:
+
+```json
+{
+  "nama": "Purwa",
+  "umur": 20,
+  "aktif": true,
+  "hobi": ["Ngoding", "Gaming"],
+  "alamat": null
+}
+```
+
+---
+
+## JSON dalam API
+
+Misalkan client meminta data pengguna.
+
+### Request
+
+```http
+GET /users/1
+```
+
+### Response
+
+```json
+{
+  "id": 1,
+  "nama": "Purwa",
+  "email": "Purwa@mail.com"
+}
+```
+
+Alurnya:
+
+```text
+Client
+   │
+   │ GET /users/1
+   ▼
+Server
+   │
+   │ JSON Response
+   ▼
+Client
+```
+
+Browser atau aplikasi kemudian membaca JSON tersebut dan menampilkannya kepada pengguna.
+
+---
+
+## Hubungan JSON dengan JavaScript
+
+Nama JSON memang berasal dari JavaScript, tetapi JSON **bukan JavaScript**.
+
+JSON hanyalah format data.
+
+Bahasa lain juga bisa menggunakannya, seperti:
+
+* JavaScript
+* Python
+* Java
+* PHP
+* Go
+* C#
+* Rust
+
+Karena itulah JSON menjadi standar pertukaran data di internet.
+
+---
+
+## Contoh Nyata dari API
+
+Misalkan API kampus mengembalikan data mahasiswa:
+
+```json
+{
+  "nim": "23101101",
+  "nama": "Purwa Kurnia",
+  "jurusan": "Informatika",
+  "semester": 4,
+  "mata_kuliah": [
+    "Pemrograman Web",
+    "Jaringan Komputer",
+    "Basis Data"
+  ]
+}
+```
+
+Frontend dapat mengambil data tersebut lalu menampilkannya menjadi:
+
+```text
+Nama      : Purwa Guri
+Jurusan   : Informatika
+Semester  : 4
+
+Mata Kuliah:
+- Pemrograman Web
+- Jaringan Komputer
+- Basis Data
+```
+
+---
+
+## Perbedaan JSON dan Object JavaScript
+
+Sekilas terlihat sama, tetapi ada perbedaan:
+
+### Object JavaScript
+
+```js
+const mahasiswa = {
+  nama: "Purwa",
+  umur: 22
+};
+```
+
+### JSON
+
+```json
+{
+  "nama": "Purwa",
+  "umur": 22
+}
+```
+
+Perbedaannya:
+
+| JavaScript Object           | JSON                                    |
+| --------------------------- | --------------------------------------- |
+| Bisa menyimpan function     | Tidak bisa                              |
+| Digunakan di dalam program  | Digunakan untuk pertukaran data         |
+| Key boleh tanpa tanda kutip | Key harus menggunakan tanda kutip ganda |
+
+---
+
+## Ringkasan
+
+* **JSON (JavaScript Object Notation)** adalah format pertukaran data yang paling populer di internet.
+* JSON terdiri dari pasangan **key-value**.
+* JSON mendukung:
+
+  * Object (`{}`)
+  * Array (`[]`)
+  * String
+  * Number
+  * Boolean
+  * Null
+* JSON banyak digunakan sebagai format **response API**.
+* Hampir semua bahasa pemrograman dapat membaca dan menghasilkan JSON.
+* Saat frontend dan backend bertukar data, kemungkinan besar data tersebut dikirim dalam bentuk JSON.
+
+> **Inti konsep JSON:** JSON adalah "bahasa data" yang digunakan client dan server untuk saling bertukar informasi secara terstruktur dan mudah dipahami.
+
+Materi ini sebenarnya langkah yang tepat setelah memahami **Client-Server**, **API**, dan **JSON**. Karena saat mulai membuat aplikasi JavaScript yang lebih besar, kita akan bertemu dengan **Node.js** dan **Package Manager**.
+
+# Node.js dan Package Manager
+
+## Mengapa Kita Membutuhkannya?
+
+Bayangkan kamu ingin membuat aplikasi web modern.
+
+Awalnya mungkin hanya menggunakan:
+
+```html
+<h1>Hello World</h1>
+```
+
+dan sedikit JavaScript:
+
+```js
+console.log("Hello World");
+```
+
+Namun ketika aplikasi semakin besar, kamu mungkin membutuhkan:
+
+* Framework seperti React
+* Library untuk membuat API
+* Library untuk mengelola database
+* Library untuk autentikasi
+* Library untuk mengirim email
+
+Daripada membuat semuanya dari nol, developer biasanya menggunakan kode yang sudah dibuat oleh developer lain.
+
+Masalahnya:
+
+> Bagaimana cara menginstal, memperbarui, dan mengelola ribuan library tersebut?
+
+Di sinilah Package Manager berperan.
+
+---
+
+## Apa itu Node.js?
+**Node.js** adalah runtime environment yang memungkinkan JavaScript dijalankan di luar browser.
+
+Sebelum Node.js muncul, JavaScript hanya bisa berjalan di browser.
+
+Contoh:
+
+```js
+alert("Hello");
+```
+
+Kode di atas hanya bisa dijalankan melalui browser.
+
+Namun sejak Node.js diperkenalkan, JavaScript dapat digunakan untuk:
+
+* Membuat backend
+* Membuat API
+* Membaca file
+* Mengakses database
+* Membuat aplikasi command line
+* Membuat server
+
+---
+
+## Analogi Sederhana
+
+Bayangkan JavaScript adalah seorang koki.
+
+Sebelum ada Node.js:
+
+* Koki hanya boleh bekerja di restoran tertentu (browser).
+
+Setelah ada Node.js:
+
+* Koki bisa bekerja di mana saja.
+* Di rumah.
+* Di kantor.
+* Di hotel.
+
+Dengan kata lain:
+
+> Node.js memberikan "tempat kerja baru" bagi JavaScript di luar browser.
+
+---
+
+## Cara Kerja Node.js
+
+Ketika kamu menjalankan:
 
 ```bash
-# 1. Buat folder project
-mkdir damkar-api
-cd damkar-api
+node app.js
+```
 
-# 2. Inisialisasi project
+Node.js akan:
+
+1. Membaca file JavaScript.
+2. Menerjemahkan kode menggunakan mesin V8.
+3. Menjalankan kode tersebut di komputer.
+
+Alurnya:
+
+```text
+app.js
+   │
+   ▼
+ Node.js
+   │
+   ▼
+ V8 Engine
+   │
+   ▼
+ Hasil Program
+```
+
+---
+
+## Apa itu V8 Engine?
+
+V8 adalah mesin JavaScript yang dibuat oleh:
+
+Google
+
+Tugas V8:
+
+* Membaca kode JavaScript.
+* Mengubahnya menjadi kode mesin.
+* Menjalankannya dengan cepat.
+
+Node.js menggunakan V8 sebagai "mesin" utamanya.
+
+---
+
+## Contoh Node.js
+
+Misalnya membuat file:
+
+```js
+console.log("Halo Informatika!");
+```
+
+Lalu jalankan:
+
+```bash
+node app.js
+```
+
+Output:
+
+```text
+Halo Informatika!
+```
+
+Sekarang JavaScript berjalan langsung di komputer tanpa browser.
+
+---
+
+## Apa itu Package?
+
+Package adalah kumpulan kode yang dibuat untuk menyelesaikan tugas tertentu.
+
+Contoh:
+
+* Membuat server
+* Mengelola database
+* Mengirim email
+* Membuat autentikasi
+* Membuat UI
+
+Anggap package sebagai:
+
+> "Modul siap pakai yang dibuat oleh developer lain."
+
+---
+
+## Apa itu Package Manager?
+
+## Definisi
+
+Package Manager adalah alat yang digunakan untuk:
+
+* Menginstal package
+* Menghapus package
+* Memperbarui package
+* Mengelola dependensi
+
+---
+
+## Analogi Sederhana
+
+Bayangkan smartphone.
+
+Kamu ingin memasang aplikasi baru.
+
+Daripada mengunduh file satu per satu dari internet, kamu membuka:
+
+* App Store
+* Play Store
+
+Kemudian klik Install.
+
+Package Manager bekerja dengan cara yang mirip.
+
+---
+
+## NPM (Node Package Manager)
+
+Package Manager paling populer di dunia JavaScript adalah: **NPM (Node Package Manager)**
+NPM otomatis terinstal ketika kita menginstal Node.js.
+
+---
+
+### Mengecek NPM
+
+```bash
+npm -v
+```
+
+Contoh output:
+
+```text
+10.5.0
+```
+
+---
+
+## Apa itu NPM Registry?
+
+NPM memiliki gudang package yang sangat besar bernama:
+
+Di dalamnya terdapat jutaan package yang bisa digunakan secara gratis.
+
+Alurnya:
+
+```text
+Developer
+    │
+    ▼
+ npm install
+    │
+    ▼
+ NPM Registry
+    │
+    ▼
+ Download Package
+```
+
+---
+
+## Menginstal Package
+
+Misalnya ingin menggunakan Express untuk membuat server.
+
+```bash
+npm install express
+```
+
+NPM akan:
+
+1. Mengunduh package Express.
+2. Mengunduh dependensinya.
+3. Menyimpannya di folder:
+
+```text
+node_modules/
+```
+
+---
+
+## Apa itu Dependency?
+
+Dependency adalah package yang dibutuhkan oleh package lain.
+
+Misalnya:
+
+```text
+Express
+ ├── Package A
+ ├── Package B
+ └── Package C
+```
+
+Saat menginstal Express, package lain yang dibutuhkan juga akan ikut terinstal secara otomatis.
+
+Karena itulah Package Manager sangat membantu.
+
+---
+
+## package.json
+
+Ketika membuat project Node.js biasanya kita menjalankan:
+
+```bash
+npm init
+```
+
+atau
+
+```bash
 npm init -y
-
-# 3. Install semua library yang dibutuhkan
-npm install express mysql2 dotenv
-npm install -D nodemon
-
-# 4. Lihat apa yang terbentuk
-ls
 ```
 
-Setelah dijalankan, akan muncul:
-- `package.json` — identitas & daftar library project
-- `node_modules/` — folder berisi semua library yang diunduh
-- `package-lock.json` — catatan versi library yang tepat
+NPM akan membuat file:
 
-> **Penting:** Folder `node_modules` jangan di-share atau di-upload ke GitHub. Ukurannya bisa ratusan MB! Cukup share `package.json`-nya, lalu orang lain tinggal jalankan `npm install`.
-
----
-
-## 6. Tools untuk Testing API
-
-### Teori
-
-Saat membangun API, kita perlu alat untuk **mencoba/menguji** endpoint yang kita buat — tanpa harus membuat tampilan frontend dulu.
-
-Ada dua pilihan populer:
-
-| Tools | Kelebihan | Cara Install |
-|---|---|---|
-| **Postman** | Fitur lengkap, bisa simpan koleksi request | Download di [postman.com](https://postman.com) |
-| **Thunder Client** | Ringan, langsung di dalam VS Code | Extensions VS Code → cari "Thunder Client" |
-
-### Cara Membaca Tampilan Thunder Client / Postman
-
-```
-┌─────────────────────────────────────────────────┐
-│  [GET ▼]  [http://localhost:3000/api/laporan]  [Send] │
-├─────────────────────────────────────────────────┤
-│  Params │ Headers │ Body │                      │
-├─────────────────────────────────────────────────┤
-│  Response                                        │
-│  Status: 200 OK    Time: 23ms                   │
-│                                                  │
-│  {                                               │
-│    "success": true,                              │
-│    "data": [...]                                 │
-│  }                                               │
-└─────────────────────────────────────────────────┘
+```text
+package.json
 ```
 
-### HTTP Status Code yang Perlu Diketahui
+File ini adalah identitas project.
 
-| Kode | Artinya | Kapan Muncul di Project Damkar |
-|---|---|---|
-| `200 OK` | Berhasil | GET laporan berhasil |
-| `201 Created` | Data baru berhasil dibuat | POST laporan baru berhasil |
-| `400 Bad Request` | Request salah / data tidak lengkap | POST tanpa `no_laporan` |
-| `404 Not Found` | Data tidak ditemukan | GET `/api/laporan/999` (tidak ada) |
-| `500 Internal Server Error` | Error di server | Query database gagal |
+Contoh:
 
----
-
-## 7. Setup Awal Express
-
-### Teori
-
-**Express.js** adalah framework minimalis di atas Node.js untuk membangun server dan API. Tanpa Express, membuat server di Node.js murni memerlukan banyak kode boilerplate.
-
-```javascript
-// Tanpa Express (Node.js murni — lebih ribet)
-const http = require('http')
-const server = http.createServer((req, res) => {
-  if (req.url === '/api/laporan' && req.method === 'GET') {
-    res.writeHead(200, { 'Content-Type': 'application/json' })
-    res.end(JSON.stringify({ data: [] }))
+```json
+{
+  "name": "belajar-node",
+  "version": "1.0.0",
+  "dependencies": {
+    "express": "^5.0.0"
   }
-})
-
-// Dengan Express (jauh lebih bersih)
-const express = require('express')
-const app = express()
-app.get('/api/laporan', (req, res) => {
-  res.json({ data: [] })
-})
+}
 ```
 
-### 💻 Praktik: Lihat `index.js` Project Damkar
+---
 
-Buka file `index.js`. Ini adalah **pintu masuk** seluruh aplikasi kita:
+### Fungsi package.json
 
-```javascript
-// index.js
+Menyimpan informasi seperti:
 
-require("dotenv").config();           // [1] Muat variabel dari file .env
+* Nama project
+* Versi project
+* Script yang tersedia
+* Daftar package yang digunakan
 
-const express = require("express");   // [2] Import library Express
-const app = express();                // [3] Buat instance aplikasi Express
-const PORT = process.env.PORT || 3000;// [4] Tentukan port server
+---
 
-app.use(express.json());              // [5] Middleware: agar bisa baca JSON dari request
+## node_modules
 
-app.use("/api/pos", posRoutes);       // [6] Daftarkan semua route pos
-app.use("/api/laporan", laporanRoutes);// [7] Daftarkan semua route laporan
+Setelah menginstal package, NPM membuat folder:
 
-app.listen(PORT, () => {              // [8] Nyalakan server
-  console.log(`Server berjalan di http://localhost:${PORT}`)
-})
+```text
+node_modules/
 ```
 
-**Alur eksekusi saat server dinyalakan:**
+Folder ini berisi semua package yang digunakan project.
 
-```
-node index.js
-     │
-     ├─ [1] Baca .env → DB_HOST, DB_USER, dst. tersedia
-     ├─ [2-3] Express siap
-     ├─ [4] Port ditentukan (3000)
-     ├─ [5] Middleware JSON aktif
-     ├─ [6-7] Semua route terdaftar
-     └─ [8] Server menyala, siap menerima request
+Contoh:
+
+```text
+project/
+│
+├── package.json
+├── package-lock.json
+├── node_modules/
+└── app.js
 ```
 
-### 💻 Praktik: Jalankan Server
+---
+
+## Package Manager Selain NPM
+
+Selain NPM, ada juga package manager lain:
+
+### Yarn
 
 ```bash
-# Pastikan sudah ada file .env
-cp .env.example .env
-
-# Jalankan server
-npm run dev
+yarn add express
 ```
-
-Output yang seharusnya muncul:
-```
-🚒 Server berjalan di http://localhost:3000
-📋 Dokumentasi API: http://localhost:3000/
-✅ Berhasil terhubung ke database MySQL
-```
-
-Buka browser ke `http://localhost:3000/` — kamu akan melihat daftar endpoint dalam format JSON.
-
 ---
 
-## 8. Anatomi Request & Response — Routing Dasar
+### pnpm
 
-### Teori
-
-**Route** adalah aturan yang menentukan: *"Kalau ada request dengan method X ke URL Y, jalankan fungsi Z."*
-
-```javascript
-app.METHOD(PATH, HANDLER)
-//  │       │     │
-//  │       │     └── Fungsi yang dijalankan
-//  │       └──────── URL endpoint
-//  └──────────────── HTTP Method (get, post, put, delete)
-```
-
-### Anatomi Handler Function
-
-Setiap route memiliki fungsi dengan dua parameter penting:
-
-```javascript
-app.get('/api/laporan', (req, res) => {
-//                       │    │
-//                       │    └── response: untuk mengirim jawaban ke Client
-//                       └─────── request: berisi semua info dari Client
-  
-  // Ambil sesuatu dari request:
-  console.log(req.params)  // parameter URL  → /api/laporan/:id → { id: "5" }
-  console.log(req.query)   // query string   → /api/laporan?status=proses
-  console.log(req.body)    // body request   → data JSON yang dikirim Client
-
-  // Kirim response:
-  res.json({ success: true })       // kirim JSON
-  res.status(404).json({ ... })     // kirim JSON dengan status code tertentu
-})
-```
-
-### 💻 Praktik: Lihat Struktur Route Damkar
-
-Buka file `routes/laporan.routes.js`:
-
-```javascript
-const router = express.Router()
-
-// Perhatikan urutan route — ini PENTING!
-router.get('/',               getAllLaporan)      // GET /api/laporan
-router.get('/status/:status', getLaporanByStatus) // GET /api/laporan/status/proses
-router.get('/:id',            getLaporanById)     // GET /api/laporan/5
-router.post('/',              createLaporan)
-router.put('/:id',            updateStatusLaporan)
-router.delete('/:id',         deleteLaporan)
-```
-
-> **⚠️ Kenapa `/status/:status` harus di atas `/:id`?**  
-> Express membaca route dari atas ke bawah. Jika `/:id` duluan, maka `/status/proses` akan dianggap sebagai `id = "status"`, bukan route filter. Selalu taruh route yang **lebih spesifik di atas** route yang lebih umum.
-
-### 💻 Praktik: Coba di Postman / Thunder Client
-
-```
-1. GET  http://localhost:3000/api/laporan
-   → Harus dapat daftar semua laporan
-
-2. GET  http://localhost:3000/api/laporan/1
-   → Harus dapat detail laporan ID 1
-
-3. GET  http://localhost:3000/api/laporan/status/proses
-   → Harus dapat laporan yang masih "proses"
-
-4. GET  http://localhost:3000/api/laporan/999
-   → Harus dapat response 404
+```bash
+pnpm add express
 ```
 
 ---
 
-## 9. Middleware Dasar
+## Hubungan Node.js dan Package Manager
 
-### Teori
+Banyak pemula mengira Node.js dan NPM adalah hal yang sama.
 
-**Middleware** adalah fungsi yang berjalan **di antara** request masuk dan response keluar. Ibarat pos pemeriksaan sebelum laporan kebakaran diproses oleh petugas.
+Padahal berbeda.
 
-```
-Request  ──▶  [Middleware 1]  ──▶  [Middleware 2]  ──▶  [Route Handler]  ──▶  Response
-              express.json()        (bisa custom)         getAllLaporan()
-```
+| Node.js                         | NPM                         |
+| ------------------------------- | --------------------------- |
+| Runtime JavaScript              | Package Manager             |
+| Menjalankan kode JavaScript     | Mengelola package           |
+| `node app.js`                   | `npm install express`       |
+| Mesin untuk menjalankan program | Toko aplikasi untuk package |
 
-Middleware bisa digunakan untuk:
-- **Parsing** — mengubah raw request menjadi data yang bisa dibaca
-- **Autentikasi** — cek apakah user punya akses
-- **Logging** — catat setiap request yang masuk
-- **Error Handling** — tangkap dan format error
+Analogi:
 
-### 💻 Praktik: Buktikan Pentingnya `express.json()`
-
-**Langkah 1:** Sementara komen dulu middleware di `index.js`:
-
-```javascript
-// app.use(express.json())  ← di-komen dulu
+```text
+Node.js = Android
+NPM     = Play Store
 ```
 
-**Langkah 2:** Coba POST request di Postman:
+Android menjalankan aplikasi.
+
+Play Store mengelola aplikasi.
+
+Begitu pula:
+
+* Node.js menjalankan JavaScript.
+* NPM mengelola package JavaScript.
+
+---
+
+## Ringkasan
+
+* **Node.js** adalah runtime yang memungkinkan JavaScript berjalan di luar browser.
+* Node.js menggunakan **V8 Engine** untuk menjalankan JavaScript.
+* **Package** adalah kumpulan kode siap pakai yang dibuat untuk menyelesaikan tugas tertentu.
+* **Package Manager** adalah alat untuk mengelola package dan dependency.
+* **NPM** adalah package manager bawaan Node.js.
+* File **package.json** menyimpan informasi project dan daftar dependency.
+* Folder **node_modules** berisi seluruh package yang digunakan project.
+
+> **Inti konsepnya:** Node.js adalah mesin yang menjalankan JavaScript di komputer atau server, sedangkan Package Manager (NPM) adalah alat yang membantu kita mengunduh dan mengelola kode buatan developer lain agar tidak perlu membuat semuanya dari nol.
+
+Nah, setelah memahami:
+
+1. Client-Server → siapa yang berkomunikasi.
+2. API → aturan komunikasinya.
+3. JSON → format datanya.
+4. Node.js → lingkungan untuk menjalankan JavaScript di server.
+5. NPM → alat untuk menginstal package.
+
+Langkah berikutnya yang biasanya dipelajari adalah **Express.js**, karena Express adalah framework yang membantu kita membuat server dan API dengan lebih mudah.
+
+# Apa itu Express.js?
+
+## Definisi
+
+**Express.js** adalah framework untuk Node.js yang digunakan untuk membuat:
+
+* Web Server
+* REST API
+* Backend Application
+
+dengan lebih mudah dan cepat.
+
+Express menyediakan berbagai fitur yang membantu developer menangani request dan response tanpa harus menulis kode server dari nol.
+
+---
+
+## Kenapa Perlu Express?
+
+Node.js sebenarnya sudah bisa membuat server sendiri.
+
+Contohnya:
+
+```js
+const http = require("http");
+
+const server = http.createServer((req, res) => {
+  res.end("Hello World");
+});
+
+server.listen(3000);
 ```
-POST http://localhost:3000/api/laporan
-Body (JSON):
+
+Kode di atas bekerja, tetapi ketika aplikasi menjadi besar:
+
+* Banyak endpoint
+* Banyak middleware
+* Banyak validasi
+* Banyak route
+
+kode akan menjadi sulit dikelola.
+
+Express menyederhanakan semuanya.
+
+---
+
+## Dengan Express
+
+Kode yang sama bisa ditulis:
+
+```js
+const express = require("express");
+
+const app = express();
+
+app.get("/", (req, res) => {
+  res.send("Hello World");
+});
+
+app.listen(3000);
+```
+
+Lebih pendek dan lebih mudah dibaca.
+
+---
+
+## Analogi Sederhana
+
+Bayangkan kamu ingin membangun rumah.
+
+### Menggunakan Node.js Murni
+
+Kamu membuat sendiri:
+
+* Batu bata
+* Pintu
+* Jendela
+* Atap
+
+Semuanya dari nol.
+
+### Menggunakan Express
+
+Kamu sudah diberi:
+
+* Pondasi
+* Pintu siap pakai
+* Jendela siap pakai
+* Kerangka bangunan
+
+Tinggal fokus membangun rumahnya.
+
+Express tidak menggantikan Node.js.
+
+Express **dibangun di atas Node.js**.
+
+```text
+Aplikasi Kamu
+      ↑
+   Express
+      ↑
+    Node.js
+      ↑
+ Operating System
+```
+
+---
+
+## Setup Project Express
+
+### 1. Buat Folder Project
+
+Misalnya di CMD/PowerShell/Git Command:
+
+```bash
+mkdir belajar-express
+cd belajar-express
+```
+
+atau bikin seperti biasa di file explorer
+
+---
+
+### 2. Inisialisasi Project Node.js
+
+Jalankan di powershell vscode:
+
+```bash
+npm init -y
+```
+
+Akan muncul file:
+
+```text
+package.json
+```
+
+Contoh:
+
+```json
 {
-  "no_laporan": "LAP-2024-011",
-  "tanggal_kejadian": "2024-12-10",
-  "alamat_kejadian": "Jl. Sudirman No. 5",
-  "pos_id": 1
+  "name": "belajar-express",
+  "version": "1.0.0"
 }
-```
-
-**Hasil:** Error — `req.body` akan bernilai `undefined`, validasi gagal.
-
-**Langkah 3:** Aktifkan kembali middleware:
-```javascript
-app.use(express.json())  // ← aktifkan lagi
-```
-
-**Langkah 4:** Coba POST yang sama → sekarang berhasil!
-
-### 💻 Praktik: Lihat `errorHandler.js`
-
-```javascript
-// middleware/errorHandler.js
-
-const errorHandler = (err, req, res, next) => {
-//                    │              │
-//                    │              └── next: lanjut ke middleware berikutnya
-//                    └─────────────── err: object error yang ditangkap
-
-  console.error('Error:', err.message)
-
-  res.status(err.statusCode || 500).json({
-    success: false,
-    message: err.message || 'Terjadi kesalahan pada server'
-  })
-}
-```
-
-Error handler **selalu punya 4 parameter** `(err, req, res, next)` — ini yang membedakannya dari middleware biasa. Di `index.js`, error handler didaftarkan **paling terakhir**:
-
-```javascript
-// index.js
-app.use('/api/pos', posRoutes)
-app.use('/api/laporan', laporanRoutes)
-app.use((req, res) => { /* 404 handler */ })
-app.use(errorHandler)  // ← selalu paling bawah
 ```
 
 ---
 
-## 10. Koneksi Database & Async/Await
+### 3. Install Express
 
-### Teori
-
-#### Koneksi MySQL
-
-Sebelum bisa query, kita harus terhubung ke database. Lihat `config/database.js`:
-
-```javascript
-const mysql = require('mysql2')
-require('dotenv').config()
-
-const db = mysql.createConnection({
-  host:     process.env.DB_HOST,     // dari file .env
-  user:     process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME
-})
-
-db.connect((err) => {
-  if (err) {
-    console.error('❌ Gagal koneksi:', err.message)
-    process.exit(1)  // hentikan server jika DB tidak bisa dihubungi
-  }
-  console.log('✅ Berhasil terhubung ke database MySQL')
-})
-
-module.exports = db  // ekspor agar bisa dipakai file lain
+```bash
+npm install express
 ```
 
-File `.env` yang menyimpan konfigurasi:
-```
-DB_HOST=localhost
-DB_USER=root
-DB_PASSWORD=
-DB_NAME=damkar_db
-PORT=3000
-```
+NPM akan mengunduh Express dan dependensinya.
 
-> **Kenapa pakai `.env`?** Agar password database tidak ikut ter-upload ke GitHub. File `.env` selalu masuk ke `.gitignore`.
+Struktur folder:
 
-#### Asynchronous — Masalah yang Harus Dipahami
-
-Query ke database **membutuhkan waktu**. JavaScript tidak boleh "diam menunggu" karena itu akan membekukan seluruh server.
-
-```javascript
-// ❌ CARA SALAH — seolah-olah JavaScript bisa menunggu
-const hasil = db.query('SELECT * FROM laporan_kebakaran')
-console.log(hasil) // ini jalan SEBELUM query selesai → undefined!
-
-// ✅ CARA BENAR — beritahu JavaScript untuk menunggu dengan async/await
-const getAllLaporan = async () => {
-  const hasil = await db.promise().query('SELECT * FROM laporan_kebakaran')
-  console.log(hasil) // ini jalan SETELAH query selesai ✓
-}
+```text
+belajar-express/
+│
+├── node_modules/
+├── package.json
+├── package-lock.json
 ```
 
-**Analogi:** Kamu memesan makanan di restoran. Kamu tidak berdiri diam di depan kasir menunggu makanannya jadi — kamu duduk, sambil ngobrol. Saat makanan siap, pelayan datang. `await` adalah cara JavaScript "duduk sambil ngobrol" sambil menunggu database.
+---
 
-### 💻 Praktik: Pahami Arsitektur Controller → Service
+### 4. Buat File Server
 
-Project damkar menggunakan pola **Controller → Service**. Ini memisahkan dua tanggung jawab:
+Misalnya:
 
-```
-Request ──▶ Route ──▶ Controller ──▶ Service ──▶ Database
-                       │               │
-                       │               └── "Gimana caranya ambil data?"
-                       │                   (logika query SQL ada di sini)
-                       │
-                       └── "Apa yang harus direspons ke Client?"
-                           (validasi input, format response ada di sini)
+```text
+server.js
 ```
 
-**Lihat `controllers/laporan.controller.js`:**
+---
 
-```javascript
-const getAllLaporan = async (req, res) => {
-  try {
-    // Controller memanggil Service — tidak tahu detail query-nya
-    const results = await laporanService.getAllLaporan()
+### 5. Tulis Kode Express
 
-    // Controller yang bertanggung jawab atas format response
-    res.json({
-      success: true,
-      total: results.length,
-      data: results
-    })
-  } catch (err) {
-    // Jika ada error, kembalikan pesan error
-    res.status(500).json({ success: false, message: err.message })
-  }
-}
+```js
+const express = require("express");
+
+const app = express();
+
+app.get("/", (req, res) => {
+  res.send("Hello World");
+});
+
+app.listen(3000, () => {
+  console.log("Server berjalan di port 3000");
+});
 ```
 
-**Lihat `services/laporan.service.js`** *(yang perlu kamu buat)*:
+---
 
-```javascript
-const db = require('../config/database')
+### 6. Jalankan Server
 
-// Service hanya tahu satu hal: query ke database
-const getAllLaporan = () => {
-  return new Promise((resolve, reject) => {
-    const query = `
-      SELECT
-        l.id,
-        l.no_laporan,
-        l.tanggal_kejadian,
-        l.alamat_kejadian,
-        l.tingkat_bahaya,
-        l.status,
-        l.keterangan,
-        p.nama_pos   AS nama_pos_penanganan,
-        p.wilayah    AS wilayah_pos,
-        p.no_telp    AS telp_pos
-      FROM laporan_kebakaran l
-      INNER JOIN pos_pemadam p ON l.pos_id = p.id
-      ORDER BY l.tanggal_kejadian DESC
-    `
-
-    db.query(query, (err, results) => {
-      if (err) reject(err)
-      else resolve(results)
-    })
-  })
-}
-
-module.exports = { getAllLaporan }
+```bash
+node server.js
 ```
 
-### 💻 Praktik: Perhatikan Query JOIN-nya
+Output:
 
-```sql
-FROM laporan_kebakaran l          -- tabel utama, alias "l"
-INNER JOIN pos_pemadam p          -- tabel yang digabung, alias "p"
-  ON l.pos_id = p.id              -- kondisi: kolom pos_id di laporan harus sama dengan id di pos
+```text
+Server berjalan di port 3000
 ```
 
-**INNER JOIN** = hanya tampilkan data yang **punya pasangan di kedua tabel**.
+---
 
-```
-laporan_kebakaran          pos_pemadam
-┌────┬─────────┬───────┐   ┌────┬──────────────────────┐
-│ id │ no_lap  │pos_id │   │ id │ nama_pos             │
-├────┼─────────┼───────┤   ├────┼──────────────────────┤
-│  1 │LAP-001  │  1    │──▶│  1 │ Pos Utama Bdg Tengah │ ← TAMPIL
-│  2 │LAP-002  │  2    │──▶│  2 │ Pos Bandung Barat    │ ← TAMPIL
-│  3 │LAP-003  │  99   │──▶│ 99 │ (tidak ada!)         │ ← TIDAK TAMPIL
-└────┴─────────┴───────┘   └────┴──────────────────────┘
+### 7. Akses Browser
+
+Buka:
+
+```text
+http://localhost:3000
 ```
 
-### 💻 Praktik: Uji Coba Lengkap di Postman
+Hasil:
 
-**1. Ambil semua laporan (pakai JOIN)**
-```
-GET http://localhost:3000/api/laporan
+```text
+Hello World
 ```
 
-**2. Buat laporan baru**
-```
-POST http://localhost:3000/api/laporan
-Content-Type: application/json
+Selamat Guysss
 
+Kamu baru saja membuat web server pertama menggunakan Express.
+
+---
+
+## Memahami Kode Express
+
+### Membuat Aplikasi Express
+
+```js
+const express = require("express");
+const app = express();
+```
+
+`app` adalah objek utama yang akan digunakan untuk membuat server.
+
+---
+
+### Membuat Route
+
+```js
+app.get("/", (req, res) => {
+  res.send("Hello World");
+});
+```
+
+Artinya:
+
+> Jika ada request GET ke "/", kirimkan "Hello World".
+
+---
+
+### Menjalankan Server
+
+```js
+app.listen(3000);
+```
+
+Artinya:
+
+> Dengarkan request pada port 3000.
+
+---
+
+## Apa itu Route?
+
+Route adalah alamat yang bisa diakses client.
+
+Contoh:
+
+```js
+app.get("/", (req, res) => {
+  res.send("Home");
+});
+
+app.get("/about", (req, res) => {
+  res.send("About");
+});
+
+app.get("/contact", (req, res) => {
+  res.send("Contact");
+});
+```
+
+Jika browser membuka:
+
+```text
+localhost:3000/about
+```
+
+Maka server mengirim:
+
+```text
+About
+```
+
+---
+
+## Mengirim JSON
+
+Express sangat sering digunakan untuk membuat API.
+
+Contoh:
+
+```js
+app.get("/user", (req, res) => {
+  res.json({
+    nama: "Ahmad",
+    jurusan: "Informatika"
+  });
+});
+```
+
+Ketika membuka:
+
+```text
+localhost:3000/user
+```
+
+Hasil:
+
+```json
 {
-  "no_laporan": "LAP-2024-011",
-  "tanggal_kejadian": "2024-12-10",
-  "alamat_kejadian": "Jl. Sudirman No. 5, Bandung",
-  "kelurahan": "Sumurbandung",
-  "tingkat_bahaya": "tinggi",
-  "keterangan": "Kebakaran gedung perkantoran",
-  "pos_id": 1
+  "nama": "Ahmad",
+  "jurusan": "Informatika"
 }
 ```
 
-**3. Update status laporan**
-```
-PUT http://localhost:3000/api/laporan/11
-Content-Type: application/json
+Inilah contoh API sederhana.
 
-{
-  "status": "selesai",
-  "keterangan": "Berhasil dipadamkan pukul 15.30 WIB"
-}
+---
+
+## Request dan Response
+
+Di setiap route ada:
+
+```js
+(req, res)
 ```
 
-**4. Hapus laporan**
-```
-DELETE http://localhost:3000/api/laporan/11
+### req (Request)
+
+Berisi informasi yang dikirim client.
+
+Contoh:
+
+```js
+req.params
+req.query
+req.body
 ```
 
 ---
 
-## Rangkuman
+### res (Response)
 
-| Konsep | Penjelasan Singkat | Tempat di Project Damkar |
-|---|---|---|
-| Client-Server | Pemisahan antara yang minta data dan yang sediakan data | Postman ↔ Express ↔ MySQL |
-| RESTful API | Aturan standar membangun API | Semua endpoint `/api/...` |
-| HTTP Method | Kata kerja aksi (GET/POST/PUT/DELETE) | `router.get()`, `router.post()`, dst |
-| JSON | Format data komunikasi Client-Server | Semua `res.json({ ... })` |
-| Node.js | Runtime JS di server | Menjalankan seluruh project |
-| NPM | Pengelola library/package | `package.json`, `node_modules` |
-| Express | Framework server di atas Node.js | `index.js` |
-| Routing | Aturan: method + URL → fungsi | `routes/laporan.routes.js` |
-| Middleware | Fungsi perantara request-response | `express.json()`, `errorHandler.js` |
-| Async/Await | Menangani operasi yang butuh waktu | `laporanService.getAllLaporan()` |
-| JOIN | Menggabungkan 2 tabel dalam 1 query | Query di `laporan.service.js` |
+Digunakan untuk mengirim balasan ke client.
+
+Contoh:
+
+```js
+res.send()
+res.json()
+res.status()
+```
 
 ---
 
-## Tugas Mandiri
+## Struktur Project Express Pemula
 
-Setelah workshop selesai, coba kerjakan sendiri:
+Biasanya setelah project mulai berkembang:
 
-1. **Tambahkan endpoint baru** `GET /api/laporan/bahaya/:tingkat` yang memfilter laporan berdasarkan `tingkat_bahaya` (rendah / sedang / tinggi)
+```text
+belajar-express/
+│
+├── node_modules/
+├── routes/
+│   └── user.route.js
+│
+├── controllers/
+│   └── user.Controller.js
+│
+├── package.json
+├── package-lock.json
+└── server.js
+```
 
-2. **Buat service dan controller** untuk endpoint tersebut mengikuti pola yang sudah ada
+Namun untuk tahap awal cukup:
 
-3. **Uji di Postman** — pastikan response-nya konsisten dengan endpoint lain (ada `success`, `total`, `data`)
+```text
+belajar-express/
+│
+├── server.js
+├── package.json
+└── node_modules/
+```
 
-> **Hint:** Polanya hampir sama persis dengan `getLaporanByStatus`. Cukup ganti kolom yang difilter dari `status` menjadi `tingkat_bahaya`.
+---
+
+## Alur yang Terjadi Saat Browser Mengakses API
+
+Misalnya browser membuka:
+
+```text
+http://localhost:3000/user
+```
+
+Alurnya:
+
+```text
+Browser
+   │
+   │ GET /user
+   ▼
+Express Server
+   │
+   │ Cari route /user
+   ▼
+Handler Route
+   │
+   │ res.json(...)
+   ▼
+Browser
+```
+
+Browser menerima JSON lalu menampilkannya.
+
+---
+
+## Ringkasan
+
+* **Express.js** adalah framework backend untuk Node.js.
+* Express digunakan untuk membuat web server dan REST API dengan lebih mudah.
+* Install Express menggunakan:
+
+```bash
+npm install express
+```
+
+* Membuat server dasar:
+
+```js
+const express = require("express");
+const app = express();
+```
+
+* Membuat route:
+
+```js
+app.get("/", (req, res) => {});
+```
+
+* Menjalankan server:
+
+```js
+app.listen(3000);
+```
+
+* Mengirim JSON:
+
+```js
+res.json({...});
+```
+
+> **Inti konsep Express:** Jika Node.js adalah mesin mobil, maka Express adalah body dan setir yang membuat mobil tersebut jauh lebih mudah digunakan untuk membangun backend dan API. Setelah menguasai Express dasar, materi berikutnya biasanya adalah **HTTP Method (GET, POST, PUT, DELETE)** dan **REST API**, karena itulah penggunaan Express yang paling umum di dunia kerja.
+
+
+
