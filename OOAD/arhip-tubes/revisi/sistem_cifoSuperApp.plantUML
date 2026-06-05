@@ -1,0 +1,30 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor Pelanggan
+actor Finance
+actor "Admin Walanja" as AdminWalanja
+
+rectangle "Cifo Super Apps" {
+    
+    usecase "Melakukan Top Up Saldo C-Pay" as UC_TopUp
+    usecase "Membayar Tagihan Internet" as UC_BayarInternet
+    usecase "Memesan Kamar Hotel" as UC_PesanHotel
+    
+    usecase "Memvalidasi Transaksi Masuk" as UC_ValidasiMasuk
+    usecase "Mengelola Ketersediaan Kamar" as UC_KelolaKamar
+    
+    ' Bayar internet dan pesan hotel membutuhkan saldo C-Pay
+    UC_BayarInternet .> UC_TopUp : <<include>>
+    UC_PesanHotel .> UC_TopUp : <<include>>
+}
+
+Pelanggan -- UC_TopUp
+Pelanggan -- UC_BayarInternet
+Pelanggan -- UC_PesanHotel
+
+Finance -- UC_ValidasiMasuk
+
+AdminWalanja -- UC_KelolaKamar
+@enduml
