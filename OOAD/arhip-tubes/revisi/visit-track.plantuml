@@ -1,0 +1,26 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor Sales
+actor "Calon Pelanggan" as CalonPelanggan
+
+rectangle "Sistem VisitTrack (Aplikasi Sales)" {
+    
+    usecase "Mencatat Koordinat Lokasi Kunjungan" as UC_Koordinat
+    usecase "Mendata Status dan Keluhan" as UC_DataProspek
+    usecase "Mengajukan Eskalasi Pemasangan" as UC_Eskalasi
+    
+    ' Menggunakan extend karena eskalasi hanya dilakukan JIKA calon pelanggan berminat berlangganan
+    UC_Eskalasi .up.> UC_DataProspek : <<extend>>
+}
+
+' Association (Garis interaksi tanpa panah)
+Sales -- UC_Koordinat
+Sales -- UC_DataProspek
+Sales -- UC_Eskalasi
+
+' Calon Pelanggan berinteraksi dengan sistem dengan cara memberikan data kondisinya kepada Sales
+CalonPelanggan -- UC_DataProspek
+
+@enduml

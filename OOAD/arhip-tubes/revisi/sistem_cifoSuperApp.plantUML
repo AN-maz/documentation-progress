@@ -4,7 +4,7 @@ skinparam packageStyle rectangle
 
 actor Pelanggan
 actor Finance
-actor "Admin Walanja" as AdminWalanja
+actor "Divisi Walanja" as DivisiWalanja
 
 rectangle "Cifo Super Apps" {
     
@@ -16,8 +16,8 @@ rectangle "Cifo Super Apps" {
     usecase "Mengelola Ketersediaan Kamar" as UC_KelolaKamar
     
     ' Bayar internet dan pesan hotel membutuhkan saldo C-Pay
-    UC_BayarInternet .> UC_TopUp : <<include>>
-    UC_PesanHotel .> UC_TopUp : <<include>>
+    UC_BayarInternet .> UC_TopUp : <<ekstend>>
+    UC_PesanHotel .> UC_TopUp : <<ekstend>>
 }
 
 Pelanggan -- UC_TopUp
@@ -26,5 +26,5 @@ Pelanggan -- UC_PesanHotel
 
 Finance -- UC_ValidasiMasuk
 
-AdminWalanja -- UC_KelolaKamar
+DivisiWalanja -- UC_KelolaKamar
 @enduml
