@@ -29,13 +29,18 @@ rectangle "Sistem Operasional Terintegrasi Cifo" {
     usecase "Menyiapkan Perangkat Instalasi" as UC_SiapBarang
     usecase "Melakukan Instalasi Fisik" as UC_Instalasi
     
+    usecase "Mengajukan Pembelian Barang" as UC_BeliBarang
+    
     ' Include horizontal ke sub use case
     UC_Instalasi .> UC_CekJaringan : <<include>>
     UC_Instalasi .> UC_MintaBarang : <<include>>
 
+    ' Extend: Logistik mengajukan pembelian barang JIKA stok kosong
+    UC_BeliBarang .up.> UC_SiapBarang : <<extend>>
+
     ' --- Modul Finance ---
     usecase "Memvalidasi Pembayaran Pelanggan" as UC_Validasi
-    usecase "Menyetujui Eskalasi Pendanaan" as UC_ApprovalFinance
+    usecase "Menyetujui Pembelian Barang" as UC_ApprovalFinance
     
     ' --- Modul NOC ---
     usecase "Mengaktifkan Akses Internet" as UC_Aktivasi
@@ -56,6 +61,7 @@ Teknisi -- UC_MintaBarang
 Teknisi -- UC_CekJaringan
 
 Logistik -- UC_SiapBarang
+Logistik -- UC_BeliBarang
 
 Finance -- UC_Validasi
 Finance -- UC_ApprovalFinance
