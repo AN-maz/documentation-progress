@@ -8,6 +8,7 @@ actor Logistik
 actor Finance
 actor NOC
 
+' Generalisasi Actor secara vertikal untuk Customer Service
 actor "Customer Service" as CS
 actor "CS Care" as CSCare
 actor "CS Support" as CSSupport
@@ -19,41 +20,55 @@ CS <|-- CSService
 
 rectangle "Sistem Operasional Terintegrasi Cifo" {
     
-
+    ' --- Modul Sales ---
     usecase "Mencatat Data Prospek Pelanggan" as UC_Visit
     
+    ' --- Modul Teknis & Logistik ---
     usecase "Mengecek Ketersediaan Jaringan (ODP)" as UC_CekJaringan
     usecase "Mengajukan Pengambilan Perangkat" as UC_MintaBarang
     usecase "Menyiapkan Perangkat Instalasi" as UC_SiapBarang
     usecase "Melakukan Instalasi Fisik" as UC_Instalasi
+    
     usecase "Mengajukan Pembelian Barang" as UC_BeliBarang
     
+    ' Include horizontal ke sub use case
     UC_Instalasi .> UC_CekJaringan : <<include>>
     UC_Instalasi .> UC_MintaBarang : <<include>>
+
+    ' Extend: Logistik mengajukan pembelian barang JIKA stok kosong
     UC_BeliBarang .up.> UC_SiapBarang : <<extend>>
 
+    ' --- Modul Finance ---
     usecase "Memvalidasi Pembayaran Pelanggan" as UC_Validasi
     usecase "Menyetujui Pembelian Barang" as UC_ApprovalFinance
-
+    
+    ' --- Modul NOC ---
     usecase "Mengaktifkan Akses Internet" as UC_Aktivasi
+    ' Aktivasi hanya bisa terjadi jika finance sudah memvalidasi
     UC_Aktivasi .> UC_Validasi : <<include>>
-
-    usecase "Mengakses Data Pelanggan" as UC_AksesData 
+    
+    ' --- Modul Customer Service ---
     usecase "Menangani Keluhan Umum" as UC_Komplain
     usecase "Memberikan Bantuan Teknis Awal" as UC_Bantuan
     usecase "Memperbarui Administrasi Pelanggan" as UC_Admin
 }
 
+' Association (Garis tanpa panah)
 Sales -- UC_Visit
+
 Teknisi -- UC_Instalasi
 Teknisi -- UC_MintaBarang
 Teknisi -- UC_CekJaringan
+
 Logistik -- UC_SiapBarang
 Logistik -- UC_BeliBarang
+
 Finance -- UC_Validasi
 Finance -- UC_ApprovalFinance
+
 NOC -- UC_Aktivasi
-CS -- UC_AksesData
+
+' Menghubungkan aktor spesifik CS ke Use Case masing-masing
 CSCare -- UC_Komplain
 CSSupport -- UC_Bantuan
 CSService -- UC_Admin
