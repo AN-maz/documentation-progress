@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>inventory-frontend</title>
+  </head>
+  <body class="bg-gray-100 min-h-screen p-6">
+    
+    <div id="app" class="max-w-4xl mx-auto">
+      <h1 class="text-2xl font-bold text-gray-800 mb-6">📦 Inventory Produk</h1>
+
+      <div class="bg-white rounded-lg shadow p-6 mb-6">
+        <h2 id="form-title" class="text-lg font-semibold text-gray-600 mb-4">Tambah Produk</h2>
+        <input type="hidden" id="product-id" />
+        <input type="text" id="input-name" placeholder="Nama Produk"
+          class="block w-full border border-gray-300 rounded px-3 py-2 mb-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400" />
+        <input type="number" id="input-price" placeholder="Harga"
+          class="block w-full border border-gray-300 rounded px-3 py-2 mb-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400" />
+        <input type="number" id="input-category" placeholder="ID Kategori"
+          class="block w-full border border-gray-300 rounded px-3 py-2 mb-4 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400" />
+        
+        <div class="flex gap-2">
+          <button id="btn-submit"
+            class="bg-green-500 hover:bg-green-600 text-white text-sm font-medium px-4 py-2 rounded">
+            Simpan
+          </button>
+          <button id="btn-cancel"
+            class="hidden bg-gray-400 hover:bg-gray-500 text-white text-sm font-medium px-4 py-2 rounded">
+            Batal
+          </button>
+        </div>
+      </div>
+
+      <div id="notifikasi" class="hidden px-4 py-3 rounded mb-4 text-sm"></div>
+
+      <div class="bg-white rounded-lg shadow p-6">
+        <h2 class="text-lg font-semibold text-gray-600 mb-4">Daftar Produk</h2>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm text-left">
+            <thead class="bg-gray-50 text-gray-500 font-semibold">
+              <tr>
+                <th class="px-4 py-3">ID</th>
+                <th class="px-4 py-3">Nama Produk</th>
+                <th class="px-4 py-3">Harga</th>
+                <th class="px-4 py-3">Kategori</th>
+                <th class="px-4 py-3">Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="tabel-body">
+              </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
