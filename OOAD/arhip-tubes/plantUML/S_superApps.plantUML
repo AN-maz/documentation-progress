@@ -15,9 +15,9 @@ rectangle "Cifo Super Apps" {
     usecase "Memvalidasi Transaksi Masuk" as UC_ValidasiMasuk
     usecase "Mengelola Ketersediaan Kamar" as UC_KelolaKamar
     
-    ' Bayar internet dan pesan hotel membutuhkan saldo C-Pay
-    UC_BayarInternet .> UC_TopUp : <<ekstend>>
-    UC_PesanHotel .> UC_TopUp : <<ekstend>>
+    ' Perbaikan: Arah panah <<extend>> ditarik dari Extension Case ke Base Case
+    UC_TopUp .up.> UC_BayarInternet : <<extend>>
+    UC_TopUp .up.> UC_PesanHotel : <<extend>>
 }
 
 Pelanggan -- UC_TopUp
@@ -27,4 +27,5 @@ Pelanggan -- UC_PesanHotel
 Finance -- UC_ValidasiMasuk
 
 DivisiWalanja -- UC_KelolaKamar
+
 @enduml

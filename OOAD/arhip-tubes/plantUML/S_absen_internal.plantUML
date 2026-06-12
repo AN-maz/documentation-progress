@@ -9,23 +9,24 @@ actor Sales
 Karyawan <|-- Sales
 
 rectangle "Sistem Absensi Internal Cifo" {
-    
+
     usecase "Mendaftarkan Wajah & NIP" as UC_Daftar
     usecase "Mendeteksi Lokasi & Fake GPS" as UC_Deteksi
-    
+
     usecase "Melakukan Presensi" as UC_Presensi
-    
+
     ' Mengelompokkan anak-anak use case
     usecase "Presensi via Face Recognition" as UC_Face
     usecase "Presensi via Mobile App (Untuk Android)" as UC_App
     usecase "Presensi via Web (Untuk iOS)" as UC_Web
-    
-    UC_Presensi <|-- UC_Face
-    UC_Presensi <|-- UC_App
-    UC_Presensi <|-- UC_Web
-    
+
+
+    UC_Presensi .up.> UC_App : <<extend>>
+    UC_Presensi .up.> UC_Web : <<extend>>
+    UC_Presensi .up.> UC_Face : <<extend>>
+
     usecase "Melakukan Public Absen" as UC_PublicAbsen
-    
+
     ' Mengarahkan panah <<extend>> ke atas sesuai aturan materi Sesi 04
     UC_PublicAbsen .up.> UC_App : <<extend>>
     UC_PublicAbsen .up.> UC_Web : <<extend>>

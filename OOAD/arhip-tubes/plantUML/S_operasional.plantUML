@@ -8,17 +8,15 @@ actor Logistik
 actor Finance
 actor NOC
 
+' Sesuai Wawancara: Hanya ada 3 entitas CS
 actor "Customer Service" as CS
 actor "CS Care" as CSCare
 actor "CS Support" as CSSupport
-actor "CS Service" as CSService
 
 CS <|-- CSCare
 CS <|-- CSSupport
-CS <|-- CSService
 
 rectangle "Sistem Operasional Terintegrasi Cifo" {
-    
 
     usecase "Mencatat Data Prospek Pelanggan" as UC_Visit
     
@@ -46,16 +44,17 @@ rectangle "Sistem Operasional Terintegrasi Cifo" {
 
 Sales -- UC_Visit
 Teknisi -- UC_Instalasi
-Teknisi -- UC_MintaBarang
-Teknisi -- UC_CekJaringan
+
 Logistik -- UC_SiapBarang
 Logistik -- UC_BeliBarang
 Finance -- UC_Validasi
 Finance -- UC_ApprovalFinance
 NOC -- UC_Aktivasi
+
+' --- REVISI JALUR HUBUNGAN CS ---
 CS -- UC_AksesData
+CS -- UC_Admin          
 CSCare -- UC_Komplain
 CSSupport -- UC_Bantuan
-CSService -- UC_Admin
 
 @enduml
