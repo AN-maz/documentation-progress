@@ -15,7 +15,7 @@ Dalam pemrograman, kita butuh tempat untuk menyimpan data (seperti nama, umur, a
 
     // Membuat variabel menggunakan 'let' (nilainya bisa diubah nanti)
     let namaPeserta = "Andrian"; // String
-    let umur = 20; // Number
+    let umur = 22; // Number
     let sudahLulus = false; // Boolean
 
     // Mencetak hasilnya ke console browser

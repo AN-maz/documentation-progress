@@ -6,27 +6,44 @@ const productService = {
       SELECT p.id, p.name, p.price, c.id AS category_id, c.name AS category_name
       FROM products p
       INNER JOIN categories c ON p.category_id = c.id
+<<<<<<< HEAD
     `; 
+=======
+    `;
+
+>>>>>>> 0673f2ffc473d3165ab51366aff4b444d87f3d64
     const [rows] = await db.query(query);
     return rows;
   },
 
   createProduct: async (productData) => {
     const { name, price, category_name } = productData;
+<<<<<<< HEAD
     
     let categoryId;
     
+=======
+
+    let categoryId;
+
+>>>>>>> 0673f2ffc473d3165ab51366aff4b444d87f3d64
     const [existingCat] = await db.query("SELECT id FROM categories WHERE name = ?", [category_name]);
     
     if (existingCat.length > 0) {
       categoryId = existingCat[0].id;
     } else {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0673f2ffc473d3165ab51366aff4b444d87f3d64
       const [newCat] = await db.query("INSERT INTO categories (name) VALUES (?)", [category_name]);
       categoryId = newCat.insertId;
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0673f2ffc473d3165ab51366aff4b444d87f3d64
     const query = "INSERT INTO products (name, price, category_id) VALUES (?, ?, ?)";
     const [result] = await db.query(query, [name, price, categoryId]);
     

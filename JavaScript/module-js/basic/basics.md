@@ -266,33 +266,29 @@ document.getElementById("judul").innerHTML = "Hello";
 
 ## Latihan (Practical Exercise)
 
-
 ### Latihan 1: Logika dan Perulangan Dasar
 
 Buka konsol browser Anda, lalu buatlah sebuah for loop yang mencetak angka 1 sampai 10. Jika angkanya genap, cetak "[Angka] adalah Genap", jika ganjil cetak "[Angka] adalah Ganjil".
 
 ```js
-
 // TODO: Buat for loop dari let i = 1 sampai i <= 10
 
 // TODO: Gunakan if statement dan operator modulus (%) untuk mengecek genap/ganjil
 // Hint: i % 2 === 0 berarti angka genap
 
 // TODO: Console.log hasilnya
-
 ```
 
 ### Latihan 2: Array dan foreach
+
 Diberikan sebuah Array nama-nama warna. Gunakan metode forEach untuk mencetak setiap warna ke console dalam huruf kapital.
 
 ```js
-
 let daftarWarna = ["merah", "kuning", "hijau", "biru"];
 
 // TODO: Panggil method forEach pada daftarWarna
 // TODO: Di dalam fungsi forEach, gunakan metode .toUpperCase() untuk mengubah teks menjadi kapital
 // TODO: console.log hasilnya
-
 ```
 
 [⬆ Kembali ke Daftar Isi](#daftar-isi)
@@ -304,6 +300,7 @@ Challenge: Interaktif "Daftar Belanja" (Shopping List)
 Buatlah sebuah aplikasi web sederhana dengan satu file `index.html` yang menggabungkan HTML dasar dan JavaScript.
 
 Spesifikasi UI (HTML):
+
 - Sebuah `<h1>` dengan judul "Daftar Belanja".
 - Sebuah tag `<ul>` dengan ID list-belanja (awalnya kosong).
 - Sebuah tombol dengan teks "Tampilkan Daftar Belanja".

@@ -8,7 +8,7 @@ Proyek ini merupakan sebuah web application yang digunakan untuk mengelola siste
 
 Web application ini diharapkan dapat menjadi platform pendukung pembelajaran dan aktivitas organisasi UKM English Club UTB.
 
-untuk ekosistem project yang saya gunakan adalah **PHP MVC**. Referensi dari ch yt Dosen Unpas **Bapak Sanhdika Galih**. 
+untuk ekosistem project yang saya gunakan adalah **PHP MVC**. Referensi dari ch yt **Bapak Sanhdika Galih**. 
 
 Dengan Frontend di bagian:
 - app/views
