@@ -1,0 +1,21 @@
+@startuml
+|Sistem VisitTrack|
+start
+:Otomatis memunculkan form tambahan eskalasi;
+
+|Sales|
+repeat
+  :Melengkapi data pendukung\n(Nama, WA, dan Detail Alamat);
+  :Menekan tombol "Eskalasi ke Tim Teknis";
+  
+  |Sistem VisitTrack|
+  :Memverifikasi kelengkapan pengisian form tambahan;
+  backward:Menampilkan pesan "Harap lengkapi seluruh data pelanggan"\ndan membatalkan pengiriman tiket sementara (4E);
+repeat while (Apakah ada kolom data wajib yang kosong?) is ([Ya]) not ([Tidak])
+
+:Menggabungkan data diri dengan koordinat lokasi;
+:Membuat dokumen "Tiket Pemasangan";
+:Mengirim tiket ke sistem operasional Tim Teknis;
+:Menampilkan notifikasi "Eskalasi Berhasil";
+stop
+@enduml

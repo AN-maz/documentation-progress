@@ -1,0 +1,21 @@
+@startuml
+|Finance|
+start
+:Membuka daftar tagihan pemasangan baru\nyang berstatus "Menunggu Validasi";
+:Mencocokkan bukti transfer secara manual\ndengan riwayat mutasi bank perusahaan;
+
+if (Apakah dana masuk sesuai nominal?) then ([Tidak Ditemukan / Kurang (Exceptional 3E)])
+  :Menekan tombol "Tolak Pembayaran" dan\nmemberikan catatan kendala nominal;
+  |Sistem|
+  :Mengubah status tagihan kembali menjadi "Belum Lunas";
+  :Mengirimkan notifikasi penolakan ke pelanggan/Sales;
+  end
+else ([Ya / Dana Sesuai])
+  |Finance|
+  :Menekan tombol "Validasi Pembayaran";
+  |Sistem|
+  :Mengubah status tagihan menjadi "Lunas";
+  :Memperbarui izin otorisasi aktivasi untuk divisi NOC;
+  stop
+endif
+@enduml

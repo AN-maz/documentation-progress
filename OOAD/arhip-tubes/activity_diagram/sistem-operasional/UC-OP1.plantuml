@@ -1,0 +1,28 @@
+@startuml
+|Teknisi|
+start
+:Membuka detail tiket pemasangan\ndi sistem operasional;
+:Menjalankan prosedur pengecekan\nketersediaan jaringan kabel (ODP);
+
+|Sistem Operasional|
+if (Apakah port ODP tersedia?) then ([Tidak/Penuh (Exceptional Flow 2E)])
+  :Menampilkan pesan error\n"Jaringan Tidak Tersedia/Penuh";
+  :Membatalkan proses instalasi sementara;
+  :Mengembalikan tiket ke status tertunda;
+  end
+else ([Ya / Tersedia])
+  :Mengonfirmasi validasi jalur jaringan;
+endif
+
+|Teknisi|
+:Menjalankan prosedur pengajuan\nperangkat instalasi ke logistik;
+note right: Melibatkan Proses Include\nUC_MintaBarang
+
+:Melakukan pemasangan fisik kabel\ndan router di rumah pelanggan;
+:Mengubah status tugas di sistem\nmenjadi "Selesai";
+
+|Sistem Operasional|
+:Menyimpan rekaman penyelesaian;
+:Meneruskan data tiket ke divisi NOC;
+stop
+@enduml

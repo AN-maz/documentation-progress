@@ -1,0 +1,28 @@
+@startuml
+|Finance|
+start
+:Membuka daftar pengajuan pembelian barang\ndi sistem operasional;
+:Memeriksa rincian item, jumlah, dan total nominal;
+
+|Sistem|
+if (Apakah saldo kas utama di bawah limit aman?) then ([Ya (Exceptional 3E)])
+  :Memblokir tombol persetujuan pengajuan;
+  :Menampilkan pesan "Gagal Memproses.\nKas Operasional Tidak Mencukupi";
+  end
+else ([Tidak / Saldo Kas Aman])
+  |Finance|
+  if (Kondisi Anggaran Bulanan Logistik?) then ([Menipis / Terlalu Mahal (Alternate 3A)])
+    :Menekan tombol "Ajukan Revisi Nominal"\ndan memberikan catatan batas anggaran;
+    |Sistem|
+    :Mengembalikan dokumen ke Logistik\ndengan status "Butuh Revisi";
+    stop
+  else ([Mencukupi & Sesuai])
+    |Finance|
+    :Menekan tombol "Setujui Pengajuan";
+    |Sistem|
+    :Mengubah status pengajuan menjadi "Disetujui";
+    :Menerbitkan nomor pencairan dana otomatis;
+    stop
+  endif
+endif
+@enduml

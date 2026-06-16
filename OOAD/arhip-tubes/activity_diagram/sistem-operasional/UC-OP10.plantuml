@@ -1,0 +1,31 @@
+@startuml
+|CS Care|
+start
+:Membuka menu "Input Tiket Keluhan Baru"\npada sistem operasional;
+:Mengidentifikasi ID pelanggan dan\nmemasukkan detail keluhan;
+
+if (Apakah pelanggan memutuskan telepon secara sepihak?) then ([Ya (Exceptional 2E)])
+  :Menekan tombol "Batalkan Penginputan";
+  |Sistem Operasional|
+  :Menghapus draf isian data keluhan;
+  :Tidak menerbitkan nomor tiket keluhan;
+  end
+else ([Tidak / Komunikasi Lancar])
+  |CS Care|
+  if (Skala Keluhan Pelanggan?) then ([Besar / Butuh Fisik Lapangan (Alternate 3A)])
+    :Memilih kategori status tiket "Eskalasi Lapangan";
+    |Sistem Operasional|
+    :Otomatis membuat tiket gangguan baru;
+    :Meneruskan tiket ke dashboard antrean divisi Teknisi;
+    stop
+  else ([Ringan / Masalah Umum])
+    |CS Care|
+    :Memberikan solusi edukasi langsung kepada pelanggan;
+    :Memilih kategori status tiket "Selesai di Tempat"\ndan menekan tombol simpan;
+    |Sistem Operasional|
+    :Menutup tiket keluhan pelanggan;
+    :Menyimpan data ke dalam riwayat aduan;
+    stop
+  endif
+endif
+@enduml

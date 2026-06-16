@@ -1,0 +1,25 @@
+@startuml
+|Logistik|
+start
+:Membuka daftar permintaan barang\ndi sistem operasional;
+
+|Sistem Gudang|
+if (Kondisi Stok Perangkat?) then ([Kosong / Tidak Mencukupi (Alternate 2A)])
+  |Logistik|
+  :Memicu alur perluasan pembelian barang\n(Extend menuju UC_BeliBarang);
+  :Meminta persetujuan dana ke divisi Finance;
+  end
+else ([Stok Tersedia])
+  |Sistem Gudang|
+  :Menampilkan sisa stok perangkat di layar;
+endif
+
+|Logistik|
+:Menyiapkan perangkat fisik sesuai\ndaftar permintaan Teknisi;
+:Menekan tombol "Barang Diserahkan"\ndi dalam sistem;
+
+|Sistem Gudang|
+:Memperbarui (mengurangi) jumlah stok gudang;
+:Menandai status permintaan selesai;
+stop
+@enduml

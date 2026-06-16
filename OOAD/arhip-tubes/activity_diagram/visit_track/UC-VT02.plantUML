@@ -1,0 +1,23 @@
+@startuml
+|Sales|
+start
+:Mewawancarai calon pelanggan terkait status internet;
+
+|Calon Pelanggan|
+:Memberikan informasi status internet harian;
+:Menyampaikan keluhan jaringan yang dialami;
+
+|Sales|
+:Memilih kategori status pelanggan (Hot, Warm, Cold);
+:Menginputkan catatan keluhan ke dalam formulir;
+
+|Sistem VisitTrack|
+:Memproses formulir data prospek lapangan;
+if (Kategori Status Pelanggan?) then ([Hot (Alur Alternatif 4A)])
+  :Memicu alur perluasan Pengajuan Eskalasi Pemasangan (UC-VT03);
+else ([Warm / Cold])
+  :Menyimpan data ke database prospek reguler;
+endif
+
+stop
+@enduml

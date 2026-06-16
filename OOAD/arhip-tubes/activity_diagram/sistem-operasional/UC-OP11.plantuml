@@ -1,0 +1,29 @@
+@startuml
+|Sales|
+start
+:Membuka menu "Pencatatan Prospek Baru"\npada sistem operasional;
+
+if (Apakah perangkat mendadak kehilangan internet?) then ([Ya (Alternate 3A)])
+  :Memilih opsi menu "Simpan sebagai Draf Lokal";
+  |Sistem Operasional|
+  :Menyimpan data di penyimpanan lokal aplikasi;
+  :Otomatis mengunggah ke database pusat\nsaat koneksi internet kembali pulih;
+  stop
+else ([Tidak / Koneksi Stabil])
+  |Sales|
+  :Menginputkan nama, alamat, kontak, koordinat,\nserta estimasi paket internet pilihan;
+  :Memilih opsi status prospek awal;
+  :Menekan tombol "Simpan Data Prospek";
+
+  |Sistem Operasional|
+  if (Apakah email / nomor telepon sudah terdaftar?) then ([Ya (Exceptional 2E)])
+    :Menampilkan pesan error "Gagal Menyimpan.\nData Sudah Terdaftar sebagai Pelanggan Aktif";
+    :Membatalkan proses penyimpanan secara otomatis;
+    end
+  else ([Tidak / Data Unik])
+    :Memvalidasi format isian data prospek;
+    :Menyimpan data ke database penjualan operasional;
+    stop
+  endif
+endif
+@enduml

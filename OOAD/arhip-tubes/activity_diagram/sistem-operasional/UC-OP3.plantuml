@@ -1,0 +1,25 @@
+@startuml
+|NOC|
+start
+:Membuka tiket pelanggan yang\nberstatus instalasi selesai;
+
+|Sistem|
+:Menjalankan pengecekan wajib ke modul keuangan\n(Proses Include UC_Validasi);
+
+if (Apakah status pembayaran valid?) then ([Belum Lunas / Belum Valid (Exceptional 2E)])
+  :Memblokir tombol aktivasi jaringan;
+  :Memunculkan peringatan "Menunggu Validasi Pembayaran";
+  :Menghentikan sementara proses aktivasi;
+  end
+else ([Sudah Divalidasi / Lunas])
+  :Meloloskan verifikasi pembayaran;
+endif
+
+|NOC|
+:Mengatur konfigurasi bandwidth dan\nakses otorisasi untuk perangkat pelanggan;
+:Menekan tombol "Aktifkan Jaringan";
+
+|Sistem|
+:Memperbarui status layanan pelanggan\nmenjadi "Aktif";
+stop
+@enduml

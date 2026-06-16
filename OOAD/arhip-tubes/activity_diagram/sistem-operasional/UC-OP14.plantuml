@@ -1,0 +1,31 @@
+@startuml
+|Customer Service|
+start
+:Membuka modul "Manajemen Administrasi Pelanggan"\ndi sistem operasional;
+:Mencari dan membuka profil pelanggan yang bersangkutan;
+
+if (Jenis Permohonan Administrasi?) then ([Isolir Sementara (Alternate 3A)])
+  :Mengubah status kontrak menjadi\n"Isolir Permintaan Pelanggan";
+  :Memasukkan tanggal pengaktifan kembali otomatis;
+  
+  |Sistem Operasional|
+  :Menyimpan konfigurasi dan menjadwalkan\npemutusan jaringan sementara;
+  stop
+else ([Perubahan Data Diri / Paket])
+  |Customer Service|
+  :Mengubah data administratif yang dimohonkan\n(Nomor WhatsApp / Alamat Penagihan);
+  
+  repeat
+    :Mengunggah dokumen digital pendukung\n(Foto KTP / Surat Kuasa);
+    :Menekan tombol "Simpan Perubahan Data";
+    
+    |Sistem Operasional|
+    :Memverifikasi kelengkapan berkas lampiran;
+    backward:Menampilkan pesan "Gagal Menyimpan. Dokumen Lampiran Bukti Wajib Diunggah"\ndan menolak pembaruan database (Exceptional 4E);
+  repeat while (Apakah dokumen lampiran kosong?) is ([Ya]) not ([Tidak])
+  
+  :Memvalidasi format data perubahan;
+  :Memperbarui informasi pelanggan di database utama;
+  stop
+endif
+@enduml

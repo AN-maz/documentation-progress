@@ -1,0 +1,18 @@
+@startuml
+|Sistem|
+start
+:Memunculkan formulir digital pengajuan\npembelian barang (Purchase Request);
+
+|Logistik|
+repeat
+  :Mengisi rincian nama barang, jumlah restock,\nestimasi harga, dan alasan pembelian;
+  :Menekan tombol "Kirim Pengajuan";
+  
+  |Sistem|
+  :Melakukan verifikasi kelengkapan form;
+  backward:Menampilkan pesan "Lengkapi rincian nominal dan alasan pengajuan"\ndan menahan eskalasi sementara (Exceptional 4E);
+repeat while (Apakah ada kolom estimasi harga atau alasan yang kosong?) is ([Ya]) not ([Tidak])
+
+:Meneruskan permohonan ke dashboard Finance\ndengan status "Menunggu Persetujuan/Approval";
+stop
+@enduml

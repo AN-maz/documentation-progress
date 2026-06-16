@@ -1,0 +1,20 @@
+@startuml
+|Sistem|
+start
+:Menampilkan rekomendasi nomor kotak ODP\nterdekat berdasarkan koordinat lokasi pelanggan;
+
+|Teknisi|
+:Memeriksa kondisi fisik tiang ODP di lapangan\ndan memastikan port dalam kondisi baik;
+:Memasukkan kode nomor ODP beserta nomor port\nyang digunakan ke dalam formulir aplikasi;
+
+|Sistem|
+if (Apakah port berstatus kosong?) then ([Tidak / Penuh / Rusak (Exceptional 4E)])
+  :Menampilkan notifikasi error\n"Port ODP Tidak Tersedia / Penuh";
+  :Membatalkan alur dan meminta Teknisi\nmencari koordinat ODP alternatif;
+  end
+else ([Ya / Kosong])
+  :Mengunci nomor port untuk pelanggan bersangkutan;
+  :Menampilkan pesan "Validasi ODP Berhasil";
+  stop
+endif
+@enduml

@@ -1,0 +1,23 @@
+@startuml
+|Sistem|
+start
+:Memunculkan lembar formulir digital\npermintaan material instalasi baru;
+
+|Teknisi|
+:Menginputkan estimasi panjang kabel\ndan tipe router yang akan dipasang;
+:Menekan tombol "Kirim Permintaan Barang";
+
+|Sistem|
+if (Apakah panjang kabel > 150 meter?) then ([Ya (Exceptional 4E)])
+  :Menampilkan pesan peringatan\n"Kebutuhan Material Melebihi Batas Standar ISP";
+  |Teknisi|
+  :Mengisi kolom justifikasi alasan teknis di lapangan;
+  |Sistem|
+else ([Tidak / Sesuai Standar])
+endif
+
+:Melakukan verifikasi format isian formulir;
+:Mencatat nomor manifes pengeluaran sementara;
+:Mengirimkan notifikasi permintaan barang\nke antrean kerja divisi Logistik;
+stop
+@enduml

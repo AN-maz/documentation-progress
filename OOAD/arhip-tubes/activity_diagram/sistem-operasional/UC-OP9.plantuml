@@ -1,0 +1,31 @@
+@startuml
+|NOC|
+start
+:Membuka tiket pelanggan yang berstatus "Instalasi Selesai";
+
+|Sistem|
+:Menjalankan fungsi pengecekan otomatis ke modul keuangan\n(Proses Include UC_Validasi);
+
+if (Apakah status pembayaran lunas & valid?) then ([Belum Valid / Ditolak (Exceptional 2E)])
+  :Mengunci tombol aktivasi jaringan;
+  :Menampilkan error "Aktivasi Ditolak: Pembayaran Belum Valid";
+  end
+else ([Ya / Sudah Valid])
+  |NOC|
+  :Memasukkan konfigurasi profil kecepatan (bandwidth)\nsesuai paket pilihan pelanggan;
+  :Menekan tombol "Aktivasi Otomatis via OLT";
+  
+  |Sistem|
+  if (Apakah pengiriman skrip otomatis berhasil?) then ([Gagal Sinkronisasi Skrip (Alternate 4A)])
+    |NOC|
+    :Beralih ke menu "Konfigurasi Manual via CLI/Terminal";
+    :Mengetikkan perintah routing jaringan secara manual;
+    |Sistem|
+  else ([Berhasil])
+    :Mengirim perintah konfigurasi otomatis ke perangkat;
+  endif
+  
+  :Mengubah status internet pelanggan menjadi "Aktif/Online";
+  stop
+endif
+@enduml

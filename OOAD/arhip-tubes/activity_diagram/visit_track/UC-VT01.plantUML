@@ -1,0 +1,23 @@
+@startuml
+|Sales|
+start
+:Membuka menu pencatatan kunjungan baru;
+
+|Sistem VisitTrack|
+if (Apakah koneksi internet & GPS aktif?) then ([Tidak (2E)])
+  :Gagal mendeteksi lokasi otomatis;
+  :Menampilkan pesan error;
+  end
+else ([Ya])
+  :Mendeteksi titik koordinat GPS Sales saat ini;
+  :Menampilkan koordinat pada layar aplikasi;
+endif
+
+|Sales|
+:Menekan tombol simpan koordinat;
+
+|Sistem VisitTrack|
+:Menyimpan waktu kunjungan dan titik koordinat;
+:Memasukkan data ke dalam database;
+stop
+@enduml

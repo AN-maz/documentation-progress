@@ -1,0 +1,21 @@
+@startuml
+|Customer Service|
+start
+if (Apakah pelanggan mengingat ID / Nama Lengkap?) then ([Tidak Ingat / Nama Terlalu Umum (Alternate 1A)])
+  :Menginputkan nomor serial (Serial Number) modem\natau alamat IP statis pelanggan;
+else ([Ya / Ingat])
+  :Menginputkan kata kunci berupa ID Pelanggan\natau Nama Lengkap pada kolom pencarian;
+endif
+
+:Menekan tombol "Cari Data";
+
+|Sistem|
+if (Apakah terjadi gangguan jaringan / database timeout?) then ([Ya (Exceptional 3E)])
+  :Menampilkan pesan error "Gagal Memuat Profil.\nKoneksi ke Database Pusat Terputus";
+  end
+else ([Tidak / Koneksi Normal])
+  :Melakukan kueri pencarian kecocokan ke database;
+  :Menampilkan halaman dasbor profil lengkap pelanggan;
+  stop
+endif
+@enduml
