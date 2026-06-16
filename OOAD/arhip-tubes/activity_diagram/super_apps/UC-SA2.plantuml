@@ -1,0 +1,24 @@
+@startuml
+|Sistem Cifo Super Apps|
+start
+:Menampilkan halaman pengisian saldo C-Pay;
+
+|Pelanggan|
+:Memasukkan nominal uang yang ingin diisi ulang;
+:Memilih metode pembayaran (Virtual Account Bank);
+
+|Sistem Cifo Super Apps|
+:Menerbitkan nomor Virtual Account (VA) unik\ndan batas waktu pembayaran;
+
+if (Apakah pelanggan mentransfer dana sebelum batas waktu?) then ([Tidak / Expired (Exceptional 4E)])
+  :Otomatis mengubah status transaksi menjadi "Kedaluwarsa";
+  :Menghapus nomor Virtual Account (VA) tersebut;
+  :Menutup alur top up dengan status gagal;
+  end
+else ([Ya / Tepat Waktu])
+  :Mendeteksi dana transfer masuk dari pelanggan\n(Terintegrasi dengan UC_SA03);
+  :Memperbarui jumlah saldo C-Pay;
+  :Menampilkan notifikasi "Top Up Berhasil";
+  stop
+endif
+@enduml

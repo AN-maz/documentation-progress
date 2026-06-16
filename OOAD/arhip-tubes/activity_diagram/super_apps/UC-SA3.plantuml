@@ -1,0 +1,34 @@
+@startuml
+|Finance|
+start
+:Masuk ke modul admin "Dashboard Mutasi Transaksi";
+
+|Sistem Cifo Super Apps|
+:Menampilkan daftar transaksi masuk yang telah sukses\ndiverifikasi otomatis oleh payment gateway;
+
+|Finance|
+if (Apakah ditemukan ketidakcocokan nominal / discrepancy besar?) then ([Ya / Indikasi Serangan Siber atau Bug (Exceptional 3E)])
+  :Menekan tombol "Bekukan Alur Transaksi" pada sistem;
+  |Sistem Cifo Super Apps|
+  :Otomatis menghentikan transaksi keluar-masuk\npada gerbang pembayaran untuk investigasi;
+  end
+else ([Tidak / Log Data Aman])
+  |Finance|
+  :Mencocokkan total rekap harian di sistem dengan\nrekening koran bank perusahaan secara manual;
+  
+  if (Apakah ada transaksi bernominal unik yang tertunda?) then ([Ya / Gangguan Server Bank Mitra (Alternate 2A)])
+    |Finance|
+    :Melakukan pengecekan data manual;\nMenekan tombol "Validasi Manual";
+    |Sistem Cifo Super Apps|
+    :Memaksa status transaksi terkait menjadi sukses;
+    :Langsung memperbarui hak saldo di akun pelanggan;
+  else ([Tidak / Semua Mutasi Sinkron])
+  endif
+  
+  |Finance|
+  :Menekan tombol "Kunci Laporan Transaksi Harian";
+  |Sistem Cifo Super Apps|
+  :Membukukan laporan tersebut ke dalam jurnal keuangan utama;
+  stop
+endif
+@enduml

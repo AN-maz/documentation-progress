@@ -1,0 +1,33 @@
+@startuml
+|Pelanggan|
+start
+:Memilih menu "Bayar Internet" pada halaman utama aplikasi;
+
+|Sistem Cifo Super Apps|
+if (Apakah nomor ID pelanggan terdaftar di database?) then ([Tidak (Exceptional 2E)])
+  :Menampilkan pesan error "ID Pelanggan Tidak Ditemukan";
+  :Proses peninjauan tagihan dibatalkan otomatis;
+  end
+else ([Ya])
+  :Menampilkan detail nomor pelanggan, paket internet,\ndan total nominal tagihan aktif;
+endif
+
+|Pelanggan|
+repeat
+  :Memeriksa data dan menekan tombol "Bayar via C-Pay";
+
+  |Sistem Cifo Super Apps|
+  if (Apakah jumlah saldo C-Pay pelanggan mencukupi?) then ([Tidak / Kurang (Alternate 4A)])
+    :Memicu alur perluasan (Extend menuju UC_SA02)\nuntuk mengarahkan pelanggan melakukan pengisian saldo;
+    |Pelanggan|
+    :Menyelesaikan proses pengisian saldo (Top Up);
+    |Sistem Cifo Super Apps|
+  else ([Ya / Mencukupi])
+  endif
+repeat while (Apakah saldo C-Pay masih kurang?) is ([Ya]) not ([Tidak])
+
+:Memotong saldo C-Pay sesuai nominal tagihan;
+:Mengubah status tagihan menjadi "Lunas";
+:Menampilkan resi digital bukti pembayaran sukses;
+stop
+@enduml

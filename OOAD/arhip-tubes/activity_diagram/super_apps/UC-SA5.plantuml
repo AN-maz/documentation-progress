@@ -1,0 +1,33 @@
+@startuml
+|Divisi Walanja|
+start
+:Login ke dashboard admin Cifo Super Apps\ndan membuka modul "Manajemen Kamar Hotel";
+:Memilih tipe kamar atau properti hotel spesifik;
+
+if (Apakah tujuan pengubahan untuk pemeliharaan gedung?) then ([Ya / Renovasi / Maintenance (Alternate 3A)])
+  :Memilih opsi status "Block Room / Maintenance"\npada kalender ketersediaan kamar;
+  |Sistem Cifo Super Apps|
+  :Menyimpan konfigurasi status pemeliharaan tersebut;
+  :Otomatis menyembunyikan kamar dari daftar pencarian\npelanggan tanpa menghapus datanya;
+  stop
+else ([Tidak / Pembaruan Kuota Reguler])
+  |Divisi Walanja|
+  repeat
+    :Mengubah angka alokasi kuota jumlah kamar\nuntuk tanggal tertentu;
+    :Menekan tombol "Perbarui Ketersediaan";
+
+    |Sistem Cifo Super Apps|
+    if (Apakah nilai kuota kamar minus atau teks tidak valid?) then ([Ya (Exceptional 3E)])
+      :Menampilkan pesan error "Input Kuota Kamar Tidak Valid";
+      :Menolak menyimpan perubahan data di database;
+      |Divisi Walanja|
+    else ([Tidak / Input Valid])
+    endif
+  repeat while (Apakah input kuota tidak valid?) is ([Ya]) not ([Tidak])
+
+  |Sistem Cifo Super Apps|
+  :Memvalidasi input data kuota kamar;
+  :Memperbarui status kamar di database aplikasi secara real-time;
+  stop
+endif
+@enduml
