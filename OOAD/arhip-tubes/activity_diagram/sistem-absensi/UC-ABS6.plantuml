@@ -1,0 +1,22 @@
+@startuml
+|Sistem Aplikasi|
+start
+:Membuka akses kamera depan untuk foto bukti diri\nserta membaca sensor GPS internal gawai;
+
+if (Apakah sistem operasi gawai terdeteksi Rooted Device?) then ([Ya (Exceptional 3E)])
+  :Otomatis memunculkan pesan cekal\n"Aplikasi Tidak Dapat Berjalan di Perangkat Ter-Root";
+  :Menutup aplikasi secara sepihak;
+  :Membatalkan seluruh proses pengiriman data absensi;
+  end
+else ([Tidak / Aman])
+  |Karyawan / Sales|
+  :Mengambil foto diri harian secara instan\ndi dalam antarmuka aplikasi Android;
+  
+  |Sistem Aplikasi|
+  :Membungkus file gambar, data koordinat, dan\ntanda tangan hardware menjadi paket terkompresi;
+  :Mengirimkan paket data secara aman menggunakan\nprotokol API ke server utama Cifo;
+  :Server merespons dan memberikan kode sukses;
+  :Menampilkan animasi "Absen Masuk Berhasil"\ndi layar Android;
+  stop
+endif
+@enduml

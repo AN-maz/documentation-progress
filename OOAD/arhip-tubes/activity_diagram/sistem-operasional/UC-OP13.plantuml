@@ -1,0 +1,32 @@
+@startuml
+|CS Support|
+start
+:Membuka tiket gangguan teknis aktif\npada antrean kerja;
+:Melakukan pengujian pinging dan pengecekan\nstatus redaman modem pelanggan;
+
+|Sistem Operasional|
+if (Apakah status redaman Loss of Signal / LOS?) then ([Ya (Exceptional 2E)])
+  :Mengunci opsi penyelesaian jarak jauh otomatis;
+  :Memunculkan notifikasi "Wajib Eskalasi Lapangan";
+  |CS Support|
+  :Mengubah kategori tiket menjadi "Kunjungan Lapangan";
+  :Meneruskannya ke antrean kerja divisi Teknisi;
+  end
+else ([Tidak / Sinyal Terdeteksi])
+  |CS Support|
+  :Menghubungi pelanggan dan memandu\nlangkah restart fisik perangkat modem;
+  
+  |Sistem Operasional|
+  if (Apakah status indikator berubah menjadi hijau?) then ([Tidak / Tetap Tidak Stabil (Alternate 4A)])
+    |CS Support|
+    :Menekan tombol "Refresh Port / Clear Session";
+    |Sistem Operasional|
+    :Memperbarui sesi jaringan pelanggan dari pusat;
+  else ([Ya / Kembali Normal])
+  endif
+  
+  |CS Support|
+  :Menutup tiket dengan status\n"Selesai di Tempat - Solusi Teknis Awal";
+  stop
+endif
+@enduml

@@ -1,0 +1,28 @@
+@startuml
+|Sistem|
+start
+:Mengaktifkan modul kamera pemindai secara otomatis;
+
+|Karyawan|
+repeat
+  :Memposisikan wajah di dalam bingkai digital\nyang muncul di layar terminal;
+
+  |Sistem|
+  :Memindai struktur wajah karyawan secara real-time;
+  :Mencocokkannya dengan database biometrik NIP karyawan;
+
+  if (Apakah tingkat kecocokan wajah berada di atas 95%?) then ([Ya])
+    :Meloloskan verifikasi biometrik wajah;
+  else ([Tidak (Exceptional 4E)])
+    :Menampilkan pesan galat "Wajah Tidak Dikenali / Tidak Cocok";
+    :Menghentikan sementara proses pemindaian;
+  endif
+
+|Karyawan|
+backward:Mengatur ulang posisi berdiri sebelum mencoba kembali;
+repeat while (Apakah tingkat kecocokan < 95%?) is ([Ya]) not ([Tidak])
+
+|Sistem|
+:Mengembalikan status "Terverifikasi" ke use case utama\nuntuk mengubah status kehadiran menjadi hadir;
+stop
+@enduml

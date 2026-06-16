@@ -1,0 +1,32 @@
+@startuml
+|HR|
+start
+:Masuk ke modul admin dan memilih menu\n"Mendaftarkan Wajah & NIP";
+:Mengetikkan nomor NIP, nama lengkap,\njabatan, dan divisi dari karyawan;
+
+repeat
+  :Mengaktifkan sensor kamera pemindai\nbiometrik wajah terintegrasi sistem;
+  
+  |Karyawan|
+  :Memposisikan wajah di depan kamera;
+  
+  |Sistem|
+  :Memetakan struktur unik titik wajah\n(face recognition nodes);
+  
+  if (Apakah kualitas jepretan kamera terang & jelas?) then ([Ya / Valid])
+    :Memproses pemetaan biometrik wajah;
+  else ([Gelap / Blur (Exceptional 4E)])
+    :Menampilkan pesan peringatan "Perekaman Gagal.\nIntensitas Cahaya Kurang / Wajah Tidak Jelas";
+    :Memblokir proses penyimpanan data;
+  endif
+backward:HR harus mengulangi langkah pengambilan sampel wajah;
+repeat while (Apakah kualitas jepretan kamera gelap / blur?) is ([Ya]) not ([Tidak])
+
+|HR|
+:Menekan tombol "Simpan Profil Karyawan";
+
+|Sistem|
+:Memvalidasi kelengkapan pengisian data;
+:Mengunci data biometrik ke database pusat;
+stop
+@enduml

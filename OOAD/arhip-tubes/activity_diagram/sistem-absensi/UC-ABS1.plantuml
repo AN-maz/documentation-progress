@@ -1,0 +1,31 @@
+@startuml
+|Karyawan|
+start
+:Mengakses Sistem Absensi Internal Cifo;
+:Memilih menu "Lakukan Presensi" dan\nmenentukan status (Masuk / Pulang);
+
+|Sistem|
+:Mendeteksi jenis perangkat dan parameter akses;
+
+if (Apakah status akun karyawan aktif?) then ([Tidak / Nonaktif (Exceptional 3E)])
+  :Memblokir akses tombol presensi;
+  :Menampilkan pesan "Akun Anda tidak terdaftar/Nonaktif";
+  end
+else ([Ya / Aktif])
+  if (Jenis Perangkat yang Digunakan?) then ([Android (Alternate 3A)])
+    :Mengarahkan alur ke modul aplikasi Android\n(Extend menuju UC_App);
+  elseif (Jenis Perangkat yang Digunakan?) then ([iOS / iPhone (Alternate 3B)])
+    :Mengarahkan alur ke modul web browser\n(Extend menuju UC_Web);
+  else ([Terminal Lobi Kantor])
+    :Mengarahkan alur ke modul Face Recognition\n(Extend menuju UC_Face);
+  endif
+endif
+
+|Karyawan|
+:Menyelesaikan proses verifikasi kehadiran\nsesuaikan dengan metode perangkat;
+
+|Sistem|
+:Mencatat stempel waktu (timestamp) secara real-time;
+:Menampilkan pesan sukses "Presensi Berhasil Dicatat";
+stop
+@enduml

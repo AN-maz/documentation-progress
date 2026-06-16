@@ -1,0 +1,24 @@
+@startuml
+|Sales|
+start
+:Membuka sistem absensi internal Cifo\ndari perangkat gawit di lapangan;
+:Memilih menu khusus "Public Absen";
+
+|Sistem|
+:Meminta Sales memasukkan data foto selfie terkini\nserta mengunci koordinat GPS lapangan;
+
+if (Apakah koordinat GPS berada dalam batas penugasan?) then ([Tidak (Exceptional 3E)])
+  :Menampilkan pesan error\n"Lokasi Koordinat Publik Tidak Sesuai Jadwal Tugas";
+  :Menolak pengajuan Public Absen secara otomatis;
+  end
+else ([Ya / Sesuai Jadwal])
+  |Sales|
+  :Mengirimkan data foto selfie dan lokasi melalui\nmedia pengirim yang tersedia (UC_App / UC_Web);
+  
+  |Sistem|
+  :Memverifikasi parameter lokasi;
+  :Menyimpan log absensi sebagai status "Hadir Dinas Luar";
+  :Menampilkan notifikasi "Public Absen Berhasil Dikirim";
+  stop
+endif
+@enduml

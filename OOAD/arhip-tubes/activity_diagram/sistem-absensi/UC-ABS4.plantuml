@@ -1,0 +1,23 @@
+@startuml
+|HR|
+start
+:Masuk ke modul keamanan "Manajemen Geofencing & Fraud";
+:Meninjau titik koordinat pusat gedung Cifo\nserta mengatur batas radius aman presensi;
+
+|Sistem|
+:Menjalankan fungsi latar belakang (background service)\nuntuk menyaring paket data koordinat masuk;
+
+if (Apakah terdeteksi aplikasi manipulasi lokasi / Fake GPS?) then ([Ya (Exceptional 3E)])
+  :Otomatis memblokir kiriman data absensi tersebut;
+  :Menandai status akun terkait dengan label "Indikasi Fraud";
+  :Memunculkan peringatan instan di dasbor HR;
+  :Menggugurkan perekaman data kehadiran secara permanen;
+  end
+else ([Tidak / Aman])
+  :Menampilkan laporan log berstatus "Aman/Clean"\nuntuk seluruh data presensi harian yang valid;
+  
+  |HR|
+  :Menyetujui log laporan kehadiran berkala tersebut;
+  stop
+endif
+@enduml

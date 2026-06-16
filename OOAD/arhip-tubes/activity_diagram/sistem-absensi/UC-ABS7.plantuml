@@ -1,0 +1,24 @@
+@startuml
+|Sistem|
+start
+:Membuka halaman antarmuka web presensi\nresponsif pada peramban (browser) perangkat iOS;
+:Memicu permintaan izin (pop-up permission) untuk\nmengakses fitur kamera dan layanan lokasi;
+
+if (Apakah Karyawan/Sales memberikan izin akses lokasi?) then ([Tidak / Menolak (Exceptional 3E)])
+  :Mendeteksi parameter koordinat kosong;
+  :Menampilkan pesan galat "Akses Lokasi Ditolak.\nHarap aktifkan izin lokasi pada pengaturan Safari/Chrome Anda";
+  :Menghentikan proses pengiriman data kehadiran;
+  end
+else ([Ya / Memberikan Izin])
+  |Karyawan / Sales|
+  :Mengambil foto diri secara langsung (selfie) melalui kamera web\nserta membiarkan sistem mengunci titik koordinat GPS;
+  :Menekan tombol "Kirim Absen via Web";
+  
+  |Sistem|
+  :Mengenkripsi berkas gambar serta data koordinat;
+  :Mengirimkan paket data ke server pusat Cifo;
+  :Server memproses data absensi tersebut;
+  :Menampilkan pesan sukses "Absen Web Berhasil Dicatat"\npada layar gawai iOS;
+  stop
+endif
+@enduml
