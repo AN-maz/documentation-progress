@@ -1,0 +1,71 @@
+@startuml
+autonumber
+skinparam style strictuml
+
+actor Pelanggan
+participant "Sistem Super Apps" as App
+database "Database" as DB
+
+activate Pelanggan
+Pelanggan -> App: Membuka menu pemesanan hotel di aplikasi
+activate App
+Pelanggan -> App: Memasukkan kriteria pencarian (Tanggal, Tamu, Properti)
+App -> DB: Ambil daftar pilihan kamar hotel tersedia
+activate DB
+DB --> App: Mengembalikan data kamar & harga
+deactivate DB
+App --> Pelanggan: Menampilkan daftar pilihan kamar hotel & rincian harga
+deactivate App
+
+Pelanggan -> App: Memilih kamar & melengkapi formulir data diri tamu
+activate App
+App -> DB: Memeriksa sisa kuota fisik kamar real-time
+activate DB
+DB --> App: Mengembalikan status sisa kuota
+deactivate DB
+
+alt [Sisa kuota kamar fisik habis / Penuh (Exceptional 3E)]
+    App --> Pelanggan: Menampilkan pesan "Maaf, Kamar Sudah Penuh atau Tidak Tersedia"
+    App -> App: Membatalkan proses pemesanan otomatis & kembali ke awal
+    App --> Pelanggan: Mengembalikan ke halaman pencarian awal
+    deactivate App
+else [Kamar Masih Tersedia / Ya]
+    App --> Pelanggan: Menampilkan halaman konfirmasi pembayaran
+    deactivate App
+    
+    loop [Apakah saldo C-Pay masih kurang?]
+        Pelanggan -> App: Menekan tombol "Bayar dengan C-Pay"
+        activate App
+        App -> DB: Memverifikasi kecukupan saldo C-Pay milik pelanggan
+        activate DB
+        DB --> App: Mengembalikan data status kecukupan saldo
+        deactivate DB
+        
+        alt [Jumlah saldo C-Pay tidak mencukupi (Alternate 5A)]
+            App -> App: Memicu alur pengisian saldo (Extend UC_SA02)
+            App --> Pelanggan: Mengarahkan ke modul pengisian saldo (Top Up)
+            deactivate App
+            Pelanggan -> App: Menyelesaikan proses pengisian saldo (Top Up C-Pay)
+            activate App
+        else [Jumlah saldo C-Pay mencukupi / Aman]
+            App --> Pelanggan: Konfirmasi verifikasi saldo sukses
+        end
+        deactivate App
+    end
+    
+    Pelanggan -> App: Mengonfirmasi penyelesaian pembayaran final
+    activate App
+    App -> DB: Memotong saldo C-Pay & memperbarui status reservasi
+    activate DB
+    DB --> App: Konfirmasi pemotongan sukses
+    deactivate DB
+    App -> DB: Menerbitkan dokumen e-voucher hotel resmi
+    activate DB
+    DB --> App: Mengembalikan data berkas e-voucher
+    deactivate DB
+    App --> Pelanggan: Menampilkan e-voucher hotel resmi di layar aplikasi
+    deactivate App
+end
+
+deactivate Pelanggan
+@enduml

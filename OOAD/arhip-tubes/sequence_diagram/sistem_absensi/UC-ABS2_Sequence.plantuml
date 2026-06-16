@@ -1,0 +1,39 @@
+@startuml
+autonumber
+skinparam style strictuml
+
+actor Sales
+participant "Sistem Absensi" as Sys
+database "Database" as DB
+
+activate Sales
+Sales -> Sys: Membuka sistem absensi Cifo dari perangkat gawai di lapangan
+activate Sys
+Sales -> Sys: Memilih menu khusus "Public Absen"
+Sys --> Sales: Meminta foto selfie terkini & mengunci koordinat GPS
+deactivate Sys
+
+Sales -> Sys: Mengirimkan data parameter koordinat GPS lapangan
+activate Sys
+Sys -> Sys: Memeriksa kesesuaian koordinat dengan jadwal tugas wilayah
+
+alt [Koordinat di Luar Batas Cakupan Penugasan (Exceptional 3E)]
+    Sys --> Sales: Menampilkan pesan error "Lokasi Koordinat Publik Tidak Sesuai Jadwal Tugas"
+    Sys -> Sys: Menolak pengajuan Public Absen secara otomatis
+else [Koordinat Berada Dalam Radius / Sesuai Jadwal]
+    Sys --> Sales: Mengizinkan pengiriman kelengkapan paket data media
+    deactivate Sys
+    
+    Sales -> Sys: Mengirimkan foto selfie dan lokasi (via UC_App / UC_Web)
+    activate Sys
+    Sys -> Sys: Memverifikasi parameter validitas lokasi lapangan
+    Sys -> DB: Menyimpan log absensi dengan status "Hadir Dinas Luar"
+    activate DB
+    DB --> Sys: Konfirmasi data berhasil dibukukan ke penyimpanan pusat
+    deactivate DB
+    Sys --> Sales: Menampilkan notifikasi "Public Absen Berhasil Dikirim"
+    deactivate Sys
+end
+
+deactivate Sales
+@enduml

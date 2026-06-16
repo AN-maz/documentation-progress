@@ -1,0 +1,38 @@
+@startuml
+autonumber
+skinparam style strictuml
+
+actor Sales
+participant "Aplikasi VisitTrack" as App
+participant "Sistem Operasional" as SysOp
+
+activate App
+App --> Sales: Otomatis memunculkan form tambahan eskalasi
+deactivate App
+
+activate Sales
+loop [Apakah ada kolom data wajib yang kosong?]
+    Sales -> App: Melengkapi data pendukung (Nama, WA, dan Detail Alamat)
+    activate App
+    Sales -> App: Menekan tombol "Eskalasi ke Tim Teknis"
+    App -> App: Memverifikasi kelengkapan pengisian form tambahan
+    
+    alt [Ada kolom data wajib yang kosong (Exceptional 4E)]
+        App --> Sales: Menampilkan pesan "Harap lengkapi seluruh data pelanggan"
+    else [Seluruh data terisi lengkap / valid]
+        App --> Sales: Konfirmasi validasi form eskalasi berhasil
+        deactivate App
+    end
+end
+
+activate App
+App -> App: Menggabungkan data diri dengan koordinat lokasi
+App -> App: Membuat dokumen "Tiket Pemasangan"
+App -> SysOp: Mengirim tiket ke sistem operasional Tim Teknis
+activate SysOp
+SysOp --> App: Konfirmasi penerimaan data tiket operasional
+deactivate SysOp
+App --> Sales: Menampilkan notifikasi "Eskalasi Berhasil"
+deactivate App
+deactivate Sales
+@enduml

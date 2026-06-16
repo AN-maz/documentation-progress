@@ -1,0 +1,45 @@
+@startuml
+autonumber
+skinparam style strictuml
+
+actor Pelanggan
+participant "Sistem Super Apps" as App
+database "Database" as DB
+
+activate Pelanggan
+Pelanggan -> App: Membuka halaman pengisian saldo C-Pay
+activate App
+App --> Pelanggan: Menampilkan antarmuka top up
+deactivate App
+
+Pelanggan -> App: Memasukkan nominal & memilih metode pembayaran (Virtual Account)
+activate App
+App -> DB: Membuat nomor Virtual Account unik & batas waktu
+activate DB
+DB --> App: Mengembalikan nomor VA dan timestamp kedaluwarsa
+deactivate DB
+App --> Pelanggan: Menerbitkan nomor VA & batas waktu pembayaran
+deactivate App
+
+alt [Pelanggan tidak mentransfer dana sebelum batas waktu / Expired (Exceptional 4E)]
+    App -> App: Batas waktu pembayaran habis (Timeout)
+    activate App
+    App -> DB: Otomatis mengubah status transaksi menjadi "Kedaluwarsa"
+    activate DB
+    DB --> App: Konfirmasi penutupan transaksi sukses
+    deactivate DB
+    App --> Pelanggan: Menampilkan status transaksi gagal (Expired)
+    deactivate App
+else [Pelanggan mentransfer dana tepat waktu / Ya]
+    App -> App: Mendeteksi dana transfer masuk dari bank (Terintegrasi dengan UC_SA03)
+    activate App
+    App -> DB: Memperbarui (menambah) jumlah saldo C-Pay di akun pelanggan
+    activate DB
+    DB --> App: Konfirmasi pembaruan saldo berhasil dibukukan
+    deactivate DB
+    App --> Pelanggan: Menampilkan notifikasi "Top Up Berhasil"
+    deactivate App
+end
+
+deactivate Pelanggan
+@enduml

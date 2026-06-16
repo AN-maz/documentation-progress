@@ -1,0 +1,33 @@
+@startuml
+autonumber
+skinparam style strictuml
+
+actor Sales
+participant "Aplikasi VisitTrack" as App
+database "Database" as DB
+
+activate Sales
+Sales -> App: Membuka menu pencatatan kunjungan baru
+activate App
+
+App -> App: Memeriksa koneksi internet & sensor GPS
+
+alt [Koneksi Internet / GPS Tidak Aktif (Exceptional 2E)]
+    App --> Sales: Gagal mendeteksi lokasi otomatis & menampilkan pesan error
+else [Koneksi Internet & GPS Aktif]
+    App -> App: Mendeteksi titik koordinat GPS Sales saat ini
+    App --> Sales: Menampilkan koordinat pada layar aplikasi
+    deactivate App
+
+    Sales -> App: Menekan tombol simpan koordinat
+    activate App
+    App -> DB: Menyimpan waktu kunjungan dan titik koordinat
+    activate DB
+    DB --> App: Memasukkan data ke dalam database & konfirmasi sukses
+    deactivate DB
+    App --> Sales: Menampilkan notifikasi "Data Berhasil Disimpan"
+    deactivate App
+end
+
+deactivate Sales
+@enduml

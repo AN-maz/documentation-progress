@@ -1,0 +1,53 @@
+@startuml
+autonumber
+skinparam style strictuml
+
+actor "Divisi Walanja" as Walanja
+participant "Sistem Super Apps" as App
+database "Database" as DB
+
+activate Walanja
+Walanja -> App: Login ke dashboard admin & membuka modul "Manajemen Kamar Hotel"
+activate App
+Walanja -> App: Memilih tipe kamar atau properti hotel spesifik
+App -> App: Memeriksa tujuan pengubahan data operasional
+
+alt [Tujuan untuk pemeliharaan gedung / Renovasi (Alternate 3A)]
+    Walanja -> App: Memilih opsi status "Block Room / Maintenance" pada kalender
+    App -> DB: Menyimpan konfigurasi status pemeliharaan kamar
+    activate DB
+    DB --> App: Konfirmasi data pemeliharaan disimpan
+    deactivate DB
+    App -> App: Otomatis menyembunyikan kamar terkait dari daftar pencarian
+    App --> Walanja: Menampilkan pesan "Status Kamar Diperbarui ke Maintenance"
+    deactivate App
+else [Tidak / Pembaruan Kuota Reguler]
+    App --> Walanja: Menampilkan form alokasi kuota reguler
+    deactivate App
+    
+    loop [Apakah input kuota tidak valid?]
+        Walanja -> App: Mengubah angka alokasi kuota & tekan "Perbarui Ketersediaan"
+        activate App
+        App -> App: Memeriksa validitas format data kuota yang diinput
+        
+        alt [Nilai kuota minus / format teks tidak valid (Exceptional 3E)]
+            App --> Walanja: Menampilkan pesan error "Input Kuota Kamar Tidak Valid"
+            App -> App: Menolak menyimpan perubahan data ke database
+        else [Input Valid / Normal]
+            App --> Walanja: Konfirmasi verifikasi format data valid
+        end
+        deactivate App
+    end
+    
+    Walanja -> App: Mengirimkan konfirmasi final pembaruan kuota kamar
+    activate App
+    App -> DB: Memvalidasi data & memperbarui status kuota kamar real-time
+    activate DB
+    DB --> App: Konfirmasi pembaruan database sukses disimpan
+    deactivate DB
+    App --> Walanja: Menampilkan status "Kamar Berhasil Diperbarui secara Real-Time"
+    deactivate App
+end
+
+deactivate Walanja
+@enduml

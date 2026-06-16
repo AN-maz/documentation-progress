@@ -1,0 +1,51 @@
+@startuml
+autonumber
+skinparam style strictuml
+
+actor Finance
+participant "Sistem Super Apps" as App
+database "Database" as DB
+
+activate Finance
+Finance -> App: Masuk ke modul admin "Dashboard Mutasi Transaksi"
+activate App
+App -> DB: Memuat daftar transaksi masuk terverifikasi payment gateway
+activate DB
+DB --> App: Mengembalikan data log mutasi masuk harian
+deactivate DB
+App --> Finance: Menampilkan daftar riwayat transaksi masuk otomatis
+deactivate App
+
+alt [Ditemukan ketidakcocokan nominal / discrepancy besar (Exceptional 3E)]
+    Finance -> App: Menekan tombol "Bekukan Alur Transaksi" pada sistem
+    activate App
+    App -> App: Otomatis menghentikan transaksi pada gerbang pembayaran untuk investigasi
+    App --> Finance: Menampilkan notifikasi "Sistem Keuangan Gerbang Dibekukan Sementara"
+    deactivate App
+else [Tidak / Log Data Rekapitulasi Mutasi Aman]
+    Finance -> Finance: Mencocokkan total rekap harian sistem dengan rekening koran bank secara manual
+    
+    alt [Ada transaksi bernominal unik yang tertunda / Gangguan Server Bank (Alternate 2A)]
+        Finance -> App: Melakukan pengecekan manual & menekan tombol "Validasi Manual"
+        activate App
+        App -> DB: Memaksa status transaksi terkait berubah menjadi sukses
+        activate DB
+        App -> DB: Langsung memperbarui hak saldo di akun pelanggan yang tertunda
+        DB --> App: Konfirmasi eksekusi paksa manual berhasil dimasukkan
+        deactivate DB
+        App --> Finance: Menampilkan status mutasi berhasil diperbarui manual
+        deactivate App
+    end
+    
+    Finance -> App: Menekan tombol "Kunci Laporan Transaksi Harian"
+    activate App
+    App -> DB: Membukukan laporan rekap harian ke dalam jurnal keuangan utama
+    activate DB
+    DB --> App: Konfirmasi pembukuan jurnal harian berhasil dikunci
+    deactivate DB
+    App --> Finance: Menampilkan pesan "Laporan Transaksi Harian Berhasil Dibukukan"
+    deactivate App
+end
+
+deactivate Finance
+@enduml

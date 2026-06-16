@@ -1,0 +1,33 @@
+@startuml
+autonumber
+skinparam style strictuml
+
+actor "Karyawan / Sales" as User
+participant "Sistem Aplikasi Android" as App
+participant "Server Pusat Cifo" as Server
+
+activate User
+User -> App: Membuka media pengiriman via Android
+activate App
+App -> App: Membuka akses kamera depan & baca sensor GPS internal
+App -> App: Memeriksa integritas sistem operasi gawai (Play Integrity)
+
+alt [Sistem Operasional Gawai Terdeteksi Rooted Device (Exceptional 3E)]
+    App --> User: Memunculkan pesan cekal "Aplikasi Tidak Dapat Berjalan di Perangkat Ter-Root"
+    App -> App: Membatalkan seluruh proses pengiriman data absensi
+    App -> App: Menutup aplikasi secara sepihak (terminate)
+else [Sistem Operasional Perangkat Aman / Tidak Ter Root]
+    User -> App: Mengambil foto diri harian secara instan via kamera depan
+    User -> App: Menekan tombol kirim absen harian
+    App -> App: Membungkus berkas gambar, koordinat GPS, dan Device ID ke paket kompresi
+    App -> Server: Mengirimkan enkripsi paket data secara aman via protokol API
+    activate Server
+    Server -> Server: Memproses validasi log kehadiran dan Device ID akun
+    Server --> App: Mengembalikan kode respons sukses operasi
+    deactivate Server
+    App --> User: Menampilkan animasi sukses "Absen Masuk Berhasil" di layar
+    deactivate App
+end
+
+deactivate User
+@enduml

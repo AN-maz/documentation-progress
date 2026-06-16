@@ -1,0 +1,46 @@
+@startuml
+autonumber
+skinparam style strictuml
+
+actor Karyawan
+participant "Sistem Absensi" as Sys
+database "Database" as DB
+
+activate Karyawan
+Karyawan -> Sys: Mengakses Sistem Absensi Internal Cifo
+activate Sys
+Karyawan -> Sys: Memilih menu "Lakukan Presensi" & tentukan status (Masuk/Pulang)
+
+Sys -> DB: Memeriksa status keaktifan akun karyawan
+activate DB
+DB --> Sys: Mengembalikan status akun
+deactivate DB
+
+alt [Status Akun Nonaktif / Skorsing (Exceptional 3E)]
+    Sys --> Karyawan: Memblokir akses & menampilkan pesan "Akun Anda Tidak Terdaftar/Nonaktif"
+else [Status Akun Aktif]
+    Sys -> Sys: Mendeteksi jenis perangkat dan parameter akses karyawan
+    
+    alt [Perangkat Android (Alternate 3A)]
+        Sys -> Sys: Mengarahkan alur ke modul aplikasi Android (Extend menuju UC_App)
+    else [Perangkat iOS / iPhone (Alternate 3B)]
+        Sys -> Sys: Mengarahkan alur ke modul web browser (Extend menuju UC_Web)
+    else [Terminal Lobi Kantor]
+        Sys -> Sys: Mengarahkan alur ke modul Face Recognition (Extend menuju UC_Face)
+    end
+    
+    Sys --> Karyawan: Menampilkan antarmuka verifikasi sesuai perangkat
+    deactivate Sys
+
+    Karyawan -> Sys: Menyelesaikan proses verifikasi kehadiran harian
+    activate Sys
+    Sys -> DB: Mencatat stempel waktu (timestamp) secara real-time
+    activate DB
+    DB --> Sys: Konfirmasi log kehadiran berhasil disimpan
+    deactivate DB
+    Sys --> Karyawan: Menampilkan pesan sukses "Presensi Berhasil Dicatat"
+    deactivate Sys
+end
+
+deactivate Karyawan
+@enduml

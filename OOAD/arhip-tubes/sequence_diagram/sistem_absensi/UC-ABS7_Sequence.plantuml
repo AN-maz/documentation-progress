@@ -1,0 +1,33 @@
+@startuml
+autonumber
+skinparam style strictuml
+
+actor "Karyawan / Sales" as User
+participant "Sistem Web Responsif" as Web
+participant "Server Pusat Cifo" as Server
+
+activate User
+User -> Web: Membuka media pengiriman via Web Browser iOS
+activate Web
+Web -> Web: Membuka halaman antarmuka web presensi responsif Safari/Chrome
+Web -> Web: Memicu notifikasi permintaan izin (pop-up permission) kamera & lokasi
+
+alt [User Menolak / Memblokir Izin Akses Layanan Lokasi (Exceptional 3E)]
+    Web -> Web: Mendeteksi parameter koordinat kosong pada HTML5 Geolocation
+    Web --> User: Menampilkan pesan galat "Akses Lokasi Ditolak. Harap aktifkan izin lokasi..."
+    Web -> Web: Menghentikan seluruh rangkaian proses pengiriman data kehadiran
+else [User Memberikan Izin Akses Kamera & Layanan Lokasi]
+    User -> Web: Mengambil foto selfie langsung & membiarkan sistem mengunci GPS gawai
+    User -> Web: Menekan tombol "Kirim Absen via Web"
+    Web -> Web: Mengenkripsi berkas gambar dan parameter data koordinat lokasi
+    Web -> Server: Mengirimkan paket enkripsi data kehadiran ke server pusat Cifo
+    activate Server
+    Server -> Server: Memproses perekaman log absensi internal perangkat iOS
+    Server --> Web: Mengembalikan status pengolahan data sukses dicatat
+    deactivate Server
+    Web --> User: Menampilkan pesan sukses "Absen Web Berhasil Dicatat" pada layar gawai
+    deactivate Web
+end
+
+deactivate User
+@enduml

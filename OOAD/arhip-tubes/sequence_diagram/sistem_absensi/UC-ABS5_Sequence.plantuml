@@ -1,0 +1,43 @@
+@startuml
+autonumber
+skinparam style strictuml
+
+actor Karyawan
+participant "Sistem Terminal Lobi" as Sys
+database "Database" as DB
+
+activate Sys
+Sys -> Sys: Mengaktifkan modul kamera pemindai secara otomatis
+deactivate Sys
+
+activate Karyawan
+loop [Apakah tingkat kecocokan biometrik wajah < 95%?]
+    Karyawan -> Sys: Memposisikan wajah di dalam bingkai digital layar
+    activate Sys
+    Sys -> Sys: Memindai struktur unik wajah karyawan secara real-time
+    Sys -> DB: Mencocokkan data wajah dengan database biometrik NIP
+    activate DB
+    DB --> Sys: Mengembalikan data nilai tingkat kecocokan (%)
+    deactivate DB
+    
+    alt [Tingkat kecocokan berada di bawah 95% (Exceptional 4E)]
+        Sys --> Karyawan: Menampilkan pesan galat "Wajah Tidak Dikenali / Tidak Cocok"
+        Sys -> Sys: Menghentikan sementara proses pemindaian lensa
+        Karyawan -> Karyawan: Mengatur ulang posisi berdiri agar lebih presisi
+    else [Tingkat kecocokan berada di atas atau sama dengan 95%]
+        Sys -> Sys: Meloloskan verifikasi biometrik wajah karyawan
+        Sys --> Karyawan: Menampilkan konfirmasi "Wajah Terverifikasi"
+        deactivate Sys
+    end
+end
+
+activate Sys
+Sys -> Sys: Mengembalikan status "Terverifikasi" ke use case utama
+Sys -> DB: Memperbarui status kehadiran karyawan menjadi hadir
+activate DB
+DB --> Sys: Konfirmasi pembaruan database pusat sukses
+deactivate DB
+Sys --> Karyawan: Menampilkan indikator sukses presensi terminal
+deactivate Sys
+deactivate Karyawan
+@enduml

@@ -1,0 +1,46 @@
+@startuml
+autonumber
+skinparam style strictuml
+
+actor HR
+actor Karyawan
+participant "Sistem Absensi" as Sys
+database "Database" as DB
+
+activate HR
+HR -> Sys: Masuk ke modul admin & memilih menu "Mendaftarkan Wajah & NIP"
+activate Sys
+HR -> Sys: Menginputkan data dasar (NIP, Nama, Jabatan, Divisi)
+deactivate Sys
+
+loop [Apakah kualitas jepretan kamera gelap / blur?]
+    HR -> Sys: Mengaktifkan sensor kamera pemindai biometrik wajah
+    activate Sys
+    Sys --> Karyawan: Meminta karyawan memposisikan wajah di depan lensa kamera
+    activate Karyawan
+    Karyawan -> Sys: Memposisikan wajah dengan tegak di depan kamera terminal
+    deactivate Karyawan
+    Sys -> Sys: Memetakan struktur unik titik wajah (face recognition nodes)
+    
+    alt [Intensitas Cahaya Kurang / Wajah Blur (Exceptional 4E)]
+        Sys --> HR: Pesan "Perekaman Gagal. Intensitas Cahaya Kurang / Wajah Tidak Jelas"
+        Sys -> Sys: Memblokir sementara proses penyimpanan data profil
+    else [Kualitas Jepretan Terang & Jelas / Valid]
+        Sys -> Sys: Memproses ekstraksi data pemetaan biometrik wajah
+        Sys --> HR: Menampilkan pratinjau wajah berhasil terverifikasi
+        deactivate Sys
+    end
+end
+
+HR -> Sys: Menekan tombol "Simpan Profil Karyawan"
+activate Sys
+Sys -> Sys: Memvalidasi kelengkapan seluruh berkas isian data
+Sys -> DB: Mengunci data biometrik dan NIP ke database pusat
+activate DB
+DB --> Sys: Konfirmasi data karyawan berhasil terdaftar secara permanen
+deactivate DB
+Sys --> HR: Menampilkan pesan sukses registrasi karyawan baru
+deactivate Sys
+
+deactivate HR
+@enduml

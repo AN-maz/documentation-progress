@@ -1,0 +1,38 @@
+@startuml
+autonumber
+skinparam style strictuml
+
+actor HR
+participant "Sistem Absensi" as Sys
+database "Database" as DB
+
+activate HR
+HR -> Sys: Masuk ke modul "Manajemen Geofencing & Fraud"
+activate Sys
+HR -> Sys: Meninjau titik pusat Cifo & atur batas radius aman
+
+Sys -> Sys: Jalankan fungsi latar belakang (background service)\nuntuk menyaring paket koordinat masuk
+
+alt [Terdeteksi Aplikasi Mock Location / Fake GPS (Exceptional 3E)]
+    Sys -> Sys: Blokir kiriman data absensi secara otomatis
+    Sys -> DB: Menandai status akun dengan label "Indikasi Fraud"
+    activate DB
+    DB --> Sys: Konfirmasi pembaruan status fraud
+    deactivate DB
+    Sys --> HR: Memunculkan peringatan instan di dasbor pemantauan
+    Sys -> Sys: Menggugurkan perekaman data kehadiran secara permanen
+    deactivate Sys
+else [Koordinat Bersifat Riil / Aman / Clean]
+    Sys --> HR: Menampilkan laporan log berstatus "Aman/Clean"
+    
+    HR -> Sys: Menyetujui log laporan kehadiran berkala
+    Sys -> DB: Membukan data kehadiran harian karyawan ke database
+    activate DB
+    DB --> Sys: Konfirmasi data berhasil diarsipkan
+    deactivate DB
+    Sys --> HR: Menampilkan status "Laporan Berhasil Disetujui"
+    deactivate Sys
+end
+
+deactivate HR
+@enduml

@@ -1,0 +1,33 @@
+@startuml
+autonumber
+skinparam style strictuml
+
+actor Sales
+actor "Calon Pelanggan" as Cust
+participant "Aplikasi VisitTrack" as App
+database "Database" as DB
+
+activate Sales
+Sales -> Cust: Mewawancarai terkait status internet harian
+activate Cust
+Cust --> Sales: Memberikan informasi status internet & menyampaikan keluhan
+deactivate Cust
+
+Sales -> App: Memilih kategori status (Hot, Warm, Cold) & input catatan keluhan
+activate App
+App -> App: Memproses formulir data prospek lapangan
+
+alt [Kategori Status Pelanggan = Hot (Alur Alternatif 4A)]
+    App -> App: Memicu alur perluasan Pengajuan Eskalasi Pemasangan (UC-VT03)
+    App --> Sales: Mengalihkan antarmuka ke formulir tambahan eskalasi
+else [Kategori Status Pelanggan = Warm / Cold]
+    App -> DB: Menyimpan data ke database prospek reguler
+    activate DB
+    DB --> App: Konfirmasi data berhasil disimpan ke dalam storasi
+    deactivate DB
+    App --> Sales: Menampilkan pesan "Data Prospek Reguler Berhasil Disimpan"
+end
+
+deactivate App
+deactivate Sales
+@enduml
