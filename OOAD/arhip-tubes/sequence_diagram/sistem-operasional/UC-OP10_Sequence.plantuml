@@ -1,0 +1,35 @@
+@startuml
+autonumber
+skinparam style strictuml
+
+actor "Customer Service" as CS
+boundary "Form Profil" as Form
+control "Control Pelanggan" as Ctrl
+entity "Database Pelanggan" as DB
+
+activate CS
+CS -> Form: Membuka profil pelanggan yang akan diperbarui
+activate Form
+CS -> Form: Memilih menu perubahan data pelanggan
+CS -> Form: Melakukan pembaruan informasi
+CS -> Form: Menyimpan perubahan data
+Form -> Ctrl: Mengirim request pembaruan data
+activate Ctrl
+Ctrl -> Ctrl: Memvalidasi format data yang dimasukkan
+
+alt [Format data tidak sesuai / Tidak]
+    Ctrl --> Form: Menolak penyimpanan
+    Form --> CS: Meminta CS memperbaiki format data
+else [Format data sesuai / Ya]
+    Ctrl -> DB: Memperbarui data pelanggan di database
+    activate DB
+    DB --> Ctrl: Konfirmasi update berhasil
+    deactivate DB
+    Ctrl --> Form: Status pembaruan sukses
+    Form --> CS: Menampilkan notifikasi keberhasilan
+end
+
+deactivate Ctrl
+deactivate Form
+deactivate CS
+@enduml

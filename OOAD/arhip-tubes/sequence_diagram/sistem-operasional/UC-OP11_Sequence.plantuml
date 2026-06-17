@@ -1,0 +1,37 @@
+@startuml
+autonumber
+skinparam style strictuml
+
+actor "CS Care" as CS
+boundary "Form Tiket Keluhan" as Form
+control "Control Keluhan" as Ctrl
+entity "Database Tiket" as DB
+
+activate CS
+CS -> Form: Membuka formulir pembuatan tiket keluhan
+activate Form
+CS -> Form: Memasukkan identitas pelanggan dan detail keluhan
+CS -> Form: Menentukan kategori keluhan
+CS -> Form: Mengirimkan tiket keluhan
+Form -> Ctrl: Mengirim request pembuatan tiket
+activate Ctrl
+Ctrl -> Ctrl: Memverifikasi kelengkapan informasi
+
+alt [Informasi tidak lengkap / Tidak]
+    Ctrl --> Form: Menolak pembuatan tiket
+    Form --> CS: Meminta CS Care melengkapi data
+else [Informasi lengkap / Ya]
+    Ctrl -> Ctrl: Membuat nomor tiket secara otomatis
+    Ctrl -> DB: Menyimpan tiket & Meneruskan ke divisi terkait
+    activate DB
+    DB --> Ctrl: Konfirmasi tiket disimpan
+    deactivate DB
+    Ctrl --> Form: Mengembalikan nomor tiket baru
+    Form --> CS: Menampilkan nomor tiket keluhan
+    CS -> CS: Menyampaikan nomor tiket kepada pelanggan
+end
+
+deactivate Ctrl
+deactivate Form
+deactivate CS
+@enduml

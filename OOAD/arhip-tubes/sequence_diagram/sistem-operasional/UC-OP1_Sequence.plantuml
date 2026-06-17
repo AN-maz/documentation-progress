@@ -3,75 +3,36 @@ autonumber
 skinparam style strictuml
 
 actor Teknisi
-boundary "Form Tiket Instalasi" as Form
-control "Controller Instalasi" as Ctrl
-entity "Database ODP" as DB
+boundary "Form Cek ODP" as Form
+control "Controller ODP" as Ctrl
+entity "Database Jaringan" as DB
 
-Teknisi -> Form: Membuka detail tiket pemasangan
+activate Teknisi
+Teknisi -> Form: Melakukan pemeriksaan fisik ODP di lapangan
 activate Form
-Form -> Ctrl: Meminta data detail tiket
+Teknisi -> Form: Memasukkan kode ODP dan nomor port
+Form -> Ctrl: Mengirim request ketersediaan port
 activate Ctrl
-Ctrl -> DB: Mengambil data pelanggan
-activate DB
-DB --> Ctrl: Mengembalikan data tiket
-deactivate DB
-Ctrl --> Form: Mengirimkan data tiket
-deactivate Ctrl
-Form --> Teknisi: Menampilkan antarmuka detail tiket
-deactivate Form
 
-Teknisi -> Teknisi: Memeriksa fisik tiang ODP di lapangan
-
-Teknisi -> Form: Memasukkan kode ODP & nomor port
-activate Form
-Form -> Ctrl: Mengirim request validasi port
-activate Ctrl
-Ctrl -> DB: Memeriksa ketersediaan port ODP
+Ctrl -> DB: Memeriksa status ketersediaan port
 activate DB
 DB --> Ctrl: Mengembalikan status port
 deactivate DB
 
-alt [Port ODP Tidak / Penuh (Exceptional Flow 2E)]
-    Ctrl -> Ctrl: Membatalkan proses instalasi sementara
-    Ctrl -> DB: Mengembalikan tiket ke status tertunda
+alt [Port Tidak / Penuh / Gangguan]
+    Ctrl --> Form: Mengembalikan pesan kesalahan jaringan
+    Form --> Teknisi: Menampilkan pesan kesalahan
+    Teknisi -> Form: Memilih ODP lain yang masih tersedia
+else [Port Tersedia / Ya]
+    Ctrl -> DB: Mengalokasikan port untuk pelanggan
     activate DB
-    DB --> Ctrl: Konfirmasi pembaruan tiket
+    DB --> Ctrl: Konfirmasi port dialokasikan
     deactivate DB
-    Ctrl --> Form: Mengembalikan pesan gagal
-    Form --> Teknisi: Menampilkan pesan error "Jaringan Tidak Tersedia/Penuh"
-    deactivate Ctrl
-    deactivate Form
-else [Port ODP Tersedia / Ya]
-    ' BARIS ACTIVATE DI SINI SUDAH DIHAPUS KARENA STATUSNYA MASIH AKTIF
-    Ctrl --> Form: Mengonfirmasi validasi jalur jaringan
-    Form --> Teknisi: Menampilkan notifikasi "Validasi ODP Sukses"
-    deactivate Form
-    
-    ' Interaksi diperbaiki: Teknisi berinteraksi lewat Form, bukan langsung ke Ctrl
-    Teknisi -> Form: Menjalankan prosedur pengajuan logistik (Include UC_MintaBarang)
-    activate Form
-    Form -> Ctrl: Meneruskan permintaan barang logistik
-    Ctrl -> Ctrl: Mencatat permintaan barang
-    Ctrl --> Form: Konfirmasi permintaan dicatat
-    deactivate Ctrl
-    Form --> Teknisi: Menampilkan status pengajuan logistik
-    deactivate Form
-    
-    Teknisi -> Teknisi: Melakukan pemasangan fisik kabel dan router
-    
-    Teknisi -> Form: Mengubah status tugas menjadi "Selesai"
-    activate Form
-    Form -> Ctrl: Mengirim pembaruan status tiket
-    activate Ctrl
-    Ctrl -> DB: Menyimpan rekaman penyelesaian tiket
-    activate DB
-    DB --> Ctrl: Konfirmasi data disimpan
-    deactivate DB
-    Ctrl -> Ctrl: Meneruskan data tiket ke antrean divisi NOC
-    Ctrl --> Form: Mengembalikan status sukses
-    Form --> Teknisi: Menampilkan notifikasi "Instalasi Fisik Selesai"
-    deactivate Ctrl
-    deactivate Form
+    Ctrl --> Form: Status validasi sukses
+    Form --> Teknisi: Menampilkan notifikasi "Validasi ODP Berhasil"
 end
 
+deactivate Ctrl
+deactivate Form
+deactivate Teknisi
 @enduml

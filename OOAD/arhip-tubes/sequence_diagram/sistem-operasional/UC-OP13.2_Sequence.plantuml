@@ -1,0 +1,44 @@
+@startuml
+autonumber
+skinparam style strictuml
+
+actor Logistik
+boundary "Dashboard Logistik" as Form
+control "Control Gudang" as Ctrl
+entity "Database Inventaris" as DB
+
+activate Logistik
+Logistik -> Form: Konfirmasi penyerahan barang di layar
+activate Form
+Form -> Ctrl: Memicu proses stok otomatis (Include)
+activate Ctrl
+
+Ctrl -> DB: Mengambil data barang dan jumlah keluar
+activate DB
+DB --> Ctrl: Mengembalikan rincian barang keluar
+deactivate DB
+Ctrl -> Ctrl: Menghitung stok terbaru
+
+alt [Terjadi kegagalan sistem/database / Ya]
+    Ctrl -> Ctrl: Membatalkan perubahan data (Rollback)
+    Ctrl --> Form: Mengirim pesan kesalahan sistem
+    Form --> Logistik: Menampilkan pesan error di layar
+else [Perhitungan sukses / Tidak]
+    Ctrl -> DB: Memperbarui data stok pada sistem inventaris
+    activate DB
+    DB --> Ctrl: Konfirmasi pembaruan stok sukses
+    deactivate DB
+    
+    Ctrl -> DB: Menyimpan riwayat transaksi
+    activate DB
+    DB --> Ctrl: Konfirmasi riwayat disimpan
+    deactivate DB
+    
+    Ctrl --> Form: Mengembalikan status berhasil
+    Form --> Logistik: Menampilkan notifikasi "Stok Terupdate"
+end
+
+deactivate Ctrl
+deactivate Form
+deactivate Logistik
+@enduml

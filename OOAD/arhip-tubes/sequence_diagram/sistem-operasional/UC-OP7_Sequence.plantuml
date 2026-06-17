@@ -1,0 +1,51 @@
+@startuml
+autonumber
+skinparam style strictuml
+
+actor Finance
+boundary "Form Validasi" as Form
+control "Controller Keuangan" as Ctrl
+entity "Database Keuangan" as DB
+
+activate Finance
+Finance -> Form: Membuka modul antrean validasi pembayaran
+activate Form
+Form -> Ctrl: Meminta data pembayaran tertunda
+activate Ctrl
+Ctrl -> DB: Mengambil data bukti transfer
+activate DB
+DB --> Ctrl: Mengembalikan bukti dan nominal
+deactivate DB
+Ctrl --> Form: Meneruskan data ke layar
+Form --> Finance: Menampilkan lampiran bukti transfer & tagihan
+deactivate Ctrl
+
+Finance -> Finance: Mencocokkan nominal dengan mutasi bank
+
+alt [Nominal Tidak Sesuai / Kurang / Palsu]
+    Finance -> Form: Menekan tombol "Tolak Pembayaran"
+    Form -> Ctrl: Mengirim penolakan
+    activate Ctrl
+    Ctrl -> DB: Mengubah status menjadi "Belum Valid"
+    activate DB
+    DB --> Ctrl: Status diperbarui
+    deactivate DB
+    Ctrl --> Form: Meneruskan peringatan error
+    Form --> Finance: Menampilkan peringatan agar CS menghubungi pelanggan
+    deactivate Ctrl
+else [Nominal Sesuai / Ya]
+    Finance -> Form: Menekan tombol "Validasi Pembayaran"
+    Form -> Ctrl: Mengirim konfirmasi pelunasan
+    activate Ctrl
+    Ctrl -> DB: Mengubah status tagihan menjadi "Lunas"
+    activate DB
+    DB --> Ctrl: Menyimpan data validasi ke database
+    deactivate DB
+    Ctrl --> Form: Konfirmasi pembayaran lunas
+    Form --> Finance: Menampilkan notifikasi sukses
+    deactivate Ctrl
+end
+
+deactivate Form
+deactivate Finance
+@enduml

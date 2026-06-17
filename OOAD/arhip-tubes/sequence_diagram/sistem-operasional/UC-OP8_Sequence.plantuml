@@ -1,0 +1,38 @@
+@startuml
+autonumber
+skinparam style strictuml
+
+actor NOC
+boundary "Dashboard NOC" as Form
+control "Control Jaringan" as Ctrl
+entity "Database Layanan" as DB
+
+activate NOC
+NOC -> Form: Membuka tiket pelanggan (Instalasi selesai & Lunas)
+activate Form
+NOC -> Form: Melakukan konfigurasi layanan jaringan sesuai paket
+NOC -> Form: Menekan tombol "Aktivasi Layanan"
+
+Form -> Ctrl: Meneruskan perintah aktivasi
+activate Ctrl
+Ctrl -> Ctrl: Menerapkan konfigurasi jaringan ke server API
+
+alt [Konfigurasi Gagal Diterapkan / Tidak]
+    Ctrl --> Form: Mengirim pesan kesalahan sistem
+    Form --> NOC: Menampilkan pesan kesalahan
+    NOC -> NOC: Menunda proses aktivasi hingga masalah selesai
+else [Konfigurasi Berhasil Diterapkan / Ya]
+    Ctrl -> DB: Mengubah status pelanggan menjadi "Aktif"
+    activate DB
+    DB --> Ctrl: Konfirmasi database diperbarui
+    deactivate DB
+    
+    Ctrl -> Ctrl: Memicu proses pengiriman notifikasi WA\n(Extend UC_OP14)
+    Ctrl --> Form: Mengembalikan status aktivasi sukses
+    Form --> NOC: Menampilkan notifikasi internet telah aktif
+end
+
+deactivate Ctrl
+deactivate Form
+deactivate NOC
+@enduml

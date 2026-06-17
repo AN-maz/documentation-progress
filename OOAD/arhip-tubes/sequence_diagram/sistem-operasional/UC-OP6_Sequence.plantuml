@@ -2,44 +2,51 @@
 autonumber
 skinparam style strictuml
 
-actor Logistik
-boundary "Form Purchase Request" as Form
+actor Finance
+boundary "Dashboard Finance" as Form
 control "Controller Pembelian" as Ctrl
 entity "Database Finance" as DB
 
-activate Ctrl
-Ctrl --> Form: Membuat formulir digital pengajuan
+activate Finance
+Finance -> Form: Membuka daftar Purchase Request
 activate Form
-Form --> Logistik: Memunculkan formulir pengajuan pembelian
-deactivate Form
+Form -> Ctrl: Mengambil detail pengajuan
+activate Ctrl
+Ctrl -> DB: Mengambil rincian kebutuhan & estimasi biaya
+activate DB
+DB --> Ctrl: Mengembalikan rincian
+deactivate DB
+Ctrl --> Form: Menampilkan rincian pengajuan
 deactivate Ctrl
 
-activate Logistik
-loop [Apakah ada kolom estimasi harga atau alasan yang kosong?]
-    Logistik -> Form: Mengisi rincian nama barang, restock, harga, alasan
-    activate Form
-    Logistik -> Form: Menekan tombol "Kirim Pengajuan"
-    Form -> Ctrl: Mengirimkan request pengajuan data
-    activate Ctrl
-    
-    Ctrl -> Ctrl: Melakukan verifikasi kelengkapan form
-    
-    alt [Ada kolom yang kosong (Exceptional 4E)]
-        Ctrl --> Form: Mengembalikan peringatan validasi form gagal
-        Form --> Logistik: Menampilkan pesan "Lengkapi rincian nominal dan alasan pengajuan"
-        Ctrl -> Ctrl: Menahan eskalasi permohonan ke tingkat selanjutnya
-    else [Semua data lengkap dan valid]
-        Ctrl -> DB: Meneruskan permohonan dengan status "Menunggu Persetujuan"
-        activate DB
-        DB --> Ctrl: Mengembalikan konfirmasi tiket permohonan masuk
-        deactivate DB
-        Ctrl --> Form: Mengembalikan status pengajuan berhasil
-        Form --> Logistik: Menampilkan notifikasi sukses pengiriman
-    end
-    
-    deactivate Ctrl
-    deactivate Form
+Finance -> Finance: Melakukan evaluasi terhadap pengajuan
+Finance -> Form: Mengirimkan hasil keputusan
+Form -> Ctrl: Memproses keputusan validasi anggaran
+activate Ctrl
+
+alt [Anggaran Tidak Mencukupi / Ditolak]
+    Ctrl -> DB: Menandai pengajuan ditolak beserta alasan
+    activate DB
+    DB --> Ctrl: Konfirmasi status ditolak
+    deactivate DB
+    Ctrl --> Form: Menampilkan status ditolak
+else [Butuh Revisi]
+    Ctrl --> Form: Mengembalikan pengajuan ke Logistik
+    Form --> Finance: Meminta revisi data pengajuan
+else [Anggaran Sesuai / Disetujui]
+    Ctrl -> DB: Memperbarui status pengajuan menjadi disetujui
+    activate DB
+    DB --> Ctrl: Konfirmasi status disetujui
+    deactivate DB
+    Ctrl -> DB: Mengirimkan notifikasi kepada Logistik
+    activate DB
+    DB --> Ctrl: Notifikasi terkirim
+    deactivate DB
+    Ctrl --> Form: Konfirmasi persetujuan berhasil
+    Form --> Finance: Menampilkan status selesai
 end
 
-deactivate Logistik
+deactivate Ctrl
+deactivate Form
+deactivate Finance
 @enduml

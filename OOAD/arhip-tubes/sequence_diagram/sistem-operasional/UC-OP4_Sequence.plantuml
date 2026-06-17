@@ -2,47 +2,44 @@
 autonumber
 skinparam style strictuml
 
-actor Teknisi
-boundary "Form Cek ODP" as Form
-control "Controller ODP" as Ctrl
-entity "Database Jaringan" as DB
+actor Logistik
+boundary "Dashboard Logistik" as Form
+control "Controller Gudang" as Ctrl
+entity "Database Gudang" as DB
 
-activate Ctrl
-Ctrl -> DB: Mengambil rekomendasi ODP terdekat
-activate DB
-DB --> Ctrl: Mengembalikan data lokasi ODP
-deactivate DB
-Ctrl --> Form: Menampilkan rekomendasi ODP
+activate Logistik
+Logistik -> Form: Membuka daftar permintaan perangkat
 activate Form
-Form --> Teknisi: Menampilkan rekomendasi di layar gawai
-deactivate Form
-deactivate Ctrl
-
-activate Teknisi
-Teknisi -> Teknisi: Memeriksa fisik tiang ODP di lapangan
-Teknisi -> Form: Memasukkan kode ODP & nomor port
-activate Form
-Form -> Ctrl: Mengirim request verifikasi port ODP
+Form -> Ctrl: Meminta data stok perangkat
 activate Ctrl
-Ctrl -> DB: Mengecek status ketersediaan port
+Ctrl -> DB: Mengecek ketersediaan stok
 activate DB
-DB --> Ctrl: Mengembalikan status port
+DB --> Ctrl: Mengembalikan informasi stok yang tersedia
 deactivate DB
+Ctrl --> Form: Mengirimkan data stok
+Form --> Logistik: Menampilkan informasi stok
 
-alt [Port Tidak/Penuh/Rusak (Exceptional 4E)]
-    Ctrl --> Form: Status error jaringan penuh
-    Form --> Teknisi: Menampilkan notifikasi "Port ODP Tidak Tersedia / Penuh"
-    Ctrl -> Ctrl: Membatalkan alur & meminta koordinat alternatif
-else [Port Berstatus Kosong / Ya]
-    Ctrl -> DB: Mengunci nomor port untuk pelanggan bersangkutan
+alt [Stok tidak mencukupi / Tidak]
+    Ctrl --> Form: Mengirimkan peringatan stok habis
+    Form --> Logistik: Memberikan peringatan stok tidak cukup
+    Logistik -> Form: Menunda proses penyerahan barang
+else [Stok mencukupi / Ya]
+    Logistik -> Logistik: Menyiapkan perangkat sesuai permintaan
+    Logistik -> Form: Menyerahkan perangkat ke Teknisi & menekan konfirmasi
+    
+    Form -> Ctrl: Memproses penyerahan barang
+    Ctrl -> Ctrl: Menjalankan proses pembaruan stok otomatis (Include UC_OP13)
+    
+    Ctrl -> DB: Memotong stok & Menandai permintaan selesai
     activate DB
-    DB --> Ctrl: Konfirmasi port berhasil dikunci
+    DB --> Ctrl: Konfirmasi update stok berhasil
     deactivate DB
-    Ctrl --> Form: Status validasi sukses
-    Form --> Teknisi: Menampilkan pesan "Validasi ODP Berhasil"
+    
+    Ctrl --> Form: Status penyerahan sukses
+    Form --> Logistik: Menampilkan notifikasi selesai
 end
 
 deactivate Ctrl
 deactivate Form
-deactivate Teknisi
+deactivate Logistik
 @enduml

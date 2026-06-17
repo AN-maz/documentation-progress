@@ -1,0 +1,40 @@
+@startuml
+autonumber
+skinparam style strictuml
+
+participant "Base Case (Aktivasi)" as Caller
+control "Control Notifikasi" as Ctrl
+entity "Database Pelanggan" as DB
+boundary "API WhatsApp" as API
+
+activate Caller
+Caller -> Ctrl: Mendeteksi layanan pelanggan diaktifkan (Trigger Extend)
+activate Ctrl
+Ctrl -> DB: Mengambil data kontak pelanggan dari database
+activate DB
+DB --> Ctrl: Mengembalikan no WhatsApp & detail pelanggan
+deactivate DB
+Ctrl -> Ctrl: Menyusun pesan informasi aktivasi layanan
+Ctrl -> API: Mengirimkan permintaan webhook ke API WhatsApp
+activate API
+API --> Ctrl: Mengembalikan response API (Status Pengiriman)
+deactivate API
+
+alt [Pengiriman Gagal / Gangguan API / Tidak]
+    Ctrl -> DB: Mencatat kegagalan pengiriman di log
+    activate DB
+    DB --> Ctrl: Log kegagalan tersimpan
+    deactivate DB
+    note right of Ctrl: Tidak memengaruhi status\naktivasi layanan utama
+    Ctrl --> Caller: Mengembalikan status selesai dengan peringatan
+else [Pengiriman berhasil / Ya]
+    Ctrl -> DB: Mencatat status pengiriman notifikasi berhasil
+    activate DB
+    DB --> Ctrl: Log keberhasilan tersimpan
+    deactivate DB
+    Ctrl --> Caller: Mengembalikan status selesai
+end
+
+deactivate Ctrl
+deactivate Caller
+@enduml

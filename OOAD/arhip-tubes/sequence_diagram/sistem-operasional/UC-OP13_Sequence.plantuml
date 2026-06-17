@@ -1,0 +1,35 @@
+@startuml
+autonumber
+skinparam style strictuml
+
+participant "Base Case (Logistik)" as Caller
+control "Control Gudang" as Ctrl
+entity "Database Inventaris" as DB
+
+activate Caller
+Caller -> Ctrl: Menerima konfirmasi barang diserahkan (Trigger Include)
+activate Ctrl
+Ctrl -> DB: Mengambil data barang dan jumlah keluar dari transaksi
+activate DB
+DB --> Ctrl: Mengembalikan rincian barang keluar
+deactivate DB
+Ctrl -> Ctrl: Menghitung stok terbaru
+
+alt [Terjadi kegagalan sistem/database / Ya]
+    Ctrl -> Ctrl: Membatalkan perubahan data (Rollback)
+    Ctrl --> Caller: Menampilkan pesan kesalahan ke pengguna
+else [Perhitungan sukses / Tidak]
+    Ctrl -> DB: Memperbarui data stok pada sistem inventaris
+    activate DB
+    DB --> Ctrl: Konfirmasi pembaruan stok sukses
+    deactivate DB
+    Ctrl -> DB: Menyimpan riwayat transaksi
+    activate DB
+    DB --> Ctrl: Konfirmasi riwayat disimpan
+    deactivate DB
+    Ctrl --> Caller: Mengembalikan status berhasil ke Base Case
+end
+
+deactivate Ctrl
+deactivate Caller
+@enduml

@@ -2,60 +2,45 @@
 autonumber
 skinparam style strictuml
 
-actor Logistik
-boundary "Dashboard Gudang" as Form
+actor Teknisi
+boundary "Form Permintaan" as Form
 control "Controller Logistik" as Ctrl
-entity "Database Gudang" as DB
-actor Finance
+entity "Database Material" as DB
 
-activate Logistik
-Logistik -> Form: Membuka daftar permintaan barang dari Teknisi
-activate Form
-Form -> Ctrl: Meminta rincian permintaan & status stok
+activate Teknisi
+Ctrl -> Form: Menampilkan formulir permintaan perangkat instalasi
 activate Ctrl
-Ctrl -> DB: Memeriksa kondisi stok perangkat fisik
-activate DB
-DB --> Ctrl: Mengembalikan jumlah sisa stok
-deactivate DB
+activate Form
+Form --> Teknisi: Memunculkan form di layar
+deactivate Ctrl
 
-alt [Kondisi Stok Kosong / Tidak Mencukupi (Alternate 2A)]
-    Ctrl --> Form: Mengirim peringatan stok habis
-    Form --> Logistik: Menampilkan peringatan stok habis
-    
-    Logistik -> Form: Memicu alur pembelian barang (Extend UC_BeliBarang)
-    Form -> Ctrl: Meminta formulir pembelian
-    Ctrl --> Form: Membuat formulir pengajuan
-    Form --> Logistik: Menampilkan formulir pengajuan pembelian
-    
-    Logistik -> Finance: Meminta persetujuan dana pembelian perangkat
-    activate Finance
-    Finance --> Logistik: Memproses validasi pengajuan dana
-    deactivate Finance
-else [Kondisi Stok Tersedia]
-    Ctrl --> Form: Mengirimkan data sisa stok
-    Form --> Logistik: Menampilkan sisa stok perangkat di layar
-    deactivate Ctrl
-    deactivate Form
-    
-    Logistik -> Logistik: Menyiapkan perangkat fisik sesuai daftar permintaan
-    
-    Logistik -> Form: Menekan tombol "Barang Diserahkan"
-    activate Form
-    Form -> Ctrl: Mengirim instruksi serah terima
-    activate Ctrl
-    Ctrl -> DB: Memperbarui (mengurangi) jumlah stok gudang
-    activate DB
-    DB --> Ctrl: Konfirmasi pembaruan stok sukses
-    deactivate DB
-    Ctrl -> DB: Menandai status permintaan menjadi selesai
-    activate DB
-    DB --> Ctrl: Konfirmasi status permintaan diperbarui
-    deactivate DB
-    Ctrl --> Form: Mengembalikan status transaksi sukses
-    Form --> Logistik: Menampilkan pesan sukses "Serah Terima Barang Berhasil"
-    deactivate Ctrl
-    deactivate Form
+Teknisi -> Form: Mengisi kebutuhan material dan perangkat
+Form -> Ctrl: Meneruskan data permintaan
+activate Ctrl
+Ctrl -> Ctrl: Memverifikasi data permintaan dan batas standar
+
+alt [Permintaan melebihi batas standar / Ya]
+    Ctrl --> Form: Meminta justifikasi tambahan
+    Form --> Teknisi: Menampilkan form justifikasi
+    Teknisi -> Form: Memberikan justifikasi teknis
+    Form -> Ctrl: Meneruskan data beserta justifikasi
+else [Permintaan normal / Tidak]
+    Ctrl -> Ctrl: Meloloskan verifikasi standar
 end
 
-deactivate Logistik
+Ctrl -> DB: Menyimpan data & membuat nomor manifes barang
+activate DB
+DB --> Ctrl: Mengembalikan nomor manifes
+deactivate DB
+
+Ctrl -> DB: Mengirimkan permintaan ke antrean dashboard Logistik
+activate DB
+DB --> Ctrl: Status pengiriman antrean sukses
+deactivate DB
+
+Ctrl --> Form: Konfirmasi permintaan berhasil
+Form --> Teknisi: Menampilkan status berhasil dikirim
+deactivate Ctrl
+deactivate Form
+deactivate Teknisi
 @enduml

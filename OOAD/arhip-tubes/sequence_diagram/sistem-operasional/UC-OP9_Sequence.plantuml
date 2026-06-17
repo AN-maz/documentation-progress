@@ -1,0 +1,34 @@
+@startuml
+autonumber
+skinparam style strictuml
+
+actor "Customer Service" as CS
+boundary "Modul Pencarian" as Form
+control "Control Pelanggan" as Ctrl
+entity "Database Pelanggan" as DB
+
+activate CS
+CS -> Form: Membuka modul pencarian data pelanggan
+activate Form
+CS -> Form: Memasukkan identitas pelanggan (ID / No. Telp)
+Form -> Ctrl: Mengirim request pencarian data
+activate Ctrl
+Ctrl -> DB: Melakukan pencarian data di database
+activate DB
+DB --> Ctrl: Mengembalikan hasil pencarian
+deactivate DB
+
+alt [Data tidak ditemukan / Tidak]
+    Ctrl --> Form: Mengembalikan pesan kesalahan (Data Kosong)
+    Form --> CS: Menampilkan pesan kesalahan
+    CS -> Form: Meminta pelanggan melakukan verifikasi data kembali
+else [Data ditemukan / Ya]
+    Ctrl --> Form: Mengembalikan profil dan layanan aktif
+    Form --> CS: Menampilkan profil dan informasi layanan aktif
+    CS -> CS: Menyampaikan informasi kepada pelanggan
+end
+
+deactivate Ctrl
+deactivate Form
+deactivate CS
+@enduml

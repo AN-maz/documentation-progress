@@ -1,0 +1,65 @@
+@startuml
+autonumber
+skinparam style strictuml
+
+actor "CS Support" as CS
+boundary "Dashboard Pemantauan" as Form
+control "Control Jaringan" as Ctrl
+entity "Database Layanan" as DB
+
+activate CS
+CS -> Form: Membuka data pelanggan di dashboard pemantauan
+activate Form
+CS -> Form: Memeriksa status perangkat dan koneksi
+Form -> Ctrl: Meminta status komunikasi perangkat
+activate Ctrl
+Ctrl -> DB: Mengecek koneksi jaringan pelanggan
+activate DB
+DB --> Ctrl: Mengembalikan status konektivitas
+deactivate DB
+
+alt [Sistem tidak dapat berkomunikasi dengan perangkat / Tidak]
+    Ctrl --> Form: Status koneksi terputus
+    Form --> CS: Menampilkan pesan kesalahan (Gagal Komunikasi)
+    CS -> Form: Membuat tiket gangguan fisik ke Teknisi
+    Form -> Ctrl: Mengirim request tiket fisik
+    Ctrl -> DB: Menyimpan tiket gangguan fisik
+    activate DB
+    DB --> Ctrl: Tiket berhasil dibuat
+    deactivate DB
+else [Sistem dapat berkomunikasi / Ya]
+    Ctrl --> Form: Status perangkat merespons
+    Form --> CS: Menampilkan status perangkat online
+    
+    CS -> Form: Menjalankan tindakan pemulihan jarak jauh (Restart, dll)
+    Form -> Ctrl: Mengirim instruksi pemulihan
+    Ctrl -> DB: Mengeksekusi instruksi pemulihan ke perangkat
+    activate DB
+    DB --> Ctrl: Mengembalikan status terbaru pasca pemulihan
+    deactivate DB
+    Ctrl --> Form: Memperbarui dan menampilkan status koneksi terbaru
+    Form --> CS: Menampilkan hasil pemulihan
+    
+    alt [Layanan tidak kembali normal / Tidak]
+        CS -> Form: Membuat tiket gangguan fisik ke Teknisi
+        Form -> Ctrl: Mengirim request tiket fisik
+        Ctrl -> DB: Menyimpan tiket gangguan fisik
+        activate DB
+        DB --> Ctrl: Tiket berhasil dibuat
+        deactivate DB
+    else [Layanan kembali normal / Ya]
+        CS -> Form: Menutup laporan gangguan
+        Form -> Ctrl: Mengirim perintah tutup laporan
+        Ctrl -> DB: Menyimpan riwayat penanganan ke log operasional
+        activate DB
+        DB --> Ctrl: Konfirmasi log disimpan
+        deactivate DB
+        Ctrl --> Form: Laporan berhasil ditutup
+        Form --> CS: Menampilkan notifikasi sukses
+    end
+end
+
+deactivate Ctrl
+deactivate Form
+deactivate CS
+@enduml
