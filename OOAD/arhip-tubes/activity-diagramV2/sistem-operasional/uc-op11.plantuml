@@ -1,0 +1,22 @@
+@startuml
+|CS Care|
+start
+:Membuka formulir pembuatan tiket keluhan;
+:Memasukkan identitas pelanggan dan detail keluhan;
+:Menentukan kategori keluhan;
+:Mengirimkan tiket keluhan;
+
+|Sistem Operasional|
+:Memverifikasi kelengkapan informasi;
+if (Apakah informasi lengkap?) then ([Tidak])
+  :Menolak pembuatan tiket;
+  :Meminta CS Care melengkapi data;
+  stop
+else ([Ya])
+  :Membuat nomor tiket secara otomatis;
+  :Meneruskan tiket ke divisi terkait;
+  |CS Care|
+  :Menyampaikan nomor tiket kepada pelanggan;
+  stop
+endif
+@enduml

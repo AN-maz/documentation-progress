@@ -1,0 +1,26 @@
+@startuml
+|Finance|
+start
+:Membuka modul antrean validasi pembayaran;
+
+|Sistem Operasional|
+:Menampilkan lampiran bukti transfer\ndan nominal tagihan pelanggan;
+
+|Finance|
+:Mencocokkan nominal dengan mutasi bank;
+
+if (Apakah nominal sesuai dan valid?) then ([Tidak / Kurang / Palsu])
+  :Menekan tombol "Tolak Pembayaran";
+  |Sistem Operasional|
+  :Mengubah status menjadi "Belum Valid";
+  :Menampilkan peringatan agar CS menghubungi pelanggan;
+  stop
+else ([Ya / Sesuai])
+  |Finance|
+  :Menekan tombol "Validasi Pembayaran";
+  |Sistem Operasional|
+  :Mengubah status tagihan menjadi "Lunas";
+  :Menyimpan data validasi ke database;
+  stop
+endif
+@enduml

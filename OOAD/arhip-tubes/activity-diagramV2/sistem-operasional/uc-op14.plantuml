@@ -1,0 +1,20 @@
+@startuml
+|Sistem Operasional|
+start
+:Mendeteksi layanan pelanggan berhasil diaktifkan;
+:Mengambil data kontak pelanggan dari database;
+:Menyusun pesan informasi aktivasi layanan;
+:Mengirimkan permintaan ke API WhatsApp;
+
+if (Pengiriman berhasil?) then ([Tidak / Gangguan API])
+  :Mencatat kegagalan pengiriman di log;
+  note right
+    Tidak memengaruhi status
+    aktivasi layanan utama
+  end note
+  stop
+else ([Ya])
+  :Mencatat status pengiriman notifikasi berhasil;
+  stop
+endif
+@enduml

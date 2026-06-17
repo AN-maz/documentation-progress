@@ -1,0 +1,21 @@
+@startuml
+|Customer Service|
+start
+:Membuka modul pencarian data pelanggan;
+:Memasukkan identitas pelanggan (ID / No. Telp);
+
+|Sistem Operasional|
+:Melakukan pencarian data di database;
+if (Apakah data ditemukan?) then ([Tidak])
+  :Menampilkan pesan kesalahan;
+  |Customer Service|
+  :Meminta pelanggan melakukan verifikasi data kembali;
+  stop
+else ([Ya])
+  |Sistem Operasional|
+  :Menampilkan profil dan informasi layanan aktif;
+  |Customer Service|
+  :Menyampaikan informasi kepada pelanggan;
+  stop
+endif
+@enduml

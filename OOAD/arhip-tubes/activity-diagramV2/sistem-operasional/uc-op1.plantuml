@@ -1,0 +1,20 @@
+@startuml
+|Teknisi|
+start
+:Melakukan pemeriksaan fisik ODP di lapangan;
+:Memasukkan kode ODP dan nomor port;
+
+|Sistem Operasional|
+:Memeriksa status ketersediaan port;
+if (Apakah port tersedia?) then ([Tidak / Penuh / Gangguan])
+  :Menampilkan pesan kesalahan;
+  |Teknisi|
+  :Memilih ODP lain yang masih tersedia;
+  stop
+else ([Ya / Tersedia])
+  |Sistem Operasional|
+  :Mengalokasikan port untuk pelanggan;
+  :Menampilkan notifikasi "Validasi ODP Berhasil";
+  stop
+endif
+@enduml

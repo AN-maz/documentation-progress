@@ -1,0 +1,31 @@
+@startuml
+|CS Support|
+start
+:Membuka data pelanggan di dashboard pemantauan;
+:Memeriksa status perangkat dan koneksi;
+
+|Sistem Operasional|
+if (Sistem dapat berkomunikasi dengan perangkat?) then ([Tidak])
+  :Menampilkan pesan kesalahan;
+  |CS Support|
+  :Membuat tiket gangguan fisik ke Teknisi;
+  stop
+else ([Ya])
+  |CS Support|
+  :Menjalankan tindakan pemulihan jarak jauh (Restart, dll);
+  |Sistem Operasional|
+  :Memperbarui dan menampilkan status koneksi terbaru;
+  
+  if (Apakah layanan kembali normal?) then ([Tidak])
+    |CS Support|
+    :Membuat tiket gangguan fisik ke Teknisi;
+    stop
+  else ([Ya])
+    |CS Support|
+    :Menutup laporan gangguan;
+    |Sistem Operasional|
+    :Menyimpan riwayat penanganan ke log operasional;
+    stop
+  endif
+endif
+@enduml

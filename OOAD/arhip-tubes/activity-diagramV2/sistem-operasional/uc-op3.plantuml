@@ -1,0 +1,22 @@
+@startuml
+|Teknisi|
+start
+:Menyelesaikan proses instalasi di lokasi pelanggan;
+:Membuka detail tiket pekerjaan pada sistem;
+:Mengubah status pekerjaan menjadi "Selesai";
+
+|Sistem Operasional|
+:Memvalidasi kelengkapan data instalasi;
+if (Apakah data sudah lengkap?) then ([Tidak])
+  :Menolak perubahan status;
+  :Meminta kelengkapan data;
+  |Teknisi|
+  :Melengkapi data instalasi;
+  stop
+else ([Ya])
+  |Sistem Operasional|
+  :Menyimpan data penyelesaian instalasi;
+  :Meneruskan tiket ke antrean NOC untuk aktivasi;
+  stop
+endif
+@enduml

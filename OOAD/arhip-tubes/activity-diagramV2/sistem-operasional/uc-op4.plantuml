@@ -1,0 +1,23 @@
+@startuml
+|Logistik|
+start
+:Membuka daftar permintaan perangkat;
+
+|Sistem Operasional|
+:Menampilkan informasi stok yang tersedia;
+
+if (Apakah stok mencukupi?) then ([Tidak])
+  :Memberikan peringatan stok tidak cukup;
+  :Menunda proses penyerahan barang;
+  stop
+else ([Ya])
+  |Logistik|
+  :Menyiapkan perangkat sesuai permintaan;
+  :Menyerahkan perangkat kepada Teknisi\ndan menekan tombol konfirmasi;
+  
+  |Sistem Operasional|
+  :Menjalankan proses pembaruan stok otomatis\n(Include UC_OP13);
+  :Menandai permintaan selesai;
+  stop
+endif
+@enduml

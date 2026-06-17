@@ -1,0 +1,20 @@
+@startuml
+|Customer Service|
+start
+:Membuka profil pelanggan yang akan diperbarui;
+:Memilih menu perubahan data pelanggan;
+:Melakukan pembaruan informasi;
+:Menyimpan perubahan data;
+
+|Sistem Operasional|
+:Memvalidasi format data yang dimasukkan;
+if (Apakah format data sesuai?) then ([Tidak])
+  :Menolak penyimpanan;
+  :Meminta CS memperbaiki format data;
+  stop
+else ([Ya])
+  :Memperbarui data pelanggan di database;
+  :Menampilkan notifikasi keberhasilan;
+  stop
+endif
+@enduml

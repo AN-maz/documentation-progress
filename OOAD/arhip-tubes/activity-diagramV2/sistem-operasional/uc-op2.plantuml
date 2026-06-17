@@ -1,0 +1,22 @@
+@startuml
+|Sistem Operasional|
+start
+:Menampilkan formulir permintaan perangkat instalasi;
+
+|Teknisi|
+:Mengisi kebutuhan material dan perangkat;
+
+|Sistem Operasional|
+:Memverifikasi data permintaan;
+if (Permintaan melebihi batas standar?) then ([Ya])
+  :Meminta alasan / justifikasi tambahan;
+  |Teknisi|
+  :Memberikan justifikasi teknis;
+  |Sistem Operasional|
+else ([Tidak])
+endif
+
+:Membuat nomor manifes pengambilan barang;
+:Mengirimkan permintaan ke dashboard Logistik;
+stop
+@enduml

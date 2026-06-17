@@ -1,0 +1,18 @@
+@startuml
+|Sistem Operasional|
+start
+:Menerima konfirmasi barang diserahkan ke Teknisi;
+:Mengambil data barang dan jumlah keluar dari transaksi;
+:Menghitung stok terbaru;
+
+if (Terjadi kegagalan sistem/database?) then ([Ya])
+  :Membatalkan perubahan data;
+  :Menampilkan pesan kesalahan ke pengguna;
+  stop
+else ([Tidak])
+  :Memperbarui data stok pada sistem inventaris;
+  :Menyimpan riwayat transaksi;
+  :Mengembalikan status berhasil ke Base Case;
+  stop
+endif
+@enduml

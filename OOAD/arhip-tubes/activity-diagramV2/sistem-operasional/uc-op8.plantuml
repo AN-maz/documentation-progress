@@ -1,0 +1,19 @@
+@startuml
+|NOC|
+start
+:Membuka tiket pelanggan (Instalasi selesai & Lunas);
+:Melakukan konfigurasi layanan jaringan sesuai paket;
+:Menekan tombol aktivasi layanan;
+
+|Sistem Operasional|
+:Menerapkan konfigurasi jaringan;
+if (Konfigurasi berhasil diterapkan?) then ([Tidak])
+  :Menampilkan pesan kesalahan;
+  :Menunda proses aktivasi hingga masalah selesai;
+  stop
+else ([Ya])
+  :Mengubah status pelanggan menjadi "Aktif";
+  :Memicu proses pengiriman notifikasi WA\n(Extend UC_OP14);
+  stop
+endif
+@enduml

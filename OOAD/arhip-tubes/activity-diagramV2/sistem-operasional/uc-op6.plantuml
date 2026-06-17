@@ -1,0 +1,24 @@
+@startuml
+|Finance|
+start
+:Membuka daftar Purchase Request;
+:Memeriksa rincian kebutuhan dan estimasi biaya;
+:Melakukan evaluasi terhadap pengajuan;
+
+if (Apakah anggaran mencukupi dan valid?) then ([Tidak / Ditolak])
+  |Sistem Operasional|
+  :Menandai pengajuan ditolak beserta alasan;
+  stop
+else ([Butuh Revisi])
+  |Finance|
+  :Meminta revisi data pengajuan;
+  stop
+else ([Ya / Disetujui])
+  |Finance|
+  :Memberikan keputusan persetujuan;
+  |Sistem Operasional|
+  :Memperbarui status pengajuan;
+  :Mengirimkan notifikasi kepada Logistik;
+  stop
+endif
+@enduml

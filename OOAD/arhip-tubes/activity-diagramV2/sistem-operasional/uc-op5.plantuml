@@ -1,0 +1,21 @@
+@startuml
+|Sistem Operasional|
+start
+:Mendeteksi stok barang di bawah batas minimum;
+
+|Logistik|
+:Membuka formulir Purchase Request;
+:Mengisi rincian barang yang dibutuhkan;
+:Mengirimkan permohonan pembelian;
+
+|Sistem Operasional|
+:Memverifikasi kelengkapan data pengajuan;
+if (Apakah data lengkap?) then ([Tidak])
+  :Menolak pengiriman;
+  :Meminta pengguna melengkapi informasi;
+  stop
+else ([Ya])
+  :Meneruskan pengajuan ke dashboard Finance\nuntuk proses persetujuan;
+  stop
+endif
+@enduml
