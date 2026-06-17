@@ -1,0 +1,96 @@
+@startuml
+skinparam style strictuml
+skinparam classAttributeIconSize 0
+
+' --- GENERALIZATION (Pewarisan Aktor) ---
+class Pengguna {
+  - idPengguna: String
+  - nama: String
+  - email: String
+  - noTelp: String
+  + loginApp(): boolean
+}
+
+class Pelanggan {
+  - pinCPay: String
+  + requestTopUp(): void
+  + buatReservasi(): void
+  + bayarTagihan(): void
+}
+
+class Finance {
+  - levelOtorisasi: int
+  + validasiMutasiBank(): void
+}
+
+class DivisiWalanja {
+  - idManajemen: String
+  + updateStatusKamar(): void
+}
+
+Pengguna <|-- Pelanggan
+Pengguna <|-- Finance
+Pengguna <|-- DivisiWalanja
+
+' --- ENTITAS DATA (Model) ---
+class DompetCPay {
+  - idDompet: String
+  - saldoAktif: double
+  - limitMaksimal: double
+  + tambahSaldo(nominal: double): void
+  + potongSaldo(nominal: double): boolean
+}
+
+class TagihanInternet {
+  - idTagihan: String
+  - periodeBulan: String
+  - nominalTagihan: double
+  - statusBayar: String
+  + prosesPembayaran(): void
+}
+
+class KamarHotel {
+  - idKamar: String
+  - tipeKamar: String
+  - hargaPerMalam: double
+  - statusKetersediaan: String
+  + setKetersediaan(): void
+  + cekKuota(): boolean
+}
+
+class ReservasiHotel {
+  - idReservasi: String
+  - tanggalCheckIn: Date
+  - tanggalCheckOut: Date
+  - totalBiaya: double
+  - eVoucher: String
+  + generateVoucher(): void
+}
+
+class Transaksi {
+  - idTransaksi: String
+  - jenisTransaksi: String 
+  - nominal: double
+  - waktuTransaksi: Date
+  - statusValidasi: String
+  - buktiPembayaran: String
+  + setujuiTransaksi(): void
+  + tolakTransaksi(): void
+}
+
+' --- RELATIONSHIPS (Asosiasi & Multiplicity) ---
+Pelanggan "1" -- "1" DompetCPay : memiliki >
+Pelanggan "1" -- "0..*" TagihanInternet : memiliki >
+Pelanggan "1" -- "0..*" ReservasiHotel : melakukan >
+
+DompetCPay "1" -- "0..*" Transaksi : menghasilkan log >
+
+TagihanInternet "1" -- "1" Transaksi : dibayar melalui >
+ReservasiHotel "1" -- "1" Transaksi : dibayar melalui >
+
+DivisiWalanja "1" -- "1..*" KamarHotel : mengelola >
+ReservasiHotel "0..*" -- "1" KamarHotel : memesan >
+
+Finance "1" -- "0..*" Transaksi : memvalidasi >
+
+@enduml

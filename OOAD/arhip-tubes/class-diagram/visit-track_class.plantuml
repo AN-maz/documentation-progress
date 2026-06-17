@@ -1,0 +1,48 @@
+@startuml
+skinparam style strictuml
+skinparam classAttributeIconSize 0
+
+class Sales {
+  - idSales: int
+  + namaLengkap: String
+  + areaPenugasan: String
+  + noTelp: String
+  + catatKunjungan(kordinatGPS: String): void
+  + inputDataProspek(): boolean
+}
+
+class CalonPelanggan {
+  - idPelanggan: int
+  + nama: String
+  + alamatLokasi: String
+  + noKontak: String
+  + sampaikanKeluhan(): String
+}
+
+class DataProspek {
+  - idProspek: int
+  - idSales: int
+  - idPelanggan: int
+  + statusMinat: String
+  + koordinatGPS: String
+  + catatanKeluhan: String
+  + tanggalKunjungan: Date
+  + simpanProspek(): void
+  + verifikasiKelengkapan(): boolean
+}
+
+class TiketEskalasi {
+  - idTiket: int
+  - idProspek: int
+  + tanggalDibuat: Date
+  + prioritas: String
+  + statusTiket: String
+  + teruskanKeOperasional(): void
+}
+
+' Relasi Association dan Multiplicity
+Sales "1" -- "0..*" DataProspek : mencatat >
+CalonPelanggan "1" -- "1..*" DataProspek : memiliki >
+DataProspek "1" -- "0..1" TiketEskalasi : menghasilkan >
+
+@enduml

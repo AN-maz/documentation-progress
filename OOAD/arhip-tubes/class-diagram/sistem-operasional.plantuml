@@ -1,0 +1,146 @@
+@startuml
+skinparam style strictuml
+skinparam classAttributeIconSize 0
+
+' ==========================================
+' GENERALIZATION (SUPERCLASS & SUBCLASS)
+' ==========================================
+class Pegawai {
+  - idPegawai: String
+  - namaPegawai: String
+  - divisi: String
+  - passwordHash: String
+  + loginSistem(): boolean
+  + logoutSistem(): void
+}
+
+class Teknisi {
+  - areaTugas: String
+  + updateStatusInstalasi(): void
+}
+
+class Logistik {
+  - shiftKerja: String
+  + prosesBarangKeluar(): void
+}
+
+class Finance {
+  - otorisasiKeuangan: boolean
+  + validasiData(): void
+}
+
+class NOC {
+  - hakAksesJaringan: String
+  + konfigurasiAktivasi(): void
+}
+
+class CustomerService {
+  - ekstensiTelp: String
+  + cariDataPelanggan(): void
+}
+
+Pegawai <|-- Teknisi
+Pegawai <|-- Logistik
+Pegawai <|-- Finance
+Pegawai <|-- NOC
+Pegawai <|-- CustomerService
+
+' ==========================================
+' ENTITAS DATA (MODEL)
+' ==========================================
+class Pelanggan {
+  - idPelanggan: String
+  - namaLengkap: String
+  - alamatInstalasi: String
+  - noWhatsApp: String
+  - statusLayanan: String
+  + getProfilLengkap(): Pelanggan
+  + updateAdministrasi(): boolean
+  + kirimNotifikasiWA(): void
+}
+
+class ODP {
+  - kodeODP: String
+  - koordinatGPS: String
+  - kapasitasPort: int
+  - portTersedia: int
+  + cekKetersediaanPort(): boolean
+  + alokasiPortPelanggan(): void
+}
+
+class Tiket {
+  - idTiket: String
+  - jenisTiket: String 
+  - tanggalDibuat: Date
+  - deskripsi: String
+  - statusTiket: String
+  + buatTiketBaru(): void
+  + ubahStatusTiket(): void
+}
+
+class PermintaanBarang {
+  - idPermintaan: String
+  - tanggalPermintaan: Date
+  - statusPenyerahan: String
+  + ajukanPermintaan(): void
+  + konfirmasiDiserahkan(): void
+}
+
+class Perangkat {
+  - idBarang: String
+  - namaBarang: String
+  - kategori: String
+  - stokTersedia: int
+  - batasMinimum: int
+  + kurangiStok(jumlah: int): void
+  + updateStokOtomatis(): void
+}
+
+class PurchaseRequest {
+  - idPR: String
+  - tanggalPengajuan: Date
+  - estimasiBiaya: double
+  - statusApproval: String
+  + ajukanPembelian(): void
+  + setujuiPembelian(): void
+  + tolakPembelian(): void
+}
+
+class Pembayaran {
+  - idPembayaran: String
+  - nominal: double
+  - metodeBayar: String
+  - buktiTransfer: String
+  - statusValidasi: String
+  + validasiLunas(): void
+}
+
+' ==========================================
+' RELATIONSHIPS & MULTIPLICITY
+' ==========================================
+
+' Relasi Pelanggan dengan Entitas Lain
+Pelanggan "1" -- "0..*" Tiket : memiliki >
+Pelanggan "1" -- "0..*" Pembayaran : melakukan >
+
+' Relasi Pegawai (Aktor) terhadap Pekerjaannya
+CustomerService "1" -- "0..*" Pelanggan : mengelola >
+CustomerService "1" -- "0..*" Tiket : membuat tiket keluhan >
+
+Teknisi "1" -- "0..*" Tiket : menyelesaikan instalasi >
+Teknisi "1" -- "0..*" PermintaanBarang : mengajukan >
+
+Logistik "1" -- "0..*" PermintaanBarang : menyiapkan >
+Logistik "1" -- "0..*" PurchaseRequest : mengajukan >
+
+Finance "1" -- "0..*" Pembayaran : memvalidasi >
+Finance "1" -- "0..*" PurchaseRequest : menyetujui >
+
+NOC "1" -- "1..*" Pelanggan : mengaktifkan internet >
+
+' Relasi antar Entitas Benda/Sistem
+Tiket "1" -- "0..1" ODP : memesan port >
+PermintaanBarang "0..*" -- "1..*" Perangkat : terdiri dari >
+PurchaseRequest "0..*" -- "1..*" Perangkat : menyuplai stok >
+
+@enduml

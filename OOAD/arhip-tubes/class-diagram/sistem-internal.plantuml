@@ -1,0 +1,75 @@
+@startuml
+skinparam style strictuml
+skinparam classAttributeIconSize 0
+
+' --- GENERALIZATION (Pewarisan Aktor) ---
+class Pegawai {
+  - idPegawai: String
+  - namaLengkap: String
+  - passwordHash: String
+  + loginSistem(): boolean
+}
+
+class HR {
+  - aksesDashboard: boolean
+  + kelolaGeofence(): void
+  + validasiLogFraud(): void
+}
+
+class Karyawan {
+  - nip: String
+  - departemen: String
+  - statusAktif: boolean
+  + lakukanPresensi(tipe: String): boolean
+}
+
+class Sales {
+  - areaPenugasan: String
+  + lakukanPublicAbsen(): void
+}
+
+Pegawai <|-- HR
+Pegawai <|-- Karyawan
+Karyawan <|-- Sales
+
+' --- ENTITAS DATA (Model) ---
+class DataBiometrik {
+  - idBiometrik: String
+  - nipKaryawan: String
+  - strukturWajah: String
+  + daftarWajah(): void
+  + cocokkanWajah(scanWajah: String): boolean
+}
+
+class Geofence {
+  - idLokasi: String
+  - namaArea: String
+  - koordinatPusat: String
+  - radiusAmanMeter: int
+  + setAreaAman(): void
+  + validasiKoordinat(gpsPelapor: String): boolean
+}
+
+class LogPresensi {
+  - idPresensi: String
+  - waktuCatat: Date
+  - jenisPresensi: String 
+  - platform: String 
+  - koordinatGPS: String
+  - fotoSelfie: String
+  - statusFraud: boolean
+  + rekamKehadiran(): void
+  + deteksiFakeGPS(): boolean
+}
+
+' --- RELATIONSHIPS (Asosiasi & Multiplicity) ---
+HR "1" -- "0..*" DataBiometrik : mendaftarkan >
+HR "1" -- "1..*" Geofence : mengatur >
+HR "1" -- "0..*" LogPresensi : memantau & menindak >
+
+Karyawan "1" -- "1" DataBiometrik : memiliki >
+Karyawan "1" -- "0..*" LogPresensi : mencetak >
+
+Geofence "1" -- "0..*" LogPresensi : memvalidasi >
+
+@enduml
