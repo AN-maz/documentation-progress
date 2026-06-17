@@ -15,12 +15,10 @@ rectangle "Cifo Super Apps" {
     usecase "Memvalidasi Transaksi Masuk" as UC_ValidasiMasuk
     usecase "Mengelola Ketersediaan Kamar" as UC_KelolaKamar
     
-    ' Perbaikan: Arah panah <<extend>> ditarik dari Extension Case ke Base Case
     UC_TopUp .up.> UC_BayarInternet : <<extend>>
     UC_TopUp .up.> UC_PesanHotel : <<extend>>
 }
 
-Pelanggan -- UC_TopUp
 Pelanggan -- UC_BayarInternet
 Pelanggan -- UC_PesanHotel
 

@@ -8,7 +8,7 @@ actor "Calon Pelanggan" as CalonPelanggan
 rectangle "Sistem VisitTrack (Aplikasi Sales)" {
 
     usecase "Mencatat Koordinat Lokasi Kunjungan" as UC_Koordinat
-    usecase "Mendata Status dan Keluhan" as UC_DataProspek
+    usecase "Mencatat Data Prospek Pelanggan\n(Status & Keluhan)" as UC_DataProspek
     usecase "Mengajukan Eskalasi Pemasangan" as UC_Eskalasi
 
     ' Menggunakan extend karena eskalasi hanya dilakukan JIKA calon pelanggan berminat berlangganan
@@ -18,7 +18,6 @@ rectangle "Sistem VisitTrack (Aplikasi Sales)" {
 ' Association (Garis interaksi tanpa panah)
 Sales -- UC_Koordinat
 Sales -- UC_DataProspek
-Sales -- UC_Eskalasi
 
 ' Calon Pelanggan berinteraksi dengan sistem dengan cara memberikan data kondisinya kepada Sales
 CalonPelanggan -- UC_DataProspek

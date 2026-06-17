@@ -1,5 +1,4 @@
 @startuml
-
 skinparam packageStyle rectangle
 
 actor HR
@@ -20,16 +19,15 @@ rectangle "Sistem Absensi Internal Cifo" {
     usecase "Presensi via Mobile App (Untuk Android)" as UC_App
     usecase "Presensi via Web (Untuk iOS)" as UC_Web
 
-
-    UC_Presensi .up.> UC_App : <<extend>>
-    UC_Presensi .up.> UC_Web : <<extend>>
-    UC_Presensi .up.> UC_Face : <<extend>>
+    ' REVISI: Arah panah DARI extension KE base case
+    UC_App .down.> UC_Presensi : <<extend>>
+    UC_Web .down.> UC_Presensi : <<extend>>
+    UC_Face .down.> UC_Presensi : <<extend>>
 
     usecase "Melakukan Public Absen" as UC_PublicAbsen
 
-    ' Mengarahkan panah <<extend>> ke atas sesuai aturan materi Sesi 04
-    UC_PublicAbsen .up.> UC_App : <<extend>>
-    UC_PublicAbsen .up.> UC_Web : <<extend>>
+    UC_App .down.> UC_PublicAbsen : <<extend>>
+    UC_Web .down.> UC_PublicAbsen : <<extend>>
 }
 
 HR -- UC_Daftar

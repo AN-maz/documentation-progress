@@ -1,0 +1,50 @@
+@startuml
+autonumber
+skinparam style strictuml
+
+actor Teknisi
+boundary "Form Material" as Form
+control "Controller Logistik" as Ctrl
+entity "Database Gudang" as DB
+
+activate Ctrl
+Ctrl --> Form: Membuat (generate) lembar formulir digital
+activate Form
+Form --> Teknisi: Memunculkan form permintaan perangkat
+deactivate Form
+deactivate Ctrl
+
+activate Teknisi
+Teknisi -> Form: Menginputkan estimasi panjang kabel & router
+activate Form
+Teknisi -> Form: Menekan tombol "Kirim Permintaan Barang"
+Form -> Ctrl: Meneruskan data permintaan material
+activate Ctrl
+
+Ctrl -> Ctrl: Mengevaluasi limitasi panjang kabel
+
+alt [Panjang kabel > 150 meter (Exceptional 4E)]
+    Ctrl --> Form: Mengembalikan pesan peringatan batas standar
+    Form --> Teknisi: Menampilkan pesan "Kebutuhan Material Melebihi Batas ISP"
+    Teknisi -> Form: Mengisi kolom justifikasi alasan teknis di lapangan
+    Form -> Ctrl: Mengirimkan pembaruan data beserta justifikasi
+else [Panjang kabel Sesuai Standar / <= 150 meter]
+    Ctrl -> Ctrl: Meloloskan evaluasi standar batas panjang kabel
+end
+
+Ctrl -> Ctrl: Melakukan verifikasi format isian formulir
+Ctrl -> DB: Mencatat nomor manifes pengeluaran sementara
+activate DB
+DB --> Ctrl: Konfirmasi manifes berhasil disimpan
+deactivate DB
+Ctrl -> DB: Mengirimkan notifikasi permintaan ke antrean Logistik
+activate DB
+DB --> Ctrl: Pembaruan antrean logistik sukses
+deactivate DB
+Ctrl --> Form: Mengirimkan status permintaan sukses
+Form --> Teknisi: Menampilkan indikator keberhasilan pengajuan
+deactivate Ctrl
+deactivate Form
+
+deactivate Teknisi
+@enduml

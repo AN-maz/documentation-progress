@@ -1,0 +1,61 @@
+@startuml
+autonumber
+skinparam style strictuml
+
+actor Logistik
+boundary "Dashboard Gudang" as Form
+control "Controller Logistik" as Ctrl
+entity "Database Gudang" as DB
+actor Finance
+
+activate Logistik
+Logistik -> Form: Membuka daftar permintaan barang dari Teknisi
+activate Form
+Form -> Ctrl: Meminta rincian permintaan & status stok
+activate Ctrl
+Ctrl -> DB: Memeriksa kondisi stok perangkat fisik
+activate DB
+DB --> Ctrl: Mengembalikan jumlah sisa stok
+deactivate DB
+
+alt [Kondisi Stok Kosong / Tidak Mencukupi (Alternate 2A)]
+    Ctrl --> Form: Mengirim peringatan stok habis
+    Form --> Logistik: Menampilkan peringatan stok habis
+    
+    Logistik -> Form: Memicu alur pembelian barang (Extend UC_BeliBarang)
+    Form -> Ctrl: Meminta formulir pembelian
+    Ctrl --> Form: Membuat formulir pengajuan
+    Form --> Logistik: Menampilkan formulir pengajuan pembelian
+    
+    Logistik -> Finance: Meminta persetujuan dana pembelian perangkat
+    activate Finance
+    Finance --> Logistik: Memproses validasi pengajuan dana
+    deactivate Finance
+else [Kondisi Stok Tersedia]
+    Ctrl --> Form: Mengirimkan data sisa stok
+    Form --> Logistik: Menampilkan sisa stok perangkat di layar
+    deactivate Ctrl
+    deactivate Form
+    
+    Logistik -> Logistik: Menyiapkan perangkat fisik sesuai daftar permintaan
+    
+    Logistik -> Form: Menekan tombol "Barang Diserahkan"
+    activate Form
+    Form -> Ctrl: Mengirim instruksi serah terima
+    activate Ctrl
+    Ctrl -> DB: Memperbarui (mengurangi) jumlah stok gudang
+    activate DB
+    DB --> Ctrl: Konfirmasi pembaruan stok sukses
+    deactivate DB
+    Ctrl -> DB: Menandai status permintaan menjadi selesai
+    activate DB
+    DB --> Ctrl: Konfirmasi status permintaan diperbarui
+    deactivate DB
+    Ctrl --> Form: Mengembalikan status transaksi sukses
+    Form --> Logistik: Menampilkan pesan sukses "Serah Terima Barang Berhasil"
+    deactivate Ctrl
+    deactivate Form
+end
+
+deactivate Logistik
+@enduml

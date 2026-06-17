@@ -1,0 +1,48 @@
+@startuml
+autonumber
+skinparam style strictuml
+
+actor Teknisi
+boundary "Form Cek ODP" as Form
+control "Controller ODP" as Ctrl
+entity "Database Jaringan" as DB
+
+activate Ctrl
+Ctrl -> DB: Mengambil rekomendasi ODP terdekat
+activate DB
+DB --> Ctrl: Mengembalikan data lokasi ODP
+deactivate DB
+Ctrl --> Form: Menampilkan rekomendasi ODP
+activate Form
+Form --> Teknisi: Menampilkan rekomendasi di layar gawai
+deactivate Form
+deactivate Ctrl
+
+activate Teknisi
+Teknisi -> Teknisi: Memeriksa fisik tiang ODP di lapangan
+Teknisi -> Form: Memasukkan kode ODP & nomor port
+activate Form
+Form -> Ctrl: Mengirim request verifikasi port ODP
+activate Ctrl
+Ctrl -> DB: Mengecek status ketersediaan port
+activate DB
+DB --> Ctrl: Mengembalikan status port
+deactivate DB
+
+alt [Port Tidak/Penuh/Rusak (Exceptional 4E)]
+    Ctrl --> Form: Status error jaringan penuh
+    Form --> Teknisi: Menampilkan notifikasi "Port ODP Tidak Tersedia / Penuh"
+    Ctrl -> Ctrl: Membatalkan alur & meminta koordinat alternatif
+else [Port Berstatus Kosong / Ya]
+    Ctrl -> DB: Mengunci nomor port untuk pelanggan bersangkutan
+    activate DB
+    DB --> Ctrl: Konfirmasi port berhasil dikunci
+    deactivate DB
+    Ctrl --> Form: Status validasi sukses
+    Form --> Teknisi: Menampilkan pesan "Validasi ODP Berhasil"
+end
+
+deactivate Ctrl
+deactivate Form
+deactivate Teknisi
+@enduml

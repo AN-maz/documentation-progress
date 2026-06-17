@@ -1,0 +1,45 @@
+@startuml
+autonumber
+skinparam style strictuml
+
+actor Logistik
+boundary "Form Purchase Request" as Form
+control "Controller Pembelian" as Ctrl
+entity "Database Finance" as DB
+
+activate Ctrl
+Ctrl --> Form: Membuat formulir digital pengajuan
+activate Form
+Form --> Logistik: Memunculkan formulir pengajuan pembelian
+deactivate Form
+deactivate Ctrl
+
+activate Logistik
+loop [Apakah ada kolom estimasi harga atau alasan yang kosong?]
+    Logistik -> Form: Mengisi rincian nama barang, restock, harga, alasan
+    activate Form
+    Logistik -> Form: Menekan tombol "Kirim Pengajuan"
+    Form -> Ctrl: Mengirimkan request pengajuan data
+    activate Ctrl
+    
+    Ctrl -> Ctrl: Melakukan verifikasi kelengkapan form
+    
+    alt [Ada kolom yang kosong (Exceptional 4E)]
+        Ctrl --> Form: Mengembalikan peringatan validasi form gagal
+        Form --> Logistik: Menampilkan pesan "Lengkapi rincian nominal dan alasan pengajuan"
+        Ctrl -> Ctrl: Menahan eskalasi permohonan ke tingkat selanjutnya
+    else [Semua data lengkap dan valid]
+        Ctrl -> DB: Meneruskan permohonan dengan status "Menunggu Persetujuan"
+        activate DB
+        DB --> Ctrl: Mengembalikan konfirmasi tiket permohonan masuk
+        deactivate DB
+        Ctrl --> Form: Mengembalikan status pengajuan berhasil
+        Form --> Logistik: Menampilkan notifikasi sukses pengiriman
+    end
+    
+    deactivate Ctrl
+    deactivate Form
+end
+
+deactivate Logistik
+@enduml

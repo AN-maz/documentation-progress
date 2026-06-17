@@ -1,0 +1,63 @@
+@startuml
+autonumber
+skinparam style strictuml
+
+actor NOC
+boundary "Dashboard NOC" as Form
+control "Controller Aktivasi" as Ctrl
+entity "Database Layanan" as DB
+participant "Modul Keuangan" as Keuangan
+
+' NOC tidak perlu di-activate secara manual agar garis hidupnya bersih
+NOC -> Form: Membuka tiket pelanggan berstatus instalasi selesai
+activate Form
+Form -> Ctrl: Meminta data tiket & validasi
+activate Ctrl
+
+Ctrl -> Keuangan: Menjalankan pengecekan wajib status tagihan (Include UC_Validasi)
+activate Keuangan
+Keuangan --> Ctrl: Mengembalikan data status pembayaran pelanggan
+deactivate Keuangan
+
+alt [Status Pembayaran Belum Lunas / Belum Valid (Exceptional 2E)]
+    Ctrl -> Ctrl: Memblokir fungsi tombol aktivasi jaringan
+    Ctrl -> Ctrl: Menghentikan sementara proses aktivasi tiket
+    Ctrl --> Form: Mengembalikan peringatan error
+    Form --> NOC: Memunculkan peringatan "Menunggu Validasi Pembayaran"
+    deactivate Ctrl
+    deactivate Form
+else [Status Pembayaran Sudah Divalidasi / Lunas]
+    ' BARIS ACTIVATE DI SINI SUDAH DIHAPUS KARENA STATUSNYA MASIH AKTIF DARI ATAS
+    Ctrl -> Ctrl: Meloloskan verifikasi pembayaran
+    Ctrl --> Form: Memberikan otorisasi akses
+    Form --> NOC: Menampilkan antarmuka panel aktivasi jaringan
+    deactivate Form
+    deactivate Ctrl
+    
+    NOC -> Form: Mengatur konfigurasi bandwidth & akses otorisasi pelanggan
+    activate Form
+    Form -> Ctrl: Mengirim data konfigurasi
+    activate Ctrl
+    Ctrl -> DB: Menyimpan data konfigurasi sementara
+    activate DB
+    DB --> Ctrl: Konfirmasi konfigurasi disimpan
+    deactivate DB
+    Ctrl --> Form: Status siap diaktifkan
+    deactivate Ctrl
+    deactivate Form
+    
+    NOC -> Form: Menekan tombol "Aktifkan Jaringan"
+    activate Form
+    Form -> Ctrl: Memerintahkan aktivasi final
+    activate Ctrl
+    Ctrl -> DB: Memperbarui status layanan pelanggan menjadi "Aktif"
+    activate DB
+    DB --> Ctrl: Konfirmasi database diperbarui
+    deactivate DB
+    Ctrl --> Form: Status aktivasi sukses
+    Form --> NOC: Menampilkan notifikasi "Jaringan Pelanggan Berhasil Aktif"
+    deactivate Ctrl
+    deactivate Form
+end
+
+@enduml
