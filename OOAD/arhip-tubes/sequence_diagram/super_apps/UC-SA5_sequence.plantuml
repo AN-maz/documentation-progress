@@ -3,51 +3,47 @@ autonumber
 skinparam style strictuml
 
 actor "Divisi Walanja" as Walanja
-participant "Sistem Super Apps" as App
-database "Database" as DB
+boundary "Manajemen Kamar" as Form
+control "Control Hotel" as Ctrl
+entity "Database Kamar" as DB
 
 activate Walanja
-Walanja -> App: Login ke dashboard admin & membuka modul "Manajemen Kamar Hotel"
-activate App
-Walanja -> App: Memilih tipe kamar atau properti hotel spesifik
-App -> App: Memeriksa tujuan pengubahan data operasional
+Walanja -> Form: Membuka modul manajemen kamar hotel
+activate Form
+Walanja -> Form: Memilih tipe kamar yang akan diperbarui
 
-alt [Tujuan untuk pemeliharaan gedung / Renovasi (Alternate 3A)]
-    Walanja -> App: Memilih opsi status "Block Room / Maintenance" pada kalender
-    App -> DB: Menyimpan konfigurasi status pemeliharaan kamar
+alt [Tujuan Pemeliharaan / Renovasi]
+    Walanja -> Form: Memilih opsi Block / Maintenance
+    Form -> Ctrl: Mengirim status Blocked
+    activate Ctrl
+    Ctrl -> DB: Mengubah status kamar menjadi tidak tersedia
     activate DB
-    DB --> App: Konfirmasi data pemeliharaan disimpan
+    DB --> Ctrl: Konfirmasi data diupdate
     deactivate DB
-    App -> App: Otomatis menyembunyikan kamar terkait dari daftar pencarian
-    App --> Walanja: Menampilkan pesan "Status Kamar Diperbarui ke Maintenance"
-    deactivate App
-else [Tidak / Pembaruan Kuota Reguler]
-    App --> Walanja: Menampilkan form alokasi kuota reguler
-    deactivate App
-    
-    loop [Apakah input kuota tidak valid?]
-        Walanja -> App: Mengubah angka alokasi kuota & tekan "Perbarui Ketersediaan"
-        activate App
-        App -> App: Memeriksa validitas format data kuota yang diinput
-        
-        alt [Nilai kuota minus / format teks tidak valid (Exceptional 3E)]
-            App --> Walanja: Menampilkan pesan error "Input Kuota Kamar Tidak Valid"
-            App -> App: Menolak menyimpan perubahan data ke database
-        else [Input Valid / Normal]
-            App --> Walanja: Konfirmasi verifikasi format data valid
-        end
-        deactivate App
-    end
-    
-    Walanja -> App: Mengirimkan konfirmasi final pembaruan kuota kamar
-    activate App
-    App -> DB: Memvalidasi data & memperbarui status kuota kamar real-time
-    activate DB
-    DB --> App: Konfirmasi pembaruan database sukses disimpan
-    deactivate DB
-    App --> Walanja: Menampilkan status "Kamar Berhasil Diperbarui secara Real-Time"
-    deactivate App
+    Ctrl --> Form: Menginstruksikan sistem menyembunyikan kamar dari pencarian
+    deactivate Ctrl
+else [Reguler]
+    Walanja -> Form: Mengubah data angka ketersediaan kamar
 end
 
+Walanja -> Form: Menyimpan perubahan data
+Form -> Ctrl: Mengirim request update ketersediaan
+activate Ctrl
+Ctrl -> Ctrl: Memvalidasi format data yang dimasukkan
+
+alt [Format Data Tidak Valid]
+    Ctrl --> Form: Menolak penyimpanan perubahan
+    Form --> Walanja: Menampilkan pesan kesalahan (Format Salah)
+else [Format Data Valid]
+    Ctrl -> DB: Memperbarui informasi ketersediaan kamar secara real-time
+    activate DB
+    DB --> Ctrl: Konfirmasi update sukses
+    deactivate DB
+    Ctrl --> Form: Status berhasil diperbarui
+    Form --> Walanja: Menampilkan notifikasi sukses
+end
+
+deactivate Ctrl
+deactivate Form
 deactivate Walanja
 @enduml

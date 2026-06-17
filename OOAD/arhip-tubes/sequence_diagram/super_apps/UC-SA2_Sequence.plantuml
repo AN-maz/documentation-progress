@@ -3,43 +3,53 @@ autonumber
 skinparam style strictuml
 
 actor Pelanggan
-participant "Sistem Super Apps" as App
-database "Database" as DB
+boundary "Halaman Top Up" as Form
+control "Control Top Up" as Ctrl
+entity "Database Keuangan" as DB
 
 activate Pelanggan
-Pelanggan -> App: Membuka halaman pengisian saldo C-Pay
-activate App
-App --> Pelanggan: Menampilkan antarmuka top up
-deactivate App
+Ctrl -> Form: Memicu Inisiasi Top Up (Extend)
+activate Ctrl
+activate Form
+Form --> Pelanggan: Menampilkan halaman pengisian saldo C-Pay
+deactivate Ctrl
 
-Pelanggan -> App: Memasukkan nominal & memilih metode pembayaran (Virtual Account)
-activate App
-App -> DB: Membuat nomor Virtual Account unik & batas waktu
+Pelanggan -> Form: Memasukkan nominal saldo yang ditambahkan
+Form -> Ctrl: Meneruskan request Top Up
+activate Ctrl
+Ctrl -> DB: Men-generate kode pembayaran / Virtual Account
 activate DB
-DB --> App: Mengembalikan nomor VA dan timestamp kedaluwarsa
+DB --> Ctrl: Mengembalikan kode pembayaran
 deactivate DB
-App --> Pelanggan: Menerbitkan nomor VA & batas waktu pembayaran
-deactivate App
+Ctrl --> Form: Mengirim instruksi tagihan
+Form --> Pelanggan: Menampilkan instruksi dan kode pembayaran
+deactivate Ctrl
 
-alt [Pelanggan tidak mentransfer dana sebelum batas waktu / Expired (Exceptional 4E)]
-    App -> App: Batas waktu pembayaran habis (Timeout)
-    activate App
-    App -> DB: Otomatis mengubah status transaksi menjadi "Kedaluwarsa"
+Pelanggan -> Form: Menyelesaikan proses pembayaran (Transfer Bank, dll)
+Form -> Ctrl: Mengirim konfirmasi cek pembayaran
+activate Ctrl
+Ctrl -> DB: Memeriksa status pembayaran dari gateway
+activate DB
+DB --> Ctrl: Mengembalikan status transaksi (Tepat Waktu/Kedaluwarsa)
+deactivate DB
+
+alt [Pembayaran Kedaluwarsa / Lewat Batas Waktu]
+    Ctrl -> DB: Menutup transaksi kedaluwarsa
     activate DB
-    DB --> App: Konfirmasi penutupan transaksi sukses
+    DB --> Ctrl: Konfirmasi penutupan
     deactivate DB
-    App --> Pelanggan: Menampilkan status transaksi gagal (Expired)
-    deactivate App
-else [Pelanggan mentransfer dana tepat waktu / Ya]
-    App -> App: Mendeteksi dana transfer masuk dari bank (Terintegrasi dengan UC_SA03)
-    activate App
-    App -> DB: Memperbarui (menambah) jumlah saldo C-Pay di akun pelanggan
+    Ctrl --> Form: Mengembalikan status batal
+    Form --> Pelanggan: Membatalkan proses top up
+else [Pembayaran Tepat Waktu / Valid]
+    Ctrl -> DB: Memperbarui saldo C-Pay pelanggan
     activate DB
-    DB --> App: Konfirmasi pembaruan saldo berhasil dibukukan
+    DB --> Ctrl: Konfirmasi saldo bertambah
     deactivate DB
-    App --> Pelanggan: Menampilkan notifikasi "Top Up Berhasil"
-    deactivate App
+    Ctrl --> Form: Mengembalikan status berhasil
+    Form --> Pelanggan: Menampilkan notifikasi keberhasilan
 end
 
+deactivate Ctrl
+deactivate Form
 deactivate Pelanggan
 @enduml

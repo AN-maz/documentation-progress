@@ -3,69 +3,62 @@ autonumber
 skinparam style strictuml
 
 actor Pelanggan
-participant "Sistem Super Apps" as App
-database "Database" as DB
+boundary "Menu Hotel" as Form
+control "Control Reservasi" as Ctrl
+entity "Database Kamar" as DB
 
 activate Pelanggan
-Pelanggan -> App: Membuka menu pemesanan hotel di aplikasi
-activate App
-Pelanggan -> App: Memasukkan kriteria pencarian (Tanggal, Tamu, Properti)
-App -> DB: Ambil daftar pilihan kamar hotel tersedia
+Pelanggan -> Form: Memasukkan kriteria pencarian kamar hotel
+activate Form
+Form -> Ctrl: Mengirim kriteria pencarian
+activate Ctrl
+Ctrl -> DB: Mencari kamar yang tersedia
 activate DB
-DB --> App: Mengembalikan data kamar & harga
+DB --> Ctrl: Mengembalikan daftar kamar
 deactivate DB
-App --> Pelanggan: Menampilkan daftar pilihan kamar hotel & rincian harga
-deactivate App
+Ctrl --> Form: Meneruskan ke layar
+Form --> Pelanggan: Menampilkan daftar kamar yang tersedia
+deactivate Ctrl
 
-Pelanggan -> App: Memilih kamar & melengkapi formulir data diri tamu
-activate App
-App -> DB: Memeriksa sisa kuota fisik kamar real-time
+Pelanggan -> Form: Memilih kamar dan melengkapi data reservasi
+Form -> Ctrl: Mengirim request booking sementara
+activate Ctrl
+Ctrl -> DB: Memverifikasi ketersediaan kamar secara real-time
 activate DB
-DB --> App: Mengembalikan status sisa kuota
+DB --> Ctrl: Mengembalikan ketersediaan stok
 deactivate DB
 
-alt [Sisa kuota kamar fisik habis / Penuh (Exceptional 3E)]
-    App --> Pelanggan: Menampilkan pesan "Maaf, Kamar Sudah Penuh atau Tidak Tersedia"
-    App -> App: Membatalkan proses pemesanan otomatis & kembali ke awal
-    App --> Pelanggan: Mengembalikan ke halaman pencarian awal
-    deactivate App
-else [Kamar Masih Tersedia / Ya]
-    App --> Pelanggan: Menampilkan halaman konfirmasi pembayaran
-    deactivate App
+alt [Kamar Tidak Tersedia / Penuh]
+    Ctrl --> Form: Mengembalikan status kamar habis
+    Form --> Pelanggan: Menampilkan pemberitahuan & diminta memilih kamar lain
+else [Kamar Tersedia]
+    Ctrl --> Form: Konfirmasi slot kamar diamankan
+    Form --> Pelanggan: Menampilkan tagihan reservasi
+    Pelanggan -> Form: Melakukan pembayaran menggunakan C-Pay
+    Form -> Ctrl: Memproses perintah pembayaran C-Pay
+    Ctrl -> DB: Memverifikasi saldo C-Pay
+    activate DB
+    DB --> Ctrl: Mengembalikan sisa saldo
+    deactivate DB
     
-    loop [Apakah saldo C-Pay masih kurang?]
-        Pelanggan -> App: Menekan tombol "Bayar dengan C-Pay"
-        activate App
-        App -> DB: Memverifikasi kecukupan saldo C-Pay milik pelanggan
+    alt [Saldo C-Pay Tidak Mencukupi]
+        Ctrl --> Form: Status saldo kurang
+        Form --> Pelanggan: Memicu alur pengisian saldo (Extend UC_SA02)
+    else [Saldo Mencukupi]
+        Ctrl -> DB: Memotong saldo pelanggan & mencatat booking
         activate DB
-        DB --> App: Mengembalikan data status kecukupan saldo
+        DB --> Ctrl: Konfirmasi transaksi sukses
         deactivate DB
-        
-        alt [Jumlah saldo C-Pay tidak mencukupi (Alternate 5A)]
-            App -> App: Memicu alur pengisian saldo (Extend UC_SA02)
-            App --> Pelanggan: Mengarahkan ke modul pengisian saldo (Top Up)
-            deactivate App
-            Pelanggan -> App: Menyelesaikan proses pengisian saldo (Top Up C-Pay)
-            activate App
-        else [Jumlah saldo C-Pay mencukupi / Aman]
-            App --> Pelanggan: Konfirmasi verifikasi saldo sukses
-        end
-        deactivate App
+        Ctrl -> DB: Menerbitkan e-voucher hotel
+        activate DB
+        DB --> Ctrl: File e-voucher
+        deactivate DB
+        Ctrl --> Form: Mengirim data e-voucher
+        Form --> Pelanggan: Menampilkan e-voucher hotel (Bukti Reservasi)
     end
-    
-    Pelanggan -> App: Mengonfirmasi penyelesaian pembayaran final
-    activate App
-    App -> DB: Memotong saldo C-Pay & memperbarui status reservasi
-    activate DB
-    DB --> App: Konfirmasi pemotongan sukses
-    deactivate DB
-    App -> DB: Menerbitkan dokumen e-voucher hotel resmi
-    activate DB
-    DB --> App: Mengembalikan data berkas e-voucher
-    deactivate DB
-    App --> Pelanggan: Menampilkan e-voucher hotel resmi di layar aplikasi
-    deactivate App
 end
 
+deactivate Ctrl
+deactivate Form
 deactivate Pelanggan
 @enduml

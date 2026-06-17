@@ -3,55 +3,48 @@ autonumber
 skinparam style strictuml
 
 actor Pelanggan
-participant "Aplikasi Super Apps" as App
-database "Database" as DB
+boundary "Menu Pembayaran" as Form
+control "Control Tagihan" as Ctrl
+entity "Database Tagihan" as DB
 
 activate Pelanggan
-Pelanggan -> App: Memilih menu "Bayar Internet" pada halaman utama
-activate App
-
-App -> DB: Memeriksa pendaftaran nomor ID pelanggan
+Pelanggan -> Form: Memilih menu "Bayar Internet"
+activate Form
+Form -> Ctrl: Request data tagihan
+activate Ctrl
+Ctrl -> DB: Mencari data pelanggan dan tagihan
 activate DB
-DB --> App: Mengembalikan status verifikasi nomor ID
+DB --> Ctrl: Mengembalikan hasil pencarian
 deactivate DB
 
-alt [Nomor ID Pelanggan Tidak Terdaftar (Exceptional 2E)]
-    App --> Pelanggan: Menampilkan pesan error "ID Pelanggan Tidak Ditemukan"
-    App -> App: Membatalkan proses peninjauan tagihan secara otomatis
-    deactivate App
-else [Nomor ID Pelanggan Terdaftar / Valid]
-    App --> Pelanggan: Menampilkan detail nomor, paket, dan total nominal tagihan aktif
-    deactivate App
+alt [Data Tagihan Tidak Ditemukan]
+    Ctrl --> Form: Mengirim pesan kesalahan (Data Kosong)
+    Form --> Pelanggan: Menampilkan pesan kesalahan & Batal
+else [Data Tagihan Ditemukan]
+    Ctrl --> Form: Mengirim data tagihan aktif
+    Form --> Pelanggan: Menampilkan informasi tagihan aktif
     
-    loop [Apakah saldo C-Pay masih kurang?]
-        Pelanggan -> App: Memeriksa data dan menekan tombol "Bayar via C-Pay"
-        activate App
-        App -> DB: Memverifikasi kecukupan saldo C-Pay pelanggan
-        activate DB
-        DB --> App: Mengembalikan data status kecukupan saldo
-        deactivate DB
-        
-        alt [Jumlah saldo C-Pay tidak mencukupi (Alternate 4A)]
-            App -> App: Memicu alur perluasan pengisian saldo (Extend menuju UC_SA02)
-            App --> Pelanggan: Mengarahkan pelanggan ke antarmuka pengisian saldo
-            deactivate App
-            Pelanggan -> App: Menyelesaikan proses pengisian saldo (Top Up)
-            activate App
-        else [Jumlah saldo C-Pay pelanggan mencukupi / Aman]
-            App --> Pelanggan: Konfirmasi saldo mencukupi untuk melanjutkan transaksi
-        end
-        deactivate App
-    end
-    
-    activate App
-    App -> DB: Memotong saldo C-Pay sesuai nominal tagihan bulanan
+    Pelanggan -> Form: Memilih metode pembayaran (C-Pay)
+    Form -> Ctrl: Memproses pilihan C-Pay
+    Ctrl -> DB: Memverifikasi ketersediaan saldo C-Pay
     activate DB
-    App -> DB: Mengubah status tagihan internet menjadi "Lunas"
-    DB --> App: Konfirmasi pembaruan database sukses disimpan
+    DB --> Ctrl: Mengembalikan informasi saldo
     deactivate DB
-    App --> Pelanggan: Menampilkan resi digital bukti pembayaran sukses
-    deactivate App
+    
+    alt [Saldo C-Pay Tidak Mencukupi]
+        Ctrl --> Form: Mengirim peringatan saldo kurang
+        Form --> Pelanggan: Memicu alur pengisian saldo (Extend UC_SA02)
+    else [Saldo Mencukupi]
+        Ctrl -> DB: Memotong saldo & Memperbarui status tagihan menjadi "Lunas"
+        activate DB
+        DB --> Ctrl: Konfirmasi transaksi berhasil
+        deactivate DB
+        Ctrl --> Form: Mengirim bukti transaksi
+        Form --> Pelanggan: Menampilkan bukti transaksi
+    end
 end
 
+deactivate Ctrl
+deactivate Form
 deactivate Pelanggan
 @enduml

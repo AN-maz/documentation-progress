@@ -2,32 +2,44 @@
 autonumber
 skinparam style strictuml
 
-actor Sales
 actor "Calon Pelanggan" as Cust
-participant "Aplikasi VisitTrack" as App
-database "Database" as DB
+actor Sales
+boundary "Form Prospek" as Form
+control "Control Prospek" as Ctrl
+entity "Database VisitTrack" as DB
 
-activate Sales
-Sales -> Cust: Mewawancarai terkait status internet harian
 activate Cust
-Cust --> Sales: Memberikan informasi status internet & menyampaikan keluhan
+activate Sales
+Sales -> Cust: Mewawancarai calon pelanggan
+Cust --> Sales: Menyampaikan kondisi internet & keluhan
 deactivate Cust
 
-Sales -> App: Memilih kategori status (Hot, Warm, Cold) & input catatan keluhan
-activate App
-App -> App: Memproses formulir data prospek lapangan
+Sales -> Form: Membuka formulir pendataan prospek
+activate Form
+Sales -> Form: Memasukkan keluhan & kategori status prospek
+Form -> Ctrl: Mengirim data form prospek
+activate Ctrl
+Ctrl -> Ctrl: Memvalidasi kelengkapan data prospek
 
-alt [Kategori Status Pelanggan = Hot (Alur Alternatif 4A)]
-    App -> App: Memicu alur perluasan Pengajuan Eskalasi Pemasangan (UC-VT03)
-    App --> Sales: Mengalihkan antarmuka ke formulir tambahan eskalasi
-else [Kategori Status Pelanggan = Warm / Cold]
-    App -> DB: Menyimpan data ke database prospek reguler
-    activate DB
-    DB --> App: Konfirmasi data berhasil disimpan ke dalam storasi
-    deactivate DB
-    App --> Sales: Menampilkan pesan "Data Prospek Reguler Berhasil Disimpan"
+alt [Data Prospek Tidak Lengkap (Exception)]
+    Ctrl --> Form: Menolak penyimpanan
+    Form --> Sales: Meminta melengkapi data yang kurang
+    Sales -> Form: Melengkapi formulir data
+else [Data Lengkap]
+    alt [Kategori Status "Hot" (Alternate)]
+        Ctrl -> Ctrl: Memicu "Mengajukan Eskalasi Pemasangan"\n(Extend UC_VT03)
+        Ctrl --> Form: Menampilkan form eskalasi
+    else [Kategori Status "Reguler"]
+        Ctrl -> DB: Memproses dan menyimpan data prospek
+        activate DB
+        DB --> Ctrl: Konfirmasi data tersimpan
+        deactivate DB
+        Ctrl --> Form: Status sukses
+        Form --> Sales: Menampilkan notifikasi sukses
+    end
 end
 
-deactivate App
+deactivate Ctrl
+deactivate Form
 deactivate Sales
 @enduml

@@ -3,49 +3,53 @@ autonumber
 skinparam style strictuml
 
 actor Finance
-participant "Sistem Super Apps" as App
-database "Database" as DB
+boundary "Dashboard Transaksi" as Form
+control "Control Keuangan" as Ctrl
+entity "Database Laporan" as DB
 
 activate Finance
-Finance -> App: Masuk ke modul admin "Dashboard Mutasi Transaksi"
-activate App
-App -> DB: Memuat daftar transaksi masuk terverifikasi payment gateway
+Finance -> Form: Membuka dashboard transaksi
+activate Form
+Form -> Ctrl: Meminta daftar transaksi masuk
+activate Ctrl
+Ctrl -> DB: Mengambil daftar transaksi yang diterima sistem
 activate DB
-DB --> App: Mengembalikan data log mutasi masuk harian
+DB --> Ctrl: Mengembalikan daftar transaksi
 deactivate DB
-App --> Finance: Menampilkan daftar riwayat transaksi masuk otomatis
-deactivate App
+Ctrl --> Form: Meneruskan ke antarmuka
+Form --> Finance: Menampilkan daftar transaksi
+deactivate Ctrl
 
-alt [Ditemukan ketidakcocokan nominal / discrepancy besar (Exceptional 3E)]
-    Finance -> App: Menekan tombol "Bekukan Alur Transaksi" pada sistem
-    activate App
-    App -> App: Otomatis menghentikan transaksi pada gerbang pembayaran untuk investigasi
-    App --> Finance: Menampilkan notifikasi "Sistem Keuangan Gerbang Dibekukan Sementara"
-    deactivate App
-else [Tidak / Log Data Rekapitulasi Mutasi Aman]
-    Finance -> Finance: Mencocokkan total rekap harian sistem dengan rekening koran bank secara manual
-    
-    alt [Ada transaksi bernominal unik yang tertunda / Gangguan Server Bank (Alternate 2A)]
-        Finance -> App: Melakukan pengecekan manual & menekan tombol "Validasi Manual"
-        activate App
-        App -> DB: Memaksa status transaksi terkait berubah menjadi sukses
-        activate DB
-        App -> DB: Langsung memperbarui hak saldo di akun pelanggan yang tertunda
-        DB --> App: Konfirmasi eksekusi paksa manual berhasil dimasukkan
-        deactivate DB
-        App --> Finance: Menampilkan status mutasi berhasil diperbarui manual
-        deactivate App
+Finance -> Finance: Mencocokkan data transaksi dengan laporan keuangan bank
+
+alt [Beda Signifikan / Tidak Sesuai]
+    Finance -> Form: Menandai anomali transaksi
+    Form -> Ctrl: Mengirim pelaporan masalah
+    activate Ctrl
+    Ctrl -> DB: Menandai transaksi sebagai bermasalah
+    activate DB
+    DB --> Ctrl: Konfirmasi status diupdate
+    deactivate DB
+    Ctrl --> Form: Menghentikan proses validasi sementara
+    Form --> Finance: Menampilkan notifikasi "Validasi Ditunda"
+    deactivate Ctrl
+else [Sesuai / Valid]
+    alt [Transaksi Belum Terverifikasi Otomatis]
+        Finance -> Form: Melakukan validasi secara manual
     end
     
-    Finance -> App: Menekan tombol "Kunci Laporan Transaksi Harian"
-    activate App
-    App -> DB: Membukukan laporan rekap harian ke dalam jurnal keuangan utama
+    Finance -> Form: Menyetujui hasil validasi transaksi
+    Form -> Ctrl: Mengirim konfirmasi persetujuan validasi
+    activate Ctrl
+    Ctrl -> DB: Menyimpan hasil validasi & memperbarui laporan keuangan
     activate DB
-    DB --> App: Konfirmasi pembukuan jurnal harian berhasil dikunci
+    DB --> Ctrl: Konfirmasi data sinkron
     deactivate DB
-    App --> Finance: Menampilkan pesan "Laporan Transaksi Harian Berhasil Dibukukan"
-    deactivate App
+    Ctrl --> Form: Status pembaruan berhasil
+    Form --> Finance: Menampilkan notifikasi sukses dibukukan
+    deactivate Ctrl
 end
 
+deactivate Form
 deactivate Finance
 @enduml
