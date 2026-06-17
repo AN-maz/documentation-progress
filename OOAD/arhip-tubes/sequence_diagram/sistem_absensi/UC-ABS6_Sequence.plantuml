@@ -2,32 +2,39 @@
 autonumber
 skinparam style strictuml
 
-actor "Karyawan / Sales" as User
-participant "Sistem Aplikasi Android" as App
-participant "Server Pusat Cifo" as Server
+actor Karyawan
+boundary "Mobile App Android" as Form
+control "Control Keamanan" as Ctrl
+entity "Server Absensi" as DB
 
-activate User
-User -> App: Membuka media pengiriman via Android
-activate App
-App -> App: Membuka akses kamera depan & baca sensor GPS internal
-App -> App: Memeriksa integritas sistem operasi gawai (Play Integrity)
+activate Form
+Form -> Ctrl: Mengakses kamera depan dan layanan GPS
+activate Ctrl
+Ctrl -> Ctrl: Melakukan pemeriksaan integritas OS Android
 
-alt [Sistem Operasional Gawai Terdeteksi Rooted Device (Exceptional 3E)]
-    App --> User: Memunculkan pesan cekal "Aplikasi Tidak Dapat Berjalan di Perangkat Ter-Root"
-    App -> App: Membatalkan seluruh proses pengiriman data absensi
-    App -> App: Menutup aplikasi secara sepihak (terminate)
-else [Sistem Operasional Perangkat Aman / Tidak Ter Root]
-    User -> App: Mengambil foto diri harian secara instan via kamera depan
-    User -> App: Menekan tombol kirim absen harian
-    App -> App: Membungkus berkas gambar, koordinat GPS, dan Device ID ke paket kompresi
-    App -> Server: Mengirimkan enkripsi paket data secara aman via protokol API
-    activate Server
-    Server -> Server: Memproses validasi log kehadiran dan Device ID akun
-    Server --> App: Mengembalikan kode respons sukses operasi
-    deactivate Server
-    App --> User: Menampilkan animasi sukses "Absen Masuk Berhasil" di layar
-    deactivate App
+alt [Perangkat Rooted / Dimodifikasi / Ya]
+    Ctrl --> Form: Menolak proses absensi
+    Form --> Karyawan: Menampilkan pesan peringatan modifikasi
+    Form -> Form: Menghentikan akses ke fitur presensi
+else [Perangkat Aman / Tidak]
+    Ctrl --> Form: Sistem aman
+    deactivate Ctrl
+    
+    activate Karyawan
+    Karyawan -> Form: Mengambil foto selfie sebagai bukti
+    Form -> Ctrl: Meneruskan foto, GPS, dan info perangkat
+    activate Ctrl
+    Ctrl -> Ctrl: Menggabungkan foto, koordinat, dan identitas perangkat
+    Ctrl -> DB: Mengirimkan paket data absensi ke server
+    activate DB
+    DB --> Ctrl: Memvalidasi & Menerima data
+    DB --> Ctrl: Mengembalikan konfirmasi keberhasilan
+    deactivate DB
+    Ctrl --> Form: Meneruskan konfirmasi keberhasilan
+    Form --> Karyawan: Menampilkan notifikasi presensi sukses
 end
 
-deactivate User
+deactivate Ctrl
+deactivate Form
+deactivate Karyawan
 @enduml

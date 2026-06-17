@@ -3,36 +3,44 @@ autonumber
 skinparam style strictuml
 
 actor HR
-participant "Sistem Absensi" as Sys
-database "Database" as DB
+boundary "Dashboard Geofencing" as Form
+control "Control Keamanan" as Ctrl
+entity "Database Absensi" as DB
 
 activate HR
-HR -> Sys: Masuk ke modul "Manajemen Geofencing & Fraud"
-activate Sys
-HR -> Sys: Meninjau titik pusat Cifo & atur batas radius aman
+HR -> Form: Masuk ke modul "Manajemen Geofencing & Fraud"
+activate Form
+HR -> Form: Meninjau titik koordinat pusat dan radius batas aman
+Form -> Ctrl: Mengirim parameter filter
+activate Ctrl
 
-Sys -> Sys: Jalankan fungsi latar belakang (background service)\nuntuk menyaring paket koordinat masuk
+Ctrl -> DB: Meminta data log koordinat absen harian
+activate DB
+DB --> Ctrl: Mengembalikan sekumpulan data log
+deactivate DB
+Ctrl -> Ctrl: Menjalankan background service menyaring log koordinat
 
-alt [Terdeteksi Aplikasi Mock Location / Fake GPS (Exceptional 3E)]
-    Sys -> Sys: Blokir kiriman data absensi secara otomatis
-    Sys -> DB: Menandai status akun dengan label "Indikasi Fraud"
+alt [Terdeteksi Aplikasi Fake GPS / Mock Location]
+    Ctrl -> DB: Memblokir absen & menandai "Indikasi Fraud"
     activate DB
-    DB --> Sys: Konfirmasi pembaruan status fraud
+    DB --> Ctrl: Status terupdate
     deactivate DB
-    Sys --> HR: Memunculkan peringatan instan di dasbor pemantauan
-    Sys -> Sys: Menggugurkan perekaman data kehadiran secara permanen
-    deactivate Sys
-else [Koordinat Bersifat Riil / Aman / Clean]
-    Sys --> HR: Menampilkan laporan log berstatus "Aman/Clean"
-    
-    HR -> Sys: Menyetujui log laporan kehadiran berkala
-    Sys -> DB: Membukan data kehadiran harian karyawan ke database
+    Ctrl --> Form: Meneruskan peringatan fraud
+    Form --> HR: Menampilkan peringatan instan ke layar HR
+else [Aman / Tidak Terdeteksi]
+    Ctrl --> Form: Mengembalikan log bersih
+    Form --> HR: Menampilkan laporan log berstatus "Aman/Clean"
+    HR -> Form: Menyetujui log laporan kehadiran valid
+    Form -> Ctrl: Mengirim persetujuan
+    Ctrl -> DB: Mengubah status log menjadi "Disetujui"
     activate DB
-    DB --> Sys: Konfirmasi data berhasil diarsipkan
+    DB --> Ctrl: Konfirmasi pembaruan log
     deactivate DB
-    Sys --> HR: Menampilkan status "Laporan Berhasil Disetujui"
-    deactivate Sys
+    Ctrl --> Form: Konfirmasi sukses
+    Form --> HR: Menampilkan notifikasi persetujuan berhasil
 end
 
+deactivate Ctrl
+deactivate Form
 deactivate HR
 @enduml

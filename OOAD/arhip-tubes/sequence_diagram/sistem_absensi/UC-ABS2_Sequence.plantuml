@@ -2,38 +2,39 @@
 autonumber
 skinparam style strictuml
 
-actor Sales
-participant "Sistem Absensi" as Sys
-database "Database" as DB
+actor Karyawan
+boundary "Menu Presensi" as Form
+control "Control Presensi" as Ctrl
+entity "Database Karyawan" as DB
 
-activate Sales
-Sales -> Sys: Membuka sistem absensi Cifo dari perangkat gawai di lapangan
-activate Sys
-Sales -> Sys: Memilih menu khusus "Public Absen"
-Sys --> Sales: Meminta foto selfie terkini & mengunci koordinat GPS
-deactivate Sys
+activate Karyawan
+Karyawan -> Form: Mengakses sistem absensi
+activate Form
+Karyawan -> Form: Memilih menu "Lakukan Presensi" & status (Masuk/Pulang)
+Form -> Ctrl: Mengirim request presensi awal
+activate Ctrl
+Ctrl -> DB: Memeriksa status keaktifan akun karyawan
+activate DB
+DB --> Ctrl: Mengembalikan status akun
+deactivate DB
 
-Sales -> Sys: Mengirimkan data parameter koordinat GPS lapangan
-activate Sys
-Sys -> Sys: Memeriksa kesesuaian koordinat dengan jadwal tugas wilayah
-
-alt [Koordinat di Luar Batas Cakupan Penugasan (Exceptional 3E)]
-    Sys --> Sales: Menampilkan pesan error "Lokasi Koordinat Publik Tidak Sesuai Jadwal Tugas"
-    Sys -> Sys: Menolak pengajuan Public Absen secara otomatis
-else [Koordinat Berada Dalam Radius / Sesuai Jadwal]
-    Sys --> Sales: Mengizinkan pengiriman kelengkapan paket data media
-    deactivate Sys
-    
-    Sales -> Sys: Mengirimkan foto selfie dan lokasi (via UC_App / UC_Web)
-    activate Sys
-    Sys -> Sys: Memverifikasi parameter validitas lokasi lapangan
-    Sys -> DB: Menyimpan log absensi dengan status "Hadir Dinas Luar"
+alt [Akun Tidak Aktif / Terdaftar]
+    Ctrl --> Form: Mengirim instruksi blokir
+    Form --> Karyawan: Memblokir akses & menampilkan pesan error
+else [Akun Aktif]
+    Ctrl --> Form: Mengizinkan akses
+    Form --> Karyawan: Meminta verifikasi kehadiran
+    Karyawan -> Form: Menyelesaikan verifikasi kehadiran\n(Memicu Extend Wajah/App)
+    Form -> Ctrl: Meneruskan data verifikasi
+    Ctrl -> DB: Mencatat timestamp real-time presensi
     activate DB
-    DB --> Sys: Konfirmasi data berhasil dibukukan ke penyimpanan pusat
+    DB --> Ctrl: Konfirmasi pencatatan berhasil
     deactivate DB
-    Sys --> Sales: Menampilkan notifikasi "Public Absen Berhasil Dikirim"
-    deactivate Sys
+    Ctrl --> Form: Status presensi sukses
+    Form --> Karyawan: Menampilkan notifikasi berhasil
 end
 
-deactivate Sales
+deactivate Ctrl
+deactivate Form
+deactivate Karyawan
 @enduml

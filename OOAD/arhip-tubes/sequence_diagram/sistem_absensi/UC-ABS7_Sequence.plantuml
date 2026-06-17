@@ -2,32 +2,35 @@
 autonumber
 skinparam style strictuml
 
-actor "Karyawan / Sales" as User
-participant "Sistem Web Responsif" as Web
-participant "Server Pusat Cifo" as Server
+actor Karyawan
+boundary "Web Browser iOS" as Form
+control "Control Web" as Ctrl
+entity "Server Absensi" as DB
 
-activate User
-User -> Web: Membuka media pengiriman via Web Browser iOS
-activate Web
-Web -> Web: Membuka halaman antarmuka web presensi responsif Safari/Chrome
-Web -> Web: Memicu notifikasi permintaan izin (pop-up permission) kamera & lokasi
+activate Form
+Form -> Form: Menampilkan halaman web presensi responsif
+Form -> Karyawan: Meminta izin akses kamera dan lokasi
 
-alt [User Menolak / Memblokir Izin Akses Layanan Lokasi (Exceptional 3E)]
-    Web -> Web: Mendeteksi parameter koordinat kosong pada HTML5 Geolocation
-    Web --> User: Menampilkan pesan galat "Akses Lokasi Ditolak. Harap aktifkan izin lokasi..."
-    Web -> Web: Menghentikan seluruh rangkaian proses pengiriman data kehadiran
-else [User Memberikan Izin Akses Kamera & Layanan Lokasi]
-    User -> Web: Mengambil foto selfie langsung & membiarkan sistem mengunci GPS gawai
-    User -> Web: Menekan tombol "Kirim Absen via Web"
-    Web -> Web: Mengenkripsi berkas gambar dan parameter data koordinat lokasi
-    Web -> Server: Mengirimkan paket enkripsi data kehadiran ke server pusat Cifo
-    activate Server
-    Server -> Server: Memproses perekaman log absensi internal perangkat iOS
-    Server --> Web: Mengembalikan status pengolahan data sukses dicatat
-    deactivate Server
-    Web --> User: Menampilkan pesan sukses "Absen Web Berhasil Dicatat" pada layar gawai
-    deactivate Web
+activate Karyawan
+alt [Izin Ditolak / Blocked]
+    Karyawan --> Form: Menolak izin akses
+    Form --> Karyawan: Menampilkan pesan "Akses Lokasi Ditolak"
+    Form -> Form: Membatalkan proses pengiriman data absensi
+else [Izin Diberikan / Allowed]
+    Karyawan --> Form: Memberikan izin akses
+    Karyawan -> Form: Mengambil foto selfie
+    Form -> Ctrl: Meneruskan gambar & meminta titik GPS
+    activate Ctrl
+    Ctrl -> Ctrl: Memperoleh koordinat GPS perangkat
+    Ctrl -> DB: Mengirimkan data absensi ke server
+    activate DB
+    DB --> Ctrl: Mengonfirmasi penyimpanan data
+    deactivate DB
+    Ctrl --> Form: Meneruskan status keberhasilan
+    Form --> Karyawan: Menampilkan notifikasi presensi berhasil
+    deactivate Ctrl
 end
 
-deactivate User
+deactivate Form
+deactivate Karyawan
 @enduml

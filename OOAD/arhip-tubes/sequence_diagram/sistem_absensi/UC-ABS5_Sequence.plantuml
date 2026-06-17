@@ -3,41 +3,36 @@ autonumber
 skinparam style strictuml
 
 actor Karyawan
-participant "Sistem Terminal Lobi" as Sys
-database "Database" as DB
+boundary "Terminal Lobi" as Form
+control "Control Biometrik" as Ctrl
+entity "Database Karyawan" as DB
 
-activate Sys
-Sys -> Sys: Mengaktifkan modul kamera pemindai secara otomatis
-deactivate Sys
+Form -> Ctrl: Meminta inisiasi terminal
+activate Ctrl
+Ctrl --> Form: Mengaktifkan kamera pemindai wajah
+activate Form
+deactivate Ctrl
 
 activate Karyawan
-loop [Apakah tingkat kecocokan biometrik wajah < 95%?]
-    Karyawan -> Sys: Memposisikan wajah di dalam bingkai digital layar
-    activate Sys
-    Sys -> Sys: Memindai struktur unik wajah karyawan secara real-time
-    Sys -> DB: Mencocokkan data wajah dengan database biometrik NIP
-    activate DB
-    DB --> Sys: Mengembalikan data nilai tingkat kecocokan (%)
-    deactivate DB
-    
-    alt [Tingkat kecocokan berada di bawah 95% (Exceptional 4E)]
-        Sys --> Karyawan: Menampilkan pesan galat "Wajah Tidak Dikenali / Tidak Cocok"
-        Sys -> Sys: Menghentikan sementara proses pemindaian lensa
-        Karyawan -> Karyawan: Mengatur ulang posisi berdiri agar lebih presisi
-    else [Tingkat kecocokan berada di atas atau sama dengan 95%]
-        Sys -> Sys: Meloloskan verifikasi biometrik wajah karyawan
-        Sys --> Karyawan: Menampilkan konfirmasi "Wajah Terverifikasi"
-        deactivate Sys
-    end
+Karyawan -> Form: Memposisikan wajah di dalam area pemindaian
+Form -> Ctrl: Mengirim data pindaian wajah
+activate Ctrl
+Ctrl -> DB: Meminta pencocokan data biometrik
+activate DB
+DB --> Ctrl: Mengembalikan persentase kecocokan wajah
+deactivate DB
+
+alt [Kecocokan di bawah ambang batas (<95%)]
+    Ctrl --> Form: Mengirim status wajah tidak cocok
+    Form --> Karyawan: Menampilkan pesan "Wajah Tidak Dikenali"
+    Form --> Karyawan: Diminta mengulangi proses pemindaian
+else [Kecocokan di atas ambang batas (>=95%)]
+    Ctrl -> Ctrl: Set status menjadi "Terverifikasi"
+    Ctrl --> Form: Mengembalikan status "Terverifikasi" ke Base Case
+    Form --> Karyawan: Menampilkan notifikasi terverifikasi
 end
 
-activate Sys
-Sys -> Sys: Mengembalikan status "Terverifikasi" ke use case utama
-Sys -> DB: Memperbarui status kehadiran karyawan menjadi hadir
-activate DB
-DB --> Sys: Konfirmasi pembaruan database pusat sukses
-deactivate DB
-Sys --> Karyawan: Menampilkan indikator sukses presensi terminal
-deactivate Sys
+deactivate Ctrl
+deactivate Form
 deactivate Karyawan
 @enduml
