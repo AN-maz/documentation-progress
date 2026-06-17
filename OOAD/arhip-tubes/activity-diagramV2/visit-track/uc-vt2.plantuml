@@ -1,0 +1,32 @@
+@startuml
+|Sales|
+start
+:Mewawancarai calon pelanggan;
+
+|Calon Pelanggan|
+:Menyampaikan informasi kondisi internet\ndan keluhan yang dialami;
+
+|Sales|
+:Membuka formulir pendataan prospek pada aplikasi;
+:Memasukkan catatan keluhan dan memilih kategori status prospek;
+
+|Sistem VisitTrack|
+:Memvalidasi kelengkapan data prospek;
+
+if (Apakah data prospek diisi lengkap?) then ([Tidak (Exceptional 4E)])
+  :Menolak penyimpanan;
+  :Meminta Sales melengkapi data yang kurang;
+  |Sales|
+  :Melengkapi formulir data;
+  stop
+else ([Ya / Lengkap])
+  |Sistem VisitTrack|
+  if (Apakah kategori status prospek "Hot"?) then ([Ya (Alternate 4A)])
+    :Memicu proses "Mengajukan Eskalasi\nPemasangan" (Extend UC_VT03);
+    stop
+  else ([Tidak / Reguler])
+    :Memproses dan menyimpan data prospek\nke dalam basis data;
+    stop
+  endif
+endif
+@enduml

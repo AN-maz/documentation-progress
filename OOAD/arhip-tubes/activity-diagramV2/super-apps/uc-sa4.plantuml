@@ -1,0 +1,36 @@
+@startuml
+|Pelanggan|
+start
+:Memasukkan kriteria pencarian kamar hotel;
+
+|Sistem Cifo Super Apps|
+:Menampilkan daftar kamar yang tersedia;
+
+|Pelanggan|
+:Memilih kamar dan melengkapi data reservasi;
+
+|Sistem Cifo Super Apps|
+:Memverifikasi ketersediaan kamar secara real-time;
+
+if (Apakah kamar masih tersedia?) then ([Tidak (Exceptional 4E)])
+  :Menampilkan pemberitahuan kamar penuh;
+  |Pelanggan|
+  :Diminta memilih kamar lain;
+  stop
+else ([Ya])
+  |Pelanggan|
+  :Melakukan pembayaran menggunakan C-Pay;
+  
+  |Sistem Cifo Super Apps|
+  :Memverifikasi saldo C-Pay;
+  
+  if (Apakah saldo mencukupi?) then ([Tidak (Alternate 5A)])
+    :Memicu alur pengisian saldo\n(Extend UC_SA02);
+    stop
+  else ([Ya])
+    :Memotong saldo C-Pay pelanggan;
+    :Menerbitkan e-voucher hotel (Bukti Reservasi);
+    stop
+  endif
+endif
+@enduml

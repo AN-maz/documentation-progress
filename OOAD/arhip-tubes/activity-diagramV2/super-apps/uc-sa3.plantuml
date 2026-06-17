@@ -1,0 +1,31 @@
+@startuml
+|Finance|
+start
+:Membuka dashboard transaksi;
+
+|Sistem Cifo Super Apps|
+:Menampilkan daftar transaksi yang diterima;
+
+|Finance|
+:Mencocokkan data transaksi dengan laporan keuangan bank;
+
+if (Apakah data sesuai?) then ([Beda Signifikan (Exceptional 3E)])
+  |Sistem Cifo Super Apps|
+  :Menandai transaksi sebagai bermasalah;
+  :Menghentikan proses validasi sementara;
+  stop
+else ([Sesuai / Valid])
+  |Finance|
+  if (Apakah transaksi sudah terverifikasi otomatis?) then ([Belum (Alternate 3A)])
+    :Melakukan validasi secara manual;
+  else ([Sudah Otomatis])
+  endif
+  
+  :Menyetujui hasil validasi transaksi;
+  
+  |Sistem Cifo Super Apps|
+  :Menyimpan hasil validasi;
+  :Memperbarui laporan keuangan;
+  stop
+endif
+@enduml

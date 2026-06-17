@@ -1,0 +1,19 @@
+@startuml
+|Sales|
+start
+:Membuka sistem absensi dari perangkat lapangan;
+:Memilih menu "Public Absen";
+
+|Sistem Absensi|
+:Meminta Sales mengambil selfie terkini\ndan mengunci titik GPS;
+:Memverifikasi lokasi koordinat GPS;
+
+if (Apakah koordinat dalam cakupan wilayah penugasan?) then ([Tidak])
+  :Menolak pengajuan absen secara otomatis;
+  :Menampilkan peringatan luar area;
+  stop
+else ([Ya])
+  :Menyimpan log absensi sebagai "Hadir Dinas Luar";
+  stop
+endif
+@enduml

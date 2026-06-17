@@ -1,0 +1,21 @@
+@startuml
+|HR|
+start
+:Masuk ke modul "Manajemen Geofencing & Fraud";
+:Meninjau titik koordinat pusat dan radius batas aman;
+
+|Sistem Absensi|
+:Menjalankan background service menyaring log kordinat;
+
+if (Terdeteksi aplikasi Fake GPS / Mock Location?) then ([Ya / Indikasi Fraud])
+  :Memblokir absen otomatis;
+  :Menandai akun sebagai "Indikasi Fraud";
+  :Menampilkan peringatan instan ke layar HR;
+  stop
+else ([Tidak / Aman])
+  :Menampilkan laporan log berstatus "Aman/Clean";
+  |HR|
+  :Menyetujui log laporan kehadiran valid;
+  stop
+endif
+@enduml

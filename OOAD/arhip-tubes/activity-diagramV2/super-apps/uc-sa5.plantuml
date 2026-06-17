@@ -1,0 +1,30 @@
+@startuml
+|Divisi Walanja|
+start
+:Membuka modul manajemen kamar hotel;
+:Memilih tipe kamar yang akan diperbarui;
+
+if (Tujuan untuk pemeliharaan / renovasi?) then ([Ya (Alternate 3A)])
+  :Mengubah status kamar menjadi tidak tersedia;
+  |Sistem Cifo Super Apps|
+  :Menyembunyikan kamar dari daftar pencarian;
+else ([Tidak / Reguler])
+  |Divisi Walanja|
+  :Mengubah data angka ketersediaan kamar;
+endif
+
+|Divisi Walanja|
+:Menyimpan perubahan data;
+
+|Sistem Cifo Super Apps|
+:Memvalidasi data yang dimasukkan;
+
+if (Apakah format data valid?) then ([Tidak (Exceptional 4E)])
+  :Menampilkan pesan kesalahan;
+  :Menolak penyimpanan perubahan;
+  stop
+else ([Ya])
+  :Memperbarui informasi ketersediaan\nkamar secara real-time;
+  stop
+endif
+@enduml

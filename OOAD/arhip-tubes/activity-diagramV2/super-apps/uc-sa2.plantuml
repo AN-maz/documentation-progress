@@ -1,0 +1,27 @@
+@startuml
+|Sistem Cifo Super Apps|
+start
+:Menampilkan halaman pengisian saldo C-Pay;
+
+|Pelanggan|
+:Memasukkan nominal saldo yang ditambahkan;
+
+|Sistem Cifo Super Apps|
+:Menampilkan instruksi dan kode pembayaran;
+
+|Pelanggan|
+:Menyelesaikan proses pembayaran;
+
+|Sistem Cifo Super Apps|
+:Memeriksa status pembayaran;
+
+if (Apakah pembayaran diselesaikan sebelum batas waktu?) then ([Tidak (Exceptional 4E)])
+  :Membatalkan proses top up;
+  :Menutup transaksi kedaluwarsa;
+  stop
+else ([Ya])
+  :Memperbarui saldo C-Pay pelanggan;
+  :Menampilkan notifikasi keberhasilan;
+  stop
+endif
+@enduml

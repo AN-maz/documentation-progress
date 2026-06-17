@@ -1,0 +1,22 @@
+@startuml
+|Sistem Absensi|
+start
+:Mengaktifkan kamera pemindai wajah di terminal lobi;
+
+|Karyawan|
+:Memposisikan wajah di dalam area pemindaian;
+
+|Sistem Absensi|
+:Memindai dan mencocokkan data biometrik wajah;
+
+if (Kecocokan di atas ambang batas (>=95%)?) then ([Tidak])
+  :Menampilkan pesan "Wajah Tidak Dikenali";
+  |Karyawan|
+  :Diminta mengulangi proses pemindaian;
+  stop
+else ([Ya])
+  |Sistem Absensi|
+  :Mengembalikan status "Terverifikasi" ke proses utama;
+  stop
+endif
+@enduml

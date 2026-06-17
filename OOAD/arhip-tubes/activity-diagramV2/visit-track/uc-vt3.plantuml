@@ -1,0 +1,26 @@
+@startuml
+|Sistem VisitTrack|
+start
+:Menampilkan formulir eskalasi pemasangan;
+
+|Sales|
+:Melengkapi data pendukung pelanggan;
+:Menekan tombol "Eskalasi ke Tim Teknis";
+
+|Sistem VisitTrack|
+:Memverifikasi kelengkapan data pendukung;
+
+if (Apakah data pendukung wajib sudah lengkap?) then ([Tidak (Exceptional 4E)])
+  :Menampilkan pesan peringatan;
+  :Menunda pengiriman tiket hingga data dilengkapi;
+  |Sales|
+  :Melengkapi data pendukung yang kurang;
+  stop
+else ([Ya / Lengkap])
+  |Sistem VisitTrack|
+  :Membuat tiket pemasangan berdasarkan\ndata pelanggan dan lokasi kunjungan;
+  :Mengirimkan tiket ke Sistem Operasional;
+  :Menampilkan notifikasi berhasil;
+  stop
+endif
+@enduml

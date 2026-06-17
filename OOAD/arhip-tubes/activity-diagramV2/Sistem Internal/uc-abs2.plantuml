@@ -1,0 +1,21 @@
+@startuml
+|Karyawan|
+start
+:Mengakses sistem absensi;
+:Memilih menu "Lakukan Presensi"\ndan menentukan status (Masuk/Pulang);
+
+|Sistem Absensi|
+:Memeriksa status keaktifan akun karyawan;
+
+if (Apakah akun aktif / terdaftar?) then ([Tidak])
+  :Memblokir akses presensi;
+  :Menampilkan pesan error;
+  stop
+else ([Ya])
+  |Karyawan|
+  :Menyelesaikan proses verifikasi kehadiran\n(Memicu Extend Verifikasi Wajah/Aplikasi);
+  |Sistem Absensi|
+  :Mencatat timestamp real-time ke database;
+  stop
+endif
+@enduml

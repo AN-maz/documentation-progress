@@ -1,0 +1,29 @@
+@startuml
+|Sales|
+start
+:Membuka aplikasi VisitTrack dan\nmemilih menu "Catat Kunjungan";
+
+|Sistem VisitTrack|
+:Mendeteksi lokasi GPS saat ini;
+
+if (Apakah sensor GPS dan internet aktif?) then ([Tidak (Exceptional 2E)])
+  :Menampilkan pesan kesalahan;
+  :Membatalkan proses pencatatan lokasi;
+  stop
+else ([Ya])
+  if (Apakah lokasi otomatis terdeteksi?) then ([Tidak (Alternate 2A)])
+    |Sales|
+    :Menentukan titik lokasi secara manual\npada peta (2B);
+    |Sistem VisitTrack|
+  else ([Ya / Terdeteksi])
+  endif
+  :Menampilkan titik koordinat dan alamat pada peta;
+endif
+
+|Sales|
+:Menekan tombol "Simpan Koordinat";
+
+|Sistem VisitTrack|
+:Menyimpan data koordinat kunjungan\nke dalam basis data;
+stop
+@enduml

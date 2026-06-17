@@ -1,0 +1,24 @@
+@startuml
+|Sistem Absensi|
+start
+:Menampilkan halaman web presensi yang responsif;
+:Meminta izin akses kamera dan lokasi melalui browser;
+
+|Karyawan|
+if (Apakah izin akses diberikan?) then ([Tidak / Ditolak])
+  |Sistem Absensi|
+  :Menampilkan pesan "Akses Lokasi Ditolak";
+  :Membatalkan proses pengiriman data absensi;
+  stop
+else ([Ya / Allowed])
+  |Karyawan|
+  :Memberikan izin akses;
+  :Mengambil foto selfie;
+  
+  |Sistem Absensi|
+  :Memperoleh koordinat GPS perangkat;
+  :Mengirimkan data absensi ke server;
+  :Menampilkan notifikasi presensi berhasil;
+  stop
+endif
+@enduml

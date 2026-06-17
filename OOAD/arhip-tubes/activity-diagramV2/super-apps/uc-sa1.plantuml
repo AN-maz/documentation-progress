@@ -1,0 +1,32 @@
+@startuml
+|Pelanggan|
+start
+:Memilih menu "Bayar Internet" pada aplikasi;
+
+|Sistem Cifo Super Apps|
+:Melakukan pencarian data pelanggan dan tagihan;
+
+if (Apakah data tagihan ditemukan?) then ([Tidak (Exceptional 2E)])
+  :Menampilkan pesan kesalahan;
+  :Membatalkan proses pembayaran;
+  stop
+else ([Ya])
+  :Menampilkan informasi tagihan aktif;
+  
+  |Pelanggan|
+  :Memilih metode pembayaran (C-Pay);
+  
+  |Sistem Cifo Super Apps|
+  :Memverifikasi ketersediaan saldo C-Pay;
+  
+  if (Apakah saldo C-Pay mencukupi?) then ([Tidak (Alternate 4A)])
+    :Memicu alur pengisian saldo\n(Extend UC_SA02);
+    stop
+  else ([Ya])
+    :Memproses pembayaran;
+    :Memperbarui status tagihan menjadi "Lunas";
+    :Menampilkan bukti transaksi;
+    stop
+  endif
+endif
+@enduml

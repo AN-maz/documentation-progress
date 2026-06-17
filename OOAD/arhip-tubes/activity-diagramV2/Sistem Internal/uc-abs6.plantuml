@@ -1,0 +1,21 @@
+@startuml
+|Sistem Absensi|
+start
+:Mengakses kamera depan dan layanan GPS perangkat;
+:Melakukan pemeriksaan integritas keamanan sistem OS;
+
+if (Apakah perangkat dalam kondisi Rooted / Dimodifikasi?) then ([Ya])
+  :Menolak proses absensi;
+  :Menampilkan pesan peringatan;
+  :Menghentikan akses ke fitur presensi;
+  stop
+else ([Tidak / Aman])
+  |Karyawan|
+  :Mengambil foto selfie sebagai bukti kehadiran;
+  |Sistem Absensi|
+  :Menggabungkan foto, koordinat GPS, dan identitas perangkat;
+  :Mengirimkan data absensi ke server;
+  :Menerima konfirmasi keberhasilan dari server;
+  stop
+endif
+@enduml

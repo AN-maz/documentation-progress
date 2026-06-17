@@ -1,0 +1,25 @@
+@startuml
+|HR|
+start
+:Masuk ke modul "Mendaftarkan Wajah & NIP";
+:Menginputkan NIP, nama lengkap, dan divisi;
+:Mengaktifkan sensor kamera pemindai;
+
+|Karyawan|
+:Memposisikan wajah di depan kamera;
+
+|Sistem Absensi|
+:Memetakan struktur unik titik wajah;
+
+if (Kualitas jepretan kamera baik?) then ([Tidak / Gelap / Blur])
+  :Menampilkan pesan peringatan;
+  :Menolak memproses pemetaan wajah;
+  stop
+else ([Ya / Jelas])
+  |HR|
+  :Menekan tombol "Simpan Profil";
+  |Sistem Absensi|
+  :Mengunci data biometrik dan NIP ke database;
+  stop
+endif
+@enduml
