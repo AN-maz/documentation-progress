@@ -1,5 +1,5 @@
 export const CoverComponent = () => {
-  return `
+  return /*html*/ `
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@400;500;600;700&display=swap');
 
@@ -33,16 +33,16 @@ export const CoverComponent = () => {
     <div class="w-full max-w-[794px] h-[1123px] print:w-[210mm] print:h-[297mm] print:max-w-none print:h-screen print:shadow-none bg-white relative font-['Poppins',_sans-serif] text-[var(--color-ec-blue)] p-[60px] box-border overflow-hidden mx-auto shadow-[0_4px_10px_rgba(0,0,0,0.1)] border-t-[15px] border-[var(--color-ec-red)]">
       
       <div class="flex items-center gap-6 mb-12">
-        <div class="w-[60px] h-[60px] bg-gray-200 rounded-full flex items-center justify-center border-2 border-[var(--color-ec-blue)] overflow-hidden">
-          <span class="text-[10px] text-center font-bold text-gray-500">Logo<br>Kampus</span>
-          </div>
-
-        <div class="w-[60px] h-[60px] bg-gray-200 rounded-full flex items-center justify-center border-2 border-[var(--color-ec-blue)] overflow-hidden">
-          <span class="text-[10px] text-center font-bold text-gray-500">Logo<br>Fakultas</span>
+        <div class="w-[60px] h-[60px] bg-gray-200 rounded-full flex items-center justify-center border-2 border-gray-300">
+            <img src="../../public/logo-utb.png" alt="Logo Kampus" class="w-full h-full object-contain rounded-full" />
         </div>
 
-        <div class="w-[60px] h-[60px] bg-gray-200 rounded-full flex items-center justify-center border-2 border-[var(--color-ec-red)] overflow-hidden">
-          <span class="text-[10px] text-center font-bold text-gray-500">Logo<br>EC</span>
+        <div class="w-[60px] h-[60px] bg-gray-200 rounded-full flex items-center justify-center border-2 border-gray-300">
+            <img src="../../public/bem.png" alt="Logo Kampus" class="w-full h-full object-contain rounded-full" />
+        </div>
+
+        <div class="w-[60px] h-[60px] bg-gray-200 rounded-full flex items-center justify-center border-2 border-gray-300">
+            <img src="../../public/ec.png" alt="Logo Kampus" class="w-full h-full object-contain rounded-full" />
         </div>
       </div>
 

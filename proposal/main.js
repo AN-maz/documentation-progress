@@ -12,6 +12,10 @@ import { SasaranComponent } from "./src/components/Sasaran.js";
 import { WaktuTempatComponent } from "./src/components/WaktuTempat.js";
 import { KepanitiaanComponent } from "./src/components/Kepanitiaan.js";
 import { proposalContent } from "./src/data/proposal.data.js";
+import { RundownComponent } from "./src/components/Rundown.js";
+import { OutputComponent } from "./src/components/Output.js";
+import { EvaluasiComponent } from "./src/components/Evaluasi.js";
+import { PenutupComponent } from "./src/components/Penutup.js";
 
 const componentRegistry = {
   pendahuluan: PendahuluanComponent,
@@ -23,6 +27,10 @@ const componentRegistry = {
   waktutempat: WaktuTempatComponent,
   kepanitiaan: KepanitiaanComponent,
   rab: RABComponent,
+  rundown: RundownComponent,
+  output: OutputComponent,
+  evaluasi: EvaluasiComponent,
+  penutup: PenutupComponent,
 };
 
 const app = document.getElementById("app");
@@ -42,19 +50,39 @@ proposalContent.forEach((sectionData) => {
     htmlRender += PageLayout(KepanitiaanComponent(sectionData, 2), currentPage);
     currentPage++;
   } else if (sectionData.id === "rab") {
-    const chunkSize = 3;
-    const grandTotal = 4849000;
-    // PENTING: Akses ke sectionData.content.categories
+    const totals = {
+      totalKeseluruhan: sectionData.content.totalKeseluruhan,
+      biayaTakTerduga: sectionData.content.biayaTakTerduga,
+      grandTotal: sectionData.content.grandTotal,
+    };
+
     const allCategories = sectionData.content.categories;
 
-    for (let i = 0; i < allCategories.length; i += chunkSize) {
-      const chunk = allCategories.slice(i, i + chunkSize);
-      const isLast = i + chunkSize >= allCategories.length;
+    // PEMBAGIAN HALAMAN MANUAL YANG IDEAL UNTUK A4:
+    // Halaman 1: Sekretaris (1 item) & Show Director (7 item)
+    // Halaman 2: Logging (22 item - Hampir 1 full page)
+    // Halaman 3: Art Director (3 item), Consumption (5 item) + Bagian Grand Total
+    const chunks = [
+      [allCategories[0], allCategories[1]],
+      [allCategories[2]],
+      [allCategories[3], allCategories[4]],
+    ];
+
+    chunks.forEach((chunk, index) => {
+      const isFirst = index === 0;
+      const isLast = index === chunks.length - 1;
 
       htmlRender += PageLayout(
-        RABComponent(chunk, isLast, grandTotal),
+        RABComponent(chunk, isFirst, isLast, totals),
         currentPage,
       );
+      currentPage++;
+    });
+  } else if (sectionData.id === "rundown") {
+    const chunkSize = 15; // Sesuaikan jumlah baris per halaman
+    for (let i = 0; i < sectionData.content.length; i += chunkSize) {
+      const chunk = sectionData.content.slice(i, i + chunkSize);
+      htmlRender += PageLayout(RundownComponent(chunk), currentPage);
       currentPage++;
     }
   } else {
