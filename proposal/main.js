@@ -9,6 +9,7 @@ import { LandasanComponent } from "./src/components/Landasan.js";
 import { TemaComponent } from "./src/components/Tema.js";
 import { TujuanComponent } from "./src/components/Tujuan.js";
 import { SasaranComponent } from "./src/components/Sasaran.js";
+import { ProfilPemateriComponent } from "./src/components/ProfilPemateri.js";
 import { WaktuTempatComponent } from "./src/components/WaktuTempat.js";
 import { KepanitiaanComponent } from "./src/components/Kepanitiaan.js";
 import { proposalContent } from "./src/data/proposal.data.js";
@@ -16,6 +17,7 @@ import { RundownComponent } from "./src/components/Rundown.js";
 import { OutputComponent } from "./src/components/Output.js";
 import { EvaluasiComponent } from "./src/components/Evaluasi.js";
 import { PenutupComponent } from "./src/components/Penutup.js";
+import { PengesahanComponent } from "./src/components/Pengesahan.js";
 
 const componentRegistry = {
   pendahuluan: PendahuluanComponent,
@@ -24,6 +26,7 @@ const componentRegistry = {
   tema: TemaComponent,
   tujuan: TujuanComponent,
   sasaran: SasaranComponent,
+  pemateri: ProfilPemateriComponent,
   waktutempat: WaktuTempatComponent,
   kepanitiaan: KepanitiaanComponent,
   rab: RABComponent,
@@ -31,6 +34,7 @@ const componentRegistry = {
   output: OutputComponent,
   evaluasi: EvaluasiComponent,
   penutup: PenutupComponent,
+  pengesahan: PengesahanComponent,
 };
 
 const app = document.getElementById("app");

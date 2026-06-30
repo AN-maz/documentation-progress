@@ -6,24 +6,26 @@ export const DaftarIsiComponent = () => {
     { title: "Landasan Kegiatan", page: "05" },
     { title: "Tema Kegiatan", page: "06" },
     { title: "Tujuan Kegiatan", page: "07" },
-    { title: "Sasaran Audiens", page: "07" },
-    { title: "Waktu dan Tempat Pelaksanaan", page: "08" },
-    { title: "Kepanitiaan", page: "09" },
-    { title: "Rancangan Anggaran Biaya", page: "10" },
-    { title: "Rundown Acara", page: "12" },
-    { title: "Output yang Diharapkan", page: "14" },
-    { title: "Evaluasi dan Tindak Lanjut", page: "15" },
-    { title: "Penutup", page: "16" }
+    { title: "Sasaran Audiens", page: "08" },
+    { title: "Profile Pemateri", page: "09" },
+    { title: "Waktu dan Tempat Pelaksanaan", page: "10" },
+    { title: "Kepanitiaan", page: "11–12" },
+    { title: "Rancangan Anggaran Biaya", page: "13–15" },
+    { title: "Rundown Acara", page: "16–17" },
+    { title: "Output yang Diharapkan", page: "18" },
+    { title: "Evaluasi dan Tindak Lanjut", page: "19" },
+    { title: "Penutupan", page: "20" },
+    { title: "Lembar Pengesahan", page: "21" },
   ];
 
   // Render list item
-  let listItemsHTML = '';
+  let listItemsHTML = "";
   tocData.forEach((item, index) => {
     // Membuat warna kotak kecil bergantian (Merah dan Biru)
     const isEven = index % 2 === 0;
-    const accentColor = isEven ? 'var(--color-ec-red)' : 'var(--color-ec-blue)';
+    const accentColor = isEven ? "var(--color-ec-red)" : "var(--color-ec-blue)";
 
-    listItemsHTML += `
+    listItemsHTML += /*html*/`
       <div class="flex items-center gap-4 mb-3 z-10 relative">
         <div class="w-5 h-5 border-2 border-[var(--color-ec-blue)] bg-[${accentColor}] shadow-[3px_3px_0px_0px_var(--color-ec-blue)] shrink-0"></div>
 
@@ -35,7 +37,7 @@ export const DaftarIsiComponent = () => {
     `;
   });
 
-  return `
+  return /*html*/ `
     <div class="relative w-full h-full flex flex-col pt-4">
       
       <div class="absolute top-0 right-0 opacity-80 z-0">

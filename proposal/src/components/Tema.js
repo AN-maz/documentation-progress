@@ -1,9 +1,10 @@
 export const TemaComponent = (data) => {
-  // Jika di file data Anda isinya masih "...", saya otomatis ubah 
+  // Jika di file data Anda isinya masih "...", saya otomatis ubah
   // ke tema asli dari dokumen referensi Anda ("Your Best TOEFL Score")
-  const themeText = data.content === '"..."' || data.content === "..." 
-                    ? '"Your Best TOEFL Score"' 
-                    : data.content;
+  const themeText =
+    data.content === '"..."' || data.content === "..."
+      ? "English Club TOEFL Fest: Let's Crack It Together"
+      : data.content;
 
   return `
     <div class="relative w-full h-full flex flex-col items-center justify-center min-h-[850px]">

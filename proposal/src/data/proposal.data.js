@@ -1,23 +1,23 @@
 export const proposalContent = [
   {
     id: "pendahuluan",
-    title: "I. Pendahuluan",
+    title: "Pendahuluan",
     content:
       "Kemampuan berbahasa Inggris saat ini menjadi salah satu kualifikasi penting dalam dunia akademik maupun profesional. TOEFL (Test of English as a Foreign Language) merupakan salah satu standar internasional yang digunakan untuk mengukur kemampuan bahasa Inggris seseorang. Dalam upaya membantu mahasiswa untuk mempersiapkan diri menghadapi tes TOEFL, English Club UTB mengadakan kegiatan Workshop TOEFL Preparation sebagai bentuk kontribusi dalam peningkatan mutu dan kompetensi mahasiswa UTB.",
   },
 
   {
     id: "deskripsi",
-    title: "II. Deskripsi Kegiatan",
+    title: "Deskripsi Kegiatan",
     content: [
-      'TOEFL Crash Course: "..." merupakan program pelatihan singkat yang diselenggarakan oleh English Club Universitas Teknologi Bandung untuk membantu mahasiswa dalam memahami format tes TOEFL, meningkatkan keterampilan bahasa Inggris akademik, serta menguasai strategi mengerjakan soal secara efektif.',
+      'TOEFL Crash Course: "English Club TOEFL Fest: Lets Crack It Together" merupakan program pelatihan singkat yang diselenggarakan oleh English Club Universitas Teknologi Bandung untuk membantu mahasiswa dalam memahami format tes TOEFL, meningkatkan keterampilan bahasa Inggris akademik, serta menguasai strategi mengerjakan soal secara efektif.',
       "Kegiatan ini dikemas dalam bentuk workshop intensif dengan pendekatan interaktif, mencakup materi dan latihan Reading, Listening, Structure, dan Writing yang dipandu oleh narasumber berpengalaman. Pelatihan ini diharapkan dapat memberikan pembekalan praktis bagi peserta yang hendak mengikuti TOEFL resmi, baik sebagai syarat kelulusan, beasiswa, maupun studi lanjut.",
     ],
   },
 
   {
     id: "landasan",
-    title: "III. Landasan Kegiatan",
+    title: "Landasan Kegiatan",
     isList: true,
     content: [
       "Tri Dharma Perguruan Tinggi, sebagai bentuk pengembangan diri mahasiswa dalam bidang pendidikan dan pelatihan.",
@@ -30,7 +30,7 @@ export const proposalContent = [
   {
     id: "tema",
     title: "IV. Tema Kegiatan",
-    content: '"..."',
+    content: "English Club TOEFL Fest: Let's Crack It Together",
   },
 
   {
@@ -47,7 +47,7 @@ export const proposalContent = [
 
   {
     id: "sasaran",
-    title: "VI. Sasaran Audiens",
+    title: "Sasaran Audiens",
     isList: true,
     content: [
       "Anggota English Club UTB",
@@ -56,10 +56,25 @@ export const proposalContent = [
       "Undangan dari komunitas bahasa atau klub luar",
     ],
   },
-
+  {
+    id: "pemateri",
+    title: "Profil Pemateri",
+    content: {
+      nama: "[Nama Pemateri, S.Pd., M.A.]",
+      asal: "[Nama Institut/Lembaga B]",
+      deskripsi:
+        "Workshop TOEFL Crash Course ini akan dipandu secara langsung oleh pakar dan praktisi bahasa Inggris berpengalaman. Beliau memiliki rekam jejak dan dedikasi yang tinggi dalam bidang akademik, dengan berbagai pencapaian luar biasa yang relevan, di antaranya:",
+      pencapaian: [
+        "Meraih skor TOEFL ITP di atas 600 / IELTS 7.5.",
+        "Berpengalaman mengajar persiapan TOEFL/IELTS selama lebih dari 5 tahun.",
+        "Penerima beasiswa luar negeri (LPDP/AAS/Chevening).",
+        "Penulis buku atau modul pembelajaran bahasa Inggris interaktif.",
+      ],
+    },
+  },
   {
     id: "waktutempat",
-    title: "VII. Waktu dan Tempat Pelaksanaan",
+    title: "Waktu dan Tempat Pelaksanaan",
     content: {
       waktu: "Selasa, 5 Agustus 2025",
       tempat: "Lantai 4 Gedung A, Universitas Teknologi Bandung",
@@ -73,64 +88,102 @@ export const proposalContent = [
     title: "Kepanitiaan",
     content: [
       {
-        divisi: "Penanggung Jawab",
+        divisi: "Topman",
         anggota: [
           {
-            nama: "Dhenia Putri Nuraini",
-            nim: "24552011311",
-          },
-        ],
-      },
-      {
-        divisi: "Ketua Pelaksana",
-        anggota: [
-          {
-            nama: "Muhamad Arfana Firjatullah",
-            nim: "23552011315",
-          },
-        ],
-      },
-      {
-        divisi: "Sekretaris",
-        anggota: [
-          {
-            nama: "Ega Silfhia",
+            nama: "EGA SILFHIA (ketua pelaksana)",
             nim: "24552011313",
           },
-        ],
-      },
-      {
-        divisi: "Bendahara",
-        anggota: [
           {
-            nama: "Nabilah Zulfaa Afifah",
-            nim: "24552012006",
+            nama: "DHENIA PUTRI NURAINI (Penanggung jawab 1 )",
+            nim: "24552011311",
           },
-        ],
-      },
-      {
-        divisi: "LO",
-        anggota: [
           {
-            nama: "Anisa Febrianti",
+            nama: "MUHAMAD ARFANA FIRJATULLAH (Penanggung jawab 2)",
+            nim: "23552011315",
+          },
+          {
+            nama: "ANISA FEBRIANTI (bendahara)",
             nim: "24552011287",
           },
+          {
+            nama: "ANDRIAN MAULANA DZIKWAN (sekretaris)",
+            nim: "24552011027",
+          },
         ],
       },
       {
-        divisi: "Divisi Acara",
+        divisi: "Div. Konsumsi",
         anggota: [
           {
-            nama: "As'ad Miftahul Haq",
+            nama: "ADRIAN (Kadiv)",
+            nim: "24552011294",
+          },
+          {
+            nama: "DAFFA SAPUTRA",
+            nim: "24262011153",
+          },
+          {
+            nama: "HERDI JULIAN",
+            nim: "25552011060",
+          },
+          {
+            nama: "Resty Nabila Santyara",
+            nim: "25262011206",
+          },
+          {
+            nama: "Lugina Restyana",
+            nim: "25612091014",
+          },
+        ],
+      },
+      {
+        divisi: "Div. Logistik",
+        anggota: [
+          {
+            nama: "AS'AD MIFTAHUL HAQ (kadiv)",
             nim: "24552011304",
           },
           {
-            nama: "Adinda Fitriani Sabila",
-            nim: "24552011203",
+            nama: "ADRIAN FATHURRAHMAN",
+            nim: "24552011106",
           },
           {
-            nama: "Alkhansa Haqqi Sabila",
-            nim: "24552011354",
+            nama: "Muhammad Argie Bevie Soleh",
+            nim: "25552011357",
+          },
+          {
+            nama: "khalil ibrahim Hussein Syamsuddin",
+            nim: "25552011291",
+          },
+          {
+            nama: "Muhamad Febri Herdiansyah",
+            nim: "25262011019",
+          },
+        ],
+      },
+      {
+        divisi: "Div. Acara",
+        anggota: [
+          {
+            nama: "YUYU DHAYU AL ROCHMAN (kadiv)",
+            nim: "23612091031",
+          },
+          {
+            nama: "s.putri.r",
+            nim: "25262011089",
+          },
+          {
+            nama: "Muhamad Yusuf",
+            nim: "25552011061",
+          },
+          {
+            nama: "Desrianti Mutiara Rizky",
+            nim: "25262011174",
+          },
+          {
+            nama: "Muhammad Ihsan Irwansyah",
+            nim: "25262011197",
           },
         ],
       },
@@ -138,157 +191,54 @@ export const proposalContent = [
         divisi: "MC",
         anggota: [
           {
-            nama: "Andrian Maulana Dzikwan",
-            nim: "24552011027",
+            nama: "NABILAH ZULFAA AFIFAH",
+            nim: "24552012006",
           },
           {
-            nama: "Salma Isyana F",
-            nim: "2426011316",
-          },
-        ],
-      },
-      {
-        divisi: "Divisi Logistik",
-        anggota: [
-          {
-            nama: "Laila Ramadanisa",
-            nim: "24552011214",
-          },
-          {
-            nama: "Salsabilla Fathinah",
-            nim: "24552011008",
-          },
-          {
-            nama: "Delia Fazriatul",
-            nim: "222101134",
-          },
-        ],
-      },
-      {
-        divisi: "Divisi Humas",
-        anggota: [
-          {
-            nama: "Mutia Putri Pramesti",
+            nama: "MUTIA PUTRI PRAMESTI",
             nim: "24262011143",
           },
+        ],
+      },
+      {
+        divisi: "Div. Humas",
+        anggota: [
           {
-            nama: "Daffa Saputra",
-            nim: "24262011153",
-          },
-          {
-            nama: "Muhammad Sultan Fathurasyir",
+            nama: "MUHAMMAD SULTAN FATHURRASYID",
             nim: "24552011376",
           },
           {
-            nama: "Ariq Naufal Rabbani",
-            nim: "24552011302",
+            nama: "Aurora Nabila Busra",
+            nim: "25612091069",
+          },
+          {
+            nama: "Intan Puspita Sari",
+            nim: "25262011184",
           },
         ],
       },
       {
-        divisi: "Divisi Pubdok",
+        divisi: "Div. Pubdok",
         anggota: [
           {
-            nama: "Moch. Naufal Ar Karim",
-            nim: "24552011014",
+            nama: "DWI BUDI FITRI ADI (kadiv)",
+            nim: "24552011093",
           },
           {
-            nama: "Adrian Fathurrahman",
-            nim: "24552011106",
+            nama: "Kirsty Faza Khoerani",
+            nim: "25552011137",
           },
           {
-            nama: "Muhammad Fachri Athallah S.",
-            nim: "24552011117",
+            nama: "Rindi Rianti",
+            nim: "25552011106",
           },
           {
-            nama: "Rievan Rivaldy Nur Triana",
-            nim: "24552011030",
+            nama: "reidhisa alea youshiva",
+            nim: "25262011102",
           },
           {
-            nama: "M. Belga Ghifari",
-            nim: "24552011078",
-          },
-        ],
-      },
-      {
-        divisi: "Divisi Konsumsi",
-        anggota: [
-          {
-            nama: "Muhamad Arga Reksapati",
-            nim: "24552011324",
-          },
-          {
-            nama: "Feisal Ramdhani Riyadi",
-            nim: "24552011317",
-          },
-          {
-            nama: "Riza Esa Maulana",
-            nim: "24552011348",
-          },
-          {
-            nama: "Mochamad Fajar Maulana",
-            nim: "24552011322",
-          },
-          {
-            nama: "Adrian",
-            nim: "24552011294",
-          },
-          {
-            nama: "Ahmad Rizcky Helmi",
-            nim: "24552011289",
-          },
-          {
-            nama: "Edah Oktaviani",
-            nim: "222101059",
-          },
-          {
-            nama: "Nirmawati Huzaimah",
-            nim: "222101022",
-          },
-        ],
-      },
-      {
-        divisi: "Divisi Dokumentasi",
-        anggota: [
-          {
-            nama: "Aulia Ramadhan",
-            nim: "24552011401",
-          },
-          {
-            nama: "Nadia Safitri",
-            nim: "24552011402",
-          },
-          {
-            nama: "Rizky Pratama",
-            nim: "24552011403",
-          },
-          {
-            nama: "Siti Aisyah",
-            nim: "24552011404",
-          },
-          {
-            nama: "Fajar Nugraha",
-            nim: "24552011405",
-          },
-          {
-            nama: "Muhammad Iqbal",
-            nim: "24552011406",
-          },
-          {
-            nama: "Putri Maharani",
-            nim: "24552011407",
-          },
-          {
-            nama: "Kevin Alvaro",
-            nim: "24552011408",
-          },
-          {
-            nama: "Nabila Khairunnisa",
-            nim: "24552011409",
-          },
-          {
-            nama: "Reza Maulana",
-            nim: "24552011410",
+            nama: "Rizky Firmansyah",
+            nim: "252620111247",
           },
         ],
       },
@@ -296,7 +246,7 @@ export const proposalContent = [
   },
   {
     id: "rab",
-    title: "IX. Rancangan Anggaran Biaya",
+    title: "Rancangan Anggaran Biaya",
     content: {
       totalKeseluruhan: 5929000,
       biayaTakTerduga: 592900,
@@ -639,7 +589,120 @@ export const proposalContent = [
       ],
     },
   },
+  {
+    id: "rundown",
+    title: "Rundown Acara",
+    content: [
+      {
+        waktu: "06.30 - 07.00",
+        kegiatan: "Kumpul Panitia",
+        durasi: "30'",
+        ket: "Prepare panitia",
+      },
+      {
+        waktu: "07.00 - 07.30",
+        kegiatan: "Prepare Panitia (Briefing)",
+        durasi: "30'",
+        ket: "Prepare panitia",
+      },
+      {
+        waktu: "07.30 - 09.00",
+        kegiatan: "Pengecekan persiapan sebelum acara",
+        durasi: "90'",
+        ket: "Prepare panitia",
+      },
+      {
+        waktu: "09.00 - 09.30",
+        kegiatan: "Registrasi Peserta",
+        durasi: "30'",
+        ket: "Div. Humas",
+      },
+      {
+        waktu: "09.30 - 09.35",
+        kegiatan: "Menyanyikan Lagu Kebangsaan & Mars UTB",
+        durasi: "5'",
+        ket: "MC + Seluruh Peserta",
+      },
+      {
+        waktu: "09.35 - 09.38",
+        kegiatan: "Pembukaan oleh MC",
+        durasi: "3'",
+        ket: "MC",
+      },
 
+      // Bagian Sambutan
+      {
+        waktu: "09.38 - 09.40",
+        kegiatan: "Sambutan: Ketua Pelaksana",
+        durasi: "2'",
+        ket: "Masing-masing pihak",
+      },
+      {
+        waktu: "09.40 - 09.42",
+        kegiatan: "Sambutan: Ketua English Club",
+        durasi: "2'",
+        ket: "Masing-masing pihak",
+      },
+      {
+        waktu: "09.42 - 09.45",
+        kegiatan: "Sambutan: SBDO",
+        durasi: "3'",
+        ket: "Masing-masing pihak",
+      },
+      {
+        waktu: "09.45 - 09.50",
+        kegiatan: "Sambutan: Kemahasiswaan",
+        durasi: "5'",
+        ket: "Masing-masing pihak",
+      },
+      {
+        waktu: "09.50 - 09.55",
+        kegiatan: "Sambutan: Pembina 1",
+        durasi: "5'",
+        ket: "Masing-masing pihak",
+      },
+      {
+        waktu: "09.55 - 10.00",
+        kegiatan: "Sambutan: Pembina 2",
+        durasi: "5'",
+        ket: "Masing-masing pihak",
+      },
+
+      // Sesi Materi
+      {
+        waktu: "10.00 - 10.10",
+        kegiatan: "INTRODUCTION",
+        durasi: "10'",
+        ket: "Pihak Petal",
+      },
+      {
+        waktu: "10.10 - 10.45",
+        kegiatan: "TEST SIMULATION",
+        durasi: "35'",
+        ket: "Pihak Petal",
+      },
+      {
+        waktu: "10.45 - 12.25",
+        kegiatan: "PRESENTATION ON SKILLS AND TEST STRATEGIES",
+        durasi: "100'",
+        ket: "Pihak Petal",
+      },
+
+      // Penutupan
+      {
+        waktu: "12.25 - 12.27",
+        kegiatan: "Penyerahan Sertifikat",
+        durasi: "2'",
+        ket: "MC + Ketua Pelaksana + Pemateri",
+      },
+      {
+        waktu: "12.27 - 12.30",
+        kegiatan: "Dokumentasi & Penutupan Acara",
+        durasi: "3'",
+        ket: "Div. Publikasi & MC",
+      },
+    ],
+  },
   {
     id: "output",
     title: "XI. Output yang Diharapkan",
@@ -655,7 +718,7 @@ export const proposalContent = [
 
   {
     id: "evaluasi",
-    title: "XII. Evaluasi dan Tindak Lanjut",
+    title: "Evaluasi dan Tindak Lanjut",
     content: [
       {
         subtitle: "A. Kepuasan Peserta",
@@ -678,11 +741,14 @@ export const proposalContent = [
 
   {
     id: "penutup",
-    title: "XIII. Penutup",
+    title: "Penutup",
     content: [
-      'Kegiatan TOEFL Crash Course: "..." merupakan langkah konkret dari English Club UTB untuk membantu mahasiswa dalam mempersiapkan diri menghadapi tes TOEFL secara optimal. Melalui pelatihan intensif ini, peserta diharapkan dapat memahami struktur soal, menguasai strategi pengerjaan, dan meningkatkan kepercayaan diri dalam menghadapi ujian TOEFL.',
+      'Kegiatan TOEFL Crash Course: "English Club TOEFL Fest: Lets Crack It Together" merupakan langkah konkret dari English Club UTB untuk membantu mahasiswa dalam mempersiapkan diri menghadapi tes TOEFL secara optimal. Melalui pelatihan intensif ini, peserta diharapkan dapat memahami struktur soal, menguasai strategi pengerjaan, dan meningkatkan kepercayaan diri dalam menghadapi ujian TOEFL.',
       "Dengan dukungan dari berbagai pihak, kami optimis kegiatan ini akan berjalan dengan lancar dan memberikan dampak positif bagi pengembangan kompetensi bahasa Inggris mahasiswa Universitas Teknologi Bandung. Besar harapan kami agar kegiatan ini mendapat persetujuan dan dukungan penuh agar dapat direalisasikan sesuai rencana.",
       "Atas perhatian dan kerja samanya, kami ucapkan terima kasih.",
     ],
+  },
+  {
+    id: "pengesahan",
   },
 ];

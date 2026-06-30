@@ -32,42 +32,59 @@ export const CoverComponent = () => {
 
     <div class="w-full max-w-[794px] h-[1123px] print:w-[210mm] print:h-[297mm] print:max-w-none print:h-screen print:shadow-none bg-white relative font-['Poppins',_sans-serif] text-[var(--color-ec-blue)] p-[60px] box-border overflow-hidden mx-auto shadow-[0_4px_10px_rgba(0,0,0,0.1)] border-t-[15px] border-[var(--color-ec-red)]">
       
-      <div class="flex items-center gap-6 mb-12">
+      <!-- ================= LOGO KAMPUS & ORGANISASI ================= -->
+      <div class="flex items-center gap-6 mb-12 relative z-10">
         <div class="w-[60px] h-[60px] bg-gray-200 rounded-full flex items-center justify-center border-2 border-gray-300">
             <img src="../../public/logo-utb.png" alt="Logo Kampus" class="w-full h-full object-contain rounded-full" />
         </div>
 
         <div class="w-[60px] h-[60px] bg-gray-200 rounded-full flex items-center justify-center border-2 border-gray-300">
-            <img src="../../public/bem.png" alt="Logo Kampus" class="w-full h-full object-contain rounded-full" />
+            <img src="../../public/bem.png" alt="Logo BEM" class="w-full h-full object-contain rounded-full" />
         </div>
 
         <div class="w-[60px] h-[60px] bg-gray-200 rounded-full flex items-center justify-center border-2 border-gray-300">
-            <img src="../../public/ec.png" alt="Logo Kampus" class="w-full h-full object-contain rounded-full" />
+            <img src="../../public/ec.png" alt="Logo EC" class="w-full h-full object-contain rounded-full" />
         </div>
       </div>
 
-      <div class="absolute top-[80px] right-[60px] opacity-20">
+      <!-- ================= DEKORASI ================= -->
+      <div class="absolute top-[80px] right-[60px] opacity-20 z-0">
         <svg width="100" height="100" viewBox="0 0 100 100">
           <circle cx="50" cy="50" r="40" fill="none" stroke="var(--color-ec-blue)" stroke-width="2" stroke-dasharray="5,5"/>
           <circle cx="50" cy="50" r="20" fill="var(--color-ec-red)"/>
         </svg>
       </div>
 
-      <div class="mb-10">
-        <p class="text-[var(--color-ec-red)] font-bold tracking-[0.2em] text-sm mb-2 uppercase">Proposal Kegiatan</p>
-        <h1 class="font-['Playfair_Display',_serif] text-[56px] font-black leading-[1.1] m-0 mb-4 text-[var(--color-ec-blue)]">
-          TOEFL<br>Preparation
-        </h1>
-        <h2 class="text-lg font-semibold text-gray-600 m-0 border-l-4 border-[var(--color-ec-red)] pl-4">
-          English Club<br>Universitas Teknologi Bandung
-        </h2>
+      <!-- ================= HEADER TITLE & SPONSOR ================= -->
+      <div class="flex justify-between items-end mb-10 relative z-10">
+        
+        <!-- Kiri: Judul Acara -->
+        <div>
+          <p class="text-[var(--color-ec-red)] font-bold tracking-[0.2em] text-sm mb-2 uppercase">Proposal Kegiatan</p>
+          <h1 class="font-['Playfair_Display',_serif] text-[56px] font-black leading-[1.1] m-0 mb-4 text-[var(--color-ec-blue)]">
+            TOEFL<br>Preparation
+          </h1>
+          <h2 class="text-lg font-semibold text-gray-600 m-0 border-l-4 border-[var(--color-ec-red)] pl-4">
+            English Club<br>Universitas Teknologi Bandung
+          </h2>
+        </div>
+
+        <!-- Kanan: Kotak Sponsor (BARU Ditambahkan) -->
+        <div class="bg-white border-4 border-[var(--color-ec-blue)] p-4 shadow-[6px_6px_0px_0px_var(--color-ec-red)] min-w-[260px] text-right mb-2">
+           <p class="text-[10px] uppercase tracking-widest text-gray-500 font-bold mb-1">Diajukan Kepada Yth.</p>
+           <!-- Ganti [NAMA PT SPONSOR] dengan data dinamis Anda nantinya -->
+           <h3 class="font-black text-lg text-[var(--color-ec-blue)] leading-tight">[NAMA PT SPONSOR]</h3>
+           <p class="text-[12px] text-gray-600 mt-1">Divisi Sponsorship / CSR</p>
+        </div>
+
       </div>
 
+      <!-- ================= GAMBAR UTAMA ================= -->
       <div class="relative mb-[60px] mt-8">
         <div class="absolute -top-4 -right-4 w-full h-full bg-[var(--color-ec-blue)] z-[1]"></div>
         
         <div class="relative w-full h-[380px] bg-white z-[2] border-2 border-[var(--color-ec-blue)]">
-          <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=1000&auto=format&fit=crop" alt="TOEFL Preparation Preparation" class="w-full h-full object-cover">
+          <img src="../../public/2.webp" alt="TOEFL Preparation" class="w-full h-full object-cover">
         </div>
 
         <div class="absolute -bottom-8 -left-8 z-[3]">
@@ -77,15 +94,16 @@ export const CoverComponent = () => {
         </div>
       </div>
 
+      <!-- ================= FOOTER COVER ================= -->
       <div class="flex justify-between gap-6 absolute bottom-[60px] left-[60px] right-[60px]">
         <div class="flex-1 bg-white border-l-[6px] border-[var(--color-ec-red)] p-4 shadow-sm bg-gray-50">
           <p class="m-0 mb-1 text-xs text-gray-500 uppercase font-semibold">Penyelenggara</p>
           <h3 class="m-0 text-[16px] font-bold text-[var(--color-ec-blue)] leading-tight">English Club (EC) UTB</h3>
         </div>
         
-        <div class="flex-1 bg-white border-l-[6px] border-[var(--color-ec-blue)] p-4 shadow-sm bg-gray-50">
+        <div class="flex-1 bg-white border-l-[6px] border-[var(--color-ec-blue)] p-4 shadow-sm bg-gray-50 text-right">
           <p class="m-0 mb-1 text-xs text-gray-500 uppercase font-semibold">Tahun Pelaksanaan</p>
-          <h3 class="m-0 text-[16px] font-bold text-[var(--color-ec-blue)] leading-tight">2025</h3>
+          <h3 class="m-0 text-[16px] font-bold text-[var(--color-ec-blue)] leading-tight">2026</h3>
         </div>
       </div>
       

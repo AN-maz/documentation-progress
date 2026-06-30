@@ -1,5 +1,5 @@
 export const PendahuluanComponent = (data) => {
-  return `
+  return /*html*/`
     <div class="relative w-full h-full flex flex-col pt-4">
       
       <div class="absolute top-0 right-0 opacity-100 z-0">
@@ -62,7 +62,7 @@ export const PendahuluanComponent = (data) => {
         </div>
 
         <div class="w-[90%] mx-auto mt-10 relative bg-white border-4 border-[var(--color-ec-blue)] shadow-[12px_12px_0px_0px_var(--color-ec-red)] z-10 transition-transform hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[16px_16px_0px_0px_var(--color-ec-red)]">
-          <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=1000&auto=format&fit=crop" alt="TOEFL Preparation" class="w-full h-[300px] object-cover grayscale hover:grayscale-0 transition duration-500">
+          <img src="../../public/1.webp" alt="TOEFL Preparation" class="w-full h-[300px] object-cover transition duration-500">
         </div>
 
       </div>
