@@ -19,7 +19,7 @@ export const ProfilPemateriComponent = (data) => {
     `;
   });
 
-  return `
+  return /*html*/`
     <div class="relative w-full h-full flex flex-col pt-4">
       
       <div class="absolute top-10 right-0 z-0 opacity-40">

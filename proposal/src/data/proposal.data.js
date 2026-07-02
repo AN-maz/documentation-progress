@@ -61,7 +61,7 @@ export const proposalContent = [
     title: "Profil Pemateri",
     content: {
       nama: "[Nama Pemateri, S.Pd., M.A.]",
-      asal: "[Nama Institut/Lembaga B]",
+      asal: "institute petal",
       deskripsi:
         "Workshop TOEFL Crash Course ini akan dipandu secara langsung oleh pakar dan praktisi bahasa Inggris berpengalaman. Beliau memiliki rekam jejak dan dedikasi yang tinggi dalam bidang akademik, dengan berbagai pencapaian luar biasa yang relevan, di antaranya:",
       pencapaian: [
