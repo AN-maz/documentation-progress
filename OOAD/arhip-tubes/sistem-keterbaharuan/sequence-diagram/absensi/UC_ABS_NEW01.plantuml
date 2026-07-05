@@ -1,0 +1,34 @@
+@startuml
+autonumber
+skinparam style strictuml
+
+actor Karyawan
+boundary "Form Pengajuan" as Form
+control "Control Absensi" as Ctrl
+entity "Database Absensi" as DB
+
+activate Karyawan
+Karyawan -> Form: Memilih menu & mengisi form izin/cuti
+activate Form
+Karyawan -> Form: Melampirkan dokumen (jika sakit)
+Karyawan -> Form: Menekan tombol "Kirim Pengajuan"
+Form -> Ctrl: Mengirim data pengajuan
+activate Ctrl
+Ctrl -> Ctrl: Validasi kelengkapan data
+
+alt [Data Tidak Lengkap (Exceptional 4E)]
+    Ctrl --> Form: Mengembalikan pesan error
+    Form --> Karyawan: Meminta lengkapi data form
+else [Data Lengkap]
+    Ctrl -> DB: Menyimpan data (Status: Menunggu Validasi)
+    activate DB
+    DB --> Ctrl: Konfirmasi penyimpanan sukses
+    deactivate DB
+    Ctrl --> Form: Pengajuan berhasil dikirim
+    Form --> Karyawan: Menampilkan status "Menunggu Validasi"
+end
+
+deactivate Ctrl
+deactivate Form
+deactivate Karyawan
+@enduml

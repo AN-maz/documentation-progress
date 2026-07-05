@@ -1,0 +1,20 @@
+@startuml
+title Activity Diagram: Mengajukan Klaim Lembur
+|Karyawan|
+start
+:Memilih menu "Mengajukan Klaim Lembur";
+:Memasukkan jam mulai, jam selesai, & deskripsi tugas;
+:Menekan tombol "Ajukan Klaim";
+
+|Sistem Absensi|
+:Mencocokkan data lembur dengan log presensi pulang;
+if (Data log presensi ditemukan?) then ([Tidak (Exceptional 4E)])
+  :Menolak pengajuan lembur;
+  :Meminta karyawan melakukan koreksi presensi;
+  stop
+else ([Ya])
+  :Menyimpan data pengajuan;
+  :Mengupdate status menjadi "Menunggu Validasi";
+  stop
+endif
+@enduml

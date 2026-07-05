@@ -1,0 +1,21 @@
+@startuml
+title Activity Diagram: Mengajukan Izin, Sakit & Cuti
+|Karyawan|
+start
+:Memilih menu "Pengajuan Izin, Sakit & Cuti";
+:Memilih kategori & mengisi durasi waktu;
+:Melampirkan dokumen pendukung (jika sakit);
+:Menekan tombol "Kirim Pengajuan";
+
+|Sistem Absensi|
+:Memvalidasi kelengkapan form;
+if (Data lengkap?) then ([Tidak (Exceptional 4E)])
+  :Menampilkan pesan error;
+  :Meminta karyawan melengkapi data;
+  stop
+else ([Ya])
+  :Menyimpan data pengajuan;
+  :Mengupdate status menjadi "Menunggu Validasi";
+  stop
+endif
+@enduml

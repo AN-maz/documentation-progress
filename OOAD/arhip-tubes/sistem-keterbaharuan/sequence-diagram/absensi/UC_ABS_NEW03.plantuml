@@ -1,0 +1,34 @@
+@startuml
+autonumber
+skinparam style strictuml
+
+actor HR
+boundary "Dashboard Validasi" as Form
+control "Control Validasi" as Ctrl
+entity "Database Pengajuan" as DB
+
+activate HR
+HR -> Form: Membuka menu validasi
+activate Form
+Form -> Ctrl: Meminta daftar pengajuan "Menunggu Validasi"
+activate Ctrl
+Ctrl -> DB: Menarik data pengajuan
+activate DB
+DB --> Ctrl: Mengembalikan daftar pengajuan
+deactivate DB
+Ctrl --> Form: Menampilkan daftar pengajuan
+Form --> HR: Menampilkan rincian pengajuan & lampiran
+
+HR -> Form: Memilih aksi "Disetujui" atau "Ditolak"
+Form -> Ctrl: Mengirim keputusan validasi
+Ctrl -> DB: Memperbarui status pengajuan
+activate DB
+DB --> Ctrl: Konfirmasi update sukses
+deactivate DB
+
+Ctrl -> Form: Mengirim notifikasi update
+Form --> HR: Menampilkan status validasi berhasil
+deactivate Ctrl
+deactivate Form
+deactivate HR
+@enduml

@@ -1,0 +1,46 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor HR
+actor Karyawan
+actor Sales
+
+Karyawan <|-- Sales
+
+rectangle "Sistem Absensi Internal Cifo (Sistem Usulan)" {
+
+    ' --- Fitur Core / Berjalan ---
+    usecase "Mendaftarkan Wajah & NIP" as UC_Daftar
+    usecase "Mendeteksi Lokasi & Fake GPS" as UC_Deteksi
+    usecase "Melakukan Presensi (Masuk/Pulang)" as UC_Presensi
+    usecase "Melakukan Public Absen" as UC_PublicAbsen
+
+    ' (Grup Ekstensi Metode Absen)
+    usecase "Pilih Metode: Face/App/Web" as UC_Metode
+    UC_Metode .up.> UC_Presensi : <<extend>>
+    UC_Metode .up.> UC_PublicAbsen : <<extend>>
+
+    ' --- Fitur Keterbaharuan (Usulan Baru) ---
+    usecase "Mengajukan Izin, Sakit & Cuti" as UC_PengajuanAbsen
+    usecase "Mengajukan Klaim Lembur" as UC_Lembur
+    usecase "Memvalidasi Pengajuan Karyawan" as UC_ValidasiHR
+    usecase "Melihat Rekap Kehadiran Bulanan" as UC_RekapPribadi
+    
+}
+
+' Garis Interaksi HR
+HR -- UC_Daftar
+HR -- UC_Deteksi
+HR -- UC_ValidasiHR
+
+' Garis Interaksi Karyawan (Base)
+Karyawan -- UC_Presensi
+Karyawan -- UC_PengajuanAbsen
+Karyawan -- UC_Lembur
+Karyawan -- UC_RekapPribadi
+
+' Garis Interaksi Sales
+Sales -- UC_PublicAbsen
+
+@enduml

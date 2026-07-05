@@ -1,0 +1,96 @@
+@startuml
+skinparam style strictuml
+skinparam classAttributeIconSize 0
+
+' ==========================================
+' GENERALIZATION (SUPERCLASS & SUBCLASS)
+' ==========================================
+class Pegawai {
+  - idPegawai: String
+  - namaLengkap: String
+  - passwordHash: String
+  + login(): boolean
+}
+
+class Karyawan {
+  - departemen: String
+  + melakukanPresensi(): void
+  + ajukanIzinCuti(): void
+  + klaimLembur(): void
+  + lihatRekapPribadi(): List
+}
+
+class Sales {
+  - areaTugas: String
+  + melakukanPublicAbsen(): void
+}
+
+class HR {
+  - levelAkses: int
+  + daftarWajahNIP(): void
+  + deteksiLokasiFakeGPS(): void
+  + validasiPengajuan(): void
+}
+
+Pegawai <|-- Karyawan
+Pegawai <|-- HR
+Karyawan <|-- Sales
+
+' ==========================================
+' ENTITAS ABSENSI & ADMINISTRASI
+' ==========================================
+class LogPresensi {
+  - idLog: String
+  - waktuCatat: Date
+  - jenisPresensi: String
+  - metodePresensi: String
+  - koordinatGPS: String
+  - fotoBukti: String
+  - statusFraud: boolean
+  + rekamKehadiran(): void
+}
+
+class Pengajuan {
+  - idPengajuan: String
+  - jenisPengajuan: String
+  - durasi: int
+  - deskripsi: String
+  - status: String
+  - lampiran: String
+  + kirimPengajuan(): void
+  + updateStatus(status: String): void
+}
+
+class Lembur {
+  - idLembur: String
+  - jamMulai: Time
+  - jamSelesai: Time
+  + hitungDurasi(): double
+}
+
+class Geofence {
+  - idArea: String
+  - koordinatPusat: String
+  - radiusAman: int
+  + validasiLokasi(): boolean
+}
+
+' ==========================================
+' RELATIONSHIPS & MULTIPLICITY
+' ==========================================
+
+' Relasi Kehadiran
+Karyawan "1" -- "0..*" LogPresensi : mencatat >
+
+' Relasi Pengajuan (Izin, Cuti, Lembur)
+Karyawan "1" -- "0..*" Pengajuan : mengajukan >
+Pengajuan <|-- Lembur
+
+' Relasi Validasi oleh HR
+HR "1" -- "0..*" Pengajuan : memvalidasi >
+HR "1" -- "1..*" Geofence : mengatur >
+
+' Relasi HR ke data Registrasi
+HR "1" -- "0..*" Karyawan : mendaftarkan wajah/NIP >
+
+@enduml

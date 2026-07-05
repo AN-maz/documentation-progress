@@ -1,0 +1,35 @@
+@startuml
+autonumber
+skinparam style strictuml
+
+actor Karyawan
+boundary "Form Klaim Lembur" as Form
+control "Control Lembur" as Ctrl
+entity "Database Log Presensi" as DB
+
+activate Karyawan
+Karyawan -> Form: Mengisi jam lembur & deskripsi tugas
+activate Form
+Karyawan -> Form: Menekan tombol "Ajukan Klaim"
+Form -> Ctrl: Mengirim data klaim
+activate Ctrl
+Ctrl -> DB: Mencocokkan lembur dengan log presensi pulang
+activate DB
+DB --> Ctrl: Mengembalikan hasil verifikasi
+
+alt [Data Presensi Pulang Tidak Ditemukan (Exceptional 4E)]
+    Ctrl --> Form: Menolak pengajuan
+    Form --> Karyawan: Meminta melakukan koreksi presensi
+else [Data Valid]
+    Ctrl -> DB: Menyimpan data (Status: Menunggu Validasi)
+    activate DB
+    DB --> Ctrl: Konfirmasi sukses
+    deactivate DB
+    Ctrl --> Form: Klaim berhasil diajukan
+    Form --> Karyawan: Menampilkan status "Menunggu Validasi"
+end
+
+deactivate Ctrl
+deactivate Form
+deactivate Karyawan
+@enduml

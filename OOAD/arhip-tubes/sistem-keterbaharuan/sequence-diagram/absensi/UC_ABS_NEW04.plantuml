@@ -1,0 +1,30 @@
+@startuml
+autonumber
+skinparam style strictuml
+
+actor Karyawan
+boundary "Menu Rekap Absensi" as Form
+control "Control Rekap" as Ctrl
+entity "Database Absensi" as DB
+
+activate Karyawan
+Karyawan -> Form: Membuka menu rekap kehadiran
+activate Form
+Form -> Ctrl: Meminta data rekap bulanan
+activate Ctrl
+Ctrl -> DB: Melakukan perhitungan akumulasi data
+activate DB
+DB --> Ctrl: Mengembalikan hasil perhitungan
+
+alt [Koneksi Database Gagal (Exceptional 2E)]
+    Ctrl --> Form: Mengembalikan status error
+    Form --> Karyawan: Menampilkan pesan error koneksi
+else [Data Berhasil Diambil]
+    Ctrl --> Form: Mengirim data rekap kehadiran
+    Form --> Karyawan: Menampilkan ringkasan statistik (Hadir, Telat, dll)
+end
+
+deactivate Ctrl
+deactivate Form
+deactivate Karyawan
+@enduml

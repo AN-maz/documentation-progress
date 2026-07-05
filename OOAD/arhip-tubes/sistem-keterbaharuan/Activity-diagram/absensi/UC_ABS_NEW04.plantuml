@@ -1,0 +1,18 @@
+@startuml
+title Activity Diagram: Melihat Rekap Kehadiran Bulanan
+|Karyawan|
+start
+:Membuka menu "Rekap Kehadiran Bulanan";
+
+|Sistem Absensi|
+:Menghitung akumulasi data absensi periode berjalan;
+
+if (Apakah koneksi database stabil?) then ([Tidak (Exceptional 2E)])
+  :Menampilkan pesan error koneksi;
+  stop
+else ([Ya])
+  :Menampilkan ringkasan (Hadir, Telat, Cuti, dll);
+  :Menampilkan detail presensi per tanggal;
+  stop
+endif
+@enduml

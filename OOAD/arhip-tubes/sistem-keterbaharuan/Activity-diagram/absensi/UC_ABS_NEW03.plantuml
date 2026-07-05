@@ -1,0 +1,23 @@
+@startuml
+title Activity Diagram: Memvalidasi Pengajuan Karyawan
+|HR|
+start
+:Membuka menu "Validasi Pengajuan";
+
+|Sistem Absensi|
+:Menampilkan daftar pengajuan dengan status "Menunggu Validasi";
+
+|HR|
+:Meninjau detail pengajuan & dokumen pendukung;
+if (Apakah data/dokumen valid?) then ([Tidak (Exceptional 3E)])
+  :Memilih status "Ditolak";
+  :Menginput alasan penolakan;
+else ([Ya])
+  :Memilih status "Disetujui";
+endif
+
+|Sistem Absensi|
+:Memperbarui status pengajuan;
+:Mengirim notifikasi ke Karyawan;
+stop
+@enduml
