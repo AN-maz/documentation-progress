@@ -1,0 +1,31 @@
+@startuml
+title Activity Diagram: Auto-Request Pembelian Barang
+
+|Sistem Operasional|
+start
+:Memonitor ketersediaan stok secara real-time;
+
+if (Apakah stok barang < batas minimum?) then ([Ya])
+  :Membuat draf Purchase Request (PR) otomatis;
+  :Mengirim notifikasi PR ke dashboard Logistik;
+
+  |Logistik|
+  :Menerima notifikasi & memeriksa draf PR;
+  
+  if (Apakah barang sudah dipesan\npada kloter sebelumnya?) then ([Ya (Exceptional 5E)])
+    :Membatalkan draf PR otomatis;
+    stop
+  else ([Tidak / Belum Dipesan])
+    :Memvalidasi draf PR;
+    :Menekan tombol "Kirim ke Finance";
+    
+    |Sistem Operasional|
+    :Meneruskan PR ke departemen Finance;
+    :Mengupdate status PR menjadi\n"Menunggu Persetujuan Finance";
+    stop
+  endif
+
+else ([Tidak (Stok Aman)])
+  stop
+endif
+@enduml

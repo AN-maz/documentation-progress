@@ -1,0 +1,30 @@
+@startuml
+title Activity Diagram: Manajemen Tiket Gangguan (Proaktif)
+
+|Pelanggan|
+start
+:Melaporkan gangguan teknis\nmelalui aplikasi (Super Apps);
+
+|Sistem Operasional|
+:Menerima data laporan keluhan pelanggan;
+:Membuat ID Tiket Gangguan baru (Status: Open);
+:Menjalankan fungsi "Mengakses Data Pelanggan"\nuntuk menarik profil & histori gangguan;
+
+if (Apakah sinkronisasi data\npelanggan berhasil?) then ([Tidak (Exceptional 3E)])
+  :Menandai tiket dengan label "Anomali Data";
+  :Mengelompokkan tiket ke antrean CS;
+  
+  |Customer Service (CS)|
+  :Melakukan verifikasi identitas\n& data pelanggan secara manual;
+  :Memeriksa detail tiket untuk dievaluasi/dieskalasi;
+  stop
+
+else ([Ya / Berhasil])
+  |Sistem Operasional|
+  :Mengelompokkan tiket lengkap\nke antrean dashboard CS;
+  
+  |Customer Service (CS)|
+  :Memeriksa detail tiket untuk dievaluasi/dieskalasi;
+  stop
+endif
+@enduml

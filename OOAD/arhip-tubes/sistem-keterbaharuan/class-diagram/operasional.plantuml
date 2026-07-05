@@ -1,0 +1,194 @@
+@startuml
+skinparam style strictuml
+skinparam classAttributeIconSize 0
+
+' ==========================================
+' GENERALIZATION: SUPERCLASS KARYAWAN
+' ==========================================
+class Karyawan {
+  - idKaryawan: String
+  - namaLengkap: String
+  - noTelp: String
+  - emailKontak: String
+  - passwordHash: String
+  + loginSistem(): boolean
+  + logoutSistem(): void
+}
+
+class Teknisi {
+  - areaCoverage: String
+  - spesialisasiInstalasi: String
+  - statusKetersediaan: boolean
+  + cekKetersediaanODP(kodeODP: String): boolean
+  + updateStatusInstalasi(idTiket: String): void
+  + scanQRBarangKeluar(qrCode: String): boolean
+}
+
+class Logistik {
+  - shiftKerja: String
+  - lokasiGudang: String
+  + validasiPurchaseRequest(idPR: String): void
+  + updateStokManual(idBarang: String, jumlah: int): void
+}
+
+class Finance {
+  - levelOtorisasi: int
+  - kodeCabang: String
+  + jalankanAuditOtomatis(): void
+  + setujuiPurchaseRequest(idPR: String): boolean
+}
+
+class NOC {
+  - tingkatAksesServer: int
+  - ipAddressNode: String
+  + aktivasiInternetPelanggan(idPelanggan: String): boolean
+  + pantauTrafikJaringan(): void
+}
+
+' Generalisasi CS sesuai Use Case Diagram
+class CustomerService {
+  - ekstensiTelpon: String
+  - ratingPelayanan: double
+  + aksesDataPelanggan(idPelanggan: String): Pelanggan
+  + kelolaTiketGangguan(idTiket: String): void
+}
+
+class CSCare {
+  - totalKomplainDitangani: int
+  - tingkatRetensi: double
+  + tanganiKeluhanUmum(idPelanggan: String): void
+}
+
+class CSSupport {
+  - levelKemampuanTeknis: int
+  - sertifikasiBantuan: String
+  + berikanBantuanTeknisAwal(idPelanggan: String): void
+}
+
+' Hubungan Pewarisan (Generalization)
+Karyawan <|-- Teknisi
+Karyawan <|-- Logistik
+Karyawan <|-- Finance
+Karyawan <|-- NOC
+Karyawan <|-- CustomerService
+
+CustomerService <|-- CSCare
+CustomerService <|-- CSSupport
+
+' ==========================================
+' ENTITAS PELANGGAN & JARINGAN
+' ==========================================
+class Pelanggan {
+  - idPelanggan: String
+  - namaPelanggan: String
+  - alamatInstalasi: String
+  - koordinatGPS: String
+  - paketInternet: String
+  - statusAktif: boolean
+  + requestPembuatanTiket(): void
+  + terimaNotifikasiWA(): void
+}
+
+class JaringanODP {
+  - kodeODP: String
+  - lokasiTiang: String
+  - kapasitasTotalPort: int
+  - jumlahPortTerpakai: int
+  - statusKondisi: String
+  + hitungPortTersedia(): int
+}
+
+' ==========================================
+' ENTITAS INVENTORY & PROCUREMENT (Keterbaharuan)
+' ==========================================
+class PerangkatGudang {
+  - idBarang: String
+  - namaBarang: String
+  - kategori: String
+  - qrCodeSerialNumber: String
+  - stokTersedia: int
+  - batasMinimumThreshold: int
+  - hargaSatuan: double
+  + kurangiStokOtomatis(jumlah: int): void
+  + cekKondisiBatasMinimum(): boolean
+}
+
+class PurchaseRequest {
+  - idPR: String
+  - tanggalRequest: Date
+  - totalEstimasiBiaya: double
+  - urgensi: String
+  - statusPersetujuan: String
+  - alasanPembelian: String
+  + generateOtomatisSistem(): void
+  + teruskanKeDivisiFinance(): void
+}
+
+class LogMutasiBarang {
+  - idLogMutasi: String
+  - waktuScanKeluar: Date
+  - jumlahItemKeluar: int
+  - tujuanInstalasi: String
+  + rekamDataScanQR(): void
+}
+
+' ==========================================
+' ENTITAS TIKET & AUDIT KEUANGAN (Keterbaharuan)
+' ==========================================
+class TiketGangguan {
+  - idTiket: String
+  - tanggalDibuat: Date
+  - kategoriMasalah: String
+  - deskripsiKeluhan: String
+  - statusTiket: String
+  - prioritas: String
+  + autoRoutingKeTeknisiArea(): void
+  + updateEskalasiTiket(): void
+}
+
+class TagihanPelanggan {
+  - idTagihan: String
+  - periodeBulan: String
+  - totalTagihan: double
+  - tanggalJatuhTempo: Date
+  - statusPembayaran: String
+  + ubahStatusJadiLunas(): void
+}
+
+class LaporanAuditKeuangan {
+  - idAudit: String
+  - tanggalRekonsiliasi: Date
+  - totalTransaksiCocok: int
+  - totalDanaSelisih: double
+  - statusAudit: String
+  + eksekusiPencocokanData(): void
+  + kirimNotifikasiKeFinance(): void
+}
+
+' ==========================================
+' RELATIONSHIPS & MULTIPLICITY
+' ==========================================
+
+' Relasi Jaringan
+Teknisi "1" -- "0..*" JaringanODP : mengecek >
+Pelanggan "1" -- "1" JaringanODP : terhubung ke >
+
+' Relasi Gudang (Scan QR & Auto-Beli)
+Logistik "1" -- "0..*" PurchaseRequest : meninjau >
+Finance "1" -- "0..*" PurchaseRequest : menyetujui anggaran >
+PerangkatGudang "1" -- "0..1" PurchaseRequest : memicu pembuatan >
+Teknisi "1" -- "0..*" LogMutasiBarang : memindai QR code >
+PerangkatGudang "1" -- "0..*" LogMutasiBarang : dicatat riwayatnya >
+
+' Relasi Tiket Proaktif
+Pelanggan "1" -- "0..*" TiketGangguan : membuat (via Super Apps) >
+CustomerService "1" -- "0..*" TiketGangguan : meninjau & mengawal >
+TiketGangguan "0..*" -- "1" Pelanggan : menarik data profil >
+Teknisi "1" -- "0..*" TiketGangguan : ditugaskan menangani >
+
+' Relasi Audit Otomatis
+Finance "1" -- "0..*" LaporanAuditKeuangan : mengeksekusi >
+LaporanAuditKeuangan "1" -- "1..*" TagihanPelanggan : merekonsiliasi >
+Pelanggan "1" -- "0..*" TagihanPelanggan : memiliki kewajiban >
+
+@enduml

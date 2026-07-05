@@ -1,0 +1,57 @@
+@startuml
+autonumber
+skinparam style strictuml
+
+actor Pelanggan
+boundary "Super Apps" as App
+control "Control Tiket" as Ctrl
+entity "Database Pelanggan" as DBPel
+entity "Database Tiket" as DBTiket
+boundary "Dashboard CS" as DashCS
+actor "Customer Service" as CS
+
+activate Pelanggan
+Pelanggan -> App: Melaporkan keluhan gangguan
+activate App
+App -> Ctrl: Mengirim data keluhan & lokasi
+activate Ctrl
+
+Ctrl -> DBTiket: Membuat ID Tiket (Status: Open)
+activate DBTiket
+DBTiket --> Ctrl: Konfirmasi ID Tiket terbuat
+deactivate DBTiket
+
+Ctrl -> DBPel: Sinkronisasi data profil & histori pelanggan
+activate DBPel
+DBPel --> Ctrl: Mengembalikan respon sinkronisasi
+deactivate DBPel
+
+alt [Sinkronisasi Data Gagal (Exceptional 3E)]
+    Ctrl -> DBTiket: Memberikan label "Anomali Data" pada tiket
+    activate DBTiket
+    DBTiket --> Ctrl: Status terupdate
+    deactivate DBTiket
+    
+    Ctrl -> DashCS: Meneruskan tiket (Anomali)
+    activate DashCS
+    DashCS --> CS: Menampilkan tiket di antrean
+    activate CS
+    CS -> DashCS: Melakukan verifikasi identitas manual
+    DashCS -> Ctrl: Melanjutkan eskalasi tiket
+else [Sinkronisasi Data Berhasil]
+    Ctrl -> DBTiket: Melampirkan data lengkap pelanggan ke tiket
+    activate DBTiket
+    DBTiket --> Ctrl: Tiket terupdate
+    deactivate DBTiket
+    
+    Ctrl -> DashCS: Meneruskan tiket lengkap
+    DashCS --> CS: Menampilkan tiket beserta histori
+    CS -> DashCS: Memeriksa detail untuk eskalasi lanjutan
+end
+
+deactivate CS
+deactivate DashCS
+deactivate Ctrl
+deactivate App
+deactivate Pelanggan
+@enduml

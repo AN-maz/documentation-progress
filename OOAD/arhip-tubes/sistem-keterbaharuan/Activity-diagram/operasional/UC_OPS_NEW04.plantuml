@@ -1,0 +1,28 @@
+@startuml
+title Activity Diagram: Audit Keuangan Otomatis
+
+|Finance|
+start
+:Memilih menu "Audit Otomatis"\npada modul keuangan;
+
+|Sistem Operasional|
+:Menarik riwayat mutasi transaksi (inbound)\ndari sistem payment gateway pihak ketiga;
+:Mencocokkan nominal dan ID transaksi\ndengan daftar tagihan pelanggan di database;
+
+if (Apakah nominal dan ID transaksi\nmemiliki kecocokan absolut?) then ([Tidak / Ada Selisih (Exceptional 3E)])
+  :Memasukkan transaksi ke dalam\ntab "Unmatched";
+  
+  |Finance|
+  :Melakukan verifikasi, penelusuran,\n& alokasi pembayaran secara manual;
+  stop
+
+else ([Ya / Cocok Absolut])
+  |Sistem Operasional|
+  :Mengubah status tagihan menjadi "Lunas";
+  :Menghasilkan dan menampilkan\nLaporan Hasil Audit kepada Finance;
+  
+  |Finance|
+  :Menerima laporan hasil audit otomatis;
+  stop
+endif
+@enduml

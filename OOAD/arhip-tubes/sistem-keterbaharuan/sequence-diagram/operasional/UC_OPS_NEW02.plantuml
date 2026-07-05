@@ -1,0 +1,44 @@
+@startuml
+autonumber
+skinparam style strictuml
+
+actor Teknisi
+boundary "Aplikasi Mobile" as Form
+control "Control Inventory" as Ctrl
+entity "Database Gudang" as DB
+
+activate Teknisi
+Teknisi -> Form: Membuka menu "Scan Barang Keluar"
+activate Form
+Teknisi -> Form: Memindai QR Code perangkat
+Form -> Ctrl: Mengirim data serial number (QR)
+activate Ctrl
+
+Ctrl -> DB: Mencocokkan serial number & status stok
+activate DB
+DB --> Ctrl: Mengembalikan hasil pencarian
+deactivate DB
+
+alt [Serial Number Tidak Terdaftar (Exceptional 3E)]
+    Ctrl --> Form: Mengembalikan status "Tidak Valid"
+    Form --> Teknisi: Menampilkan peringatan "Barang Tidak Terdaftar"
+    Teknisi -> Teknisi: Melapor ke Logistik untuk cek manual
+else [Serial Number Valid]
+    Ctrl -> DB: Mencatat ID Teknisi sebagai pembawa
+    activate DB
+    DB --> Ctrl: Log pembawa tercatat
+    deactivate DB
+    
+    Ctrl -> DB: Mengurangi jumlah stok (Update Stok)
+    activate DB
+    DB --> Ctrl: Konfirmasi stok terpotong
+    deactivate DB
+    
+    Ctrl --> Form: Mengembalikan data detail barang
+    Form --> Teknisi: Menampilkan detail barang & konfirmasi sukses
+end
+
+deactivate Ctrl
+deactivate Form
+deactivate Teknisi
+@enduml

@@ -1,0 +1,53 @@
+@startuml
+autonumber
+skinparam style strictuml
+
+actor Finance
+boundary "Modul Keuangan" as Form
+control "Control Audit" as Ctrl
+entity "API Payment Gateway" as API
+entity "Database Tagihan" as DB
+
+activate Finance
+Finance -> Form: Memilih menu "Audit Otomatis"
+activate Form
+Form -> Ctrl: Request mulai rekonsiliasi data
+activate Ctrl
+
+Ctrl -> API: Menarik riwayat mutasi transaksi inbound
+activate API
+API --> Ctrl: Mengembalikan daftar transaksi
+deactivate API
+
+Ctrl -> DB: Mengambil daftar tagihan jatuh tempo
+activate DB
+DB --> Ctrl: Mengembalikan daftar tagihan
+deactivate DB
+
+Ctrl -> Ctrl: Mencocokkan nominal & ID transaksi
+
+alt [Nominal Selisih / ID Tidak Cocok (Exceptional 3E)]
+    Ctrl -> DB: Memasukkan transaksi ke tab "Unmatched"
+    activate DB
+    DB --> Ctrl: Status tersimpan
+    deactivate DB
+    Ctrl --> Form: Mengembalikan data "Unmatched"
+    Form --> Finance: Menampilkan peringatan selisih dana
+    Finance -> Form: Melakukan verifikasi & alokasi manual
+else [Pencocokan Absolut]
+    Ctrl -> DB: Mengubah status tagihan menjadi "Lunas"
+    activate DB
+    DB --> Ctrl: Update status berhasil
+    deactivate DB
+    
+    Ctrl -> Ctrl: Menghasilkan dokumen laporan audit
+    
+    Ctrl --> Form: Mengirim laporan hasil audit
+    Form --> Finance: Menampilkan laporan rekonsiliasi berhasil
+    Finance -> Form: Meninjau laporan
+end
+
+deactivate Ctrl
+deactivate Form
+deactivate Finance
+@enduml

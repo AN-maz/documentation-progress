@@ -1,0 +1,29 @@
+@startuml
+title Activity Diagram: Scan QR Barang (Inventory Out)
+
+|Teknisi|
+start
+:Membuka menu "Scan Barang Keluar"\npada aplikasi operasional;
+:Memindai kode QR pada fisik perangkat\nmenggunakan kamera mobile;
+
+|Sistem Operasional|
+:Mencocokkan serial number dengan\ndatabase gudang pusat;
+
+if (Apakah serial number terdaftar\n& QR terbaca dengan baik?) then ([Tidak (Exceptional 3E)])
+  :Menampilkan pesan "Barang Tidak Terdaftar";
+  
+  |Teknisi|
+  :Melapor ke Logistik untuk\npengecekan/input manual;
+  stop
+
+else ([Ya / Valid])
+  |Sistem Operasional|
+  :Menampilkan detail barang;
+  :Mencatat ID Teknisi sebagai pembawa barang;
+  :Mengurangi jumlah ketersediaan stok\ngudang secara otomatis (Update Stok);
+  
+  |Teknisi|
+  :Menerima konfirmasi barang keluar;
+  stop
+endif
+@enduml

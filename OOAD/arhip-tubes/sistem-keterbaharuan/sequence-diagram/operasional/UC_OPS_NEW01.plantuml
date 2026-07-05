@@ -1,0 +1,53 @@
+@startuml
+autonumber
+skinparam style strictuml
+
+actor Logistik
+boundary "Dashboard Logistik" as Form
+control "Control Pengadaan" as Ctrl
+entity "Database Gudang" as DB
+entity "Database Finance" as DBFin
+
+activate Ctrl
+Ctrl -> DB: Memonitor stok gudang (real-time)
+activate DB
+DB --> Ctrl: Mengembalikan data stok item
+deactivate DB
+
+Ctrl -> Ctrl: Mendeteksi stok < batas minimum
+Ctrl -> DB: Membuat draf Purchase Request (PR)
+activate DB
+DB --> Ctrl: Draf PR tersimpan
+deactivate DB
+
+Ctrl -> Form: Mengirim notifikasi draf PR baru
+activate Form
+Form --> Logistik: Menampilkan notifikasi & draf PR
+activate Logistik
+
+Logistik -> Form: Meninjau draf PR
+
+alt [Barang Sudah Dipesan Manual (Exceptional 5E)]
+    Logistik -> Form: Memilih aksi "Batalkan Draf"
+    Form -> Ctrl: Request hapus draf PR
+    Ctrl -> DB: Menghapus draf dari sistem
+    activate DB
+    DB --> Ctrl: Konfirmasi terhapus
+    deactivate DB
+    Ctrl --> Form: Update status dibatalkan
+    Form --> Logistik: Menampilkan konfirmasi pembatalan
+else [Validasi Sukses]
+    Logistik -> Form: Menekan tombol "Kirim ke Finance"
+    Form -> Ctrl: Request teruskan PR
+    Ctrl -> DBFin: Meneruskan dokumen PR ke Finance
+    activate DBFin
+    DBFin --> Ctrl: Konfirmasi PR diterima Finance
+    deactivate DBFin
+    Ctrl --> Form: Update status "Menunggu Persetujuan"
+    Form --> Logistik: Menampilkan status sukses terkirim
+end
+
+deactivate Logistik
+deactivate Form
+deactivate Ctrl
+@enduml

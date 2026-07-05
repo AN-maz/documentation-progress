@@ -37,7 +37,7 @@ rectangle "Sistem Operasional Terintegrasi Cifo" {
     
     usecase "Kirim Notifikasi WA Pelanggan" as UC_Notifikasi
     UC_Notifikasi .up.> UC_Aktivasi : <<extend>>
-    ' ========================================================
+    ' ========================================================`
 
     usecase "Mengakses Data Pelanggan" as UC_AksesData 
     usecase "Menangani Keluhan Umum" as UC_Komplain
