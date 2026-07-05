@@ -1,0 +1,25 @@
+@startuml
+|Pelanggan|
+start
+:Membuka menu "Lapor Gangguan";
+:Mengisi formulir gangguan teknis;
+:Melampirkan foto indikator modem (opsional);
+:Menekan tombol "Kirim Laporan";
+
+|Sistem Cifo Super Apps|
+:Memvalidasi kelengkapan data;
+
+if (Apakah data wajib sudah lengkap?) then ([Tidak (Exceptional 4E)])
+  :Menolak pengiriman;
+  :Meminta pelanggan melengkapi formulir;
+  |Pelanggan|
+  :Melengkapi data form;
+  stop
+else ([Ya])
+  |Sistem Cifo Super Apps|
+  :Membuat Trouble Ticket;
+  :Meneruskan tiket ke Sistem Operasional;
+  :Menampilkan nomor tiket kepada pelanggan;
+  stop
+endif
+@enduml

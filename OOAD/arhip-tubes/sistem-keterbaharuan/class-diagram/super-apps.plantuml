@@ -1,0 +1,154 @@
+@startuml
+skinparam style strictuml
+skinparam classAttributeIconSize 0
+
+' ==========================================
+' GENERALIZATION (SUPERCLASS & SUBCLASS)
+' ==========================================
+class Pengguna {
+  - idPengguna: String
+  - namaLengkap: String
+  - email: String
+  - noTelp: String
+  - passwordHash: String
+  + loginSistem(): boolean
+  + logoutSistem(): void
+}
+
+class Pelanggan {
+  - pinCPay: String
+  + requestTopUp(): void
+  + beliBooster(): boolean
+  + laporGangguan(): void
+  + cekRiwayatMutasi(): List
+}
+
+class DivisiWalanja {
+  - idKaryawan: String
+  + kelolaKetersediaanKamar(): void
+  + kelolaPromoHotel(): void
+}
+
+class CustomerService {
+  - ekstensiTelp: String
+  + tanganiTiketGangguan(): void
+}
+
+Pengguna <|-- Pelanggan
+Pengguna <|-- DivisiWalanja
+Pengguna <|-- CustomerService
+
+' ==========================================
+' ENTITAS TRANSAKSI & DOMPET DIGITAL
+' ==========================================
+class DompetCPay {
+  - idDompet: String
+  - saldoAktif: double
+  - limitMaksimal: double
+  + tambahSaldo(nominal: double): void
+  + potongSaldo(nominal: double): boolean
+}
+
+class Transaksi {
+  - idTransaksi: String
+  - jenisTransaksi: String
+  - nominalTransaksi: double
+  - waktuTransaksi: Date
+  - statusTransaksi: String
+  + simpanLogTransaksi(): void
+  + getRiwayat(): String
+}
+
+' ==========================================
+' ENTITAS LAYANAN INTERNET
+' ==========================================
+class TagihanInternet {
+  - idTagihan: String
+  - periodeBulan: String
+  - nominalTagihan: double
+  - statusBayar: String
+  + prosesPembayaran(): void
+}
+
+class PaketBooster {
+  - idPaket: String
+  - namaPaket: String
+  - tambahanMbps: int
+  - hargaPaket: double
+  - masaAktifJam: int
+  + aktifkanBooster(): void
+}
+
+class TiketLaporan {
+  - idTiket: String
+  - kategoriMasalah: String
+  - deskripsiLengkap: String
+  - fotoLampiran: String
+  - statusTiket: String
+  + buatTiketBaru(): void
+  + teruskanKeCS(): void
+}
+
+' ==========================================
+' ENTITAS PERHOTELAN (WALANJA)
+' ==========================================
+class KamarHotel {
+  - idKamar: String
+  - tipeKamar: String
+  - hargaPerMalam: double
+  - ketersediaan: int
+  - statusMaintenance: boolean
+  + updateStokKamar(jumlah: int): void
+}
+
+class PromoHotel {
+  - idPromo: String
+  - kodeVoucer: String
+  - persentaseDiskon: double
+  - tanggalMulai: Date
+  - tanggalBerakhir: Date
+  - isAktif: boolean
+  + validasiMasaBerlaku(): boolean
+  + publikasikan(): void
+}
+
+class ReservasiHotel {
+  - idReservasi: String
+  - tanggalCheckIn: Date
+  - tanggalCheckOut: Date
+  - totalBiaya: double
+  - eVoucher: String
+  + buatReservasi(): void
+  + terbitkanVoucher(): String
+}
+
+' ==========================================
+' RELATIONSHIPS & MULTIPLICITY
+' ==========================================
+
+' Relasi Dompet Digital & Transaksi
+Pelanggan "1" -- "1" DompetCPay : memiliki >
+DompetCPay "1" -- "0..*" Transaksi : menghasilkan log >
+
+' Relasi Fitur Pelanggan ke Layanan Utama
+Pelanggan "1" -- "0..*" TagihanInternet : membayar >
+Pelanggan "1" -- "0..*" PaketBooster : membeli >
+Pelanggan "1" -- "0..*" ReservasiHotel : memesan >
+Pelanggan "1" -- "0..*" TiketLaporan : mengajukan keluhan >
+
+' Relasi Transaksi (Pembayaran) ke Modul Layanan
+TagihanInternet "1" -- "1" Transaksi : dicatat sebagai >
+PaketBooster "1" -- "1" Transaksi : dicatat sebagai >
+ReservasiHotel "1" -- "1" Transaksi : dicatat sebagai >
+
+' Relasi CS dan Tiket Gangguan
+CustomerService "1" -- "0..*" TiketLaporan : menangani >
+
+' Relasi Perhotelan (Divisi Walanja)
+DivisiWalanja "1" -- "1..*" KamarHotel : mengelola ketersediaan >
+DivisiWalanja "1" -- "0..*" PromoHotel : merilis >
+
+ReservasiHotel "0..*" -- "1" KamarHotel : memotong stok >
+ReservasiHotel "0..*" -- "0..1" PromoHotel : menggunakan diskon >
+
+@enduml

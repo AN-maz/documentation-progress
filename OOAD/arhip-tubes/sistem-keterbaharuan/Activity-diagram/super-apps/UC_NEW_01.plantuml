@@ -1,0 +1,17 @@
+@startuml
+|Pelanggan|
+start
+:Membuka menu riwayat transaksi;
+
+|Sistem Cifo Super Apps|
+:Mengambil data transaksi dari basis data;
+
+if (Apakah pelanggan sudah memiliki transaksi?) then ([Belum (Alternate 2A)])
+  :Menampilkan halaman kosong dengan\nketerangan "Belum ada transaksi";
+  stop
+else ([Sudah / Ya])
+  :Mengurutkan transaksi berdasarkan waktu terbaru;
+  :Menampilkan daftar transaksi secara rinci;
+  stop
+endif
+@enduml

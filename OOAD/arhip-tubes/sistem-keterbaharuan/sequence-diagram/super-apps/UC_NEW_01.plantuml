@@ -1,0 +1,43 @@
+@startuml
+autonumber
+skinparam style strictuml
+
+actor Pelanggan
+boundary "Halaman Booster" as Form
+control "Control Pembelian" as Ctrl
+entity "Database C-Pay" as DB
+boundary "API Jaringan (NOC)" as NOC
+
+activate Pelanggan
+Pelanggan -> Form: Memilih paket & Mengonfirmasi pembelian
+activate Form
+Form -> Ctrl: Mengirim request pembelian paket
+activate Ctrl
+Ctrl -> DB: Meminta data saldo pelanggan saat ini
+activate DB
+DB --> Ctrl: Mengembalikan nominal saldo
+deactivate DB
+Ctrl -> Ctrl: Mengecek ketersediaan saldo
+
+alt [Saldo Tidak Mencukupi (Exception 4E)]
+    Ctrl --> Form: Mengembalikan status error (Saldo Kurang)
+    Form --> Pelanggan: Menampilkan pesan batal & anjuran Top Up
+else [Saldo Mencukupi]
+    Ctrl -> DB: Memotong saldo sesuai harga paket
+    activate DB
+    DB --> Ctrl: Konfirmasi pemotongan sukses
+    deactivate DB
+    
+    Ctrl -> NOC: POST request penambahan bandwidth
+    activate NOC
+    NOC --> Ctrl: Mengembalikan response sukses
+    deactivate NOC
+    
+    Ctrl --> Form: Mengirim data resi pembelian
+    Form --> Pelanggan: Menampilkan bukti pembelian berhasil
+end
+
+deactivate Ctrl
+deactivate Form
+deactivate Pelanggan
+@enduml

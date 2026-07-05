@@ -1,0 +1,42 @@
+@startuml
+autonumber
+skinparam style strictuml
+
+actor Pelanggan
+boundary "Form Pengaduan" as Form
+control "Control Layanan" as Ctrl
+entity "Database Tiket" as DB
+boundary "API Sistem Operasional" as API_CS
+
+activate Pelanggan
+Pelanggan -> Form: Membuka menu "Lapor Gangguan"
+activate Form
+Pelanggan -> Form: Mengisi formulir & Melampirkan foto
+Pelanggan -> Form: Menekan tombol "Kirim Laporan"
+Form -> Ctrl: Mengirim data keluhan
+activate Ctrl
+Ctrl -> Ctrl: Memvalidasi kelengkapan form (wajib isi)
+
+alt [Data Wajib Belum Lengkap (Exception 4E)]
+    Ctrl --> Form: Mengembalikan peringatan validasi
+    Form --> Pelanggan: Meminta pelanggan melengkapi formulir
+    Pelanggan -> Form: Melengkapi data form
+else [Data Lengkap]
+    Ctrl -> DB: Membuat Trouble Ticket baru
+    activate DB
+    DB --> Ctrl: Mengembalikan ID Tiket (Resi)
+    deactivate DB
+    
+    Ctrl -> API_CS: Meneruskan data tiket ke Dashboard CS
+    activate API_CS
+    API_CS --> Ctrl: Konfirmasi tiket diterima antrean
+    deactivate API_CS
+    
+    Ctrl --> Form: Mengirim nomor pelacakan tiket
+    Form --> Pelanggan: Menampilkan nomor tiket kepada pelanggan
+end
+
+deactivate Ctrl
+deactivate Form
+deactivate Pelanggan
+@enduml

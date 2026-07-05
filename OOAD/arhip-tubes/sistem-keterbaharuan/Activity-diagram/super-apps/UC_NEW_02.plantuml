@@ -1,0 +1,75 @@
+@startuml
+title Activity Diagram: Membeli Paket Tambahan (Speed Booster)
+|Pelanggan|
+start
+:Memilih menu "Speed Booster";
+:Memilih paket kecepatan & Mengonfirmasi pembelian;
+|Sistem Super Apps|
+:Memeriksa ketersediaan saldo C-Pay;
+if (Apakah saldo mencukupi?) then ([Tidak])
+  :Menampilkan peringatan saldo kurang;
+  stop
+else ([Ya])
+  :Memotong saldo C-Pay;
+  :Mengirim instruksi API ke Sistem Jaringan;
+  :Menampilkan bukti pembelian sukses;
+  stop
+endif
+@enduml
+
+@startuml
+title Activity Diagram: Melaporkan Gangguan Layanan
+|Pelanggan|
+start
+:Membuka menu "Lapor Gangguan";
+:Mengisi form keluhan & melampirkan bukti foto;
+:Menekan "Kirim Laporan";
+|Sistem Super Apps|
+:Memvalidasi data form;
+if (Data lengkap?) then ([Tidak])
+  :Meminta pelanggan melengkapi data;
+  stop
+else ([Ya])
+  :Membuat nomor Trouble Ticket (TT);
+  :Meneruskan tiket ke Sistem Operasional (CS);
+  :Menampilkan resi pelacakan tiket;
+  stop
+endif
+@enduml
+
+@startuml
+title Activity Diagram: Melihat Riwayat Transaksi
+|Pelanggan|
+start
+:Memilih menu "Riwayat Transaksi";
+|Sistem Super Apps|
+:Menarik data transaksi C-Pay dari database;
+if (Apakah ada transaksi?) then ([Tidak (Alternate 2A)])
+  :Menampilkan layar "Belum ada transaksi";
+  stop
+else ([Ya])
+  :Mengurutkan dari yang paling baru;
+  :Menampilkan daftar transaksi;
+  stop
+endif
+@enduml
+
+@startuml
+title Activity Diagram: Mengelola Promo Hotel
+|Divisi Walanja|
+start
+:Masuk ke modul "Promo Hotel";
+:Memasukkan kode promo, diskon, dan masa berlaku;
+:Menekan "Publikasikan";
+|Sistem Super Apps|
+:Memvalidasi data inputan (terutama masa berlaku);
+if (Tanggal kedaluwarsa di masa lalu?) then ([Ya (Exceptional 4E)])
+  :Menampilkan error validasi waktu;
+  :Menolak publikasi promo;
+  stop
+else ([Tidak / Valid])
+  :Menyimpan data campaign promo;
+  :Memunculkan promo di beranda Pelanggan;
+  stop
+endif
+@enduml

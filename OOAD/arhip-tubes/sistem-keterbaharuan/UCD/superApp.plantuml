@@ -1,0 +1,45 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor Pelanggan
+actor "Divisi Walanja" as DivisiWalanja
+actor "Customer Service" as CS
+
+rectangle "Cifo Super Apps (Sistem Usulan)" {
+    
+    ' Fitur Transaksi & Pembayaran (Exist + New)
+    usecase "Melakukan Top Up Saldo C-Pay" as UC_TopUp
+    usecase "Membayar Tagihan Internet" as UC_BayarInternet
+    usecase "Memesan Kamar Hotel" as UC_PesanHotel
+    usecase "Membeli Paket Tambahan (Speed Booster)" as UC_BeliAddon
+
+    ' Fitur Layanan Mandiri (Self-Service)
+    usecase "Melihat Riwayat Transaksi" as UC_Riwayat
+    usecase "Melaporkan Gangguan Layanan" as UC_LaporGangguan
+    
+    ' Fitur Back-Office (Exist + New)
+    usecase "Mengelola Ketersediaan Kamar" as UC_KelolaKamar
+    usecase "Mengelola Promo & Diskon Hotel" as UC_KelolaPromo
+    
+    ' Relasi Extend Pembayaran
+    UC_TopUp .up.> UC_BayarInternet : <<extend>>
+    UC_TopUp .up.> UC_PesanHotel : <<extend>>
+    UC_TopUp .up.> UC_BeliAddon : <<extend>>
+}
+
+' Garis Interaksi Pelanggan
+Pelanggan -- UC_BayarInternet
+Pelanggan -- UC_PesanHotel
+Pelanggan -- UC_BeliAddon
+Pelanggan -- UC_Riwayat
+Pelanggan -- UC_LaporGangguan
+
+' Garis Interaksi Divisi Walanja
+DivisiWalanja -- UC_KelolaKamar
+DivisiWalanja -- UC_KelolaPromo
+
+' Garis Interaksi CS (Integrasi Ekosistem)
+CS -- UC_LaporGangguan
+
+@enduml

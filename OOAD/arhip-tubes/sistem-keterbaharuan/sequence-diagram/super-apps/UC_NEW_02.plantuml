@@ -1,0 +1,32 @@
+@startuml
+autonumber
+skinparam style strictuml
+
+actor Pelanggan
+boundary "Menu Riwayat" as Form
+control "Control Transaksi" as Ctrl
+entity "Database Transaksi" as DB
+
+activate Pelanggan
+Pelanggan -> Form: Membuka menu riwayat transaksi
+activate Form
+Form -> Ctrl: Meminta rekapan data mutasi
+activate Ctrl
+Ctrl -> DB: Menarik data log transaksi C-Pay
+activate DB
+DB --> Ctrl: Mengembalikan array data transaksi
+deactivate DB
+
+alt [Pelanggan Belum Memiliki Transaksi (Alternate 2A)]
+    Ctrl --> Form: Mengembalikan data kosong (Null)
+    Form --> Pelanggan: Menampilkan halaman "Belum ada transaksi"
+else [Sudah Ada Transaksi / Ya]
+    Ctrl -> Ctrl: Mengurutkan transaksi berdasarkan waktu terbaru
+    Ctrl --> Form: Meneruskan daftar transaksi yang sudah terurut
+    Form --> Pelanggan: Menampilkan daftar transaksi secara rinci
+end
+
+deactivate Ctrl
+deactivate Form
+deactivate Pelanggan
+@enduml

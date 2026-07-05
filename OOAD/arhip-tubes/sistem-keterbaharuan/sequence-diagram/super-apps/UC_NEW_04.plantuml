@@ -1,0 +1,38 @@
+@startuml
+autonumber
+skinparam style strictuml
+
+actor "Divisi Walanja" as Walanja
+boundary "Modul Promo" as Form
+control "Control Hotel" as Ctrl
+entity "Database Promo" as DB
+
+activate Walanja
+Walanja -> Form: Membuka modul "Promo Hotel"
+activate Form
+Walanja -> Form: Memasukkan kode promo, diskon, dan masa berlaku
+Walanja -> Form: Menekan tombol "Publikasikan"
+Form -> Ctrl: Mengirim data campaign promo
+activate Ctrl
+Ctrl -> Ctrl: Memvalidasi tanggal kedaluwarsa & nilai diskon
+
+alt [Masa Berlaku di Masa Lalu (Exception 4E)]
+    Ctrl --> Form: Menolak validasi waktu
+    Form --> Walanja: Menampilkan pesan kesalahan & Batal publikasi
+else [Format Tanggal Valid]
+    Ctrl -> DB: Menyimpan data promo baru
+    activate DB
+    DB --> Ctrl: Konfirmasi penyimpanan berhasil
+    deactivate DB
+    Ctrl -> DB: Set status promo = Aktif (Tampil di dashboard Pelanggan)
+    activate DB
+    DB --> Ctrl: Status ter-update
+    deactivate DB
+    Ctrl --> Form: Konfirmasi publikasi sukses
+    Form --> Walanja: Menampilkan notifikasi promo berhasil mengudara
+end
+
+deactivate Ctrl
+deactivate Form
+deactivate Walanja
+@enduml

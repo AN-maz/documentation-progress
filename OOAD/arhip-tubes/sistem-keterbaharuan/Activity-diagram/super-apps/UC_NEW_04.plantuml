@@ -1,0 +1,20 @@
+@startuml
+|Divisi Walanja|
+start
+:Membuka modul "Promo Hotel";
+:Memasukkan kode promo, nilai diskon, dan masa berlaku;
+:Menekan tombol "Publikasikan";
+
+|Sistem Cifo Super Apps|
+:Memvalidasi tanggal dan nilai diskon;
+
+if (Apakah masa berlaku berada di tanggal yang telah lewat?) then ([Ya (Exceptional 4E)])
+  :Menampilkan pesan kesalahan;
+  :Membatalkan publikasi promo;
+  stop
+else ([Tidak / Valid])
+  :Menyimpan data promo;
+  :Mengaktifkan promo agar tampil\npada dashboard pelanggan;
+  stop
+endif
+@enduml
