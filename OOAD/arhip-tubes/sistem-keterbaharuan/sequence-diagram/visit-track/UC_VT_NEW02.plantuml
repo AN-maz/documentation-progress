@@ -1,0 +1,49 @@
+@startuml
+autonumber
+skinparam style strictuml
+
+actor Sales
+boundary "Pop-up Kalender" as Form
+control "Control Jadwal" as Ctrl
+entity "Database Kalender" as DB
+
+activate Sales
+Ctrl -> Form: Memicu form penjadwalan (Extend)
+activate Ctrl
+activate Form
+Form --> Sales: Menampilkan pop-up kalender otomatis
+deactivate Ctrl
+
+Sales -> Form: Memilih tanggal, jam, dan mengisi catatan
+Sales -> Form: Menekan tombol "Simpan Jadwal"
+Form -> Ctrl: Mengirim request simpan jadwal
+activate Ctrl
+
+Ctrl -> DB: Memvalidasi ketersediaan waktu (cek bentrok)
+activate DB
+DB --> Ctrl: Mengembalikan status ketersediaan
+deactivate DB
+
+alt [Jadwal Bertabrakan (Exception 2E)]
+    Ctrl --> Form: Mengembalikan peringatan jadwal bentrok
+    Form --> Sales: Menyarankan pemilihan slot waktu kosong
+    Sales -> Form: Melakukan penyesuaian tanggal dan jam
+else [Jadwal Kosong / Valid]
+    Ctrl -> DB: Menyimpan jadwal ke database aktivitas
+    activate DB
+    DB --> Ctrl: Konfirmasi penyimpanan
+    deactivate DB
+    
+    Ctrl -> DB: Mengaktifkan antrean push reminder
+    activate DB
+    DB --> Ctrl: Antrean jadwal diset
+    deactivate DB
+    
+    Ctrl --> Form: Status penjadwalan berhasil
+    Form --> Sales: Menampilkan notifikasi sukses dijadwalkan
+end
+
+deactivate Ctrl
+deactivate Form
+deactivate Sales
+@enduml

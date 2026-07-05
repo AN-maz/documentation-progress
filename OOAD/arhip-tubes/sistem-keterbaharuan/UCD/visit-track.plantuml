@@ -1,0 +1,43 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor Sales
+actor "Calon Pelanggan" as CalonPelanggan
+
+' Menambahkan aktor sistem eksternal untuk menunjukkan integrasi
+actor "Sistem Operasional\n<<External System>>" as SysOp
+
+rectangle "Sistem VisitTrack (Sistem Usulan)" {
+
+    ' Fitur Eksisting
+    usecase "Mencatat Koordinat Lokasi Kunjungan" as UC_Koordinat
+    usecase "Mencatat Data Prospek Pelanggan\n(Status & Keluhan)" as UC_DataProspek
+    usecase "Mengajukan Eskalasi Pemasangan" as UC_Eskalasi
+
+    ' Fitur Keterbaharuan (Usulan)
+    usecase "Mengecek Cakupan Jaringan (ODP)" as UC_CekCoverage
+    usecase "Mengatur Jadwal Kunjungan Ulang" as UC_FollowUp
+    usecase "Melihat Dashboard Performa Harian" as UC_Dashboard
+
+    ' Relasi Extend (Pemicu dari status prospek tertentu)
+    UC_Eskalasi .up.> UC_DataProspek : <<extend>>\n[Status: Hot]
+    UC_FollowUp .up.> UC_DataProspek : <<extend>>\n[Status: Warm/Pikir-pikir]
+}
+
+' Garis Interaksi Utama Sales
+Sales -- UC_Koordinat
+Sales -- UC_DataProspek
+Sales -- UC_CekCoverage
+Sales -- UC_Dashboard
+
+' Interaksi Calon Pelanggan
+CalonPelanggan -- UC_DataProspek
+
+' Garis Integrasi ke Sistem Operasional Pusat
+UC_CekCoverage -- SysOp
+UC_Eskalasi -- SysOp
+
+@enduml
+
+ 

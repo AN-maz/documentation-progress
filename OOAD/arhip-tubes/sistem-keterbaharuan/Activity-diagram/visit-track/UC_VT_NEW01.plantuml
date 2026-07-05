@@ -1,0 +1,30 @@
+@startuml
+|Sales|
+start
+:Membuka menu Cek Coverage pada aplikasi;
+:Menekan tombol "Gunakan Lokasi Saat Ini"\natau memasukkan titik koordinat;
+
+|Sistem VisitTrack|
+:Mengirim request API ke Sistem Operasional;
+
+if (Apakah koneksi API berhasil?) then ([Tidak / Timeout (Exceptional 3E)])
+  :Menampilkan pesan peringatan gangguan koneksi;
+  |Sales|
+  :Diminta mencoba kembali beberapa saat lagi;
+  stop
+else ([Ya])
+  |Sistem VisitTrack|
+  :Memverifikasi tiang ODP terdekat dan sisa port;
+  
+  if (Apakah port ODP tersedia?) then ([Tidak / Penuh (Alternate 5A)])
+    :Menampilkan status "Penuh" atau "Belum Terjangkau";
+    :Memberikan rekomendasi untuk mendata prospek\nke dalam daftar tunggu (Demand Area);
+    stop
+  else ([Ya / Tersedia])
+    :Menampilkan status "Jaringan Tersedia"\nbeserta estimasi jarak tarik kabel;
+    |Sales|
+    :Melanjutkan proses penawaran kepada pelanggan;
+    stop
+  endif
+endif
+@enduml

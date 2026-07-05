@@ -1,0 +1,41 @@
+@startuml
+autonumber
+skinparam style strictuml
+
+actor Sales
+boundary "Menu Cek Coverage" as Form
+control "Control Coverage" as Ctrl
+entity "API Sistem Operasional" as API
+
+activate Sales
+Sales -> Form: Membuka menu & menentukan titik lokasi
+activate Form
+Form -> Ctrl: Mengirim data koordinat pelanggan
+activate Ctrl
+
+Ctrl -> API: Request cek ketersediaan ODP terdekat
+activate API
+
+alt [Koneksi Timeout / Gangguan (Exception 3E)]
+    API --> Ctrl: Response Timeout / Error
+    Ctrl --> Form: Mengembalikan pesan kegagalan koneksi
+    Form --> Sales: Menampilkan peringatan gangguan & anjuran coba lagi
+else [Koneksi API Berhasil]
+    API --> Ctrl: Mengembalikan data ODP & sisa port
+    
+    alt [Port Penuh / Belum Terjangkau (Alternate 5A)]
+        Ctrl --> Form: Mengirim status "Penuh / Tidak Terjangkau"
+        Form --> Sales: Menampilkan status jaringan penuh
+        Form --> Sales: Memberi saran mendata ke Demand Area
+    else [Port Tersedia / Ya]
+        Ctrl --> Form: Mengirim status "Tersedia" & estimasi jarak
+        Form --> Sales: Menampilkan status "Jaringan Tersedia"
+        Sales -> Form: Melanjutkan proses penawaran ke pelanggan
+    end
+end
+
+deactivate API
+deactivate Ctrl
+deactivate Form
+deactivate Sales
+@enduml

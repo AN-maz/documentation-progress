@@ -1,0 +1,97 @@
+@startuml
+skinparam style strictuml
+skinparam classAttributeIconSize 0
+
+' ==========================================
+' AKTOR / PENGGUNA
+' ==========================================
+class Sales {
+  - idSales: String
+  - namaLengkap: String
+  - areaTugas: String
+  - targetBulanan: int
+  + catatKoordinat(): void
+  + lihatDashboardPerforma(): void
+}
+
+class CalonPelanggan {
+  - idPelanggan: String
+  - namaLengkap: String
+  - alamat: String
+  - noKontak: String
+  + sampaikanKondisi(): String
+}
+
+' ==========================================
+' ENTITAS TRANSAKSIONAL (PROSPEK & TIKET)
+' ==========================================
+class DataProspek {
+  - idProspek: String
+  - waktuKunjungan: Date
+  - koordinatGPS: String
+  - catatanKeluhan: String
+  - kategoriStatus: String
+  + simpanDataProspek(): boolean
+  + tentukanLangkahLanjutan(): void
+}
+
+class TiketEskalasi {
+  - idTiket: String
+  - prioritas: String
+  - tanggalEskalasi: Date
+  - statusKirim: String
+  + teruskanKeSistemOperasional(): boolean
+}
+
+' ==========================================
+' ENTITAS KETERBAHARUAN (USULAN BARU)
+' ==========================================
+class CakupanODP {
+  - kodeODP: String
+  - koordinatTiang: String
+  - sisaPort: int
+  - estimasiJarakMeter: double
+  - isTersedia: boolean
+  + requestApiOperasional(): boolean
+  + hitungJarakTarikKabel(): double
+}
+
+class JadwalKunjungan {
+  - idJadwal: String
+  - tanggalKunjungan: Date
+  - jamKunjungan: Time
+  - catatanKhusus: String
+  - statusReminder: String
+  + aktifkanPushNotification(): void
+}
+
+class PerformaHarian {
+  - idRekap: String
+  - tanggalRekap: Date
+  - totalKunjungan: int
+  - jumlahClosing: int
+  - sisaTarget: int
+  - closingRate: double
+  + kalkulasiMetrikKPI(): void
+  + generateGrafik(): String
+}
+
+' ==========================================
+' RELATIONSHIPS & MULTIPLICITY
+' ==========================================
+
+' Relasi Utama Pencatatan
+Sales "1" -- "0..*" DataProspek : mencatat >
+CalonPelanggan "1" -- "1..*" DataProspek : memiliki >
+
+' Relasi dari Status Prospek (Hot, Warm, Reguler)
+DataProspek "1" -- "0..1" TiketEskalasi : menghasilkan (jika Hot) >
+DataProspek "1" -- "0..1" JadwalKunjungan : menjadwalkan ulang (jika Warm) >
+
+' Relasi Fitur Keterbaharuan
+Sales "1" -- "1" PerformaHarian : memantau >
+DataProspek "0..*" -- "1" PerformaHarian : berkontribusi pada >
+
+CalonPelanggan "1" -- "0..1" CakupanODP : dicek areanya >
+
+@enduml

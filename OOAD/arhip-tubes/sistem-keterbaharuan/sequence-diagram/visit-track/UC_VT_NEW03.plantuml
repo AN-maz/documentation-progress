@@ -1,0 +1,40 @@
+@startuml
+autonumber
+skinparam style strictuml
+
+actor Sales
+boundary "Dashboard Performa" as Form
+control "Control Analitik" as Ctrl
+entity "Database VisitTrack" as DB
+
+activate Sales
+Sales -> Form: Menekan menu "Dashboard Performa"
+activate Form
+Form -> Ctrl: Meminta data metrik kinerja harian
+activate Ctrl
+
+Ctrl -> Ctrl: Mengecek stabilitas koneksi internet perangkat
+
+alt [Koneksi Tidak Stabil / Offline (Exception 2E)]
+    Ctrl -> DB: Menarik data cache lokal terakhir
+    activate DB
+    DB --> Ctrl: Mengembalikan data cache
+    deactivate DB
+    Ctrl --> Form: Mengirim versi cache & flag peringatan
+    Form --> Sales: Menampilkan versi cache & memunculkan banner offline
+else [Koneksi Stabil / Online]
+    Ctrl -> DB: Mengambil histori kunjungan & transaksi closing
+    activate DB
+    DB --> Ctrl: Mengembalikan data terbaru
+    deactivate DB
+    
+    Ctrl -> Ctrl: Melakukan kalkulasi persentase KPI (Sisa Target)
+    
+    Ctrl --> Form: Mengirim data analitik dan grafik terbaru
+    Form --> Sales: Menampilkan grafik interaktif dan metrik kinerja
+end
+
+deactivate Ctrl
+deactivate Form
+deactivate Sales
+@enduml

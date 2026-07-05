@@ -1,0 +1,26 @@
+@startuml
+|Sistem VisitTrack|
+start
+:Menampilkan pop-up kalender penjadwalan otomatis;
+
+|Sales|
+:Memilih tanggal dan jam untuk kunjungan ulang;
+:Menambahkan catatan spesifik (Opsional);
+:Menekan tombol "Simpan Jadwal";
+
+|Sistem VisitTrack|
+:Memvalidasi ketersediaan jadwal pada kalender;
+
+if (Apakah jadwal bertabrakan dengan jadwal lain?) then ([Ya (Exceptional 2E)])
+  :Memberi peringatan jadwal bentrok;
+  :Menyarankan pemilihan slot waktu yang kosong;
+  |Sales|
+  :Melakukan penyesuaian tanggal dan jam ulang;
+  stop
+else ([Tidak / Kosong])
+  |Sistem VisitTrack|
+  :Menyimpan jadwal ke dalam database kalender;
+  :Mengaktifkan antrean pengiriman push reminder\nuntuk hari yang dijadwalkan;
+  stop
+endif
+@enduml

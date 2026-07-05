@@ -1,0 +1,19 @@
+@startuml
+|Sales|
+start
+:Menekan menu "Dashboard Performa";
+
+|Sistem VisitTrack|
+:Mengecek stabilitas koneksi internet perangkat;
+
+if (Apakah koneksi internet stabil?) then ([Tidak (Exceptional 2E)])
+  :Menampilkan antarmuka dashboard versi cache;
+  :Memunculkan banner peringatan offline;
+  stop
+else ([Ya])
+  :Mengambil data histori kunjungan dan transaksi\nclosing dari database;
+  :Melakukan kalkulasi persentase pencapaian\nterhadap target KPI;
+  :Menampilkan grafik interaktif dan metrik\nkinerja (Sisa target harian);
+  stop
+endif
+@enduml
