@@ -1,0 +1,62 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor Teknisi
+actor Logistik
+actor Finance
+actor NOC
+
+' Kembalikan struktur CS yang detail
+actor "Customer Service" as CS
+actor "CS Care" as CSCare
+actor "CS Support" as CSSupport
+
+CS <|-- CSCare
+CS <|-- CSSupport
+
+actor Pelanggan
+
+rectangle "Sistem Operasional Terintegrasi Cifo (Sistem Usulan)" {
+
+    ' --- Fitur Core (Dipertahankan & Ditingkatkan) ---
+    usecase "Mengecek Ketersediaan Jaringan (ODP)" as UC_CekJaringan
+    usecase "Melakukan Instalasi Fisik" as UC_Instalasi
+    usecase "Mengaktifkan Akses Internet" as UC_Aktivasi
+
+    ' --- Fitur Keterbaharuan (Usulan Baru) ---
+    usecase "Auto-Request Pembelian Barang" as UC_AutoBeli
+    usecase "Scan QR Barang (Inventory Out)" as UC_ScanQR
+    usecase "Manajemen Tiket Gangguan (Proaktif)" as UC_TiketProaktif
+    usecase "Audit Keuangan Otomatis" as UC_AuditOtomatis
+    
+    ' --- Fungsi Pendukung ---
+    usecase "Mengakses Data Pelanggan" as UC_AksesData 
+    usecase "Menangani Keluhan Umum" as UC_Komplain
+    usecase "Memberikan Bantuan Teknis" as UC_Bantuan
+    
+    ' Relasi Tambahan
+    UC_TiketProaktif ..> UC_AksesData : <<include>>
+}
+
+' Garis Interaksi (Tegas & Detail)
+Teknisi -- UC_CekJaringan
+Teknisi -- UC_Instalasi
+Teknisi -- UC_ScanQR
+
+Logistik -- UC_AutoBeli
+Logistik -- UC_ScanQR
+
+Finance -- UC_AuditOtomatis
+
+NOC -- UC_Aktivasi
+
+' Garis Interaksi CS yang detail
+CS -- UC_AksesData
+CSCare -- UC_Komplain
+CSSupport -- UC_Bantuan
+CS -- UC_TiketProaktif
+
+Pelanggan -- UC_TiketProaktif
+
+@enduml
