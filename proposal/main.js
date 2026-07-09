@@ -61,11 +61,6 @@ proposalContent.forEach((sectionData) => {
     };
 
     const allCategories = sectionData.content.categories;
-
-    // PEMBAGIAN HALAMAN MANUAL YANG IDEAL UNTUK A4:
-    // Halaman 1: Sekretaris (1 item) & Show Director (7 item)
-    // Halaman 2: Logging (22 item - Hampir 1 full page)
-    // Halaman 3: Art Director (3 item), Consumption (5 item) + Bagian Grand Total
     const chunks = [
       [allCategories[0], allCategories[1]],
       [allCategories[2]],
@@ -89,7 +84,14 @@ proposalContent.forEach((sectionData) => {
       htmlRender += PageLayout(RundownComponent(chunk), currentPage);
       currentPage++;
     }
-  } else {
+  } else if (sectionData.id === "pengesahan") {
+    const ComponentToRender = componentRegistry[sectionData.id];
+    // Render LANGSUNG tanpa dibungkus PageLayout
+    htmlRender += ComponentToRender(); 
+    // Tetap hitung halamannya agar penomoran bab selanjutnya (jika ada) tidak kacau
+    currentPage++; 
+    
+  }else {
     const ComponentToRender =
       componentRegistry[sectionData.id] || SectionComponent;
     const sectionHTML = ComponentToRender(sectionData);

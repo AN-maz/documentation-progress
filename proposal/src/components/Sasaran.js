@@ -2,7 +2,7 @@ export const SasaranComponent = (data) => {
   const listItems = data.content || [];
   
   // Persentase target audiens berdasarkan referensi PDF Anda
-  const percentages = [40, 30, 20, 10]; 
+  const percentages = [40, 25, 25, 10]; 
   
   let barsHTML = '';
 

@@ -1,18 +1,14 @@
 export const ProfilPemateriComponent = (data) => {
-  const { nama, asal, deskripsi, pencapaian } = data.content;
+  const { nama, asal, deskripsi, pencapaian, foto } = data.content;
 
   let listHTML = "";
   pencapaian.forEach((item, index) => {
-    // Ornamen bentuk bergantian
-    const shape =
-      index % 2 === 0 ? "rounded-full" : "rounded-none transform rotate-45";
-
     listHTML += `
-      <div class="flex items-start gap-4 mb-4 group">
-        <div class="mt-1 w-6 h-6 bg-[var(--color-ec-red)] border-2 border-[var(--color-ec-blue)] flex items-center justify-center shrink-0 ${shape} transition-transform group-hover:scale-125">
-          <div class="w-2 h-2 bg-white ${index % 2 !== 0 ? "transform -rotate-45" : ""}"></div>
+      <div class="flex items-start gap-2 bg-white border-2 border-[var(--color-ec-blue)] p-2.5 shadow-[3px_3px_0px_0px_var(--color-ec-red)] hover:-translate-y-1 hover:shadow-[5px_5px_0px_0px_var(--color-ec-red)] transition-all h-full">
+        <div class="w-7 h-7 bg-[var(--color-ec-blue)] text-white font-black flex items-center justify-center shrink-0 border border-black shadow-[2px_2px_0px_0px_white]">
+          ${index + 1}
         </div>
-        <p class="text-[14px] text-gray-700 leading-relaxed font-medium m-0 flex-1">
+        <p class="text-[11px] md:text-[12px] text-gray-800 leading-snug font-bold m-0 text-left flex-1">
           ${item}
         </p>
       </div>
@@ -20,10 +16,10 @@ export const ProfilPemateriComponent = (data) => {
   });
 
   return /*html*/`
-    <div class="relative w-full h-full flex flex-col pt-4">
+    <div class="relative w-full max-w-[750px] mx-auto bg-white flex flex-col py-6 px-8 items-center justify-center text-center overflow-hidden box-border shadow-xl aspect-[1/1.414] print:shadow-none print:w-[210mm] print:h-[297mm] print:aspect-auto">
       
-      <div class="absolute top-10 right-0 z-0 opacity-40">
-        <svg width="120" height="120" viewBox="0 0 100 100">
+      <div class="absolute top-6 left-6 z-0 opacity-30">
+        <svg width="100" height="100" viewBox="0 0 100 100">
           <defs>
             <pattern id="dots-pemateri" x="0" y="0" width="15" height="15" patternUnits="userSpaceOnUse">
               <circle cx="3" cy="3" r="3" fill="var(--color-ec-blue)"/>
@@ -33,54 +29,64 @@ export const ProfilPemateriComponent = (data) => {
         </svg>
       </div>
 
-      <div class="absolute bottom-10 left-[-20px] z-0 opacity-60">
+      <div class="absolute bottom-8 right-6 z-0 opacity-40">
          <svg width="80" height="80" viewBox="0 0 100 100">
-           <polygon points="50,10 90,90 10,90" fill="none" stroke="var(--color-ec-red)" stroke-width="6"/>
+           <polygon points="50,10 90,90 10,90" fill="none" stroke="var(--color-ec-red)" stroke-width="8"/>
          </svg>
       </div>
-
-      <div class="mb-12 relative z-10">
-        <div class="flex items-center gap-2 mb-3">
-          <div class="w-6 h-6 bg-[var(--color-ec-blue)] rounded-none border-2 border-[var(--color-ec-red)] flex items-center justify-center transform rotate-45">
-             <div class="w-2 h-2 bg-white rounded-none"></div>
-          </div>
-          <span class="font-bold text-sm text-[var(--color-ec-red)] uppercase tracking-widest">Guest Speaker</span>
-        </div>
-        
-        <h1 class="font-['Playfair_Display',_serif] text-[48px] font-black text-[var(--color-ec-blue)] m-0 leading-none">
-          Profil Pemateri
-        </h1>
+      
+      <div class="absolute top-1/4 right-6 z-0 opacity-80 animate-pulse">
+        <svg width="35" height="35" viewBox="0 0 24 24" fill="var(--color-ec-red)">
+          <path d="M12 0l2.5 8.5H24l-7.5 5.5 2.5 8.5-7.5-5.5-7.5 5.5 2.5-8.5-7.5-5.5h9.5z" stroke="var(--color-ec-blue)" stroke-width="1.5"/>
+        </svg>
       </div>
 
-      <div class="relative z-10 w-[95%] mx-auto flex gap-10 items-start">
-        
-        <div class="w-[220px] shrink-0 relative group">
-          <div class="absolute top-4 left-4 w-full h-[280px] bg-[var(--color-ec-red)] border-4 border-[var(--color-ec-blue)]"></div>
-          <div class="relative w-full h-[280px] bg-gray-200 border-4 border-[var(--color-ec-blue)] overflow-hidden transition-transform group-hover:-translate-y-2 group-hover:-translate-x-2 bg-white flex items-center justify-center">
-            
-            <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?q=80&w=600&auto=format&fit=crop" alt="Foto Pemateri" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
-            
-            <svg class="absolute w-20 h-20 text-gray-400 opacity-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-          </div>
+      <div class="mb-3 relative z-10 flex flex-col items-center">
         </div>
+      <h1 class="relative z-10 font-['Playfair_Display',_serif] text-[36px] md:text-[40px] font-black text-[var(--color-ec-blue)] m-0 mb-4 leading-none">
+        Profil Pemateri
+      </h1>
 
-        <div class="flex-1">
-          <div class="mb-6 border-b-4 border-[var(--color-ec-blue)] pb-4 inline-block pr-10">
-            <h2 class="font-black text-3xl text-[var(--color-ec-blue)] m-0 leading-tight">${nama}</h2>
-            <p class="font-bold text-[16px] text-[var(--color-ec-red)] tracking-widest uppercase m-0 mt-1">${asal}</p>
-          </div>
+      <div class="relative z-10 mb-4">
+         <div class="inline-block transform rotate-2">
+           <div class="w-32 h-44 md:w-36 md:h-48 bg-gray-200 border-4 border-[var(--color-ec-blue)] shadow-[6px_6px_0px_0px_var(--color-ec-red)] flex items-center justify-center overflow-hidden">
+             <img src="./public/pemateri1.jpg" alt="${nama}" class="w-full h-full object-cover object-top" onerror="this.style.display='none'" />
+           </div>
+         </div>
+      </div>
 
-          <div class="bg-[#f2f7fb] border-l-8 border-[var(--color-ec-blue)] p-5 mb-8 text-justify">
-            <p class="m-0 text-[14px] text-gray-800 leading-relaxed font-medium">
-              ${deskripsi}
+      <div class="relative z-10 w-[90%] mx-auto mb-5">
+        <div class="bg-[var(--color-ec-red)] border-[3px] border-[var(--color-ec-blue)] shadow-[6px_6px_0px_0px_var(--color-ec-blue)] py-2.5 px-4 transform -rotate-1 inline-block w-full">
+          <h2 class="font-black text-[20px] md:text-[24px] text-white m-0 leading-tight uppercase tracking-wide">
+            ${nama}
+          </h2>
+          <div class="mt-2 inline-block bg-white px-3 py-1 border-2 border-[var(--color-ec-blue)]">
+            <p class="font-black text-[11px] md:text-[12px] text-[var(--color-ec-red)] tracking-widest uppercase m-0">
+              ${asal}
             </p>
           </div>
-
-          <div class="flex flex-col">
-            ${listHTML}
-          </div>
         </div>
+      </div>
 
+      <div class="relative z-10 w-[95%] mx-auto mb-6">
+        <div class="bg-[#fcfaf5] border-[3px] border-[var(--color-ec-blue)] p-3 md:p-4 shadow-[5px_5px_0px_0px_var(--color-ec-red)] relative">
+          <span class="absolute -top-5 -left-2 text-4xl md:text-5xl text-[var(--color-ec-red)] font-serif block transform -rotate-12 leading-none">"</span>
+          <p class="m-0 text-[12px] md:text-[13px] text-gray-800 leading-relaxed font-bold text-center px-1">
+            ${deskripsi}
+          </p>
+          <span class="absolute -bottom-6 -right-2 text-4xl md:text-5xl text-[var(--color-ec-red)] font-serif block transform rotate-180 leading-none">"</span>
+        </div>
+      </div>
+
+      <div class="relative z-10 w-[98%] mx-auto">
+        <div class="mb-3 text-center">
+          <span class="bg-[var(--color-ec-blue)] text-white font-black px-4 py-1.5 text-[11px] md:text-[12px] uppercase tracking-widest border-2 border-[var(--color-ec-red)] inline-block">
+            Highlights & Pencapaian
+          </span>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-left">
+          ${listHTML}
+        </div>
       </div>
 
     </div>

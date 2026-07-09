@@ -3,7 +3,7 @@ export const DeskripsiComponent = (data) => {
   // agar tidak menumpuk dalam satu elemen HTML.
   const contentText = data.content || "Konten belum tersedia.";
 
-  return `
+  return /*html*/`
     <div class="relative w-full h-full flex flex-col pt-4">
       
       <div class="absolute top-0 right-4 z-0 opacity-80">
@@ -41,7 +41,7 @@ export const DeskripsiComponent = (data) => {
         <div class="bg-white border-4 border-[var(--color-ec-blue)] p-6 shadow-[10px_10px_0px_0px_var(--color-ec-red)] mb-10 transition-transform hover:-translate-y-1 hover:-translate-x-1 hover:shadow-[14px_14px_0px_0px_var(--color-ec-red)]">
           <p class="text-[15px] text-gray-800 leading-relaxed text-justify m-0 font-medium">
             <span class="text-xl font-black text-[var(--color-ec-blue)] float-left text-5xl leading-[0.8] mr-2 mt-1">T</span>
-            OEFL Crash Course: "..." merupakan program pelatihan singkat yang diselenggarakan oleh English Club Universitas Teknologi Bandung untuk membantu mahasiswa dalam memahami format tes TOEFL, meningkatkan keterampilan bahasa Inggris akademik, serta menguasai strategi mengerjakan soal secara efektif.
+            OEFL Crash Course: "English Club TOEFL Fest: Let's Crack It Together" merupakan program pelatihan singkat yang diselenggarakan oleh English Club Universitas Teknologi Bandung untuk membantu mahasiswa dalam memahami format tes TOEFL, meningkatkan keterampilan bahasa Inggris akademik, serta menguasai strategi mengerjakan soal secara efektif.
           </p>
         </div>
 

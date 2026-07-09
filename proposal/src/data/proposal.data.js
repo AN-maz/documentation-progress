@@ -50,9 +50,9 @@ export const proposalContent = [
     title: "Sasaran Audiens",
     isList: true,
     content: [
+      "Mahasiswa tingkat akhir",
       "Anggota English Club UTB",
       "Mahasiswa tingkat awal dan menengah",
-      "Mahasiswa tingkat akhir",
       "Undangan dari komunitas bahasa atau klub luar",
     ],
   },
@@ -60,15 +60,16 @@ export const proposalContent = [
     id: "pemateri",
     title: "Profil Pemateri",
     content: {
-      nama: "[Nama Pemateri, S.Pd., M.A.]",
-      asal: "institute petal",
+      nama: "Miraswadina Dyah Amoendria",
+      asal: "PETAL Language Consultant & BLCI",
+      foto: "/pemateri1.jpg", // Path foto sesuai yang kamu simpan
       deskripsi:
-        "Workshop TOEFL Crash Course ini akan dipandu secara langsung oleh pakar dan praktisi bahasa Inggris berpengalaman. Beliau memiliki rekam jejak dan dedikasi yang tinggi dalam bidang akademik, dengan berbagai pencapaian luar biasa yang relevan, di antaranya:",
+        "Seorang praktisi dan pengajar bahasa Inggris dengan pengalaman lebih dari 10 tahun sejak 2012. Lulusan Teknik Industri ITB ini berdedikasi tinggi di bidang pendidikan, termasuk memandu program persiapan TOEFL secara intensif untuk mahasiswa Universitas Teknologi Bandung.",
       pencapaian: [
-        "Meraih skor TOEFL ITP di atas 600 / IELTS 7.5.",
-        "Berpengalaman mengajar persiapan TOEFL/IELTS selama lebih dari 5 tahun.",
-        "Penerima beasiswa luar negeri (LPDP/AAS/Chevening).",
-        "Penulis buku atau modul pembelajaran bahasa Inggris interaktif.",
+        "Meraih skor Prediksi TOEFL ITP 629 (2025) & IELTS Listening/Reading 8.0 & 8.5.",
+        "Berpengalaman mengajar di berbagai lembaga ternama (ILP, EEP, BLCI).",
+        "Instruktur spesialis kelas persiapan TOEFL, IELTS, dan TOEIC.",
+        "Alumni Teknik Industri Institut Teknologi Bandung (ITB) angkatan 2005.",
       ],
     },
   },
@@ -93,6 +94,10 @@ export const proposalContent = [
           {
             nama: "EGA SILFHIA (ketua pelaksana)",
             nim: "24552011313",
+          },
+          {
+            nama: "HEDI ABDUL MAJID (Wakil ketua pelaksana)",
+            nim: "25552011090",
           },
           {
             nama: "DHENIA PUTRI NURAINI (Penanggung jawab 1 )",
@@ -170,10 +175,6 @@ export const proposalContent = [
             nim: "23612091031",
           },
           {
-            nama: "s.putri.r",
-            nim: "25262011089",
-          },
-          {
             nama: "Muhamad Yusuf",
             nim: "25552011061",
           },
@@ -182,9 +183,9 @@ export const proposalContent = [
             nim: "25262011174",
           },
           {
-            nama: "Muhammad Ihsan Irwansyah",
-            nim: "25262011197",
-          },
+            nama:"S. Putri R.",
+            nim: "25262011174"
+          }
         ],
       },
       {
@@ -233,12 +234,8 @@ export const proposalContent = [
             nim: "25552011106",
           },
           {
-            nama: "reidhisa alea youshiva",
+            nama: "Reidhisa Alea Youshiva",
             nim: "25262011102",
-          },
-          {
-            nama: "Rizky Firmansyah",
-            nim: "252620111247",
           },
         ],
       },
@@ -248,9 +245,9 @@ export const proposalContent = [
     id: "rab",
     title: "Rancangan Anggaran Biaya",
     content: {
-      totalKeseluruhan: 5929000,
-      biayaTakTerduga: 592900,
-      grandTotal: 6521900,
+      totalKeseluruhan: 6429000,
+      biayaTakTerduga: 642900,
+      grandTotal: 7071900,
       categories: [
         {
           kategori: "1. Sekretaris",
@@ -268,7 +265,7 @@ export const proposalContent = [
         },
         {
           kategori: "2. Show Director",
-          subtotal: 3150000,
+          subtotal: 3650000,
           items: [
             {
               no: 2,
@@ -298,8 +295,8 @@ export const proposalContent = [
               no: 5,
               uraian: "Honor Pemateri",
               qty: 1,
-              harga: 1000000,
-              total: 1000000,
+              harga: 1500000,
+              total: 1500000,
               ket: "Bayar",
             },
             {

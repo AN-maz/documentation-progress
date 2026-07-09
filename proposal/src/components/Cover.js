@@ -73,8 +73,8 @@ export const CoverComponent = () => {
         <div class="bg-white border-4 border-[var(--color-ec-blue)] p-4 shadow-[6px_6px_0px_0px_var(--color-ec-red)] min-w-[260px] text-right mb-2">
            <p class="text-[10px] uppercase tracking-widest text-gray-500 font-bold mb-1">Diajukan Kepada Yth.</p>
            <!-- Ganti [NAMA PT SPONSOR] dengan data dinamis Anda nantinya -->
-           <h3 class="font-black text-lg text-[var(--color-ec-blue)] leading-tight">[NAMA PT SPONSOR]</h3>
-           <p class="text-[12px] text-gray-600 mt-1">Divisi Sponsorship / CSR</p>
+           <h3 class="font-black text-lg text-[var(--color-ec-blue)] leading-tight">XL</h3>
+          
         </div>
 
       </div>
