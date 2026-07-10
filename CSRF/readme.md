@@ -35,3 +35,14 @@ Karena durasi video minimal 1 menit, kamu bisa merekam dengan alur *screencast* 
 Pesan edukasinya sangat kuat: **Jangan sembarangan mengklik tautan dari orang tidak dikenal, terutama saat kamu sedang dalam kondisi *login* di aplikasi keuangan atau data penting lainnya.**
 
 Untuk *endpoint* rentan yang akan diserang nanti, kamu lebih tertarik membuat simulasi sistem "Transfer Saldo Uang" atau "Ubah Password Akun Mahasiswa"?
+
+---
+
+# Serangan ini menggunakan
+
+## - social engineering
+## - phishing link
+## - Malvertising
+## - Auto-Submit di Forum/Komentar (XSS + CSRF)
+## - Clickjacking
+

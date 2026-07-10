@@ -1,0 +1,34 @@
+@startuml
+skinparam style strictuml
+skinparam DefaultFontName Arial
+
+|Karyawan|
+start
+:Login ke sistem aplikasi Lark;
+:Memilih menu pengajuan cuti;
+
+|Sistem Lark|
+:Mengecek jatah cuti karyawan;
+
+if (Jatah cuti memenuhi syarat?) then (Tidak)
+  :Menunjukkan jatah cuti\ntidak memenuhi syarat;
+  :Pengajuan cuti otomatis ditolak;
+  stop
+else (Ya)
+
+|Karyawan|
+  :Mengisi form pengajuan cuti;
+  
+  if (Upload dokumen pendukung?) then (Ya)
+    :Upload bukti dokumen penting;
+  else (Tidak)
+  endif
+
+|Sistem Lark|
+  :Validasi bukti dokumen & pengajuan;
+
+|Atasan|
+  :Meninjau pengajuan cuti;
+  stop
+endif
+@enduml
