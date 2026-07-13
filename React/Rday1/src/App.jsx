@@ -1,31 +1,23 @@
-import { useState } from 'react';
+// Ubah import ini sesuai dengan materi yang sedang kamu pelajari/test
+import BelajarJSX from './lessons/01-Dasar-Komponent/BelajarJSX';
+import StateProps from './lessons/01-Dasar-Komponent/StateProps';
+import ConditionalRendering from './lessons/01-Dasar-Komponent/ConditionalRender';
+import Composition from './lessons/01-Dasar-Komponent/Composition';
+// import Lifecycle from './lessons/02-Rendering/Lifecycle';
 
-// Komponen Child menerima Props (teks, dan fungsi onClick)
-function Tombol({ teks, onClick }) {
-  return (
-    <button 
-      onClick={onClick}
-      className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-    >
-      {teks}
-    </button>
-  );
-}
-
-// Komponen Parent memiliki State
 export default function App() {
-  // Deklarasi state: [namaVariabel, fungsiPengubah] = useState(nilaiAwal)
-  const [angka, setAngka] = useState(0);
-
   return (
-    <div className="p-4">
-      <h2 className="text-xl mb-4">Angka saat ini: {angka}</h2>
+    <div className="p-8">
+      <h1 className="text-3xl font-bold mb-6 border-b pb-2">
+        Buku Catatan React ⚛️
+      </h1>
       
-      <div className="space-x-2">
-        {/* Mengirim props ke komponen Tombol */}
-        <Tombol teks="Tambah 1" onClick={() => setAngka(angka + 1)} />
-        <Tombol teks="Reset" onClick={() => setAngka(0)} />
-      </div>
+      {/* Tampilkan komponen yang sedang diaktifkan di sini */}
+      <BelajarJSX />
+      <StateProps />
+      <ConditionalRendering />
+      <Composition />
+      {/* <Lifecycle /> */}
     </div>
   );
 }
