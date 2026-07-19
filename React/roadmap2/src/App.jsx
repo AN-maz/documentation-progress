@@ -1,49 +1,42 @@
-import { createContext, useContext, useState } from 'react';
+import { useState, useEffect } from 'react';
 
-// 1. Buat Context-nya (Wadah Teleportasi)
-const TemaContext = createContext();
-
-// 2. Buat Provider-nya (Pemancar Data)
-function TemaProvider({ children }) {
-  const [tema, setTema] = useState('terang');
-
-  const gantiTema = () => {
-    setTema(tema === 'terang' ? 'gelap' : 'terang');
-  };
-
-  return (
-    <TemaContext.Provider value={{ tema, gantiTema }}>
-      {children}
-    </TemaContext.Provider>
-  );
-}
-
-// 3. Pakai Datanya (Penerima Teleportasi)
-function TombolTema() {
-  const { tema, gantiTema } = useContext(TemaContext);
-
-  return (
-    <button 
-      onClick={gantiTema}
-      style={{
-        background: tema === 'terang' ? '#fff' : '#333',
-        color: tema === 'terang' ? '#000' : '#fff'
-      }}
-    >
-      Ganti ke Tema {tema === 'terang' ? 'Gelap 🌙' : 'Terang ☀️'}
-    </button>
-  );
-}
-
-// 4. Bungkus Aplikasi dengan Provider
 function App() {
+  const [materi, setMateri] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    // Fungsi Async di dalam useEffect
+    const ambilData = async () => {
+      try {
+        setLoading(true);
+        // Memanggil API publik (contoh)
+        const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+        
+        if (!response.ok) throw new Error('Gagal mengambil data dari server');
+        
+        const data = await response.json();
+        setMateri(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false); // Matikan loading, baik sukses maupun gagal
+      }
+    };
+
+    ambilData();
+  }, []); // Array kosong = hanya dipanggil sekali saat halaman dibuka
+
+  // Tampilan berdasarkan state
+  if (loading) return <h3>Memuat data kelas... ⏳</h3>;
+  if (error) return <h3>Terjadi kesalahan: {error} ❌</h3>;
+
   return (
-    <TemaProvider>
-      <div>
-        <h1>Aplikasi Keren</h1>
-        <TombolTema /> {/* Tombol ini bisa langsung akses Context! */}
-      </div>
-    </TemaProvider>
+    <ul>
+      {materi.slice(0, 4).map(item => (
+        <li key={item.id}>{item.title}</li>
+      ))}
+    </ul>
   );
 }
 
