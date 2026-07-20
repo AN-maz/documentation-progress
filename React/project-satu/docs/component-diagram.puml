@@ -1,0 +1,143 @@
+@startuml
+!theme plain
+
+left to right direction
+
+skinparam backgroundColor #F8FAFC
+skinparam shadowing false
+skinparam linetype ortho
+
+skinparam package {
+    BorderColor #64748B
+    BackgroundColor #F8FAFC
+    FontStyle bold
+}
+
+skinparam rectangle {
+    RoundCorner 12
+    BorderColor #4F46E5
+}
+
+title E-Commerce Admin Dashboard
+Component Diagram
+
+package "Entry Point" {
+
+    rectangle "main.jsx" as Main
+    rectangle "App.jsx" as App
+
+    Main --> App
+}
+
+package "Global State" {
+
+    rectangle "AuthContext.jsx" as Auth
+
+    note right of Auth
+    user
+    token
+    login()
+    logout()
+    end note
+}
+
+package "Routing" {
+
+    rectangle "AppRoutes.jsx" as Routes
+    rectangle "ProtectedRoute.jsx" as Guard
+
+    Routes --> Guard
+}
+
+package "Pages" {
+
+    rectangle "Login"
+    rectangle "Dashboard"
+    rectangle "ProductList"
+    rectangle "ProductForm"
+}
+
+package "Reusable Components" {
+
+    rectangle "Layout"
+    rectangle "UI"
+
+    package Layout {
+        rectangle Sidebar
+        rectangle Navbar
+    }
+
+    package UI {
+        rectangle Button
+        rectangle Input
+        rectangle Table
+        rectangle Modal
+    }
+}
+
+package "Services" {
+
+    rectangle "api.js" as Api
+    rectangle "authService.js" as AuthService
+    rectangle "productService.js" as ProductService
+
+    Api --> AuthService
+    Api --> ProductService
+}
+
+package "External" {
+
+    rectangle "DummyJSON API"
+    rectangle "localStorage"
+}
+
+'
+' FLOW ANTAR LAYER
+'
+
+App --> Auth
+App --> Routes
+
+Auth --> localStorage
+
+Routes --> Login
+Routes --> Dashboard
+Routes --> ProductList
+Routes --> ProductForm
+
+'
+' PAGE -> COMPONENT
+'
+
+Dashboard --> Layout
+
+ProductList --> Layout
+ProductList --> UI
+
+ProductForm --> Layout
+ProductForm --> UI
+
+Login --> UI
+
+'
+' PAGE -> SERVICE
+'
+
+Login --> AuthService
+
+Dashboard --> ProductService
+
+ProductList --> ProductService
+
+ProductForm --> ProductService
+
+'
+' SERVICE -> API
+'
+
+AuthService --> Api
+ProductService --> Api
+
+Api --> "DummyJSON API"
+
+@enduml

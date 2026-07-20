@@ -1,0 +1,122 @@
+@startuml
+!theme plain
+skinparam backgroundColor #F8FAFC
+skinparam sequenceArrowThickness 2
+skinparam roundcorner 10
+skinparam titleBorderRoundCorner 10
+
+title <size:18><b>E-Commerce Admin Dashboard</b></size>\n<size:14>Sequence Diagram - Alur Aplikasi</size>
+
+' ===== Warna =====
+skinparam actorStyle awesome
+
+' Participant colors
+skinparam participant {
+  BorderColor #4F46E5
+  FontColor #1E293B
+  FontSize 13
+  FontStyle bold
+}
+
+skinparam participantBackgroundColor #EEF2FF
+
+' Custom colors per participant
+skinparam participantBorderColor #4F46E5
+
+' Database
+skinparam databaseBackgroundColor #ECFDF5
+skinparam databaseBorderColor #10B981
+
+' Boundaries
+skinparam boundaryBackgroundColor #FEF3C7
+skinparam boundaryBorderColor #F59E0B
+
+' Collections
+skinparam collectionsBackgroundColor #F1F5F9
+skinparam collectionsBorderColor #64748B
+
+' ===== Participants =====
+actor "User" as User
+boundary "main.jsx\n(Entry Point)" as Main
+participant "App.jsx\n(Root Component)" as App
+participant "AuthContext.jsx\n(Global State)" as Auth
+collections "ProtectedRoute.jsx\n(Guard)" as Guard
+collections "AppRoutes.jsx\n(Router Config)" as Routes
+participant "Login.jsx\n(Login Page)" as LoginPage
+participant "Dashboard.jsx\n(Home Page)" as Dashboard
+participant "ProductList.jsx\n(CRUD Page)" as ProductList
+participant "ProductForm.jsx\n(Add/Edit)" as ProductForm
+database "services/\nAPI Layer" as Services
+database "DummyJSON\n(REST API)" as API
+
+' ===== Flows =====
+
+== 1. Startup Aplikasi ==
+
+User -> Main: Buka aplikasi
+Main -> App: createRoot().render(<App />)
+App -> Auth: <AuthProvider>\nCek localStorage token
+
+alt Token tidak ditemukan
+    Auth --> App: user = null, token = null
+    App -> Routes: Render <AppRoutes />
+    Routes -> Guard: Route "/" → <ProtectedRoute />
+    Guard --> Routes: Token null → Redirect /login
+    Routes -> LoginPage: Render <Login />
+
+else Token ditemukan
+    Auth --> App: user = token tersimpan\n(dari localStorage)
+    App -> Routes: Render <AppRoutes />
+    Routes -> Guard: Route "/" → <ProtectedRoute />
+    Guard --> Routes: Token valid → Allow
+    Routes -> Dashboard: Render <Dashboard />
+end
+
+== 2. Login Flow ==
+
+User -> LoginPage: Input username & password
+LoginPage -> Auth: login(username, password)
+Auth -> Services: authService.loginUser()
+Services -> API: POST /auth/login
+API --> Services: { accessToken, id, username }
+Services --> Auth: Response data
+Auth -> Auth: setToken(accessToken)\nsetUser({ id, username })\nsimpan token ke localStorage
+Auth --> LoginPage: Login sukses
+LoginPage -> LoginPage: navigate("/")
+LoginPage -> Routes: Redirect ke Dashboard
+
+== 3. CRUD Flow (Contoh: Lihat Produk) ==
+
+User -> Dashboard: Klik menu "Products"
+Dashboard -> Routes: navigate("/products")
+Routes -> Guard: Validasi token
+Guard --> Routes: Token valid
+Routes -> ProductList: Render <ProductList />
+ProductList -> Services: productService.getProducts()
+Services -> API: GET /products?limit=30
+API --> Services: Array produk
+Services --> ProductList: Products data
+ProductList -> ProductList: Render tabel produk
+
+== 4. CRUD Flow (Tambah/Edit/Hapus) ==
+
+User -> ProductList: Klik "Add Product"
+ProductList -> Routes: navigate("/products/new")
+Routes -> ProductForm: Render <ProductForm />
+User -> ProductForm: Isi form & submit
+ProductForm -> Services: createProduct(payload)
+Services -> API: POST /products/add
+API --> Services: Produk baru
+Services --> ProductForm: Success
+ProductForm -> ProductList: navigate("/products")
+
+User -> ProductList: Klik "Delete"
+ProductList -> ProductList: Tampil modal konfirmasi
+User -> ProductList: Konfirmasi hapus
+ProductList -> Services: deleteProduct(id)
+Services -> API: DELETE /products/:id
+API --> Services: Success
+Services --> ProductList: Hapus dari state lokal
+ProductList -> ProductList: Update tabel
+
+@enduml
