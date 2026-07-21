@@ -1,0 +1,55 @@
+graph LR
+    subgraph Root["project-dua/"]
+        direction TB
+        A["index.html"]
+        B["package.json"]
+        C["vite.config.js"]
+        D["README.md"]
+        subgraph Public["public/"]
+            P1["favicon.svg"]
+            P2["icons.svg"]
+        end
+        subgraph Doc["doc/"]
+            D1["component-hierarchy.mermaid"]
+            D2["data-flow.mermaid"]
+            D3["state-machine.mermaid"]
+            D4["navigation-sequence.mermaid"]
+            D5["contact-form-sequence.mermaid"]
+            D6["hook-lifecycle.mermaid"]
+            D7["directory-structure.mermaid"]
+        end
+        subgraph Src["src/"]
+            direction TB
+            S1["main.jsx"]
+            S2["App.jsx"]
+            S3["index.css"]
+            subgraph Assets["assets/"]
+                A1["hero.png"]
+                A2["react.svg"]
+                A3["vite.svg"]
+            end
+            subgraph Layout["components/layout/"]
+                L1["Navbar.jsx"]
+                L2["Footer.jsx"]
+            end
+            subgraph UI["components/ui/"]
+                U1["Button.jsx"]
+                U2["FeatureCard.jsx"]
+                U3["ProfileCard.jsx"]
+            end
+            subgraph Views["views/"]
+                V1["HomeView.jsx"]
+                V2["AboutView.jsx"]
+                V3["ContactView.jsx"]
+            end
+            subgraph Data["data/"]
+                D1["mockData.js"]
+            end
+            subgraph Hooks["hooks/"]
+                H1["useDocumentTitle.js"]
+            end
+            subgraph Utils["utils/"]
+                UT["(empty)"]
+            end
+        end
+    end

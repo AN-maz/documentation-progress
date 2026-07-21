@@ -1,0 +1,29 @@
+sequenceDiagram
+    actor User
+    participant Form as ContactView.jsx
+    participant State as Local State\n(form, submitted)
+    participant Btn as Button.jsx
+
+    User->>Form: Type in Name field
+    Form->>State: onChange -> setForm({...form, name})
+    State-->>Form: Re-render with new value
+
+    User->>Form: Type in Email field
+    Form->>State: onChange -> setForm({...form, email})
+    State-->>Form: Re-render with new value
+
+    User->>Form: Type in Message field
+    Form->>State: onChange -> setForm({...form, message})
+    State-->>Form: Re-render with new value
+
+    User->>Btn: Click "Send Message"
+    Btn->>Form: type="submit"
+    Form->>Form: handleSubmit(e)
+    Note over Form: e.preventDefault()
+    Form->>State: setSubmitted(true)\nsetForm(reset)
+    State-->>Form: Re-render with success message
+    Form-->>User: Display green success text
+
+    Note over Form: After 4 seconds
+    Form->>State: setSubmitted(false)
+    State-->>Form: Success message disappears

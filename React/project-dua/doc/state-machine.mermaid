@@ -1,0 +1,8 @@
+stateDiagram-v2
+    [*] --> Home
+    Home --> About: onNavigate('about')
+    Home --> Contact: onNavigate('contact')
+    About --> Home: onNavigate('home')
+    About --> Contact: onNavigate('contact')
+    Contact --> Home: onNavigate('home')
+    Contact --> About: onNavigate('about')

@@ -1,0 +1,19 @@
+sequenceDiagram
+    actor User
+    participant Navbar as Navbar.jsx
+    participant App as App.jsx
+    participant Hook as useDocumentTitle.js
+    participant View as View Component
+
+    User->>Navbar: Click menu "About"
+    Navbar->>App: onNavigate('about')
+    App->>App: setActivePage('about')
+    App->>App: Re-render
+
+    App->>Hook: useDocumentTitle('About')
+    Hook->>Hook: document.title = "OXIGEN | About"
+    Hook->>Hook: window.scrollTo(0, 0)
+
+    App->>View: Conditionally render <AboutView />
+
+    Note over App,View: Props drilling:\nactivePage & onNavigate\npassed down as needed

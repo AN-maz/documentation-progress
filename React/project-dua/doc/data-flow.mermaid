@@ -1,0 +1,20 @@
+flowchart LR
+    subgraph Data_Layer["Data Layer"]
+        MOCK["mockData.js\nservices, team, companyInfo, navLinks"]
+    end
+
+    subgraph Component_Tree["Component Tree"]
+        APP["App.jsx\nuseState('activePage')"]
+        VIEWS["Views\nHome, About, Contact"]
+        UI["UI Components\nButton, FeatureCard, ProfileCard"]
+    end
+
+    subgraph Hooks["Custom Hooks"]
+        HOOK["useDocumentTitle.js\nuseEffect + scrollTo"]
+    end
+
+    MOCK -->|import| VIEWS
+    APP -->|props drilling| VIEWS
+    APP -->|activePage| HOOK
+    VIEWS -->|props| UI
+    UI -->|onClick / events| APP

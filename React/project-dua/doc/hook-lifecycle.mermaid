@@ -1,0 +1,19 @@
+sequenceDiagram
+    participant Comp as Component\n(uses hook)
+    participant Hook as useDocumentTitle.js
+    participant Browser as Browser
+
+    Comp->>Hook: Call hook('About')
+    Hook->>Browser: useEffect runs
+    Browser->>Browser: document.title = "OXIGEN | About"
+    Browser->>Browser: window.scrollTo(0, 0)
+
+    Note over Hook: Dependency: [pageName]\nReruns only when pageName changes
+
+    Comp->>Hook: Re-render with 'Home'
+    Hook->>Browser: useEffect runs again
+    Browser->>Browser: document.title = "OXIGEN"
+    Browser->>Browser: window.scrollTo(0, 0)
+
+    Note over Comp: Component unmounts
+    Note over Hook: Cleanup runs (if any)

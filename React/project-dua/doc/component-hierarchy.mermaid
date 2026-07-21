@@ -1,0 +1,23 @@
+graph TB
+    App["App.jsx\n(State: activePage)"] --> Navbar["Navbar.jsx\n(props: activePage, onNavigate)"]
+    App --> Main["main\n(conditional rendering)"]
+    App --> Footer["Footer.jsx"]
+
+    Main --> HomeView["HomeView.jsx\n(props: onNavigate)"]
+    Main --> AboutView["AboutView.jsx"]
+    Main --> ContactView["ContactView.jsx"]
+
+    HomeView --> FeatureCard["FeatureCard.jsx\n(props: title, description)"]
+    HomeView --> BHome["Button.jsx\n(props: variant, onClick)"]
+
+    AboutView --> ProfileCard["ProfileCard.jsx\n(props: name, role, photo)"]
+
+    ContactView --> BContact["Button.jsx\n(props: type=submit, variant)"]
+    ContactView --> FormState["Local State\n(form, submitted)"]
+
+    Navbar --> NavLinks["mockData.js\n(navLinks)"]
+    HomeView --> Services["mockData.js\n(services)"]
+    AboutView --> Team["mockData.js\n(team)"]
+    AboutView --> Company["mockData.js\n(companyInfo)"]
+
+    App -.-> Hook["useDocumentTitle(page)\n(Custom Hook)"]
