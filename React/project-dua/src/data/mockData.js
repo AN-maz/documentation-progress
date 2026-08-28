@@ -52,6 +52,12 @@ export const team = [
     role: 'Treasurer',
     photo: 'https://api.dicebear.com/9.x/avataaars/svg?seed=dimas',
   },
+  {
+    id: 5,
+    name: 'Purwa',
+    role: 'Staff',
+    photo: 'https://api.dicebear.com/9.x/avataaars/svg?seed=putra',
+  }
 ]
 
 export const companyInfo = {

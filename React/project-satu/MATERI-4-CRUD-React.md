@@ -36,7 +36,7 @@ Project ini memiliki struktur halaman CRUD sebagai berikut:
 ```
 src/
 ├── pages/
-│   └── products/
+│   └── products/ 
 │       ├── ProductList.jsx     → READ + DELETE (daftar produk)
 │       └── ProductForm.jsx     → CREATE + UPDATE (form tambah/edit)
 ├── services/

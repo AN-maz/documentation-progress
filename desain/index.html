@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IG Post - English Club Topman</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Library untuk mengubah HTML ke Gambar -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ecBlue: '#001452',
+                        ecRed: '#D81B2B',
+                        ecDark: '#000a29',
+                    },
+                    fontFamily: {
+                        'game': ['Rajdhani', 'sans-serif'], 
+                        'sans': ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        .bg-grid-pattern {
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .scanline {
+            background: repeating-linear-gradient(
+                0deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15) 1px, transparent 1px, transparent 2px
+            );
+        }
+
+        .clip-card { clip-path: polygon(8% 0, 100% 0, 100% 92%, 92% 100%, 0 100%, 0 8%); }
+        .clip-label { clip-path: polygon(0 0, 90% 0, 100% 100%, 0% 100%); }
+    </style>
+</head>
+<body class="bg-gray-900 text-white font-sans min-h-screen flex flex-col items-center py-10">
+
+    <!-- Tombol Download -->
+    <button onclick="downloadIGPost()" class="mb-8 px-6 py-3 bg-ecRed hover:bg-red-700 text-white font-game font-bold tracking-wider text-xl rounded shadow-lg transition-colors z-50">
+        📸 DOWNLOAD SEBAGAI IG POST (1080x1080)
+    </button>
+
+    <!-- KANVAS IG POST (Fix 1080x1080) -->
+    <!-- Elemen ini yang akan dirender menjadi gambar -->
+    <div id="ig-canvas" class="relative w-[1080px] h-[1080px] bg-ecDark overflow-hidden shrink-0 shadow-2xl p-10 flex flex-col">
+        
+        <!-- Background Grid -->
+        <div class="absolute inset-0 bg-grid-pattern opacity-50 z-0"></div>
+
+        <!-- Header IG Post -->
+        <div class="relative z-10 text-center mb-10 mt-4">
+            <h2 class="text-ecRed font-game font-bold tracking-[0.4em] uppercase text-xl mb-1">English Club • Universitas Teknologi Bandung</h2>
+            <h1 class="text-7xl font-game font-bold uppercase italic text-white drop-shadow-[0_0_15px_rgba(216,27,43,0.5)]">
+                Top Management <span class="text-ecRed">Roster</span>
+            </h1>
+        </div>
+
+        <!-- Grid Cards 2x2 untuk 4 Orang -->
+        <div class="relative z-10 flex-grow grid grid-cols-2 grid-rows-2 gap-8 pb-4">
+
+            <!-- KARTU 1: KETUA -->
+            <div class="relative group">
+                <div class="absolute inset-0 bg-ecRed clip-card transform scale-[1.015] opacity-80 blur-[2px]"></div>
+                <div class="relative bg-ecBlue clip-card h-full w-full overflow-hidden flex flex-col justify-end p-6 border-l-[6px] border-ecRed">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&q=80" alt="Ketua" class="absolute inset-0 w-full h-full object-cover mix-blend-luminosity opacity-70">
+                    <div class="absolute inset-0 scanline z-10"></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-ecDark via-ecBlue/60 to-transparent z-10"></div>
+
+                    <div class="relative z-20">
+                        <div class="bg-ecRed clip-label inline-block px-4 py-1.5 mb-3">
+                            <span class="font-game font-bold tracking-widest text-sm uppercase">Class: Guild Master</span>
+                        </div>
+                        <h3 class="font-game text-5xl font-bold uppercase text-white leading-none">Purwa</h3>
+                        <p class="text-gray-300 font-game tracking-widest text-xl uppercase mb-4">President</p>
+                        
+                        <div class="space-y-2 text-sm font-game tracking-wider">
+                            <div class="flex justify-between items-center">
+                                <span>Leadership</span>
+                                <div class="w-40 h-2 bg-gray-700 ml-2 rounded overflow-hidden"><div class="h-full bg-ecRed w-[95%]"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute top-4 right-6 z-20 text-ecRed font-game font-bold text-7xl opacity-30">P1</div>
+                </div>
+            </div>
+
+            <!-- KARTU 2: WAKIL -->
+            <div class="relative group">
+                <div class="absolute inset-0 bg-white clip-card transform scale-[1.015] opacity-50 blur-[2px]"></div>
+                <div class="relative bg-ecBlue clip-card h-full w-full overflow-hidden flex flex-col justify-end p-6 border-l-[6px] border-white">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80" alt="Wakil" class="absolute inset-0 w-full h-full object-cover mix-blend-luminosity opacity-70">
+                    <div class="absolute inset-0 scanline z-10"></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-ecDark via-ecBlue/60 to-transparent z-10"></div>
+
+                    <div class="relative z-20">
+                        <div class="bg-white clip-label inline-block px-4 py-1.5 mb-3">
+                            <span class="font-game font-bold tracking-widest text-sm uppercase text-ecBlue">Class: Tactician</span>
+                        </div>
+                        <h3 class="font-game text-5xl font-bold uppercase text-white leading-none">Jane Smith</h3>
+                        <p class="text-gray-300 font-game tracking-widest text-xl uppercase mb-4">Vice President</p>
+                        
+                        <div class="space-y-2 text-sm font-game tracking-wider">
+                            <div class="flex justify-between items-center">
+                                <span>Strategy</span>
+                                <div class="w-40 h-2 bg-gray-700 ml-2 rounded overflow-hidden"><div class="h-full bg-white w-[90%]"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute top-4 right-6 z-20 text-white font-game font-bold text-7xl opacity-20">P2</div>
+                </div>
+            </div>
+
+            <!-- KARTU 3: SEKRE -->
+            <div class="relative group">
+                <div class="absolute inset-0 bg-white clip-card transform scale-[1.015] opacity-50 blur-[2px]"></div>
+                <div class="relative bg-ecBlue clip-card h-full w-full overflow-hidden flex flex-col justify-end p-6 border-l-[6px] border-white">
+                    <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=800&q=80" alt="Sekretaris" class="absolute inset-0 w-full h-full object-cover mix-blend-luminosity opacity-70">
+                    <div class="absolute inset-0 scanline z-10"></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-ecDark via-ecBlue/60 to-transparent z-10"></div>
+
+                    <div class="relative z-20">
+                        <div class="bg-white clip-label inline-block px-4 py-1.5 mb-3">
+                            <span class="font-game font-bold tracking-widest text-sm uppercase text-ecBlue">Class: Lorekeeper</span>
+                        </div>
+                        <h3 class="font-game text-5xl font-bold uppercase text-white leading-none">Michael Lee</h3>
+                        <p class="text-gray-300 font-game tracking-widest text-xl uppercase mb-4">Secretary</p>
+                        
+                        <div class="space-y-2 text-sm font-game tracking-wider">
+                            <div class="flex justify-between items-center">
+                                <span>Archive Mgmt</span>
+                                <div class="w-40 h-2 bg-gray-700 ml-2 rounded overflow-hidden"><div class="h-full bg-white w-[98%]"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute top-4 right-6 z-20 text-white font-game font-bold text-7xl opacity-20">P3</div>
+                </div>
+            </div>
+
+            <!-- KARTU 4: BENDAHARA -->
+            <div class="relative group">
+                <div class="absolute inset-0 bg-ecRed clip-card transform scale-[1.015] opacity-80 blur-[2px]"></div>
+                <div class="relative bg-ecBlue clip-card h-full w-full overflow-hidden flex flex-col justify-end p-6 border-l-[6px] border-ecRed">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&q=80" alt="Bendahara" class="absolute inset-0 w-full h-full object-cover mix-blend-luminosity opacity-70">
+                    <div class="absolute inset-0 scanline z-10"></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-ecDark via-ecBlue/60 to-transparent z-10"></div>
+
+                    <div class="relative z-20">
+                        <div class="bg-ecRed clip-label inline-block px-4 py-1.5 mb-3">
+                            <span class="font-game font-bold tracking-widest text-sm uppercase">Class: Resource Mgr</span>
+                        </div>
+                        <h3 class="font-game text-5xl font-bold uppercase text-white leading-none">Sarah Chen</h3>
+                        <p class="text-gray-300 font-game tracking-widest text-xl uppercase mb-4">Treasurer</p>
+                        
+                        <div class="space-y-2 text-sm font-game tracking-wider">
+                            <div class="flex justify-between items-center">
+                                <span>Calculation</span>
+                                <div class="w-40 h-2 bg-gray-700 ml-2 rounded overflow-hidden"><div class="h-full bg-ecRed w-[92%]"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute top-4 right-6 z-20 text-ecRed font-game font-bold text-7xl opacity-30">P4</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Script Export ke Gambar -->
+    <script>
+        function downloadIGPost() {
+            const canvasElement = document.getElementById('ig-canvas');
+            
+            // Konfigurasi html2canvas agar kualitas gambarnya tajam (HD)
+            html2canvas(canvasElement, {
+                scale: 2, // Meningkatkan resolusi output 2x lipat
+                useCORS: true, // Memastikan gambar dari Unsplash bisa dirender
+                backgroundColor: '#000a29'
+            }).then(canvas => {
+                // Konversi kanvas ke URL gambar
+                const image = canvas.toDataURL("image/jpeg", 0.9);
+                
+                // Buat link download palsu dan jalankan otomatis
+                const link = document.createElement('a');
+                link.href = image;
+                link.download = 'IG_Post_English_Club.jpg';
+                link.click();
+            });
+        }
+    </script>
+</body>
+</html>
