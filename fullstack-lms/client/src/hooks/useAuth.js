@@ -12,29 +12,28 @@ export const useAuth = () => {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const navigate = useNavigate();
 
-  const login = async (credentials) => {
-    setLoading(true);
-    try {
-      const response = await authService.login(credentials);
-      const { user, token } = response.data;
+  const login = async (email, password) => {
+      setLoading(true);
+      try {
+        const response = await authService.login({ email, password });
+        const { user, token } = response.data;
 
-      // Simpan user & token ke Zustand
-      setAuth(user, token);
+        // Simpan user & token ke Zustand Store
+        setAuth(user, token);
 
-      toast.success(response.message || 'Berhasil masuk!');
-      
-      // Redirect berdasarkan role
-      if (user.role === 'admin') {
-        navigate('/admin');
-      } else {
-        navigate('/dashboard');
+        toast.success(response.message || 'Berhasil masuk!');
+        
+        // KEMBALIKAN RES DENGAN SUCCESS TRUE
+        return { success: true, data: response.data };
+      } catch (error) {
+        const errorMsg = error.response?.data?.message || 'Gagal melakukan login';
+        toast.error(errorMsg);
+        
+        // KEMBALIKAN RES DENGAN SUCCESS FALSE & PESAN ERROR
+        return { success: false, error: errorMsg };
+      } finally {
+        setLoading(false);
       }
-    } catch (error) {
-      const errorMsg = error.response?.data?.message || 'Gagal melakukan login';
-      toast.error(errorMsg);
-    } finally {
-      setLoading(false);
-    }
   };
 
   const register = async (userData) => {

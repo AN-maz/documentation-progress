@@ -47,7 +47,7 @@ export default function AuthView() {
                 setError(res.error || 'Login gagal');
             } else {
                 const payload = {
-                    namaLengkap: formData.name,
+                    name: formData.name,
                     email: formData.email,
                     password: formData.password,
                 };
