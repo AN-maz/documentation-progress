@@ -7,6 +7,9 @@ import { ProtectedRoute } from './ProtectedRoute';
 import LandingPage from '../pages/LandingPage';
 import AuthPage from '../pages/AuthPage';
 
+import MaterialCatalogPage from '../pages/learner/MaterialCatalogPage';
+import MaterialDetailPage from '../pages/learner/MaterialDetailPage';
+
 const router = createBrowserRouter([
   // 1. Single Auth Page (Login & Register)
   {
@@ -20,8 +23,18 @@ const router = createBrowserRouter([
     element: <RootLayout />,
     children: [
       { index: true, element: <LandingPage /> },
+      {path: 'materi', element: <MaterialCatalogPage /> },
+      {
+        element: <ProtectedRoute />, // Membungkus semua child route di bawahnya
+        children: [
+            {
+            path: 'materi/:slug',
+            element: <MaterialDetailPage />,
+          },
+        ],
+      },
+  
       // { path: 'materi', element: <MaterialCatalogPage /> },
-      // { path: 'materi/:slug', element: <MaterialDetailPage /> },
       // { path: 'leaderboard', element: <LeaderboardPage /> },
     ],
   },
