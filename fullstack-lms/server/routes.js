@@ -25,6 +25,7 @@ module.exports = function (app, opts) {
 
   // --- Materials Routes (Public & Learner) ---
   router.get('/materials', materiHandler.getAll)
+  router.put('/materials/:id', authMiddleware, materiHandler.update)
   router.get('/materials/:slug', materiHandler.getBySlug)
 
   // --- Creator Routes ---

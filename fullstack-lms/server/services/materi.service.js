@@ -3,7 +3,6 @@ const pool = require('../config/database')
 const { v4: uuidv4 } = require('uuid')
 const slugify = require('../utils/slugify')
 
-// 1. Dapatkan katalog materi publik (status: approved)
 const getAllApproved = async ({ category_id, search, sort = 'latest', page = 1, limit = 10 }) => {
   const offset = (page - 1) * limit
   let query = `
@@ -38,8 +37,6 @@ const getAllApproved = async ({ category_id, search, sort = 'latest', page = 1, 
   params.push(parseInt(limit), parseInt(offset))
 
   const [materials] = await pool.query(query, params)
-
-  // Hitung total items untuk pagination
   const [totalRows] = await pool.query(
     "SELECT COUNT(*) as total FROM materials WHERE status = 'approved'",
     []
@@ -67,7 +64,6 @@ const getAllApproved = async ({ category_id, search, sort = 'latest', page = 1, 
   }
 }
 
-// 2. Detail materi berdasarkan slug
 const getBySlug = async (slug, userId = null) => {
   const [rows] = await pool.query(
     `SELECT 
@@ -90,7 +86,6 @@ const getBySlug = async (slug, userId = null) => {
   const material = rows[0]
   let userProgress = { is_completed: false, has_rated: false }
 
-  // Cek progres pengguna jika user sedang terautentikasi
   if (userId) {
     const [progress] = await pool.query(
       'SELECT is_completed FROM reading_progress WHERE user_id = ? AND material_id = ?',
@@ -122,7 +117,6 @@ const getBySlug = async (slug, userId = null) => {
   }
 }
 
-// 3. Creator membuat materi baru (status pending)
 const create = async (authorId, { category_id, title, cover_image_url, content }) => {
   const id = uuidv4()
   const slug = `${slugify(title)}-${Date.now().toString().slice(-4)}`
@@ -140,7 +134,6 @@ const create = async (authorId, { category_id, title, cover_image_url, content }
   }
 }
 
-// 4. Creator melihat materi buatan sendiri
 const getUserMaterials = async (authorId) => {
   const [rows] = await pool.query(
     `SELECT id, title, status, rejection_reason, created_at 
@@ -152,9 +145,38 @@ const getUserMaterials = async (authorId) => {
   return rows
 }
 
+const update = async (materialId, authorId, { category_id, title, cover_image_url, content }) => {
+  const [existing] = await pool.query(
+    'SELECT id, status FROM materials WHERE id = ? AND author_id = ?',
+    [materialId, authorId]
+  )
+
+  if (existing.length === 0) {
+    const error = new Error('Materi tidak ditemukan atau kamu tidak memiliki hak akses')
+    error.status = 404
+    throw error
+  }
+
+  const slug = `${slugify(title)}-${Date.now().toString().slice(-4)}`
+
+  await pool.query(
+    `UPDATE materials 
+     SET category_id = ?, title = ?, slug = ?, cover_image_url = ?, content = ?, status = 'pending', rejection_reason = NULL 
+     WHERE id = ? AND author_id = ?`,
+    [category_id, title, slug, cover_image_url, content, materialId, authorId]
+  )
+
+  return {
+    id: materialId,
+    status: 'pending',
+    updated_at: new Date()
+  }
+}
+
 module.exports = {
   getAllApproved,
   getBySlug,
   create,
-  getUserMaterials
+  getUserMaterials,
+  update
 }

@@ -72,9 +72,41 @@ const getUserMaterials = async (req, res, next) => {
   }
 }
 
+const update = async (req, res, next) => {
+  try {
+    const authorId = req.user.id
+    const materialId = req.params.id
+    const { category_id, title, cover_image_url, content } = req.body
+
+    if (!category_id || !title || !content) {
+      return res.status(400).json({
+        success: false,
+        message: 'Category ID, title, and content are required',
+        errors: null
+      })
+    }
+
+    const data = await materiService.update(materialId, authorId, {
+      category_id,
+      title,
+      cover_image_url,
+      content
+    })
+
+    return res.status(200).json({
+      success: true,
+      message: 'Materi berhasil diperbarui dan dikirim ulang untuk peninjauan admin',
+      data
+    })
+  } catch (err) {
+    next(err)
+  }
+}
+
 module.exports = {
   getAll,
   getBySlug,
   create,
-  getUserMaterials
+  getUserMaterials,
+  update  
 }
