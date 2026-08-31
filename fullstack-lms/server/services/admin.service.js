@@ -1,7 +1,6 @@
 'use strict'
 const pool = require('../config/database')
 
-
 const slugify = (text) => {
   return text
     .toString()
@@ -9,12 +8,6 @@ const slugify = (text) => {
     .trim()
     .replace(/[\s\W-]+/g, '-') 
 }
-
-
-// const getAll = async () => {
-//   const [rows] = await pool.query('SELECT * FROM categories ORDER BY name ASC')
-//   return rows
-// }
 
 const createCategory = async (name) => {
   const slug = slugify(name)
@@ -48,7 +41,6 @@ const updateCategory = async (id, name) => {
     throw error
   }
 
-  // Cek bentrok nama/slug dengan kategori lain
   const [existing] = await pool.query(
     'SELECT id FROM categories WHERE (slug = ? OR name = ?) AND id != ?',
     [slug, name, id]
@@ -167,19 +159,35 @@ const getDashboardStats = async () => {
     [userCountResult],
     [pendingCountResult],
     [approvedCountResult],
+    [materialCountResult],
     [completionCountResult]
   ] = await Promise.all([
     pool.query('SELECT COUNT(id) AS total FROM users'),
     pool.query("SELECT COUNT(id) AS total FROM materials WHERE status = 'pending'"),
     pool.query("SELECT COUNT(id) AS total FROM materials WHERE status = 'approved'"),
-    pool.query('SELECT COUNT(id) AS total FROM user_completions') // Sesuaikan nama tabel log penyelesaian materi jika berbeda
+    pool.query('SELECT COUNT(id) AS total FROM materials'),
+    pool.query('SELECT COUNT(id) AS total FROM reading_progress WHERE is_completed = 1') // Disesuaikan ke tabel reading_progress
   ])
 
+  const totalUsers = userCountResult[0].total
+  const pendingMaterials = pendingCountResult[0].total
+  const approvedMaterials = approvedCountResult[0].total
+  const totalMaterials = materialCountResult[0].total
+  const totalCompletions = completionCountResult[0].total
+
   return {
-    total_users: userCountResult[0].total,
-    total_pending_materials: pendingCountResult[0].total,
-    total_approved_materials: approvedCountResult[0].total,
-    total_completions: completionCountResult[0].total
+    // Format snake_case (jika dipakai di backend lain)
+    total_users: totalUsers,
+    total_materials: totalMaterials,
+    total_pending_materials: pendingMaterials,
+    total_approved_materials: approvedMaterials,
+    total_completions: totalCompletions,
+
+    totalUsers,
+    totalMaterials,
+    pendingMaterials,
+    approvedMaterials,
+    totalCompletions
   }
 }
 
@@ -187,7 +195,6 @@ module.exports = {
   getPendingMaterials,
   updateStatus,
   getDashboardStats,
-  // getAll,
   createCategory,
   updateCategory,
   removeCategory

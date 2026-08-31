@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useThemeStore } from '../../store/useThemeStore';
 import { adminService } from '../../api/admin.service';
-import { 
-  FileText, 
-  Clock, 
-  FolderKanban, 
-  CheckCircle, 
+import {
+  FileText,
+  Clock,
+  FolderKanban,
+  CheckCircle,
   ArrowRight,
-  AlertCircle
+  AlertCircle,
 } from 'lucide-react';
 
 export default function AdminDashboardPage() {
@@ -19,29 +19,61 @@ export default function AdminDashboardPage() {
     totalMaterials: 0,
     pendingMaterials: 0,
     approvedMaterials: 0,
-    totalCategories: 0
+    totalCategories: 0,
   });
+
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchStats = async () => {
+    let cancelled = false;
+
+    async function loadStats() {
       try {
-        const data = await adminService.getStats();
-        // Menyesuaikan response statistik dari backend
+        const res = await adminService.getStats();
+
+        if (cancelled) return;
+
+        const data = res?.data?.data || res?.data || res || {};
+
         setStats({
-          totalMaterials: data?.data?.total_materials || data?.total_materials || 0,
-          pendingMaterials: data?.data?.pending_materials || data?.pending_materials || 0,
-          approvedMaterials: data?.data?.approved_materials || data?.approved_materials || 0,
-          totalCategories: data?.data?.total_categories || data?.total_categories || 0,
+          totalMaterials:
+            data.total_materials ??
+            data.totalMaterials ??
+            0,
+
+          pendingMaterials:
+            data.pending_materials ??
+            data.total_pending_materials ??
+            data.pendingMaterials ??
+            0,
+
+          approvedMaterials:
+            data.approved_materials ??
+            data.total_approved_materials ??
+            data.approvedMaterials ??
+            0,
+
+          totalCategories:
+            data.total_categories ??
+            data.totalCategories ??
+            0,
         });
       } catch (err) {
-        console.error('Gagal mengambil statistik admin:', err);
+        if (!cancelled) {
+          console.error('Gagal mengambil statistik admin:', err);
+        }
       } finally {
-        setLoading(false);
+        if (!cancelled) {
+          setLoading(false);
+        }
       }
-    };
+    }
 
-    fetchStats();
+    loadStats();
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   const statCards = [
@@ -50,66 +82,90 @@ export default function AdminDashboardPage() {
       value: stats.pendingMaterials,
       icon: Clock,
       color: 'text-amber-500 bg-amber-500/10 border-amber-500/20',
-      description: 'Materi menunggu persetujuan'
+      description: 'Materi menunggu persetujuan',
     },
     {
       title: 'Materi Disetujui',
       value: stats.approvedMaterials,
       icon: CheckCircle,
       color: 'text-emerald-500 bg-emerald-500/10 border-emerald-500/20',
-      description: 'Materi terpublikasi di katalog'
+      description: 'Materi terpublikasi di katalog',
     },
     {
       title: 'Total Materi',
       value: stats.totalMaterials,
       icon: FileText,
       color: 'text-indigo-500 bg-indigo-500/10 border-indigo-500/20',
-      description: 'Keseluruhan materi dalam sistem'
+      description: 'Keseluruhan materi dalam sistem',
     },
     {
       title: 'Total Kategori',
       value: stats.totalCategories,
       icon: FolderKanban,
       color: 'text-sky-500 bg-sky-500/10 border-sky-500/20',
-      description: 'Kategori materi aktif'
+      description: 'Kategori materi aktif',
     },
   ];
 
   return (
     <div className="space-y-8">
-      {/* Header Banner */}
-      <div className={`p-6 rounded-2xl border ${
-        isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'
-      }`}>
-        <h1 className="text-2xl font-bold mb-2">Selamat Datang di Admin Console 👋</h1>
-        <p className={`text-sm ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-          Kelola publikasi materi dari kreator dan atur struktur kategori platform dari satu tempat.
+      <div
+        className={`p-6 rounded-2xl border ${
+          isDark
+            ? 'bg-slate-900 border-slate-800'
+            : 'bg-white border-slate-200'
+        }`}
+      >
+        <h1 className="text-2xl font-bold mb-2">
+          Selamat Datang di Admin Console 👋
+        </h1>
+
+        <p
+          className={`text-sm ${
+            isDark ? 'text-slate-400' : 'text-slate-600'
+          }`}
+        >
+          Kelola publikasi materi dari kreator dan atur struktur kategori
+          platform dari satu tempat.
         </p>
       </div>
 
-      {/* Grid Cards Statistik */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-        {statCards.map((card, idx) => {
+        {statCards.map((card) => {
           const Icon = card.icon;
+
           return (
             <div
-              key={idx}
+              key={card.title}
               className={`p-5 rounded-2xl border transition-all ${
-                isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200 shadow-sm'
+                isDark
+                  ? 'bg-slate-900 border-slate-800'
+                  : 'bg-white border-slate-200 shadow-sm'
               }`}
             >
               <div className="flex items-center justify-between mb-4">
                 <span className={`p-2.5 rounded-xl border ${card.color}`}>
                   <Icon className="w-5 h-5" />
                 </span>
+
                 {loading ? (
-                  <div className="w-8 h-6 bg-slate-700/40 animate-pulse rounded"></div>
+                  <div className="w-8 h-6 bg-slate-700/40 animate-pulse rounded" />
                 ) : (
-                  <span className="text-2xl font-extrabold">{card.value}</span>
+                  <span className="text-2xl font-extrabold">
+                    {card.value}
+                  </span>
                 )}
               </div>
-              <h3 className="font-semibold text-sm">{card.title}</h3>
-              <p className={`text-xs mt-1 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
+
+              <h3 className="font-semibold text-sm">
+                {card.title}
+              </h3>
+
+              <p
+                className={`text-xs mt-1 ${
+                  isDark ? 'text-slate-400' : 'text-slate-500'
+                }`}
+              >
                 {card.description}
               </p>
             </div>
@@ -117,53 +173,85 @@ export default function AdminDashboardPage() {
         })}
       </div>
 
-      {/* Quick Action Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className={`p-6 rounded-2xl border flex flex-col justify-between ${
-          isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'
-        }`}>
+        <div
+          className={`p-6 rounded-2xl border flex flex-col justify-between ${
+            isDark
+              ? 'bg-slate-900 border-slate-800'
+              : 'bg-white border-slate-200'
+          }`}
+        >
           <div className="flex items-start gap-4">
             <div className="p-3 rounded-xl bg-amber-500/10 text-amber-500 border border-amber-500/20">
               <AlertCircle className="w-6 h-6" />
             </div>
+
             <div>
-              <h3 className="font-bold text-lg mb-1">Antrean Moderasi Materi</h3>
-              <p className={`text-sm ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                Terdapat <strong className="text-amber-500">{stats.pendingMaterials} materi</strong> yang memerlukan peninjauan status.
+              <h3 className="font-bold text-lg mb-1">
+                Antrean Moderasi Materi
+              </h3>
+
+              <p
+                className={`text-sm ${
+                  isDark ? 'text-slate-400' : 'text-slate-600'
+                }`}
+              >
+                Terdapat{' '}
+                <strong className="text-amber-500">
+                  {loading ? '...' : stats.pendingMaterials} materi
+                </strong>{' '}
+                yang memerlukan peninjauan status.
               </p>
             </div>
           </div>
+
           <Link
             to="/admin/moderation"
             className="mt-6 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-indigo-600 text-white font-medium text-sm hover:bg-indigo-500 transition"
           >
-            Tinjau Antrean <ArrowRight className="w-4 h-4" />
+            Tinjau Antrean
+            <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
 
-        <div className={`p-6 rounded-2xl border flex flex-col justify-between ${
-          isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'
-        }`}>
+        <div
+          className={`p-6 rounded-2xl border flex flex-col justify-between ${
+            isDark
+              ? 'bg-slate-900 border-slate-800'
+              : 'bg-white border-slate-200'
+          }`}
+        >
           <div className="flex items-start gap-4">
             <div className="p-3 rounded-xl bg-sky-500/10 text-sky-500 border border-sky-500/20">
               <FolderKanban className="w-6 h-6" />
             </div>
+
             <div>
-              <h3 className="font-bold text-lg mb-1">Manajemen Kategori</h3>
-              <p className={`text-sm ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                Tambah, ubah, atau hapus taksonomi kategori materi pembelajaran.
+              <h3 className="font-bold text-lg mb-1">
+                Manajemen Kategori
+              </h3>
+
+              <p
+                className={`text-sm ${
+                  isDark ? 'text-slate-400' : 'text-slate-600'
+                }`}
+              >
+                Tambah, ubah, atau hapus taksonomi kategori materi
+                pembelajaran.
               </p>
             </div>
           </div>
+
           <Link
             to="/admin/categories"
             className={`mt-6 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl font-medium text-sm border transition ${
-              isDark 
-                ? 'border-slate-700 bg-slate-800 text-slate-200 hover:bg-slate-700' 
+              isDark
+                ? 'border-slate-700 bg-slate-800 text-slate-200 hover:bg-slate-700'
                 : 'border-slate-300 bg-slate-100 text-slate-800 hover:bg-slate-200'
             }`}
           >
-            Kelola Kategori <ArrowRight className="w-4 h-4" />
+            Kelola Kategori
+            <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
       </div>
