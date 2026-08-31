@@ -1,6 +1,95 @@
 'use strict'
 const pool = require('../config/database')
 
+
+const slugify = (text) => {
+  return text
+    .toString()
+    .toLowerCase()
+    .trim()
+    .replace(/[\s\W-]+/g, '-') 
+}
+
+
+// const getAll = async () => {
+//   const [rows] = await pool.query('SELECT * FROM categories ORDER BY name ASC')
+//   return rows
+// }
+
+const createCategory = async (name) => {
+  const slug = slugify(name)
+  
+  const [existing] = await pool.query('SELECT id FROM categories WHERE slug = ? OR name = ?', [slug, name])
+  if (existing.length > 0) {
+    const error = new Error('Kategori dengan nama tersebut sudah ada')
+    error.status = 400
+    throw error
+  }
+
+  const [result] = await pool.query(
+    'INSERT INTO categories (name, slug) VALUES (?, ?)',
+    [name, slug]
+  )
+
+  return {
+    id: result.insertId,
+    name,
+    slug
+  }
+}
+
+const updateCategory = async (id, name) => {
+  const slug = slugify(name)
+
+  const [categories] = await pool.query('SELECT id FROM categories WHERE id = ?', [id])
+  if (categories.length === 0) {
+    const error = new Error('Kategori tidak ditemukan')
+    error.status = 404
+    throw error
+  }
+
+  // Cek bentrok nama/slug dengan kategori lain
+  const [existing] = await pool.query(
+    'SELECT id FROM categories WHERE (slug = ? OR name = ?) AND id != ?',
+    [slug, name, id]
+  )
+  if (existing.length > 0) {
+    const error = new Error('Kategori lain dengan nama tersebut sudah ada')
+    error.status = 400
+    throw error
+  }
+
+  await pool.query(
+    'UPDATE categories SET name = ?, slug = ? WHERE id = ?',
+    [name, slug, id]
+  )
+
+  return {
+    id: Number(id),
+    name,
+    slug
+  }
+}
+
+const removeCategory = async (id) => {
+  const [categories] = await pool.query('SELECT id FROM categories WHERE id = ?', [id])
+  if (categories.length === 0) {
+    const error = new Error('Kategori tidak ditemukan')
+    error.status = 404
+    throw error
+  }
+
+  const [materials] = await pool.query('SELECT id FROM materials WHERE category_id = ? LIMIT 1', [id])
+  if (materials.length > 0) {
+    const error = new Error('Kategori tidak dapat dihapus karena masih digunakan oleh materi')
+    error.status = 400
+    throw error
+  }
+
+  await pool.query('DELETE FROM categories WHERE id = ?', [id])
+  return { id: Number(id) }
+}
+
 const calculateLevel = (totalExp) => Math.floor(totalExp / 100) + 1
 
 const getPendingMaterials = async () => {
@@ -73,7 +162,33 @@ const updateStatus = async (materialId, status, rejectionReason = null) => {
   }
 }
 
+const getDashboardStats = async () => {
+  const [
+    [userCountResult],
+    [pendingCountResult],
+    [approvedCountResult],
+    [completionCountResult]
+  ] = await Promise.all([
+    pool.query('SELECT COUNT(id) AS total FROM users'),
+    pool.query("SELECT COUNT(id) AS total FROM materials WHERE status = 'pending'"),
+    pool.query("SELECT COUNT(id) AS total FROM materials WHERE status = 'approved'"),
+    pool.query('SELECT COUNT(id) AS total FROM user_completions') // Sesuaikan nama tabel log penyelesaian materi jika berbeda
+  ])
+
+  return {
+    total_users: userCountResult[0].total,
+    total_pending_materials: pendingCountResult[0].total,
+    total_approved_materials: approvedCountResult[0].total,
+    total_completions: completionCountResult[0].total
+  }
+}
+
 module.exports = {
   getPendingMaterials,
-  updateStatus
+  updateStatus,
+  getDashboardStats,
+  // getAll,
+  createCategory,
+  updateCategory,
+  removeCategory
 }

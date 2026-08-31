@@ -30,34 +30,37 @@ export default function AuthView() {
         setSuccessMsg('');
     };
 
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
         setLoading(true);
 
-        console.log('formData saat submit:', formData);
-
         try {
-            if (authMode === 'login') {
-                const res = await login(formData.email, formData.password);
-                if (res.success) {
-                    navigate(from, { replace: true });
-                    return;
-                }
-                setError(res.error || 'Login gagal');
+           if (authMode === 'login') {
+            const res = await login(formData.email, formData.password);
+            if (res.success) {
+                // DIPERBAIKI: Mengambil role dari res.data.user
+                const userRole = res.data?.user?.role;
+                const targetPath = userRole === 'admin' 
+                    ? '/admin' 
+                    : (from !== '/dashboard' ? from : '/dashboard');
+
+                navigate(targetPath, { replace: true });
+                return;
+            }
+            setError(res.error || 'Login gagal');
             } else {
                 const payload = {
                     name: formData.name,
                     email: formData.email,
                     password: formData.password,
                 };
-                console.log('payload register:', payload);
                 const res = await authService.register(payload);
                 if (res.success) {
                     setAuthMode('login');
                     setFormData({ ...formData, name: '', password: '' });
                     setSuccessMsg('Registrasi berhasil! Silakan login.');
-                    
                 } else {
                     setError(res.error || 'Registrasi gagal');
                 }

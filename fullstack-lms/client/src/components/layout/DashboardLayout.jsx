@@ -6,6 +6,7 @@ import {
   BookOpen, 
   PlusCircle, 
   CheckSquare, 
+  FolderKanban, // Icon untuk Kelola Kategori
   LogOut, 
   User,
   Award,
@@ -28,7 +29,8 @@ export default function DashboardLayout({ isAdmin = false }) {
   };
 
   const isActive = (path) => {
-    if (path === '/dashboard' || path === '/admin' || path === '/dashboard/materi') {
+    // Exact match untuk route root dashboard/admin
+    if (path === '/dashboard' || path === '/admin') {
       return location.pathname === path;
     }
     return location.pathname.startsWith(path);
@@ -42,10 +44,11 @@ export default function DashboardLayout({ isAdmin = false }) {
     { name: 'Eksplorasi Materi', path: '/dashboard/materi', icon: Compass },
   ];
 
-  // Menu Admin
+  // Menu Admin (Sudah ditambahkan Kelola Kategori)
   const adminMenus = [
     { name: 'Admin Overview', path: '/admin', icon: LayoutDashboard },
     { name: 'Antrean Moderasi', path: '/admin/moderation', icon: CheckSquare },
+    { name: 'Kelola Kategori', path: '/admin/categories', icon: FolderKanban },
   ];
 
   const menus = isAdmin ? adminMenus : creatorMenus;

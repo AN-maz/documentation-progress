@@ -7,13 +7,21 @@ import { ProtectedRoute } from './ProtectedRoute';
 import LandingPage from '../pages/LandingPage';
 import AuthPage from '../pages/AuthPage';
 
+// Learner Pages
 import MaterialCatalogPage from '../pages/learner/MaterialCatalogPage';
 import MaterialDetailPage from '../pages/learner/MaterialDetailPage';
 import MyMaterialsPage from '../pages/learner/MyMaterialsPage';
 
+// Creator Pages
 import CreatorDashboardPage from '../pages/creator/CreatorDashboardPage';
 import CreateMaterialPage from '../pages/creator/CreateMaterialPage';
-import EditMaterialPage from '../pages/creator/EditMaterialPage'; 
+import EditMaterialPage from '../pages/creator/EditMaterialPage';
+
+// Admin Pages
+import AdminDashboardPage from '../pages/admin/AdminDashboardPage';
+import ModerationListPage from '../pages/admin/ModerationListPage';
+import ReviewMaterialPage from '../pages/admin/ReviewMaterialPage';
+import CategoryManagementPage from '../pages/admin/CategoryManagementPage';
 
 const router = createBrowserRouter([
   // 1. Single Auth Page (Login & Register)
@@ -45,7 +53,7 @@ const router = createBrowserRouter([
           { path: 'materi', element: <MaterialCatalogPage /> },
           { path: 'materi/create', element: <CreateMaterialPage /> },
           { path: 'materi/my-materials', element: <MyMaterialsPage /> },
-          { path: 'materi/edit/:id', element: <EditMaterialPage /> }, // Rute spesifik edit materi (di atas rute :slug)
+          { path: 'materi/edit/:id', element: <EditMaterialPage /> },
           { path: 'materi/:slug', element: <MaterialDetailPage /> },
         ],
       },
@@ -60,8 +68,10 @@ const router = createBrowserRouter([
       {
         element: <DashboardLayout isAdmin />,
         children: [
-          // { index: true, element: <AdminDashboardPage /> },
-          // { path: 'moderation', element: <ModerationListPage /> },
+          { index: true, element: <AdminDashboardPage /> },
+          { path: 'moderation', element: <ModerationListPage /> },
+          { path: 'moderation/:id', element: <ReviewMaterialPage /> },
+          { path: 'categories', element: <CategoryManagementPage /> },
         ],
       },
     ],
