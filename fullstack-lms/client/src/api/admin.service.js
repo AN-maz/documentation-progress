@@ -1,4 +1,5 @@
 import api from './axios'
+
 export const adminService = {
   // --- Dashboard Stats ---
   getStats: async () => {
@@ -21,6 +22,11 @@ export const adminService = {
   },
 
   // --- Categories Management ---
+  getCategories: async () => {
+    const response = await api.get('/admin/categories')
+    return response.data
+  },
+
   createCategory: async (name) => {
     const response = await api.post('/admin/categories', { name })
     return response.data

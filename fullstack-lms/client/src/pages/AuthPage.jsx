@@ -40,7 +40,6 @@ export default function AuthView() {
            if (authMode === 'login') {
             const res = await login(formData.email, formData.password);
             if (res.success) {
-                // DIPERBAIKI: Mengambil role dari res.data.user
                 const userRole = res.data?.user?.role;
                 const targetPath = userRole === 'admin' 
                     ? '/admin' 

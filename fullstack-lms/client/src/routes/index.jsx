@@ -24,13 +24,11 @@ import ReviewMaterialPage from '../pages/admin/ReviewMaterialPage';
 import CategoryManagementPage from '../pages/admin/CategoryManagementPage';
 
 const router = createBrowserRouter([
-  // 1. Single Auth Page (Login & Register)
   {
     path: '/auth',
     element: <AuthPage />,
   },
 
-  // 2. Public Routes
   {
     path: '/',
     element: <RootLayout />,
@@ -38,8 +36,6 @@ const router = createBrowserRouter([
       { index: true, element: <LandingPage /> },
     ],
   },
-
-  // 3. Creator & Learner Dashboard Routes
   {
     path: '/dashboard',
     element: <ProtectedRoute allowedRoles={['user', 'admin']} />,
@@ -49,7 +45,6 @@ const router = createBrowserRouter([
         children: [
           { index: true, element: <CreatorDashboardPage /> },
           
-          // Rute Katalog & Detail Pembelajaran
           { path: 'materi', element: <MaterialCatalogPage /> },
           { path: 'materi/create', element: <CreateMaterialPage /> },
           { path: 'materi/my-materials', element: <MyMaterialsPage /> },
@@ -60,7 +55,6 @@ const router = createBrowserRouter([
     ],
   },
 
-  // 4. Admin Dashboard Routes
   {
     path: '/admin',
     element: <ProtectedRoute allowedRoles={['admin']} />,

@@ -101,8 +101,7 @@ export default function EditMaterialPage() {
       };
 
       await materialService.updateMaterial(id, payload);
-      
-      // Tampilkan Modal Berhasil
+
       setShowSuccessModal(true);
     } catch (err) {
       console.error('Error updating material:', err);

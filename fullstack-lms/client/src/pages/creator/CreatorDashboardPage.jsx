@@ -1,4 +1,3 @@
-// src/pages/creator/CreatorDashboardPage.jsx
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuthStore } from '../../store/useAuthStore';
@@ -32,7 +31,6 @@ export default function CreatorDashboardPage() {
     fetchMyMaterials();
   }, []);
 
-  // Helper Badge Status
   const renderStatusBadge = (status) => {
     switch (status) {
       case 'approved':
@@ -71,7 +69,6 @@ export default function CreatorDashboardPage() {
   return (
     <div className={`max-w-6xl mx-auto space-y-8 ${isDark ? 'text-slate-100' : 'text-slate-800'}`}>
       
-      {/* Header Section */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <h1 className="text-2xl sm:text-3xl font-extrabold">
@@ -89,7 +86,6 @@ export default function CreatorDashboardPage() {
         </Link>
       </div>
 
-      {/* Gamification Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         <div className={`p-5 rounded-2xl border shadow-sm flex items-center gap-4 transition ${
           isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'
@@ -128,7 +124,6 @@ export default function CreatorDashboardPage() {
         </div>
       </div>
 
-      {/* Section List Materi Dibuat */}
       <div className={`rounded-2xl border shadow-sm overflow-hidden transition ${
         isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'
       }`}>

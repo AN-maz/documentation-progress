@@ -14,7 +14,7 @@ export default function CreateMaterialPage() {
 
   const [categories, setCategories] = useState([]);
   const [submitting, setSubmitting] = useState(false);
-  const [activeTab, setActiveTab] = useState('write'); // 'write' | 'preview'
+  const [activeTab, setActiveTab] = useState('write'); 
 
   const [formData, setFormData] = useState({
     title: '',

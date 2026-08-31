@@ -18,7 +18,6 @@ export default function CategoryManagementPage() {
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Form & Modal State
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editTarget, setEditTarget] = useState(null);
   const [categoryName, setCategoryName] = useState('');

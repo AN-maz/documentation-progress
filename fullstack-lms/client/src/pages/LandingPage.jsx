@@ -1,8 +1,8 @@
-import Hero from '../features/landing/Hero'
-import Why from '../features/landing/Why'
-import Features from '../features/landing/Features'
-import OurTeam from '../features/landing/Our-team'
-import ReadyToAction from '../features/landing/ReadyToAction'
+import Hero from '../components/landing/Hero'
+import Why from '../components/landing/Why'
+import Features from '../components/landing/Features'
+import OurTeam from '../components/landing/Our-team'
+import ReadyToAction from '../components/landing/ReadyToAction'
 
 export default function LandingPage(){
     return(
