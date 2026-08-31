@@ -9,8 +9,11 @@ import AuthPage from '../pages/AuthPage';
 
 import MaterialCatalogPage from '../pages/learner/MaterialCatalogPage';
 import MaterialDetailPage from '../pages/learner/MaterialDetailPage';
+import MyMaterialsPage from '../pages/learner/MyMaterialsPage';
+
 import CreatorDashboardPage from '../pages/creator/CreatorDashboardPage';
 import CreateMaterialPage from '../pages/creator/CreateMaterialPage';
+import EditMaterialPage from '../pages/creator/EditMaterialPage'; 
 
 const router = createBrowserRouter([
   // 1. Single Auth Page (Login & Register)
@@ -41,6 +44,8 @@ const router = createBrowserRouter([
           // Rute Katalog & Detail Pembelajaran
           { path: 'materi', element: <MaterialCatalogPage /> },
           { path: 'materi/create', element: <CreateMaterialPage /> },
+          { path: 'materi/my-materials', element: <MyMaterialsPage /> },
+          { path: 'materi/edit/:id', element: <EditMaterialPage /> }, // Rute spesifik edit materi (di atas rute :slug)
           { path: 'materi/:slug', element: <MaterialDetailPage /> },
         ],
       },

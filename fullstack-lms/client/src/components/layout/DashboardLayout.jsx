@@ -27,9 +27,14 @@ export default function DashboardLayout({ isAdmin = false }) {
     navigate('/auth');
   };
 
-  const isActive = (path) => location.pathname === path;
+  const isActive = (path) => {
+    if (path === '/dashboard' || path === '/admin' || path === '/dashboard/materi') {
+      return location.pathname === path;
+    }
+    return location.pathname.startsWith(path);
+  };
 
-  // Menu Creator
+  // Menu Creator / Learner
   const creatorMenus = [
     { name: 'Overview', path: '/dashboard', icon: LayoutDashboard },
     { name: 'Buat Materi', path: '/dashboard/materi/create', icon: PlusCircle },
@@ -49,7 +54,7 @@ export default function DashboardLayout({ isAdmin = false }) {
     <div className={`flex min-h-screen ${isDark ? 'bg-slate-950 text-slate-100' : 'bg-slate-50 text-slate-800'}`}>
       
       {/* FIXED SIDEBAR */}
-      <aside className={`w-64 h-screen sticky top-0 flex flex-col justify-between p-4 border-r shrink-0 transition-colors ${
+      <aside className={`w-64 h-screen sticky top-0 flex flex-col justify-between p-4 border-r shrink-0 transition-colors z-20 ${
         isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200'
       }`}>
         
@@ -68,7 +73,7 @@ export default function DashboardLayout({ isAdmin = false }) {
             </div>
           </div>
 
-          {/* Navigation Links (Scrollable if menu is long) */}
+          {/* Navigation Links */}
           <nav className="space-y-1 overflow-y-auto pr-1">
             {menus.map((menu) => {
               const Icon = menu.icon;
@@ -79,7 +84,7 @@ export default function DashboardLayout({ isAdmin = false }) {
                   to={menu.path}
                   className={`flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-sm transition-all ${
                     active
-                      ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/30'
+                      ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/30 font-semibold'
                       : isDark
                       ? 'text-slate-400 hover:text-white hover:bg-slate-800/60'
                       : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
@@ -116,11 +121,19 @@ export default function DashboardLayout({ isAdmin = false }) {
 
           {/* User Profile Info */}
           <div className="flex items-center gap-3 px-2">
-            <div className={`w-8 h-8 rounded-full flex items-center justify-center border ${
-              isDark ? 'bg-slate-800 border-slate-700 text-slate-300' : 'bg-slate-100 border-slate-200 text-slate-600'
-            }`}>
-              <User className="w-4 h-4" />
-            </div>
+            {user?.avatar_url ? (
+              <img 
+                src={user.avatar_url} 
+                alt={user.name} 
+                className="w-8 h-8 rounded-full object-cover border border-slate-700" 
+              />
+            ) : (
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center border ${
+                isDark ? 'bg-slate-800 border-slate-700 text-slate-300' : 'bg-slate-100 border-slate-200 text-slate-600'
+              }`}>
+                <User className="w-4 h-4" />
+              </div>
+            )}
             <div className="overflow-hidden">
               <p className={`text-sm font-semibold truncate ${isDark ? 'text-slate-100' : 'text-slate-800'}`}>
                 {user?.name || 'User'}

@@ -136,13 +136,27 @@ const create = async (authorId, { category_id, title, cover_image_url, content }
 
 const getUserMaterials = async (authorId) => {
   const [rows] = await pool.query(
-    `SELECT id, title, status, rejection_reason, created_at 
-     FROM materials 
-     WHERE author_id = ? 
-     ORDER BY created_at DESC`,
+    `SELECT 
+      m.id, m.title, m.slug, m.cover_image_url, m.content, m.status, m.rejection_reason, m.created_at,
+      c.id AS category_id, c.name AS category_name
+     FROM materials m
+     LEFT JOIN categories c ON m.category_id = c.id
+     WHERE m.author_id = ? 
+     ORDER BY m.created_at DESC`,
     [authorId]
   )
-  return rows
+  
+  return rows.map(item => ({
+    id: item.id,
+    title: item.title,
+    slug: item.slug,
+    cover_image_url: item.cover_image_url,
+    content: item.content,
+    status: item.status,
+    rejection_reason: item.rejection_reason,
+    created_at: item.created_at,
+    category: item.category_id ? { id: item.category_id, name: item.category_name } : null
+  }))
 }
 
 const update = async (materialId, authorId, { category_id, title, cover_image_url, content }) => {
@@ -173,10 +187,28 @@ const update = async (materialId, authorId, { category_id, title, cover_image_ur
   }
 }
 
+const remove = async (materialId, authorId) => {
+  const [existing] = await pool.query(
+    'SELECT id FROM materials WHERE id = ? AND author_id = ?',
+    [materialId, authorId]
+  )
+
+  if (existing.length === 0) {
+    const error = new Error('Materi tidak ditemukan atau kamu tidak memiliki hak akses')
+    error.status = 404
+    throw error
+  }
+
+  await pool.query('DELETE FROM materials WHERE id = ? AND author_id = ?', [materialId, authorId])
+
+  return { id: materialId }
+}
+
 module.exports = {
   getAllApproved,
   getBySlug,
   create,
   getUserMaterials,
-  update
+  update,
+  remove
 }

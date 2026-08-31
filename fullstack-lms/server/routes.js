@@ -25,12 +25,14 @@ module.exports = function (app, opts) {
 
   // --- Materials Routes (Public & Learner) ---
   router.get('/materials', materiHandler.getAll)
-  router.put('/materials/:id', authMiddleware, materiHandler.update)
-  router.get('/materials/:slug', authMiddleware, materiHandler.getBySlug)
-
-  // --- Creator Routes ---
+  
+  // --- Creator Routes (Perlu Auth & Ownership) ---
   router.post('/materials', authMiddleware, materiHandler.create)
+  router.put('/materials/:id', authMiddleware, materiHandler.update)
+  router.delete('/materials/:id', authMiddleware, materiHandler.remove) // 👈 Rute DELETE Baru Added!
+  
   router.get('/users/me/materials', authMiddleware, materiHandler.getUserMaterials)
+  router.get('/materials/:slug', authMiddleware, materiHandler.getBySlug)
 
   // --- Gamification & Leaderboard Routes ---
   router.post('/materials/:id/complete', authMiddleware, gamificationHandler.complete)

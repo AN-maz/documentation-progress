@@ -103,10 +103,28 @@ const update = async (req, res, next) => {
   }
 }
 
+const remove = async (req, res, next) => {
+  try {
+    const authorId = req.user.id
+    const materialId = req.params.id
+
+    await materiService.remove(materialId, authorId)
+
+    return res.status(200).json({
+      success: true,
+      message: 'Materi berhasil dihapus',
+      data: { id: materialId }
+    })
+  } catch (err) {
+    next(err)
+  }
+}
+
 module.exports = {
   getAll,
   getBySlug,
   create,
   getUserMaterials,
-  update  
+  update,
+  remove
 }
