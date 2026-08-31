@@ -1,3 +1,5 @@
+// src/api/materi.service.js
+
 import apiClient from './axios';
 
 export const materialService = {
@@ -20,12 +22,23 @@ export const materialService = {
   },
 
   getUserMaterials: async () => {
-    const response = await apiClient.get('users/me/materials');
+    const response = await apiClient.get('/users/me/materials'); // Tambahkan '/' di awal url agar konsisten
     return response.data;
   },
 
-  createMaterial : async (payload) => {
+  createMaterial: async (payload) => {
     const response = await apiClient.post('/materials', payload);
     return response.data;
   },
+
+  getMaterialById: async (id) => {
+    const response = await apiClient.get(`/materials/${id}`);
+    return response.data;
+  },
+
+  // Kirim {} sebagai payload body agar tidak kosong saat POST
+  completeMaterial: async (id) => {
+    const response = await apiClient.post(`/materials/${id}/complete`, {});
+    return response.data;
+  }
 };

@@ -19,26 +19,16 @@ const router = createBrowserRouter([
     element: <AuthPage />,
   },
 
-  // 2. Public / Learner Routes
+  // 2. Public Routes
   {
     path: '/',
     element: <RootLayout />,
     children: [
       { index: true, element: <LandingPage /> },
-      { path: 'materi', element: <MaterialCatalogPage /> },
-      {
-        element: <ProtectedRoute />, // Melindungi detail materi
-        children: [
-          {
-            path: 'materi/:slug',
-            element: <MaterialDetailPage />,
-          },
-        ],
-      },
     ],
   },
 
-  // 3. Creator / User Dashboard Routes (PERBAIKAN DI SINI)
+  // 3. Creator & Learner Dashboard Routes
   {
     path: '/dashboard',
     element: <ProtectedRoute allowedRoles={['user', 'admin']} />,
@@ -46,11 +36,12 @@ const router = createBrowserRouter([
       {
         element: <DashboardLayout />,
         children: [
-          // Gunakan 'index: true' untuk rute utama '/dashboard'
           { index: true, element: <CreatorDashboardPage /> },
           
-          // Gunakan path relatif 'materi/create' (otomatis menjadi /dashboard/materi/create)
+          // Rute Katalog & Detail Pembelajaran
+          { path: 'materi', element: <MaterialCatalogPage /> },
           { path: 'materi/create', element: <CreateMaterialPage /> },
+          { path: 'materi/:slug', element: <MaterialDetailPage /> },
         ],
       },
     ],

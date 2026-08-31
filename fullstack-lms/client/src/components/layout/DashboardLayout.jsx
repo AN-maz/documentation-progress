@@ -10,7 +10,8 @@ import {
   User,
   Award,
   Sun,
-  Moon
+  Moon,
+  Compass
 } from 'lucide-react';
 
 export default function DashboardLayout({ isAdmin = false }) {
@@ -33,6 +34,7 @@ export default function DashboardLayout({ isAdmin = false }) {
     { name: 'Overview', path: '/dashboard', icon: LayoutDashboard },
     { name: 'Buat Materi', path: '/dashboard/materi/create', icon: PlusCircle },
     { name: 'Materi Saya', path: '/dashboard/materi/my-materials', icon: BookOpen },
+    { name: 'Eksplorasi Materi', path: '/dashboard/materi', icon: Compass },
   ];
 
   // Menu Admin
