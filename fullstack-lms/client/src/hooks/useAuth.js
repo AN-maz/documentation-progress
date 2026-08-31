@@ -17,19 +17,13 @@ export const useAuth = () => {
       try {
         const response = await authService.login({ email, password });
         const { user, token } = response.data;
-
-        // Simpan user & token ke Zustand Store
         setAuth(user, token);
 
         toast.success(response.message || 'Berhasil masuk!');
-        
-        // KEMBALIKAN RES DENGAN SUCCESS TRUE
         return { success: true, data: response.data };
       } catch (error) {
         const errorMsg = error.response?.data?.message || 'Gagal melakukan login';
         toast.error(errorMsg);
-        
-        // KEMBALIKAN RES DENGAN SUCCESS FALSE & PESAN ERROR
         return { success: false, error: errorMsg };
       } finally {
         setLoading(false);

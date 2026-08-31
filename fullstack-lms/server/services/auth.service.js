@@ -16,7 +16,7 @@ const register = async (name, email, password) => {
 
     await pool.query("INSERT INTO users (id,name,email,password_hash,role) VALUES (?,?,?,?,?)",[userId,name,email,passwordHash,"learner"]);
 
-    return { id: userId, name, email, role: "learner" };
+    return { id: userId, name, email, role: "user" };
 };
 
 const login = async (email, password) => {

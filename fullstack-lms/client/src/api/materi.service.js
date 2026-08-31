@@ -18,4 +18,14 @@ export const materialService = {
     const response = await apiClient.get(`/materials/${slug}`);
     return response.data;
   },
+
+  getUserMaterials: async () => {
+    const response = await apiClient.get('users/me/materials');
+    return response.data;
+  },
+
+  createMaterial : async (payload) => {
+    const response = await apiClient.post('/materials', payload);
+    return response.data;
+  },
 };

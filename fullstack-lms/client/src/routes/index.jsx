@@ -9,6 +9,8 @@ import AuthPage from '../pages/AuthPage';
 
 import MaterialCatalogPage from '../pages/learner/MaterialCatalogPage';
 import MaterialDetailPage from '../pages/learner/MaterialDetailPage';
+import CreatorDashboardPage from '../pages/creator/CreatorDashboardPage';
+import CreateMaterialPage from '../pages/creator/CreateMaterialPage';
 
 const router = createBrowserRouter([
   // 1. Single Auth Page (Login & Register)
@@ -23,23 +25,20 @@ const router = createBrowserRouter([
     element: <RootLayout />,
     children: [
       { index: true, element: <LandingPage /> },
-      {path: 'materi', element: <MaterialCatalogPage /> },
+      { path: 'materi', element: <MaterialCatalogPage /> },
       {
-        element: <ProtectedRoute />, // Membungkus semua child route di bawahnya
+        element: <ProtectedRoute />, // Melindungi detail materi
         children: [
-            {
+          {
             path: 'materi/:slug',
             element: <MaterialDetailPage />,
           },
         ],
       },
-  
-      // { path: 'materi', element: <MaterialCatalogPage /> },
-      // { path: 'leaderboard', element: <LeaderboardPage /> },
     ],
   },
 
-  // 3. Creator / User Dashboard Routes
+  // 3. Creator / User Dashboard Routes (PERBAIKAN DI SINI)
   {
     path: '/dashboard',
     element: <ProtectedRoute allowedRoles={['user', 'admin']} />,
@@ -47,10 +46,11 @@ const router = createBrowserRouter([
       {
         element: <DashboardLayout />,
         children: [
-          // { index: true, element: <CreatorDashboardPage /> },
-          // { path: 'materi/create', element: <CreateMaterialPage /> },
-          // { path: 'materi/my-materials', element: <MyMaterialsPage /> },
-          // { path: 'materi/:id/edit', element: <EditMaterialPage /> },
+          // Gunakan 'index: true' untuk rute utama '/dashboard'
+          { index: true, element: <CreatorDashboardPage /> },
+          
+          // Gunakan path relatif 'materi/create' (otomatis menjadi /dashboard/materi/create)
+          { path: 'materi/create', element: <CreateMaterialPage /> },
         ],
       },
     ],
