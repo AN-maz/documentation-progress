@@ -1,14 +1,13 @@
 'use strict'
 const materiService = require('../services/materi.service')
 
+// TAMBAHKAN FUNGSI INI
 const getAll = async (req, res, next) => {
   try {
-    const { category_id, search, sort, page, limit } = req.query
-    const data = await materiService.getAllApproved({ category_id, search, sort, page, limit })
-    
+    const data = await materiService.getAll()
     return res.status(200).json({
       success: true,
-      message: 'Katalog materi berhasil diambil',
+      message: 'Daftar materi berhasil diambil',
       data
     })
   } catch (err) {
@@ -121,7 +120,7 @@ const remove = async (req, res, next) => {
 }
 
 module.exports = {
-  getAll,
+  getAll, // <-- DITAMBAHKAN DI SINI
   getBySlug,
   create,
   getUserMaterials,

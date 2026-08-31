@@ -160,42 +160,52 @@ const getDashboardStats = async () => {
     [pendingCountResult],
     [approvedCountResult],
     [materialCountResult],
+    [categoryCountResult],
     [completionCountResult]
   ] = await Promise.all([
     pool.query('SELECT COUNT(id) AS total FROM users'),
     pool.query("SELECT COUNT(id) AS total FROM materials WHERE status = 'pending'"),
     pool.query("SELECT COUNT(id) AS total FROM materials WHERE status = 'approved'"),
     pool.query('SELECT COUNT(id) AS total FROM materials'),
-    pool.query('SELECT COUNT(id) AS total FROM reading_progress WHERE is_completed = 1') // Disesuaikan ke tabel reading_progress
+    pool.query('SELECT COUNT(id) AS total FROM categories'), // Variabel categoryCountResult ditangkap di sini
+    pool.query('SELECT COUNT(id) AS total FROM reading_progress WHERE is_completed = 1')
   ])
 
   const totalUsers = userCountResult[0].total
   const pendingMaterials = pendingCountResult[0].total
   const approvedMaterials = approvedCountResult[0].total
   const totalMaterials = materialCountResult[0].total
+  const totalCategories = categoryCountResult[0].total
   const totalCompletions = completionCountResult[0].total
 
   return {
-    // Format snake_case (jika dipakai di backend lain)
     total_users: totalUsers,
     total_materials: totalMaterials,
     total_pending_materials: pendingMaterials,
     total_approved_materials: approvedMaterials,
+    total_categories: totalCategories,
     total_completions: totalCompletions,
 
     totalUsers,
     totalMaterials,
     pendingMaterials,
     approvedMaterials,
+    totalCategories,
     totalCompletions
   }
 }
-
+const getAll = async () => {
+  const [rows] = await pool.query(
+    'SELECT id, name, slug, description, created_at FROM categories ORDER BY name ASC'
+  )
+  return rows
+}
 module.exports = {
   getPendingMaterials,
   updateStatus,
   getDashboardStats,
   createCategory,
   updateCategory,
-  removeCategory
+  removeCategory,
+  getAll
 }

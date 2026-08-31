@@ -1,6 +1,19 @@
 'use strict'
 const adminService = require('../services/admin.service')
 
+const getAll = async (req, res, next) => {
+  try {
+    const categories = await adminService.getAll()
+    return res.status(200).json({
+      success: true,
+      message: 'Daftar kategori berhasil diambil',
+      data: categories
+    })
+  } catch (err) {
+    next(err)
+  }
+}
+
 const getPendingMaterials = async (req, res, next) => {
   try {
     const materials = await adminService.getPendingMaterials()
@@ -74,7 +87,6 @@ const create = async (req, res, next) => {
       })
     }
 
-    // DIUBAH: categoryService -> adminService
     const newCategory = await adminService.createCategory(name.trim())
 
     return res.status(201).json({
@@ -100,7 +112,6 @@ const update = async (req, res, next) => {
       })
     }
 
-    // DIUBAH: categoryService -> adminService
     const updatedCategory = await adminService.updateCategory(categoryId, name.trim())
 
     return res.status(200).json({
@@ -117,7 +128,6 @@ const remove = async (req, res, next) => {
   try {
     const categoryId = req.params.id
 
-    // DIUBAH: categoryService -> adminService
     await adminService.removeCategory(categoryId)
 
     return res.status(200).json({
@@ -131,9 +141,10 @@ const remove = async (req, res, next) => {
 }
 
 module.exports = {
+  getAll, 
   getPendingMaterials,
   updateStatus,
-  getStats, // DIPERBAIKI: Ditambahkan ke exports
+  getStats,
   create,
   update,
   remove
