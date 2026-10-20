@@ -8,7 +8,7 @@
 
 ## 📍 Pertemuan 1: Introduction to Dart
 
-> 📖 Materi: [`dart-learning/materi/01-introduction.md`](dart-learning/materi/01-introduction.md) · 🧪 Latihan: [`dart-learning/lab/01-introduction/`](dart-learning/lab/01-introduction/README.md)
+> 📖 Materi: [`dart-learning/materi/01-introduction.md`](dart-learning/materi/01-introduction.md) · 🧪 Latihan: [`dart-learning/lab/01-introduction/`](dart-learning/lab/01-introduction/README.md) · ✅ Materi tersedia
 
 - **1.1** Introduction to Dart Programming
 - **1.2** Installing Dart SDK
@@ -24,7 +24,7 @@
 
 ## 📍 Pertemuan 2: Variables, Data Types & Operators
 
-> 📖 Materi: [`dart-learning/materi/02-variables.md`](dart-learning/materi/02-variables.md) · 🧪 Latihan: [`dart-learning/lab/02-variables/`](dart-learning/lab/02-variables/README.md)
+> 📖 Materi: [`dart-learning/materi/02-variables.md`](dart-learning/materi/02-variables.md) · 🧪 Latihan: [`dart-learning/lab/02-variables/`](dart-learning/lab/02-variables/README.md) · ✅ Materi tersedia
 
 - **2.1** Variables in Dart
 - **2.2** Variable Declaration: `var`, `dynamic`, and Explicit Types

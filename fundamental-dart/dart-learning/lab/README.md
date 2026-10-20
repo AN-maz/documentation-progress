@@ -21,6 +21,10 @@ lab/
 │   ├── exercises/
 │   └── solusi/
 ├── 02-variables/          # Pertemuan 2 — Variables, Data Types & Operators
+│   ├── README.md
+│   ├── kalkulator_nilai.dart
+│   ├── exercises/
+│   └── solusi/
 ├── 03-conditions-loops/   # Pertemuan 3 — Conditions & Loops
 ├── 04-functions/          # Pertemuan 4 — Functions
 ├── 05-collections/        # Pertemuan 5 — Collections
@@ -46,7 +50,7 @@ for f in lab/01-introduction/exercises/*.dart; do echo "== $f"; dart run "$f"; d
 | Pertemuan | Topik | Materi | Latihan |
 | --------- | ----- | ------ | ------- |
 | 1 | Introduction to Dart | ✅ | [ ] |
-| 2 | Variables, Data Types & Operators | ⬜ | [ ] |
+| 2 | Variables, Data Types & Operators | ✅ | [ ] |
 | 3 | Conditions & Loops | ⬜ | [ ] |
 | 4 | Functions | ⬜ | [ ] |
 | 5 | Collections | ⬜ | [ ] |
