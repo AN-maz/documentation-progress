@@ -1,0 +1,9 @@
+# Dart / Pub
+.dart_tool/
+.packages
+build/
+
+# Editor
+.idea/
+*.iml
+.vscode/
