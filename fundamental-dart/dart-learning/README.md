@@ -55,7 +55,7 @@ dart pub get                          # sync dependency (lints)
 | 1 | Introduction to Dart | ✅ [lihat](materi/01-introduction.md) | [ ] [kerjakan](lab/01-introduction/README.md) |
 | 2 | Variables, Data Types & Operators | ✅ [lihat](materi/02-variables.md) | [ ] [kerjakan](lab/02-variables/README.md) |
 | 3 | Conditions & Loops | ✅ [lihat](materi/03-conditions-loops.md) | [ ] [kerjakan](lab/03-conditions-loops/README.md) |
-| 4 | Functions | ⬜ | [ ] |
+| 4 | Functions | ✅ [lihat](materi/04-functions.md) | [ ] [kerjakan](lab/04-functions/README.md) |
 | 5 | Collections | ⬜ | [ ] |
 | — | 🚀 Projects (capstone) | — | [ ] |
 

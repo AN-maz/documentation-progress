@@ -70,7 +70,7 @@
 
 ## 📍 Pertemuan 4: Functions
 
-> 📖 Materi: [`dart-learning/materi/04-functions.md`](dart-learning/materi/04-functions.md) · 🧪 Latihan: [`dart-learning/lab/04-functions/`](dart-learning/lab/04-functions/README.md)
+> 📖 Materi: [`dart-learning/materi/04-functions.md`](dart-learning/materi/04-functions.md) · 🧪 Latihan: [`dart-learning/lab/04-functions/`](dart-learning/lab/04-functions/README.md) · ✅ Materi tersedia
 
 - **4.1** Introduction to Functions
 - **4.2** Defining and Calling Functions
@@ -84,6 +84,7 @@
 - **4.10** Anonymous Functions
 - **4.11** Variable Scope
 - **4.12** Built-in Functions
+- **4.13** Input dari Terminal (`dart:io`)
 
 ---
 
