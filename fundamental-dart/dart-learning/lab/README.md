@@ -36,6 +36,10 @@ lab/
 │   ├── exercises/
 │   └── solusi/
 ├── 05-collections/        # Pertemuan 5 — Collections
+│   ├── README.md
+│   ├── analisis_nilai_kelas.dart
+│   ├── exercises/
+│   └── solusi/
 └── projects/              # capstone lintas pertemuan
 ```
 
@@ -61,4 +65,4 @@ for f in lab/01-introduction/exercises/*.dart; do echo "== $f"; dart run "$f"; d
 | 2 | Variables, Data Types & Operators | ✅ | [ ] |
 | 3 | Conditions & Loops | ✅ | [ ] |
 | 4 | Functions | ✅ | [ ] |
-| 5 | Collections | ⬜ | [ ] |
+| 5 | Collections | ✅ | [ ] |

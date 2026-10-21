@@ -90,7 +90,7 @@
 
 ## 📍 Pertemuan 5: Collections
 
-> 📖 Materi: [`dart-learning/materi/05-collections.md`](dart-learning/materi/05-collections.md) · 🧪 Latihan: [`dart-learning/lab/05-collections/`](dart-learning/lab/05-collections/README.md)
+> 📖 Materi: [`dart-learning/materi/05-collections.md`](dart-learning/materi/05-collections.md) · 🧪 Latihan: [`dart-learning/lab/05-collections/`](dart-learning/lab/05-collections/README.md) · ✅ Materi tersedia
 
 - **5.1** Introduction to Collections
 - **5.2** Lists
