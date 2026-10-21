@@ -51,7 +51,7 @@
 
 ## 📍 Pertemuan 3: Conditions & Loops
 
-> 📖 Materi: [`dart-learning/materi/03-conditions-loops.md`](dart-learning/materi/03-conditions-loops.md) · 🧪 Latihan: [`dart-learning/lab/03-conditions-loops/`](dart-learning/lab/03-conditions-loops/README.md)
+> 📖 Materi: [`dart-learning/materi/03-conditions-loops.md`](dart-learning/materi/03-conditions-loops.md) · 🧪 Latihan: [`dart-learning/lab/03-conditions-loops/`](dart-learning/lab/03-conditions-loops/README.md) · ✅ Materi tersedia
 
 - **3.1** Conditional Statements
 - **3.2** Basic `if` Statement

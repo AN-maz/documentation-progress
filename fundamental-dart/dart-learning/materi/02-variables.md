@@ -75,6 +75,13 @@ void main() {
 }
 ```
 
+Output:
+
+```
+20
+21
+```
+
 ### Mengubah nilai variabel
 
 Variabel yang dideklarasikan tanpa `final` atau `const` bisa nilainya diganti kapan saja.
@@ -109,6 +116,13 @@ void main() {
   nama = 'Purwa';
   print(nama); // Purwa
 }
+```
+
+Output:
+
+```
+null
+Purwa
 ```
 
 Variabel `nama` di atas tidak langsung bisa dipakai sebelum diisi karena Dart menerapkan null safety. Kita akan membahas null safety lebih lanjut pada Pertemuan 6.
@@ -228,16 +242,30 @@ void main() {
 }
 ```
 
+Output:
+
+```
+Purwa
+```
+
 Contoh `final` yang nilainya dihitung saat runtime:
 
 ```dart
 void main() {
-  final sekarang = DateTime.now();
-  final hasilKali = 6 * 7;
+  // Nilai dihitung saat program berjalan, bukan ditulis langsung
+  final jumlahItem = ['apel', 'jeruk', 'mangga'].length;
+  final totalHarga = jumlahItem * 5000;
 
-  print(sekarang);
-  print(hasilKali);
+  print('Jumlah item   : $jumlahItem');
+  print('Total harga   : $totalHarga');
 }
+```
+
+Output:
+
+```
+Jumlah item   : 3
+Total harga   : 15000
 ```
 
 ### 2.3.2 `const` — tetap, ditentukan saat compile time
@@ -252,6 +280,13 @@ void main() {
   print(pi);
   print(namaKursus);
 }
+```
+
+Output:
+
+```
+3.14
+Dart Fundamentals
 ```
 
 ### 2.3.3 Perbedaan `final` dan `const`
@@ -275,6 +310,14 @@ void main() {
 }
 ```
 
+Output:
+
+```
+2026-01-01 00:00:00.000
+```
+
+(Tanggal di atas hanya ilustrasi — nilai sebenarnya adalah waktu saat program dijalankan.)
+
 ### 2.3.4 `const` pada koleksi
 
 `const` juga bisa dipakai pada `List`, `Set`, dan `Map` sehingga isinya tidak bisa diubah sama sekali.
@@ -286,6 +329,12 @@ void main() {
 
   // daftarNilai.add(70); // Error: List ini const, tidak bisa diubah
 }
+```
+
+Output:
+
+```
+[80, 90, 100]
 ```
 
 ### Ringkasan
@@ -541,6 +590,13 @@ void main() {
   print(angka.runtimeType); // List<int>
   print(huruf.runtimeType); // List<String>
 }
+```
+
+Output:
+
+```
+List<int>
+List<String>
 ```
 
 ## 2.6 Type Conversion
@@ -808,6 +864,14 @@ void main() {
 }
 ```
 
+Output:
+
+```
+3.5
+3
+3
+```
+
 ### 2.8.2 Assignment Operators
 
 | Operator | Arti                    | Ekuivalen dengan   |
@@ -912,6 +976,13 @@ void main() {
   print(a == b); // true
   print(a == 'Dart'); // true
 }
+```
+
+Output:
+
+```
+true
+true
 ```
 
 ### 2.8.4 Logical Operators
@@ -1028,6 +1099,13 @@ void main() {
 
   print(nilai >= 70 ? 'Lulus' : 'Tidak lulus');
 }
+```
+
+Output:
+
+```
+Lulus
+Lulus
 ```
 
 ### 2.8.7 Null-aware Operators

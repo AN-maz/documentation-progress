@@ -275,6 +275,14 @@ void main() {
 }
 ```
 
+
+Output:
+
+```
+Hello
+Welcome to Dart
+```
+
 Setiap pemanggilan `print()` di atas diakhiri dengan `;`.
 
 ### 1.5.2 Case sensitivity
@@ -288,6 +296,13 @@ void main() {
   print(nama);
   // print(Nama); // Error: Nama berbeda dari nama
 }
+```
+
+
+Output:
+
+```
+Purwa
 ```
 
 `nama`, `Nama`, dan `NAMA` dianggap sebagai identifier yang berbeda.
@@ -306,6 +321,14 @@ void main() {
 }
 ```
 
+
+Output:
+
+```
+Baris pertama
+Baris kedua
+```
+
 ### 1.5.4 Strings dan quotation marks
 
 String merupakan data berbentuk teks. Dart mendukung tanda petik tunggal (`'`) maupun ganda (`"`).
@@ -315,6 +338,14 @@ void main() {
   print('Belajar Dart');
   print("Belajar Flutter");
 }
+```
+
+
+Output:
+
+```
+Belajar Dart
+Belajar Flutter
 ```
 
 Keduanya valid untuk membuat string biasa.
@@ -333,6 +364,14 @@ void main() {
   print(namaMahasiswa);
   print(umur);
 }
+```
+
+
+Output:
+
+```
+Purwa
+20
 ```
 
 Dart umumnya menggunakan gaya penamaan berikut:
@@ -355,6 +394,13 @@ void main() {
 }
 ```
 
+
+Output:
+
+```
+Kode mudah dibaca
+```
+
 Contoh yang sulit dibaca:
 
 ```
@@ -363,6 +409,13 @@ if(true){
 print('Kode sulit dibaca');
 }
 }
+```
+
+
+Output:
+
+```
+Kode sulit dibaca
 ```
 
 Keduanya dapat valid secara sintaks, tetapi contoh pertama lebih mudah dipahami. Kamu dapat menggunakan formatter Dart di VS Code untuk merapikan kode secara otomatis.
@@ -414,6 +467,14 @@ void main() {
   print('Hello, Dart!');
   print('Saya mulai belajar pemrograman.');
 }
+```
+
+
+Output:
+
+```
+Hello, Dart!
+Saya mulai belajar pemrograman.
 ```
 
 Simpan file menggunakan `Ctrl + S`.
@@ -469,6 +530,13 @@ Contoh:
 void main() {
   print('Program dimulai di sini.');
 }
+```
+
+
+Output:
+
+```
+Program dimulai di sini.
 ```
 
 Ketika program dijalankan, Dart akan memulai eksekusi dari fungsi `main()`.
@@ -649,6 +717,13 @@ void main() {
 }
 ```
 
+
+Output:
+
+```
+Hello, Dart!
+```
+
 Semua teks setelah `//` pada baris tersebut dianggap komentar.
 
 ### 1.9.2 Multi-line comment
@@ -666,6 +741,13 @@ void main() {
 }
 ```
 
+
+Output:
+
+```
+Data Mahasiswa
+```
+
 Komentar jenis ini cocok untuk catatan yang memerlukan beberapa baris.
 
 ### 1.9.3 Documentation comment
@@ -681,6 +763,13 @@ void sapaPengguna() {
 void main() {
   sapaPengguna();
 }
+```
+
+
+Output:
+
+```
+Halo, pengguna!
 ```
 
 Komentar dokumentasi dapat dimanfaatkan oleh editor untuk menampilkan informasi saat programmer menggunakan fungsi tersebut.

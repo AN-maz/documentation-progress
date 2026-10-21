@@ -123,7 +123,13 @@ void main() {
 }
 ```
 
- Hasilnya sama, tapi kurung kurawal lebih disarankan karena lebih mudah dibaca dan aman saat kode bertambah.
+Output:
+
+```
+Program selesai
+```
+
+Hasilnya sama, tapi kurung kurawal lebih disarankan karena lebih mudah dibaca dan aman saat kode bertambah.
 
 ## 3.3 `if`, `else if`, and `else`
 
