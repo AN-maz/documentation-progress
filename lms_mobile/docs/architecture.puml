@@ -1,0 +1,60 @@
+@startuml architecture
+' ============================================================
+' Rancangan Arsitektur Aplikasi — LMS Mobile
+' Pola: Feature-first UI + Repository
+' ============================================================
+skinparam shadowing false
+skinparam defaultFontName SansSerif
+skinparam componentBackgroundColor #EEF2FF
+skinparam componentBorderColor #4F46E5
+skinparam packageBackgroundColor #FFFFFF
+skinparam packageBorderColor #64748B
+skinparam arrowColor #4F46E5
+skinparam noteBackgroundColor #FEF3C7
+skinparam noteBorderColor #F59E0B
+
+title **Rancangan Arsitektur Aplikasi — LMS Mobile**
+
+package "UI Layer (Presentation)" as UI {
+  component "Pages / Features" as Pages {
+    rectangle "auth\n(login)" as PAuth
+    rectangle "learner\n(dashboard, katalog,\nreader, editor, profil,\nleaderboard)" as PLearner
+    rectangle "admin\n(dashboard, moderasi,\nreview, kategori)" as PAdmin
+  }
+  component "Shared Widgets & Shells\n(bottom nav, card, badge)" as Shared
+}
+
+package "State Management" as SM {
+  component "Riverpod Providers\n(authProvider, materialsProvider,\nleaderboardProvider, ...)" as Providers
+}
+
+package "Repository Layer" as REP {
+  interface "LmsRepository\n(kontrak / antarmuka)" as Repo
+  component "MockRepository\n(data in-memory)" as Mock
+  component "ApiRepository\n(REST API) *" as Api
+  Repo <|.. Mock
+  Repo <|.. Api
+}
+
+package "Data Sources" as DS {
+  component "MockDatabase\n(in-memory + seed data)" as DB
+  component "HTTP Client\n(dio / http) *" as HTTP
+}
+
+database "Backend Server *\n(Node.js + Express + MySQL)" as Server
+
+' --- Alur utama ---
+Pages -[dotted]-> Providers : watch / read state
+Providers --> Repo : panggil metode
+Mock --> DB : baca / tulis data
+Api --> HTTP : request / response
+HTTP -[#4F46E5]-> Server : REST API (JSON)
+
+note bottom of Api
+  *) ApiRepository disiapkan untuk
+  integrasi dengan backend.
+  Menukar mock ke API cukup
+  mengubah 1 baris di providers.dart
+end note
+
+@enduml

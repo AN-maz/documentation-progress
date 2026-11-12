@@ -1,0 +1,119 @@
+@startuml user-flow
+' ============================================================
+' User Flow Diagram — LMS Mobile (Gamified Learning Platform)
+' Berisi 3 alur utama: Learner, Creator, Admin
+' ============================================================
+skinparam shadowing false
+skinparam defaultFontName SansSerif
+skinparam ActivityBackgroundColor #EEF2FF
+skinparam ActivityBorderColor #4F46E5
+skinparam ActivityDiamondBackgroundColor #FEF3C7
+skinparam ActivityDiamondBorderColor #F59E0B
+
+title **User Flow — LMS Mobile**
+
+' ------------------------------------------------------------
+' 1. ALUR LEARNER
+' ------------------------------------------------------------
+partition "Alur Learner (Pembaca)" {
+  start
+  :Buka aplikasi;
+  if (Sudah punya akun?) then (ya)
+    :Login (email & password);
+  else (belum)
+    :Registrasi akun baru;
+    :Login;
+  endif
+
+  :Masuk Dashboard Learner;
+  note right
+    Menampilkan Level, Total EXP, dan Poin
+  end note
+
+  :Buka tab Eksplorasi (Katalog);
+  :Cari / filter kategori / urutkan;
+  :Pilih materi dari katalog;
+
+  if (Materi ditemukan?) then (ya)
+    :Baca materi (render Markdown);
+  else (tidak)
+    :Ubah kata kunci / filter;
+    stop
+  endif
+
+  :Klik "Tandai Selesai & Klaim EXP";
+  :Dapat +50 EXP;
+
+  if (EXP cukup untuk naik level?) then (ya)
+    :LEVEL UP 🎉 (confetti + notifikasi);
+  else (tidak)
+  endif
+
+  :Beri rating bintang 1-5;
+  :Dapat +10 Poin;
+  :Tulis komentar (opsional);
+
+  :Cek Papan Peringkat;
+  stop
+}
+
+' ------------------------------------------------------------
+' 2. ALUR CREATOR
+' ------------------------------------------------------------
+partition "Alur Creator (Pembuat Materi)" {
+  start
+  :Login;
+  :Masuk Dashboard;
+  :Klik "Buat Materi Baru";
+  :Isi judul, kategori, cover, konten Markdown;
+  :Pratinjau (tab Preview);
+
+  if (Konten valid?) then (ya)
+    :Klik "Ajukan Materi";
+    :Status materi = PENDING;
+  else (tidak)
+    :Perbaiki konten;
+    stop
+  endif
+
+  :Materi masuk antrean Admin;
+
+  if (Keputusan Admin?) then (Approved)
+    :Materi terbit di katalog;
+    :Creator dapat +200 EXP;
+  else (Rejected)
+    :Lihat alasan penolakan;
+    :Edit materi;
+    :Ajukan ulang (kembali ke PENDING);
+  endif
+
+  :Pantau di "Materi Saya";
+  stop
+}
+
+' ------------------------------------------------------------
+' 3. ALUR ADMIN
+' ------------------------------------------------------------
+partition "Alur Admin (Moderator)" {
+  start
+  :Login sebagai Admin;
+  :Masuk Admin Console;
+  :Lihat statistik sistem;
+  :Buka Antrean Moderasi;
+  :Pilih materi berstatus PENDING;
+  :Review isi materi (preview Markdown);
+
+  if (Kualitas materi?) then (layak)
+    :Approve materi;
+    :Publikasikan ke katalog;
+    :Author dapat +200 EXP;
+  else (tidak layak)
+    :Isi alasan penolakan;
+    :Reject materi;
+  endif
+
+  :Kelola kategori (opsional, CRUD);
+  stop
+}
+
+@enduml

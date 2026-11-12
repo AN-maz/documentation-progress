@@ -1,0 +1,89 @@
+@startuml erd
+' ============================================================
+' Entity Relationship Diagram — LMS Mobile (Gamified Learning)
+' ============================================================
+skinparam monochrome false
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+skinparam shadowing false
+
+entity "users" as users {
+  * id : CHAR(36) <<PK>>
+  --
+  * name : VARCHAR(100)
+  * email : VARCHAR(100) <<UNIQUE>>
+  * password_hash : VARCHAR(255)
+  * role : ENUM('learner', 'admin') = 'learner'
+  * total_exp : INT = 0
+  * level : INT = 1
+  * total_points : INT = 0
+  * created_at : TIMESTAMP
+  * updated_at : TIMESTAMP
+}
+
+entity "categories" as categories {
+  * id : INT <<PK>>
+  --
+  * name : VARCHAR(50) <<UNIQUE>>
+  * slug : VARCHAR(50) <<UNIQUE>>
+  * description : TEXT
+  * created_at : TIMESTAMP
+}
+
+entity "materials" as materials {
+  * id : CHAR(36) <<PK>>
+  --
+  * author_id : CHAR(36) <<FK>>
+  * category_id : INT <<FK>>
+  * title : VARCHAR(255)
+  * slug : VARCHAR(255) <<UNIQUE>>
+  * cover_image_url : VARCHAR(500)
+  * content : LONGTEXT  ' Menyimpan Raw String Markdown
+  * status : ENUM('pending', 'approved', 'rejected') = 'pending'
+  * rejection_reason : TEXT
+  * average_rating : DECIMAL(3,2) = 0.00
+  * ratings_count : INT = 0
+  * created_at : TIMESTAMP
+  * updated_at : TIMESTAMP
+}
+
+entity "reading_progress" as reading_progress {
+  * id : CHAR(36) <<PK>>
+  --
+  * user_id : CHAR(36) <<FK>>
+  * material_id : CHAR(36) <<FK>>
+  * is_completed : TINYINT(1) = 0
+  * exp_rewarded : TINYINT(1) = 0
+  * completed_at : TIMESTAMP
+}
+
+entity "ratings" as ratings {
+  * id : CHAR(36) <<PK>>
+  --
+  * user_id : CHAR(36) <<FK>>
+  * material_id : CHAR(36) <<FK>>
+  * rating_value : INT  ' (1-5)
+  * point_rewarded : TINYINT(1) = 0
+  * created_at : TIMESTAMP
+}
+
+entity "comments" as comments {
+  * id : CHAR(36) <<PK>>
+  --
+  * user_id : CHAR(36) <<FK>>
+  * material_id : CHAR(36) <<FK>>
+  * comment_text : TEXT
+  * created_at : TIMESTAMP
+}
+
+' --- Relasi & Kardinalitas ---
+users ||--o{ materials : "creates"
+categories ||--o{ materials : "classifies"
+users ||--o{ reading_progress : "tracks"
+materials ||--o{ reading_progress : "tracked in"
+users ||--o{ comments : "writes"
+materials ||--o{ comments : "receives"
+users ||--o{ ratings : "gives"
+materials ||--o{ ratings : "rated by"
+
+@enduml
